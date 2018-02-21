@@ -364,6 +364,10 @@ app.directive('clientChart', ['Report', 'MetricLambda', 'Metric', '$routeParams'
             this.interval = '1h';
             distance = 60*60*24*30;
             break;
+          case '90d':
+            this.interval = '1h';
+            distance = 60*60*24*90;
+            break;
           case '1yr':
             this.interval = '1yr';
             distance = 60*60*24*365;
@@ -1361,7 +1365,7 @@ app.directive('dashClientsChart', ['$timeout', 'Report', '$routeParams', 'COLOUR
     var a, c, timer, formatted, data;
 
     // can be csv also if required //
-    scope.period = $routeParams.period || attrs.period || '30d';
+    scope.period = $routeParams.period || attrs.period || '7d';
     scope.type = attrs.type;
     scope.loading = true;
     var colours = ['#17ac5b', '#0088bb', '#ffd165', '#485b88', '#f78c6b', '#8e2d56'];
@@ -2390,7 +2394,7 @@ app.directive('radiusStats', ['$timeout', 'Report', '$routeParams', 'COLOURS', '
     function chart() {
       var params = {
         type: scope.type,
-        period: '30d'
+        period: $routeParams.period || '7d'
       };
 
       if (attrs.fake !== 'true') {
@@ -2446,7 +2450,7 @@ app.directive('emailStats', ['$timeout', 'Report', '$routeParams', 'COLOURS', 'g
     function chart() {
       var params = {
         type: scope.type,
-        period: '30d'
+        period: $routeParams.period || '7d'
       };
 
       if (attrs.fake !== 'true') {

@@ -71,12 +71,31 @@
               <md-radio-button value="signed_up_now" class="md-primary">Just signed up</md-radio-button>
               <md-radio-button value="signed_up_30" class="md-primary">Signed-up 30 days ago</md-radio-button>
               <md-radio-button value="last_seen_30">Not seen for 30 days</md-radio-button>
+              <!-- <span ng-repeat="audience in audiences">
+                <md-radio-button value="audience_{{$index}}" class="md-primary">
+                  {{audience.name}}
+                  <small ng-show="selected_audience == audience.id" ng-repeat="predicate in audience.predicates">
+                    <br>{{predicate | humanPredicate}}
+                  </small>
+                </md-radio-button>
+              </span> -->
               <md-radio-button value="custom">Custom</md-radio-button>
             </md-radio-group>
           </span>
 
           <span ng-show="campaign.template == 'custom' || campaign.id">
             <hr ng-show="!campaign.id">
+            <md-input-container ng-show="audiences.length > 0">
+              <label>Saved Audiences</label>
+              <md-select ng-model="selected_audience" ng-change="setAudiencePredicates(selected_audience)" aria-label="audience">
+                <md-option ng-value="'no_filter'">
+                  None
+                </md-option>
+                <md-option ng-repeat="audience in audiences" ng-value="audience.id">
+                  {{audience.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
             <p>People who:</p>
             <md-radio-group ng-disabled="campaign.id && campaign.state == 'live'" ng-model="campaign.predicate_type">
               <md-radio-button value="and" class="md-primary">match all these rules</md-radio-button>

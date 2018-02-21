@@ -1366,7 +1366,7 @@ table a {
   color: rgb(71, 90, 136);
 }
 
-/*WYSIWYG*/
+/*WYSIWYG start*/
 
 .mce-container * {
   color: rgba(0,0,0,0.9)!important;
@@ -1462,4 +1462,19 @@ table a {
   top: 7px!important;
 }
 
-/*WYSIWYG*/
+/*WYSIWYG end*/
+
+@media (min-width: 960px) {
+  .people-filter {
+    position:fixed;
+    width:calc(30% - 31px);
+    width:-moz-calc(30% - 31px);
+    width:-webkit-calc(30% - 31px);
+  }
+  .people-filter md-card {
+    max-height: 88vh;
+  }
+  .people-filter md-card md-card-content {
+    overflow: auto;
+  }
+}

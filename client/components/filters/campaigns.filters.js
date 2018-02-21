@@ -26,22 +26,38 @@ app.filter('humanPredicate', [ 'gettextCatalog', function(gettextCatalog) {
       case 'login_count':
         attr = 'Logins';
         break;
+      case 'email':
+        attr = 'Email address';
+        break;
+      case 'username':
+        attr = 'Username';
+        break;
+      case 'first_name':
+        attr = 'First name';
+        break;
+      case 'last_name':
+        attr = 'Last name';
+        break;
+    }
+
+    if (['email', 'username', 'first_name', 'last_name'].includes(predicate.attribute)) {
+      return attr + ' matches "' + predicate.value + '"';
     }
 
     if (predicate.attribute === 'login_count') {
       if (predicate.operator === 'gte') {
-        phrase = 'less than';
-      } else {
         phrase = 'more than';
+      } else {
+        phrase = 'less than';
       }
-      return attr + ' ' + phrase + ' ' + predicate.value + ' logins';
+      return attr + ' ' + phrase + ' ' + (predicate.value || 0) + ' logins';
     }
 
     if (isNumber(predicate.value)) {
       if (predicate.operator === 'gte') {
-        phrase = 'more than';
-      } else if (predicate.operator === 'lte') {
         phrase = 'less than';
+      } else if (predicate.operator === 'lte') {
+        phrase = 'more than';
       } else {
         phrase = 'exactly';
       }

@@ -409,6 +409,26 @@
   <!-- End of oh-mimo Zendesk Widget script -->
 
   <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId            : '1723020777736393', //217195795525157
+        autoLogAppEvents : true,
+        xfbml            : true,
+        version          : 'v2.12'
+      });
+    };
+
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+  <div class="fb-customerchat" page_id="945230345652782" mimimized="true" ref="customer-ref"></div>
+  <script>
     $( document ).ready(function() {
       if (!Modernizr.svg) {
         $('img[src*="svg"]').attr('src', function () {
@@ -418,8 +438,8 @@
     });
   </script>
 
-  <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyD243NSdgNYjRHBVBrWoEKX728FYOxuUgE&libraries=visualization"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+  <!-- <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyD243NSdgNYjRHBVBrWoEKX728FYOxuUgE&libraries=visualization"></script> -->
+  <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script> -->
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
   <script src="//js.pusher.com/3.1/pusher.min.js"></script>
 

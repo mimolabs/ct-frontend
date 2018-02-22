@@ -59,10 +59,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
         scope.audiences = data.audiences;
         setAudiencePredicate();
         deferred.resolve();
-        //});
       }, function(err) {
-        // alert(123);
-        // scope.predicates = decodeBlob();
         deferred.resolve();
       });
       return deferred.promise;
@@ -129,21 +126,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
 
     scope.filterByAudience = function(id) {
       $location.search({audience: id});
-      $route.reload();
-      // getPeople();
-      // var audience = {};
-      // if (id) {
-      //   for (var i = 0, len = scope.audiences.length; i < len; i++) {
-      //     if (scope.audiences[i].id === id) {
-      //       audience = scope.audiences[i];
-      //     }
-      //   }
-      //   scope.predicates = audience.predicates;
-      //   scope.query.predicate_type = audience.predicate_type;
-      //   scope.audience = id;
-      // }
-      // // scope.predicates_changed = undefined;
-      // updatePage();
+      $route.reload(); // lol
     };
 
     // scope.onPaginate = function (page, limit) {
@@ -342,17 +325,8 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
         per: scope.query.limit,
         location_id: scope.location.slug,
         blob: encodeBlob(),
-        // q: scope.query.filter,
       };
 
-      console.log(123123123, params)
-
-      // if (scope.predicates.length > 0) {
-      //   params.audience = {
-      //     predicates: scope.predicates,
-      //     predicate_type: scope.query.predicate_type
-      //   };
-      // }
       People.get(params, function(data) {
         scope.people = data.people;
         scope._links = data._links;

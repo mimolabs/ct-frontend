@@ -19,7 +19,7 @@
           <md-card-content>
             <div layout="column">
               <div layout="row">
-                  <md-select ng-show="query.predicates.length > 0" ng-model="predicate_type" ng-change="savePredicate()" style="margin: 0px 0px 10px 0px">
+                  <md-select ng-show="query.predicates.length > 1" ng-model="predicate_type" ng-change="savePredicate()" style="margin: 0px 0px 10px 0px">
                     <md-option ng-value="and">
                       Match all
                     </md-option>

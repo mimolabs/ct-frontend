@@ -9,7 +9,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     scope.currentNavItem = 'people';
     scope.location = {slug: $routeParams.id};
     scope.selected_audience = $routeParams.selected_audience || 'last_seen_30_days';
-    scope.new_audience = $routeParams.new_audience;
+    scope.predicates_changed = $routeParams.predicates_changed;
 
     var lastSeenDefault = [{
       value: 30,
@@ -81,13 +81,6 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
       });
     };
 
-    scope.newAudienceForm = function() {
-      scope.query.predicates = [];
-      scope.query.predicate_type = 'and';
-      scope.selected_audience = 'no_filter';
-      scope.new_audience = true;
-    };
-
     scope.filterByAudience = function(id) {
       var audience = {};
       if (id === 'no_filter') {
@@ -109,7 +102,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
         scope.query.predicate_type = audience.predicate_type;
         scope.selected_audience = audience.id;
       }
-      scope.new_audience = undefined;
+      scope.predicates_changed = undefined;
       scope.updatePage();
     };
 
@@ -170,6 +163,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     scope.savePredicate = function() {
       if (scope.query.predicates && scope.query.predicates.length > 0) {
         scope.focusedCard = undefined;
+        scope.predicates_changed = true;
         scope.updatePage();
       }
     };
@@ -224,11 +218,11 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
           predicates: scope.query.predicates
         }
       }).$promise.then(function(data) {
+        scope.predicates_changed = undefined;
         showToast(gettextCatalog.getString('Audience saved.'));
         getAudiences().then(function() {
           scope.selected_audience = data.id;
         });
-        scope.new_audience = undefined;
         $mdDialog.cancel();
       }, function(error) {
         showErrors(error);
@@ -285,15 +279,6 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
       } else {
         updateAudience(scope.selected_audience);
       }
-    };
-
-    scope.cancelAudience = function() {
-      scope.query.predicates = [];
-      scope.query.predicate_type = undefined;
-      scope.focusedCard = undefined;
-      scope.showChooser = undefined;
-      scope.new_audience = undefined;
-      scope.updatePage();
     };
 
     scope.addRule = function() {
@@ -366,7 +351,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
       hash.predicate_type = scope.query.predicate_type;
       hash.predicates = scope.query.predicates;
       hash.selected_audience = scope.selected_audience;
-      hash.new_audience = scope.new_audience;
+      hash.predicates_changed = scope.predicates_changed;
 
       $location.search(hash);
       init();

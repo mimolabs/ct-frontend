@@ -1464,6 +1464,12 @@ table a {
 
 /*WYSIWYG end*/
 
+/*people page*/
+
+.people-filter md-card-content {
+  padding-top: 0px;
+}
+
 @media (min-width: 960px) {
   .people-filter {
     position:fixed;
@@ -1471,10 +1477,19 @@ table a {
     width:-moz-calc(30% - 31px);
     width:-webkit-calc(30% - 31px);
   }
-  .people-filter md-card {
-    max-height: 88vh;
+  .people-filter > md-card {
+    height: calc(100vh - 120px);
   }
   .people-filter md-card md-card-content {
     overflow: auto;
+    height: 100%;
+  }
+  .people-table > md-card {
+    height: calc(100vh - 120px);
+  }
+  .people-table md-card md-table-container {
+    overflow: auto;
+    height: 100%;
+    margin-right:-5px;
   }
 }

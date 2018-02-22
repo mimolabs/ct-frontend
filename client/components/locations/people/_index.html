@@ -28,13 +28,7 @@
                     </md-option>
                   </md-select>
                   <div flex></div>
-                  <md-select ng-model="selected_audience" ng-change="filterByAudience(selected_audience)" aria-label="audience" style="margin: 0px 0px 10px 0px">
-                    <md-option ng-value="'no_filter'">
-                      All people
-                    </md-option>
-                    <md-option ng-value="'last_seen_30_days'">
-                      Last 30 days
-                    </md-option>
+                  <md-select ng-show="audiences.length > 0" ng-model="selected_audience" ng-change="filterByAudience(selected_audience)" aria-label="audience" style="margin: 0px 0px 10px 0px">
                     <md-option ng-repeat="audience in audiences" ng-value="audience.id">
                       {{audience.name}}
                     </md-option>

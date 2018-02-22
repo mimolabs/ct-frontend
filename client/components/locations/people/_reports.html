@@ -4,11 +4,18 @@
     <div class="example-data" ng-show="location.paid == false">
       The charts below are populated with example data. To access real data about your location, start your free trial!
     </div>
-    <select ng-change="changePeriod()" ng-model="period">
-      <option value="7d">7 Days</option>
-      <option value="30d">30 Days</option>
-      <option value="90d">90 Days</option>
-    </select>
+    <div layout-padding layout="row" layout-wrap layout-align="left center">
+      <div flex="100" flex-gt-xs="25" flex-gt-sm="20">
+        <md-input-container class="md-block" style="margin:0px;">
+          <label>Filter</label>
+          <md-select ng-change="changePeriod()" ng-model="period">
+            <md-option value="7d">7 Days</md-option>
+            <md-option value="30d">30 Days</md-option>
+            <md-option value="90d">90 Days</md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+    </div>
     <analytics ng-if="!loading">
       <client-chart>
         <radius-stats render="emails" fake="{{!location.paid}}"></radius-stats>

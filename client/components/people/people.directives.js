@@ -60,6 +60,8 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
         setAudiencePredicate();
         deferred.resolve();
       }, function(err) {
+        // In case there is no audience
+        scope.predicates = defaultBlob;
         deferred.resolve();
       });
       return deferred.promise;

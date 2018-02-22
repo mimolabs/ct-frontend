@@ -332,7 +332,7 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
       templateUrl: 'components/locations/people/index.html',
       controller: 'LocationsCtrl as lc',
       resolve: { loginRequired: loginRequired },
-      // reloadOnSearch: false
+      reloadOnSearch: false
     }).
     when('/:id/people/message_activity', {
       templateUrl: 'components/views/bulk_message_activity/index.html',

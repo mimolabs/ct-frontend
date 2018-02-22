@@ -1,4 +1,4 @@
-<people-nav location="location"></people-nav>
+updateFilters<people-nav location="location"></people-nav>
 
 <md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" ng-if="!integration.type" style="padding-bottom: 45px">
   <div flex="100">
@@ -19,7 +19,7 @@
           <md-card-content>
             <div layout="column">
               <div layout="row">
-                  <md-select ng-show="query.predicates.length > 1" ng-model="predicate_type" ng-change="savePredicate()" style="margin: 0px 0px 10px 0px">
+                  <md-select ng-show="predicates.length > 1" ng-model="predicate_type" ng-change="updateFilters()" style="margin: 0px 0px 10px 0px">
                     <md-option ng-value="and">
                       Match all
                     </md-option>
@@ -28,7 +28,7 @@
                     </md-option>
                   </md-select>
                   <div flex></div>
-                  <md-select ng-show="audiences.length > 0" ng-model="selected_audience" ng-change="filterByAudience(selected_audience)" aria-label="audience" style="margin: 0px 0px 10px 0px">
+                  <md-select ng-show="audiences.length > 0" ng-model="query.audience" ng-change="filterByAudience(query.audience)" aria-label="audience" style="margin: 0px 0px 10px 0px">
                     <md-option ng-repeat="audience in audiences" ng-value="audience.id">
                       {{audience.name}}
                     </md-option>
@@ -36,14 +36,14 @@
                 <div flex></div>
               </div>
               <span hide show-gt-sm>
-                <div ng-if="query.predicates.length > 1">
-                  <md-radio-group ng-model="query.predicate_type" ng-change="savePredicate()">
+                <div ng-if="predicates.length > 1">
+                  <md-radio-group ng-model="predicate_type" ng-change="updateFilters()">
                     <md-radio-button value="and" class="md-primary">match all these rules</md-radio-button>
                     <md-radio-button value="or" class="md-primary">match any of these rules</md-radio-button>
                   </md-radio-group>
                 </div>
                 <span>
-                  <span ng-repeat="predicate in query.predicates">
+                  <span ng-repeat="predicate in predicates">
                     <md-card flex="100">
                       <md-card-title>
                         <md-card-title-text>
@@ -126,7 +126,7 @@
                               </div>
                             </md-input-container>
                             <div>
-                              <md-button class="md-raised" ng-click="savePredicate()" ng-disabled="myForm.$invalid">Done</md-button>
+                              <md-button class="md-raised" ng-click="updateFilters()" ng-disabled="myForm.$invalid">Done</md-button>
                             </div>
                           </span>
                         </form>
@@ -170,7 +170,7 @@
                         Save user filter for quick searches and creating campaigns.
                       </md-tooltip>
                     </md-button>
-                    <!-- <md-button class="md-raised md-primary" ng-click="destroyAudience(selected_audience)" ng-show="focusedCard == undefined && selected_audience != 'no_filter'">
+                    <!-- <md-button class="md-raised md-primary" ng-click="destroyAudience(query.audience)" ng-show="focusedCard == undefined && query.audience != 'no_filter'">
                       Delete
                       <md-tooltip>
                         Delete this audience of users.

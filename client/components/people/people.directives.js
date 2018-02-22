@@ -12,7 +12,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     scope.predicates_changed = $routeParams.predicates_changed;
 
     var defaultBlob = [{
-      value: 10,
+      value: 30,
       operator: 'gte',
       attribute: 'last_seen',
       relative: true
@@ -25,35 +25,52 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     //   relative: true
     // }];
 
-    // var defaultAudiences = ['no_filter', 'last_seen_30_days', 'signed_up_30_days'];
-    var serialize = function(obj) {
-      obj = JSON.stringify(obj);
-      var encodedString = window.btoa(obj)
-      console.log(encodedString);
+    var defaultAudiences = ['no_filter', 'last_seen_30_days', 'signed_up_30_days'];
 
-      return encodedString;
-      // var str = [];
-      // for(var p in obj)
-      //   if (obj.hasOwnProperty(p)) {
-      //     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-      //   }
-      // return str.join("&");
-    }
 
-    scope.query = {
-      limit:            $routeParams.per || 25,
-      page:             $routeParams.page || 1,
-      filter:           $routeParams.q,
-      options:          [5,10,25,50,100],
-      predicate_type:   $routeParams.predicate_type || 'and',
-      blob:             $routeParams.blob || serialize(defaultBlob)
-      // predicates:       $routeParams.predicates || lastSeenDefault
-      // predicates:       s(lastSeenDefault)
+    // set the p
+    var encodeBlob = function() {
+      if (scope.predicates) {
+        return window.btoa(angular.toJson(scope.predicates));
+      }
+
+      return window.btoa(angular.toJson(scope.predicates));
+
     };
 
-    // scope.showCard = function(index) {
-    //   scope.focusedCard = index;
-    // };
+    function decodeBlob() {
+      if ($routeParams.blob) {
+        return JSON.parse(window.atob($routeParams.blob));
+      }
+
+      if ($routeParams.audience) {
+
+        //// might need to set the scope here
+      }
+      return defaultBlob;
+    }
+
+
+    function setParams() {
+
+      // getaudeice and user
+      scope.query = {
+        limit:            $routeParams.per || 25,
+        page:             $routeParams.page || 1,
+        filter:           $routeParams.q,
+        options:          [5,10,25,50,100],
+        predicate_type:   $routeParams.predicate_type || 'and',
+        audience:         $routeParams.audience
+        // blob:             encodeBlob()
+      };
+    }
+
+    // on load
+    // setParams();
+
+    scope.showCard = function(index) {
+      scope.focusedCard = index;
+    };
 
     scope.available_options = [];
     scope.available_options.push({value: 'created_at', name: 'First seen', desc: 'When the user first signed in through your WiFi network'});
@@ -99,20 +116,20 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     //   var audience = {};
     //   if (id === 'no_filter') {
     //     scope.selected_audience = 'no_filter';
-    //     scope.query.predicates = [];
+    //     scope.predicates = [];
     //   } else if (id === 'last_seen_30_days') {
     //     scope.selected_audience = 'last_seen_30_days';
-    //     scope.query.predicates = lastSeenDefault;
+    //     scope.predicates = lastSeenDefault;
     //   } else if (id === 'signed_up_30_days') {
     //     scope.selected_audience = 'signed_up_30_days';
-    //     scope.query.predicates = signedUpDefault;
+    //     scope.predicates = signedUpDefault;
     //   } else {
     //     for (var i = 0, len = scope.audiences.length; i < len; i++) {
     //       if (scope.audiences[i].id === id) {
     //         audience = scope.audiences[i];
     //       }
     //     }
-    //     scope.query.predicates = audience.predicates;
+    //     scope.predicates = audience.predicates;
     //     scope.query.predicate_type = audience.predicate_type;
     //     scope.selected_audience = audience.id;
     //   }
@@ -126,61 +143,109 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     //   scope.updatePage();
     // };
 
-    // scope.cancelRule = function() {
-    //   scope.showChooser = undefined;
-    //   scope.focusedCard = undefined;
-    // };
+    scope.cancelRule = function() {
+      scope.showChooser = undefined;
+      scope.focusedCard = undefined;
+    };
 
-    // scope.onSelect = function(index) {
-    //   scope.showChooser = undefined;
-    //   var pred = { value: '', operator: 'gte', relative: true };
-    //   switch(index) {
-    //     case 0:
-    //       pred.name = 'First seen';
-    //       pred.attribute = 'created_at';
-    //       pred.operator = 'lte';
-    //       break;
-    //     case 1:
-    //       pred.name = 'Last seen';
-    //       pred.attribute = 'last_seen';
-    //       pred.operator = 'lte';
-    //       break;
-    //     case 2:
-    //       pred.name = 'Number of logins';
-    //       pred.attribute = 'login_count';
-    //       pred.operator = 'gte';
-    //       break;
-    //     case 3:
-    //       pred.name = 'Email Address';
-    //       pred.attribute = 'email';
-    //       pred.operator = 'eq';
-    //       break;
-    //     case 4:
-    //       pred.name = 'Username';
-    //       pred.attribute = 'username';
-    //       pred.operator = 'eq';
-    //       break;
-    //     case 5:
-    //       pred.name = 'First Name';
-    //       pred.attribute = 'first_name';
-    //       pred.operator = 'eq';
-    //       break;
-    //     case 6:
-    //       pred.name = 'Last Name';
-    //       pred.attribute = 'last_name';
-    //       pred.operator = 'eq';
-    //       break;
-    //   }
-    //   scope.query.predicates.push(pred);
-    // };
+    scope.onSelect = function(index) {
+      scope.showChooser = undefined;
+      var pred = { value: '', operator: 'gte', relative: true };
+      switch(index) {
+        case 0:
+          pred.name = 'First seen';
+          pred.attribute = 'created_at';
+          pred.operator = 'lte';
+          break;
+        case 1:
+          pred.name = 'Last seen';
+          pred.attribute = 'last_seen';
+          pred.operator = 'lte';
+          break;
+        case 2:
+          pred.name = 'Number of logins';
+          pred.attribute = 'login_count';
+          pred.operator = 'gte';
+          break;
+        case 3:
+          pred.name = 'Email Address';
+          pred.attribute = 'email';
+          pred.operator = 'eq';
+          break;
+        case 4:
+          pred.name = 'Username';
+          pred.attribute = 'username';
+          pred.operator = 'eq';
+          break;
+        case 5:
+          pred.name = 'First Name';
+          pred.attribute = 'first_name';
+          pred.operator = 'eq';
+          break;
+        case 6:
+          pred.name = 'Last Name';
+          pred.attribute = 'last_name';
+          pred.operator = 'eq';
+          break;
+      }
+      scope.predicates.push(pred);
+    };
 
-    // scope.savePredicate = function() {
-    //   if (scope.query.predicates && scope.query.predicates.length > 0) {
-    //     scope.focusedCard = undefined;
-    //     scope.predicates_changed = true;
-    //     scope.updatePage();
-    //   }
-    // };
+    var setAudiencePredicate = function() {
+      if ($routeParams.audience && scope.audiences) {
+        for (var i = 0, len = scope.audiences.length; i < len; i++) {
+          if (scope.audiences[i].id !== $routeParams.audience) {
+            continue;
+          }
+          scope.predicates = scope.audiences[i].predicates;
+          scope.query.predicate_type = scope.audiences[i].predicate_type;
+          break;
+        }
+      } else {
+        scope.predicates = decodeBlob();
+      }
+    };
+
+    var getAudiences = function() {
+      var deferred = $q.defer();
+      Audience.query({location_id: scope.location.slug}, function(data) {
+        scope.audiences = data.audiences;
+        setAudiencePredicate();
+        deferred.resolve();
+      }, function(err) {
+        console.log(err);
+        scope.predicates = decodeBlob();
+        deferred.resolve();
+      });
+      return deferred.promise;
+    };
+
+    function updatePage() {
+      setParams();
+
+      var hash    = {};
+
+      hash.page           = scope.query.page;
+      hash.q              = scope.query.filter;
+      hash.predicate_type = scope.query.predicate_type;
+      hash.blob           = encodeBlob();
+      hash.predicates_changed = scope.predicates_changed;
+      hash.audiences      = scope.query.audience;
+      // hash.predicates = scope.predicates;
+      // hash.selected_audience = scope.selected_audience;
+
+
+      $location.search(hash);
+      // init();
+      getAudiences().then(getPeople);
+      // getPeople();
+    }
+
+    scope.updateFilters = function() {
+      scope.focusedCard = undefined;
+      scope.predicates_changed = true;
+      updatePage();
+    };
 
     // var removeAudienceFromList = function(audience_id) {
     //   for (var i = 0, len = scope.audiences.length; i < len; i++) {
@@ -188,7 +253,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     //       scope.audiences.splice(i, 1);
     //       showToast(gettextCatalog.getString('Audience successfully deleted.'));
     //       if (scope.selected_audience === audience_id) {
-    //         scope.query.predicates = [];
+    //         scope.predicates = [];
     //         scope.selected_audience = 'no_filter';
     //         scope.updatePage();
     //       }
@@ -197,74 +262,62 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     //   }
     // };
 
-    scope.destroyAudience = function(audience_id) {
-      if (defaultAudiences.includes(audience_id)) {
-        scope.selected_audience = 'no_filter';
-        scope.query.predicates = [];
-        scope.updatePage();
-      } else {
-        Audience.destroy({location_id: scope.location.slug, id: audience_id}).$promise.then(function(results) {
-          removeAudienceFromList(audience_id);
-        }, function(err) {
-          showErrors(err);
-        });
-      }
-    };
+    // scope.destroyAudience = function(audience_id) {
+    //   if (defaultAudiences.includes(audience_id)) {
+    //     scope.selected_audience = 'no_filter';
+    //     scope.predicates = [];
+    //     scope.updatePage();
+    //   } else {
+    //     Audience.destroy({location_id: scope.location.slug, id: audience_id}).$promise.then(function(results) {
+    //       removeAudienceFromList(audience_id);
+    //     }, function(err) {
+    //       showErrors(err);
+    //     });
+    //   }
+    // };
 
-    var getAudiences = function() {
-      var deferred = $q.defer();
-      Audience.query({location_id: scope.location.slug}, function(data) {
-        scope.audiences = data.audiences;
-        deferred.resolve();
-      }, function(err) {
-        console.log(err);
-        deferred.resolve();
-      });
-      return deferred.promise;
-    };
-
-    scope.createAudience = function(name) {
+    var createAudience = function(name) {
       Audience.create({}, {
         location_id: scope.location.slug,
         audience: {
           name: name,
           predicate_type: scope.query.predicate_type,
-          predicates: scope.query.predicates
+          blob: encodeBlob($routeParams.blob)
         }
       }).$promise.then(function(data) {
+        var hash = {};
+        hash.audience = data.id;
+        $location.search(hash);
         scope.predicates_changed = undefined;
         showToast(gettextCatalog.getString('Audience saved.'));
-        getAudiences().then(function() {
-          scope.selected_audience = data.id;
-        });
         $mdDialog.cancel();
       }, function(error) {
         showErrors(error);
       });
     };
 
-    function DialogController($scope, query) {
+    function DialogController($scope, predicates) {
       $scope.location = location;
-      $scope.query = query;
+      $scope.predicates = predicates;
       $scope.close = function() {
         $mdDialog.cancel();
       };
       $scope.save = function() {
-        scope.createAudience($scope.audience.name);
+        createAudience($scope.audience.name);
         $mdDialog.cancel();
       };
     }
 
-    DialogController.$inject = ['$scope', 'query'];
+    DialogController.$inject = ['$scope', 'predicates'];
 
-    scope.openDialog = function() {
+    var openDialog = function() {
       $mdDialog.show({
         templateUrl: 'components/audiences/_create_audience.html',
         parent: angular.element(document.body),
         clickOutsideToClose: true,
         controller: DialogController,
         locals: {
-          query: scope.query
+          predicates: scope.predicates
         }
       });
     };
@@ -274,7 +327,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
         location_id: $routeParams.id,
         id: audience_id,
         audience: {
-          predicates: scope.query.predicates,
+          predicates: scope.predicates,
           predicate_type: scope.query.predicate_type
         }
       }).$promise.then(function(results) {
@@ -287,27 +340,26 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
       });
     };
 
-    // scope.saveAudience = function() {
-    //   if (defaultAudiences.includes(scope.selected_audience) || scope.selected_audience === undefined) {
-    //     scope.openDialog(scope.location, scope.query);
-    //     return;
-    //   }
-
-    //   updateAudience(scope.selected_audience);
-    // };
+    scope.saveAudience = function() {
+      if (defaultAudiences.includes(scope.selected_audience) || scope.selected_audience === undefined) {
+        openDialog(scope.location, scope.query);
+        return;
+      }
+      updateAudience(scope.selected_audience);
+    };
 
     scope.addRule = function() {
-      if (!scope.query.predicates) {
-        scope.query.predicates = [];
+      if (!scope.predicates) {
+        scope.predicates = [];
       }
-      scope.focusedCard = scope.query.predicates.length;
+      scope.focusedCard = scope.predicates.length;
       scope.showChooser = true;
     };
 
     scope.removePredicate = function(index) {
-      scope.query.predicates.splice(index, 1);
+      scope.predicates.splice(index, 1);
       scope.focusedCard = undefined;
-      if (scope.query.predicates.length === 0) {
+      if (scope.predicates.length === 0) {
         scope.selected_audience = 'no_filter';
       }
       updatePage();
@@ -318,12 +370,12 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
         page: scope.query.page,
         per: scope.query.limit,
         location_id: scope.location.slug,
-        blob: scope.query.blob,
+        blob: encodeBlob(),
         // q: scope.query.filter,
       };
-      // if (scope.query.predicates.length > 0) {
+      // if (scope.predicates.length > 0) {
       //   params.audience = {
-      //     predicates: scope.query.predicates,
+      //     predicates: scope.predicates,
       //     predicate_type: scope.query.predicate_type
       //   };
       // }
@@ -333,7 +385,9 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
         scope.loading  = undefined;
       }, function(err){
         scope.loading  = undefined;
-        console.log(err);
+        scope.people = {};
+        scope._links = {};
+        setParams();
       });
     };
 
@@ -341,6 +395,9 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     };
 
     var init = function() {
+
+      setParams();
+      getAudiences();
       getPeople();
       // Location.get({id: $routeParams.id}, function(data) {
       //   scope.location = data;
@@ -360,20 +417,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     //   getLocation();
     // };
 
-    function updatePage(item) {
-      var hash    = {};
-      hash.page   = scope.query.page;
-      hash.q   = scope.query.filter;
-      hash.predicate_type = scope.query.predicate_type;
-      hash.predicates = scope.query.predicates;
-      hash.selected_audience = scope.selected_audience;
-      hash.predicates_changed = scope.predicates_changed;
 
-      $location.search(hash);
-      // init();
-      getAudiences().then(getPeople);
-      // getPeople();
-    };
 
     init();
   };

@@ -190,10 +190,10 @@
         <md-card class="b-bl">
           <div class="md-toolbar-tools" ng-cloak layout="row" layout-align="space-between center">
             <div flex="75">
-              {{ _links.total_entries || 0 }} {{ _links.total_entries == 1 ? 'person' : 'people' }} connected. {{_links.this_week || 0}} connected this week.
+              <span class="md-subhead">{{ _links.total_entries || 0 }} {{ _links.total_entries == 1 ? 'person' : 'people' }} connected. {{_links.this_week || 0}} connected this week.</span>
             </div>
             <div flex="25">
-              <form ng-submit="updatePage()">
+              <form ng-submit="search()">
                 <md-input-container style="margin: 10px 0px 0px 0px">
                   <input ng-model="query.filter" placeholder="{{ 'Search' | translate }}"></input>
                 </md-input-container>

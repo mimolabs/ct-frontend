@@ -80,6 +80,10 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
       getAudiences().then(getPeople());
     }
 
+    scope.search = function() {
+      updatePage();
+    };
+
     scope.showCard = function(index) {
       scope.focusedCard = index;
     };

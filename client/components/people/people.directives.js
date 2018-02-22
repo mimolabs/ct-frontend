@@ -34,7 +34,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
         return window.btoa(angular.toJson(scope.predicates));
       }
 
-      return window.btoa(angular.toJson(scope.predicates));
+      return window.btoa(angular.toJson(defaultBlob));
 
     };
 
@@ -201,7 +201,8 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
           scope.query.predicate_type = scope.audiences[i].predicate_type;
           break;
         }
-      } else {
+      }
+      if (!scope.predicates) {
         scope.predicates = decodeBlob();
       }
     };
@@ -397,8 +398,8 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     var init = function() {
 
       setParams();
-      getAudiences();
-      getPeople();
+      getAudiences().then(getPeople());
+      // getPeople();
       // Location.get({id: $routeParams.id}, function(data) {
       //   scope.location = data;
       //   var setup = scope.location.setup;

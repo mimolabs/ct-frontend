@@ -108,7 +108,7 @@ app.directive('listCampaigns', ['Campaign', 'Location', '$routeParams', '$rootSc
 
 }]);
 
-app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Auth', '$q', '$routeParams', '$rootScope', '$http', '$location', 'showToast', 'showErrors', '$sce', 'gettextCatalog', '$mdDialog', function (Campaign, Location, Integration, Auth, $q, $routeParams, $rootScope, $http, $location, showToast, showErrors, $sce, gettextCatalog, $mdDialog) {
+app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience', 'Auth', '$q', '$routeParams', '$rootScope', '$http', '$location', 'showToast', 'showErrors', '$sce', 'gettextCatalog', '$mdDialog', function (Campaign, Location, Integration, Audience, Auth, $q, $routeParams, $rootScope, $http, $location, showToast, showErrors, $sce, gettextCatalog, $mdDialog) {
 
   var link = function(scope,element,attrs) {
 
@@ -128,6 +128,19 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Auth', '$
 
     scope.states = ['draft', 'live'];
 
+    scope.tinymceOptions = {
+      selector: 'textarea',
+      height: 300,
+      menubar: false,
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor textcolor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table contextmenu paste code wordcount'
+      ],
+      toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | code',
+      content_css: []
+    };
+
     scope.addRule = function() {
       if (!scope.campaign.holding_predicates) {
         scope.campaign.holding_predicates = [];
@@ -143,12 +156,12 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Auth', '$
         case 0:
           pred.name = 'First seen';
           pred.attribute = 'created_at';
-          pred.operator = 'gte';
+          pred.operator = 'lte';
           break;
         case 1:
           pred.name = 'Last seen';
           pred.attribute = 'last_seen';
-          pred.operator = 'gte';
+          pred.operator = 'lte';
           break;
         case 2:
           pred.name = 'Number of logins';
@@ -157,6 +170,23 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Auth', '$
           break;
       }
       scope.campaign.holding_predicates.push(pred);
+    };
+
+    scope.setAudiencePredicates = function(audience_id) {
+      if (audience_id === 'no_filter' || audience_id === undefined) {
+        scope.campaign.holding_predicates = [];
+        scope.campaign.predicate_type = 'and';
+      } else {
+        var audience;
+        for (var i = 0, len = scope.audiences.length; i < len; i++) {
+          if (scope.audiences[i].id === audience_id) {
+            audience = scope.audiences[i];
+            scope.campaign.holding_predicates = audience.predicates;
+            scope.campaign.predicate_type = audience.predicate_type;
+            return;
+          }
+        }
+      }
     };
 
     scope.showCard = function(index) {
@@ -184,15 +214,15 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Auth', '$
       switch(scope.campaign.template) {
         case 'signed_up_now':
           scope.campaign.holding_predicates = [];
-          scope.campaign.holding_predicates.push({operator: 'rel_lte', rel_value: 1, attribute: 'created_at'});
+          scope.campaign.holding_predicates.push({operator: 'lte', value: 1, attribute: 'created_at'});
           break;
         case 'signed_up_30':
           scope.campaign.holding_predicates = [];
-          scope.campaign.holding_predicates.push({operator: 'rel_eq', rel_value: 30, attribute: 'created_at'});
+          scope.campaign.holding_predicates.push({operator: 'eq', value: 30, attribute: 'created_at'});
           break;
         case 'last_seen_30':
           scope.campaign.holding_predicates = [];
-          scope.campaign.holding_predicates.push({operator: 'rel_eq', rel_value: 30, attribute: 'last_seen'});
+          scope.campaign.holding_predicates.push({operator: 'eq', value: 30, attribute: 'last_seen'});
           break;
         case 'custom':
           scope.campaign.holding_predicates = [];
@@ -294,11 +324,20 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Auth', '$
       scope.loading = undefined;
     };
 
+    var getAudiences = function() {
+      Audience.query({location_id: scope.location.slug}, function(data) {
+        scope.audiences = data.audiences;
+      }, function(err) {
+        console.log(err);
+      });
+    };
+
     var init = function() {
       if ($routeParams.campaign_id) {
         getCampaign();
       } else {
         buildCampaign();
+        getAudiences();
       }
     };
 
@@ -344,11 +383,12 @@ app.directive('campNav', [function() {
 
 }]);
 
-app.directive('campaignReports', ['Campaign', 'Location', '$routeParams', function(Campaign, Location, $routeParams) {
+app.directive('campaignReports', ['Campaign', 'Location', '$routeParams', '$location', function(Campaign, Location, $routeParams, $location) {
 
   var link = function(scope, element, attrs) {
 
     scope.currentNavItem = 'reports';
+    scope.period = $routeParams.period || '7d';
 
     var init = function() {
       Location.get({id: $routeParams.id}, function(data) {
@@ -357,6 +397,14 @@ app.directive('campaignReports', ['Campaign', 'Location', '$routeParams', functi
       }, function(err){
         console.log(err);
       });
+    };
+
+    scope.changePeriod = function() {
+      var hash    = {};
+      hash.period   = scope.period;
+
+      $location.search(hash);
+      init();
     };
 
     init();

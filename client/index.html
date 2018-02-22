@@ -167,13 +167,13 @@
             <thead md-head>
               <tr md-row class="md-table-headers-row">
                 <th md-column><a href="" ng-click='sort("state", query.direction)' translate>State</a></th>
-                <th md-column><span translate><a href="" ng-click='sort("location_name", query.direction)' translate>Name</a></th>
+                <th md-column><a href="" ng-click='sort("location_name", query.direction)' translate>Name</a></th>
               </tr>
             </thead>
             <tbody md-body>
               <tr md-row md-select="location" ng-repeat="location in filtered = (locations | filter: query.filter)">
                 <td md-cell>
-                  <md-icon md-menu-origin ng-if="location.state != 'archived'" class="s48">check_circle</md-icon>
+                  <md-icon md-menu-origin ng-if="location.state != 'archived'" class="s48">check</md-icon>
                   <md-icon md-menu-origin ng-if="location.state == 'archived'" class="s48">archived</md-icon>
                 </td>
                 <td md-cell>
@@ -294,11 +294,12 @@
   <script src="bower_components/moment-duration-format/lib/moment-duration-format.js"></script>
   <script src="bower_components/angular-gettext/dist/angular-gettext.js"></script>
   <script src="bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.js"></script>
-  <script src="bower_components/angular-scroll-glue/src/scrollglue.js"></script>
   <script src="bower_components/dragula.js/dist/dragula.js"></script>
   <script src="bower_components/angular-moment-picker/dist/angular-moment-picker.min.js"></script>
   <script src="bower_components/tinycolor/tinycolor.js"></script>
   <script src="bower_components/angular-color-picker/dist/angularjs-color-picker.js"></script>
+  <script src="bower_components/tinymce/tinymce.js"></script>
+  <script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -370,10 +371,12 @@
   <script src="components/reports/reports.controller.js"></script>
   <script src="components/reports/reports.services.js"></script>
   <script src="components/reports/reports.v2.directives.js"></script>
+  <script src="components/services/audiences.services.js"></script>
   <script src="components/services/bulk_message_activity.services.js"></script>
   <script src="components/services/bulk_messages.services.js"></script>
   <script src="components/services/metrics.services.js"></script>
   <script src="components/services/pagination_labels.services.js"></script>
+  <script src="components/services/social.services.js"></script>
   <script src="components/services/themes.services.js"></script>
   <script src="components/services/users.services.js"></script>
   <script src="components/splash_codes/splash_codes.directives.js"></script>

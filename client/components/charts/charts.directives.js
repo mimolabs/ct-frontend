@@ -41,7 +41,6 @@ app.directive('clientsChart', ['$timeout', '$rootScope', 'gettextCatalog', '$fil
     function drawChart() {
 
       var drawChartCallback = function() {
-        // For the tests mainly, not sure why this has started causing a failure
         if (window.google && window.google.visualization) {
           data = new window.google.visualization.DataTable();
           data.addColumn('datetime', 'Date');
@@ -364,6 +363,10 @@ app.directive('clientChart', ['Report', 'MetricLambda', 'Metric', '$routeParams'
           case '30d':
             this.interval = '1h';
             distance = 60*60*24*30;
+            break;
+          case '90d':
+            this.interval = '1h';
+            distance = 60*60*24*90;
             break;
           case '1yr':
             this.interval = '1yr';
@@ -1362,7 +1365,7 @@ app.directive('dashClientsChart', ['$timeout', 'Report', '$routeParams', 'COLOUR
     var a, c, timer, formatted, data;
 
     // can be csv also if required //
-    scope.period = $routeParams.period || attrs.period || '30d';
+    scope.period = $routeParams.period || attrs.period || '7d';
     scope.type = attrs.type;
     scope.loading = true;
     var colours = ['#17ac5b', '#0088bb', '#ffd165', '#485b88', '#f78c6b', '#8e2d56'];
@@ -2391,7 +2394,7 @@ app.directive('radiusStats', ['$timeout', 'Report', '$routeParams', 'COLOURS', '
     function chart() {
       var params = {
         type: scope.type,
-        period: '30d'
+        period: $routeParams.period || '7d'
       };
 
       if (attrs.fake !== 'true') {
@@ -2429,7 +2432,7 @@ app.directive('emailStats', ['$timeout', 'Report', '$routeParams', 'COLOURS', 'g
 
   var link = function(scope,element,attrs,controller) {
 
-    scope.type = 'email.stats';
+    scope.type = 'emails.stats';
 
     var fakeData = {
       total: Math.floor((Math.random() * 100) + 500),
@@ -2447,7 +2450,7 @@ app.directive('emailStats', ['$timeout', 'Report', '$routeParams', 'COLOURS', 'g
     function chart() {
       var params = {
         type: scope.type,
-        period: '30d'
+        period: $routeParams.period || '7d'
       };
 
       if (attrs.fake !== 'true') {
@@ -2479,5 +2482,4 @@ app.directive('emailStats', ['$timeout', 'Report', '$routeParams', 'COLOURS', 'g
     require: '^clientChart',
     templateUrl: 'components/campaigns/reports/_email_stats.html',
   };
-
 }]);

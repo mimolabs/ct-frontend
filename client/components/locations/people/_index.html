@@ -1,4 +1,4 @@
-updateFilters<people-nav location="location"></people-nav>
+<people-nav location="location"></people-nav>
 
 <md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" ng-if="!integration.type" style="padding-bottom: 0px;margin-bottom:0px;">
   <div flex="100">
@@ -27,9 +27,9 @@ updateFilters<people-nav location="location"></people-nav>
                 </div>
                 <div flex="10" flex-gt-sm="10"></div>
                 <div flex="25" flex-gt-sm="45">
-                  <md-select ng-show="audiences.length > 0" ng-model="query.audience" ng-change="filterByAudience(query.audience)" aria-label="audience" style="margin: 0px 0px 10px 0px">
-                    <md-option ng-repeat="audience in audiences" ng-value="audience.id">
-                      {{audience.name}}
+                  <md-select ng-disabled="audiences.length < 2" ng-model="audience_id" ng-change="filterByAudience(audience_id)" aria-label="audience" style="margin: 0px 0px 10px 0px">
+                    <md-option ng-repeat="a in audiences" ng-value="a.id">
+                      {{a.name}}
                     </md-option>
                   </md-select>
                 </div>
@@ -253,40 +253,6 @@ updateFilters<people-nav location="location"></people-nav>
                 </tr>
               </tbody>
             </table>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-            <p>a</p>
-
           </md-table-container>
           <md-card-actions>
             <md-table-pagination md-limit="query.limit" md-page="query.page" md-limit-options="query.options" md-total="{{::_links.total_entries}}" md-label="{{pagination_labels}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>

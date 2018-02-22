@@ -2,7 +2,7 @@
 
 var app = angular.module('myApp.people.directives', []);
 
-app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$routeParams', '$mdDialog', 'showToast', 'showErrors', '$q','pagination_labels', 'gettextCatalog', function(People,Location,Audience,$location,$routeParams,$mdDialog,showToast,showErrors,$q, pagination_labels, gettextCatalog) {
+app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$routeParams', '$mdDialog', 'showToast', 'showErrors', '$q','pagination_labels', 'gettextCatalog', '$route', function(People,Location,Audience,$location,$routeParams,$mdDialog,showToast,showErrors,$q, pagination_labels, gettextCatalog, $route) {
 
   var link = function(scope, el, attrs, controller) {
 
@@ -18,24 +18,16 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
       relative: true
     }];
 
-    // var signedUpDefault = [{
-    //   value: 30,
-    //   operator: 'gte',
-    //   attribute: 'created_at',
-    //   relative: true
-    // }];
-
-    var defaultAudiences = ['no_filter', 'last_seen_30_days', 'signed_up_30_days'];
-
-
-    // set the p
     var encodeBlob = function() {
       if (scope.predicates) {
         return window.btoa(angular.toJson(scope.predicates));
       }
 
-      return window.btoa(angular.toJson(scope.predicates));
+      if ($routeParams.blob) {
+        return $routeParams.blob;
+      }
 
+      return window.btoa(angular.toJson(defaultBlob));
     };
 
     function decodeBlob() {
@@ -50,23 +42,46 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
       return defaultBlob;
     }
 
-
     function setParams() {
-
-      // getaudeice and user
       scope.query = {
         limit:            $routeParams.per || 25,
         page:             $routeParams.page || 1,
         filter:           $routeParams.q,
         options:          [5,10,25,50,100],
-        predicate_type:   $routeParams.predicate_type || 'and',
-        audience:         $routeParams.audience
+        predicate_type:   $routeParams.predicate_type || 'and'
         // blob:             encodeBlob()
       };
     }
 
-    // on load
-    // setParams();
+    var getAudiences = function() {
+      var deferred = $q.defer();
+      Audience.query({location_id: scope.location.slug}, function(data) {
+        scope.audiences = data.audiences;
+        setAudiencePredicate();
+        deferred.resolve();
+        //});
+      }, function(err) {
+        // alert(123);
+        // scope.predicates = decodeBlob();
+        deferred.resolve();
+      });
+      return deferred.promise;
+    };
+
+    function updatePage() {
+      setParams();
+
+      var hash    = {};
+
+      hash.page           = scope.query.page;
+      hash.q              = scope.query.filter;
+      hash.predicate_type = scope.query.predicate_type;
+      hash.blob           = encodeBlob();
+      hash.audience       = scope.audience;
+
+      $location.search(hash);
+      getAudiences().then(getPeople());
+    }
 
     scope.showCard = function(index) {
       scope.focusedCard = index;
@@ -112,30 +127,24 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     //   });
     // };
 
-    // scope.filterByAudience = function(id) {
-    //   var audience = {};
-    //   if (id === 'no_filter') {
-    //     scope.selected_audience = 'no_filter';
-    //     scope.predicates = [];
-    //   } else if (id === 'last_seen_30_days') {
-    //     scope.selected_audience = 'last_seen_30_days';
-    //     scope.predicates = lastSeenDefault;
-    //   } else if (id === 'signed_up_30_days') {
-    //     scope.selected_audience = 'signed_up_30_days';
-    //     scope.predicates = signedUpDefault;
-    //   } else {
-    //     for (var i = 0, len = scope.audiences.length; i < len; i++) {
-    //       if (scope.audiences[i].id === id) {
-    //         audience = scope.audiences[i];
-    //       }
-    //     }
-    //     scope.predicates = audience.predicates;
-    //     scope.query.predicate_type = audience.predicate_type;
-    //     scope.selected_audience = audience.id;
-    //   }
-    //   scope.predicates_changed = undefined;
-    //   scope.updatePage();
-    // };
+    scope.filterByAudience = function(id) {
+      $location.search({audience: id});
+      $route.reload();
+      // getPeople();
+      // var audience = {};
+      // if (id) {
+      //   for (var i = 0, len = scope.audiences.length; i < len; i++) {
+      //     if (scope.audiences[i].id === id) {
+      //       audience = scope.audiences[i];
+      //     }
+      //   }
+      //   scope.predicates = audience.predicates;
+      //   scope.query.predicate_type = audience.predicate_type;
+      //   scope.audience = id;
+      // }
+      // // scope.predicates_changed = undefined;
+      // updatePage();
+    };
 
     // scope.onPaginate = function (page, limit) {
     //   scope.query.page = page;
@@ -193,53 +202,18 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
 
     var setAudiencePredicate = function() {
       if ($routeParams.audience && scope.audiences) {
-        for (var i = 0, len = scope.audiences.length; i < len; i++) {
-          if (scope.audiences[i].id !== $routeParams.audience) {
-            continue;
+        angular.forEach(scope.audiences, function (value, key) {
+          if (value.id === $routeParams.audience) {
+            scope.predicates = value.predicates;
+            scope.audience_id = value.id;
           }
-          scope.predicates = scope.audiences[i].predicates;
-          scope.query.predicate_type = scope.audiences[i].predicate_type;
-          break;
-        }
-      } else {
-        scope.predicates = decodeBlob();
+        });
+      }
+
+      if (!scope.predicates) {
+        scope.predicates = defaultBlob;
       }
     };
-
-    var getAudiences = function() {
-      var deferred = $q.defer();
-      Audience.query({location_id: scope.location.slug}, function(data) {
-        scope.audiences = data.audiences;
-        setAudiencePredicate();
-        deferred.resolve();
-      }, function(err) {
-        console.log(err);
-        scope.predicates = decodeBlob();
-        deferred.resolve();
-      });
-      return deferred.promise;
-    };
-
-    function updatePage() {
-      setParams();
-
-      var hash    = {};
-
-      hash.page           = scope.query.page;
-      hash.q              = scope.query.filter;
-      hash.predicate_type = scope.query.predicate_type;
-      hash.blob           = encodeBlob();
-      hash.predicates_changed = scope.predicates_changed;
-      hash.audiences      = scope.query.audience;
-      // hash.predicates = scope.predicates;
-      // hash.selected_audience = scope.selected_audience;
-
-
-      $location.search(hash);
-      // init();
-      getAudiences().then(getPeople);
-      // getPeople();
-    }
 
     scope.updateFilters = function() {
       scope.focusedCard = undefined;
@@ -322,30 +296,27 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
       });
     };
 
-    var updateAudience = function(audience_id) {
-      Audience.update({}, {
-        location_id: $routeParams.id,
-        id: audience_id,
-        audience: {
-          predicates: scope.predicates,
-          predicate_type: scope.query.predicate_type
-        }
-      }).$promise.then(function(results) {
-        showToast(gettextCatalog.getString('Audience successfully updated.'));
-        getAudiences().then(function() {
-          scope.selected_audience = results.id;
-        });
-      }, function(err) {
-        showErrors(err);
-      });
-    };
+    // var updateAudience = function(audience_id) {
+    //   Audience.update({}, {
+    //     location_id: $routeParams.id,
+    //     id: audience_id,
+    //     audience: {
+    //       predicates: scope.predicates,
+    //       predicate_type: scope.query.predicate_type
+    //     }
+    //   }).$promise.then(function(results) {
+    //     showToast(gettextCatalog.getString('Audience successfully updated.'));
+    //     getAudiences().then(function() {
+    //       scope.selected_audience = results.id;
+    //     });
+    //   }, function(err) {
+    //     showErrors(err);
+    //   });
+    // };
 
     scope.saveAudience = function() {
-      if (defaultAudiences.includes(scope.selected_audience) || scope.selected_audience === undefined) {
-        openDialog(scope.location, scope.query);
-        return;
-      }
-      updateAudience(scope.selected_audience);
+      openDialog(scope.location, scope.query);
+      // updateAudience(scope.selected_audience); add later
     };
 
     scope.addRule = function() {
@@ -373,6 +344,9 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
         blob: encodeBlob(),
         // q: scope.query.filter,
       };
+
+      console.log(123123123, params)
+
       // if (scope.predicates.length > 0) {
       //   params.audience = {
       //     predicates: scope.predicates,
@@ -397,27 +371,10 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     var init = function() {
 
       setParams();
-      getAudiences();
-      getPeople();
-      // Location.get({id: $routeParams.id}, function(data) {
-      //   scope.location = data;
-      //   var setup = scope.location.setup;
-      //   if ($location.path().split('/')[2] !== 'people' && (setup.splash === false || setup.integrations === false || scope.location.paid === false)) {
-      //     $location.path('/' + scope.location.slug + '/guide');
-      //   }
-      //   // getAudiences();
-      //   // getPeople();
-      //   getAudiences().then(getPeople);
-      // }, function(err){
-      //   console.log(err);
-      // });
+      getAudiences().then(function() {
+        getPeople();
+      });
     };
-
-    // var init = function() {
-    //   getLocation();
-    // };
-
-
 
     init();
   };

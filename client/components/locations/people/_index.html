@@ -1,6 +1,6 @@
 <people-nav location="location"></people-nav>
 
-<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" ng-if="!integration.type" style="padding-bottom: 45px">
+<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" ng-if="!integration.type" style="padding-bottom: 0px;margin-bottom:0px;">
   <div flex="100">
     <div layout="row" layout-wrap>
 
@@ -9,48 +9,38 @@
 
       <div flex="100" flex-gt-sm="30" class="people-filter">
         <md-card class="b-bl">
-          <md-card-title>
-            <md-card-title-text>
-              <span class="md-headline" translate>
-                Filter People
-              </span>
-            </md-card-title-text>
-          </md-card-title>
+          <div class="md-toolbar-tools layout-row" layout="row">
+            <span class="md-subhead">Filter People</span>
+          </div>
           <md-card-content>
             <div layout="column">
-              <md-select ng-model="selected_audience" ng-change="filterByAudience(selected_audience)" aria-label="audience">
-                <md-option ng-value="'no_filter'">
-                  No Filter
-                </md-option>
-                <md-option ng-value="'last_seen_30_days'">
-                  Seen in last 30 days
-                </md-option>
-                <md-option ng-value="'signed_up_30_days'">
-                  Signed up in last 30 days
-                </md-option>
-                <md-option ng-repeat="audience in audiences" ng-value="audience.id">
-                  {{audience.name}}
-                </md-option>
-              </md-select>
+              <div layout="row">
+                <div flex="25" flex-gt-sm="45">
+                  <md-select ng-disabled="predicates.length < 2 || !predicates" ng-model="predicate_type" ng-change="updateFilters()" style="margin: 0px 0px 10px 0px">
+                    <md-option ng-value="and">
+                      Match all
+                    </md-option>
+                    <md-option ng-value="or">
+                      Match any
+                    </md-option>
+                  </md-select>
+                </div>
+                <div flex="10" flex-gt-sm="10"></div>
+                <div flex="25" flex-gt-sm="45">
+                  <md-select ng-disabled="audiences.length < 2" ng-model="audience_id" ng-change="filterByAudience(audience_id)" aria-label="audience" style="margin: 0px 0px 10px 0px">
+                    <md-option ng-repeat="a in audiences" ng-value="a.id">
+                      {{a.name}}
+                    </md-option>
+                  </md-select>
+                </div>
+              </div>
               <span hide show-gt-sm>
-                <div ng-if="query.predicates.length > 0 || new_audience">
-                  <md-radio-group ng-model="query.predicate_type" ng-change="savePredicate()">
-                    <md-radio-button value="and" class="md-primary">match all these rules</md-radio-button>
-                    <md-radio-button value="or" class="md-primary">match any of these rules</md-radio-button>
-                  </md-radio-group>
-                </div>
-                <md-button class="md-raised" ng-show="new_audience == undefined" ng-click="newAudienceForm()">
-                  Create new filter
-                </md-button>
-                <div>
-                  <hr ng-show="new_audience == undefined && query.predicates.length > 0">
-                </div>
                 <span>
-                  <span ng-repeat="predicate in query.predicates">
-                    <md-card flex="100">
+                  <span ng-repeat="predicate in predicates">
+                    <md-card flex="100" style="margin-left:0px;margin-right:0px;">
                       <md-card-title>
                         <md-card-title-text>
-                          <span class="md-headline" translate>
+                          <span translate>
                             {{ predicate | humanPredicate }}
                           </span>
                           <md-switch ng-model="predicate.relative" aria-label="Switch 1" ng-show="focusedCard == $index && (predicate.attribute == 'created_at' || predicate.attribute == 'last_seen')">
@@ -129,21 +119,27 @@
                               </div>
                             </md-input-container>
                             <div>
-                              <md-button class="md-raised" ng-click="savePredicate()" ng-disabled="myForm.$invalid">Save</md-button>
+                              <md-button class="md-raised" ng-click="updateFilters()" ng-disabled="myForm.$invalid" style="margin:0px;">Done</md-button>
                             </div>
                           </span>
                         </form>
                       </md-card-content>
-                      <md-card-actions layout-align="end end">
-                        <div layout="row" flex="80" flex-gt-md="65">
-                          <small flex>
-                            <md-icon style="font-size: 18px; margin-right: -5px; color: rgb(208, 216, 221);" ng-click="removePredicate($index)">delete</md-icon>
-                            <span style="color: rgb(167, 171, 174);">Remove</span>
-                          </small>
-                          <small flex>
-                            <md-icon style="font-size: 18px; margin-right: -5px; color: rgb(208, 216, 221);" ng-click="showCard($index)">mode_edit</md-icon>
-                            <span style="color: rgb(167, 171, 174);">Edit</span>
-                          </small>
+                      <md-card-actions layout="row" layout-align="space-between end">
+                        <div>
+                          <md-icon style="color:rgb(208,216,221);cursor:pointer;" ng-click="removePredicate($index)">
+                            delete
+                            <md-tooltip>
+                              Remove
+                            </md-tooltip>
+                          </md-icon>
+                        </div>
+                        <div>
+                          <md-icon style="color:rgb(208,216,221);cursor:pointer;" ng-click="showCard($index)">
+                            mode_edit
+                            <md-tooltip>
+                              Edit
+                            </md-tooltip>
+                          </md-icon>
                         </div>
                       </md-card-actions>
                     </md-card>
@@ -163,36 +159,26 @@
                       </div>
                     </md-list-item>
                   </md-list>
-                  <div layout="row">
-                    <md-button class="md-raised" ng-click="addRule()" ng-show="focusedCard == undefined && (new_audience == true || selected_audience != 'no_filter')">Add a rule</md-button>
-                    <md-button class="md-raised" ng-click="cancelAudience()" ng-show="new_audience">Cancel</md-button>
-                  </div>
-                  <div layout="row">
-                    <md-button class="md-raised md-primary" ng-click="saveAudience()" ng-show="focusedCard == undefined && query.predicates.length > 0">
-                      Save
-                      <md-tooltip>
-                        Save user filter for quick searches and creating campaigns.
-                      </md-tooltip>
-                    </md-button>
-                    <md-button class="md-raised md-primary" ng-click="destroyAudience(selected_audience)" ng-show="focusedCard == undefined && selected_audience != 'no_filter'">
-                      Delete
-                      <md-tooltip>
-                        Delete this audience of users.
-                      </md-tooltip>
-                    </md-button>
+                  <div style="padding-top:10px;">
+                    <a href="" ng-click="addRule()" ng-show="focusedCard == undefined" style="text-decoration:none;">+ Add Rule</a>
                   </div>
                 </span>
               </div>
             </span>
           </md-card-content>
+          <md-card-actions layout="row" layout-align="space-between end" style="padding-top: 10px;" hide show-gt-sm>
+            <md-button class="" ng-click="saveAudience()" ng-show="focusedCard == undefined" ng-disabled="!predicates_changed">
+              Save audience
+            </md-button>
+            <md-button class="md-warn" ng-click="destroyAudience(query.audience)" ng-show="focusedCard == undefined && query.audience != 'no_filter'">
+              Delete audience
+            </md-button>
+          </md-card-actions>
         </md-card>
       </div>
 
-      <div flex="100" flex-gt-sm="70">
-        <div class="example-data" ng-show="location.paid == false">
-          The chart below is populated with example data. To access real data about your location, start your free trial today!
-        </div>
-        <analytics ng-if="!loading" hide show-gt-sm>
+      <div flex="100" flex-gt-sm="70" class="people-table">
+        <!-- <analytics ng-if="!loading" hide show-gt-sm>
           <client-chart>
             <div layout="row" layout-wrap>
               <div flex="100" flex-gt-sm="100" ng-hide="fs && fs.panel != 'usage'">
@@ -200,24 +186,20 @@
               </div>
             </div>
           </client-chart>
-        </analytics>
+        </analytics> -->
         <md-card class="b-bl">
-          <div class="md-toolbar-tools" ng-cloak layout="row">
-            <span class="md-subhead" translate>
-              <!-- There have been 7 new this week. -->
-            </span>
+          <div class="md-toolbar-tools" ng-cloak layout="row" layout-align="space-between center">
             <div flex="75">
-              {{ _links.total_entries || 0 }} {{ _links.total_entries == 1 ? 'person' : 'people' }} connected. {{_links.this_week || 0}} connected this week.
+              <span class="md-subhead">{{ _links.total_entries || 0 }} {{ _links.total_entries == 1 ? 'person' : 'people' }} connected. {{_links.this_week || 0}} connected this week.</span>
             </div>
             <div flex="25">
-              <form ng-submit="updatePage()">
+              <form ng-submit="search()">
                 <md-input-container style="margin: 10px 0px 0px 0px">
-                  <input ng-model="query.filter" placeholder="{{ 'search' | translate }}"></input>
+                  <input ng-model="query.filter" placeholder="{{ 'Search' | translate }}"></input>
                 </md-input-container>
               </form>
             </div>
           </div>
-          <span flex><span>
           <md-table-container>
             <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise">
               <thead md-head md-order="query.order" md-on-reorder="logOrder">
@@ -233,7 +215,7 @@
               <tbody md-body>
                 <tr md-row ng-repeat="person in people">
                   <td md-cell>
-                    <a href="/#/{{ location.slug }}/people/{{ person.id }}">{{ person.first_name || person.last_name ? person.first_name + ' ' + person.last_name : person.username || 'Splash Guest'}}</a>
+                    <a href="/#/{{ location.slug }}/people/{{ person.id }}">{{ person.first_name }} {{ person.last_name }}</a>
                   </td>
                   <td md-cell>
                     {{ person.email || 'NA' }}
@@ -272,7 +254,9 @@
               </tbody>
             </table>
           </md-table-container>
-          <md-table-pagination md-limit="query.limit" md-page="query.page" md-limit-options="query.options" md-total="{{::_links.total_entries}}" md-label="{{pagination_labels}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+          <md-card-actions>
+            <md-table-pagination md-limit="query.limit" md-page="query.page" md-limit-options="query.options" md-total="{{::_links.total_entries}}" md-label="{{pagination_labels}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+          </md-card-actions>
         </md-card>
       </div>
     </div>

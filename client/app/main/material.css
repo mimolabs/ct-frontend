@@ -219,6 +219,10 @@ table.md-table tr > td.md-cell:last-of-type {
   border-right: none;
 }
 
+table.md-table tr:last-of-type > td.md-cell {
+  border-bottom: 1px solid #e0e0e0;
+}
+
 table.md-table:not(.md-row-select) td.md-cell:nth-child(n+2):nth-last-child(n+2), table.md-table:not(.md-row-select) th.md-column:nth-child(n+2):nth-last-child(n+2) {
   padding: 0 24px 0 24px;
 }
@@ -1052,7 +1056,6 @@ camp-nav .top-nav .md-active {
   }
 }
 
-
 /*toast text style*/
 
 md-bottom-sheet .md-subheader {
@@ -1464,6 +1467,12 @@ table a {
 
 /*WYSIWYG end*/
 
+/*people page*/
+
+.people-filter md-card-content {
+  padding-top: 0px;
+}
+
 @media (min-width: 960px) {
   .people-filter {
     position:fixed;
@@ -1471,10 +1480,33 @@ table a {
     width:-moz-calc(30% - 31px);
     width:-webkit-calc(30% - 31px);
   }
-  .people-filter md-card {
-    max-height: 88vh;
+  .people-filter > md-card {
+    height: calc(100vh - 120px);
   }
   .people-filter md-card md-card-content {
     overflow: auto;
+    height: 100%;
   }
+  .people-table > md-card {
+    height: calc(100vh - 120px);
+  }
+  .people-table md-card md-table-container {
+    overflow: auto;
+    height: 100%;
+    margin-right:-5px;
+  }
+}
+
+.md-subhead {
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(113, 113, 113, 0.87);
+}
+
+table.md-table td.md-cell {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+md-card.md-default-theme, md-card {
+  color: rgba(0, 0, 0, 0.75);
 }

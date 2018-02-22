@@ -28,12 +28,12 @@
                     </md-option>
                   </md-select>
                   <div flex></div>
-                  <md-select ng-show="audiences.length > 0" ng-model="audience" ng-change="filterByAudience(audience)" aria-label="audience" style="margin: 0px 0px 10px 0px">
+                  <md-select ng-show="audiences.length > 0" ng-model="audience_id" ng-change="filterByAudience(audience_id)" aria-label="audience" style="margin: 0px 0px 10px 0px">
                     <md-option ng-value="''">
                       All people
                     </md-option>
-                    <md-option ng-repeat="audience in audiences" ng-value="audience.id">
-                      {{audience.name}}
+                    <md-option ng-repeat="a in audiences" ng-value="a.id">
+                      {{a.name}}
                     </md-option>
                   </md-select>
                 <div flex></div>
@@ -188,15 +188,6 @@
       </div>
 
       <div flex="100" flex-gt-sm="70">
-        <!-- <analytics ng-if="!loading" hide show-gt-sm>
-          <client-chart>
-            <div layout="row" layout-wrap>
-              <div flex="100" flex-gt-sm="100" ng-hide="fs && fs.panel != 'usage'">
-                <dash-clients-chart name="New People" type="people.new" bar="true" render="new-people" fake="{{!location.paid}}" show-gt-sm></dash-clients-chart>
-              </div>
-            </div>
-          </client-chart>
-        </analytics> -->
         <md-card class="b-bl">
           <div class="md-toolbar-tools" ng-cloak layout="row">
             <span class="md-subhead" translate>

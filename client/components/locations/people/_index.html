@@ -28,7 +28,10 @@
                     </md-option>
                   </md-select>
                   <div flex></div>
-                  <md-select ng-show="audiences.length > 0" ng-model="query.audience" ng-change="filterByAudience(query.audience)" aria-label="audience" style="margin: 0px 0px 10px 0px">
+                  <md-select ng-show="audiences.length > 0" ng-model="audience" ng-change="filterByAudience(audience)" aria-label="audience" style="margin: 0px 0px 10px 0px">
+                    <md-option ng-value="''">
+                      All people
+                    </md-option>
                     <md-option ng-repeat="audience in audiences" ng-value="audience.id">
                       {{audience.name}}
                     </md-option>
@@ -170,7 +173,7 @@
                         Save user filter for quick searches and creating campaigns.
                       </md-tooltip>
                     </md-button>
-                    <!-- <md-button class="md-raised md-primary" ng-click="destroyAudience(query.audience)" ng-show="focusedCard == undefined && query.audience != 'no_filter'">
+                    <!-- <md-button class="md-raised md-primary" ng-click="destroyAudience(audience)" ng-show="focusedCard == undefined && audience != 'no_filter'">
                       Delete
                       <md-tooltip>
                         Delete this audience of users.

@@ -18,14 +18,29 @@
           </md-card-title>
           <md-card-content>
             <div layout="column">
-              <md-select ng-model="selected_audience" ng-change="filterByAudience(selected_audience)" aria-label="audience" ng-show="audiences.length > 0">
-                <md-option ng-value="'no_filter'">
-                  No Filter
-                </md-option>
-                <md-option ng-repeat="audience in audiences" ng-value="audience.id">
-                  {{audience.name}}
-                </md-option>
-              </md-select>
+              <div layout="row">
+                  <md-select ng-model="predicate_type" ng-change="savePredicate()" style="margin: 0px 0px 10px 0px">
+                    <md-option ng-value="and">
+                      Match all
+                    </md-option>
+                    <md-option ng-value="or">
+                      Match any
+                    </md-option>
+                  </md-select>
+                  <div flex></div>
+                  <md-select ng-model="selected_audience" ng-change="filterByAudience(selected_audience)" aria-label="audience" style="margin: 0px 0px 10px 0px">
+                    <md-option ng-value="'no_filter'">
+                      All people
+                    </md-option>
+                    <md-option ng-value="'last_seen_30_days'">
+                      Last 30 days
+                    </md-option>
+                    <md-option ng-repeat="audience in audiences" ng-value="audience.id">
+                      {{audience.name}}
+                    </md-option>
+                  </md-select>
+                <div flex></div>
+              </div>
               <span hide show-gt-sm>
                 <div ng-if="query.predicates.length > 1">
                   <md-radio-group ng-model="query.predicate_type" ng-change="savePredicate()">
@@ -38,7 +53,7 @@
                     <md-card flex="100">
                       <md-card-title>
                         <md-card-title-text>
-                          <span class="md-headline" translate>
+                          <span translate>
                             {{ predicate | humanPredicate }}
                           </span>
                           <md-switch ng-model="predicate.relative" aria-label="Switch 1" ng-show="focusedCard == $index && (predicate.attribute == 'created_at' || predicate.attribute == 'last_seen')">
@@ -151,8 +166,8 @@
                       </div>
                     </md-list-item>
                   </md-list>
-                  <div layout="row">
-                    <md-button class="md-raised" ng-click="addRule()" ng-show="focusedCard == undefined">Add a rule</md-button>
+                  <div style="text-align: center">
+                    <md-button ng-click="addRule()" ng-show="focusedCard == undefined"><md-icon>add_circle</md-icon></md-button>
                   </div>
                   <div layout="row">
                     <md-button class="md-raised md-primary" ng-click="saveAudience()" ng-show="focusedCard == undefined && predicates_changed">

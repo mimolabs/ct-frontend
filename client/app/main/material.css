@@ -1056,7 +1056,6 @@ camp-nav .top-nav .md-active {
   }
 }
 
-
 /*toast text style*/
 
 md-bottom-sheet .md-subheader {
@@ -1496,4 +1495,18 @@ table a {
     height: 100%;
     margin-right:-5px;
   }
+}
+
+.md-subhead {
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(113, 113, 113, 0.87);
+}
+
+table.md-table td.md-cell {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+md-card.md-default-theme, md-card {
+  color: rgba(0, 0, 0, 0.75);
 }

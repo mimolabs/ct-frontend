@@ -173,7 +173,7 @@
             <md-button class="" ng-click="saveAudience()" ng-show="focusedCard == undefined" ng-disabled="!predicates_changed">
               Save audience
             </md-button>
-            <md-button class="md-warn" ng-click="destroyAudience(query.audience)" ng-disabled="!audience_id" ng-show="focusedCard == undefined && query.audience != 'no_filter'">
+            <md-button class="md-warn" ng-click="destroyAudience(audience_id)" ng-disabled="!audience_id" ng-show="focusedCard == undefined && query.audience != 'no_filter'">
               Delete audience
             </md-button>
           </md-card-actions>

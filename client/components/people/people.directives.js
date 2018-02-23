@@ -8,7 +8,6 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
 
     scope.currentNavItem = 'people';
     scope.location = {slug: $routeParams.id};
-    scope.selected_audience = $routeParams.selected_audience || 'last_seen_30_days';
     scope.predicates_changed = $routeParams.predicates_changed;
 
     var defaultBlob = [{

@@ -334,9 +334,11 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
       scope.predicates.splice(index, 1);
       scope.focusedCard = undefined;
       if (scope.predicates.length === 0) {
-        scope.selected_audience = 'no_filter';
+        scope.filterByAudience();
+      } else {
+        scope.predicates_changed = true;
+        updatePage();
       }
-      updatePage();
     };
 
     var buildLocation = function() {

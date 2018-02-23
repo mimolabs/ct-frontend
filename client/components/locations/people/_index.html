@@ -16,11 +16,11 @@
             <div layout="column">
               <div layout="row">
                 <div flex="25" flex-gt-sm="45">
-                  <md-select ng-disabled="predicates.length < 2 || !predicates" ng-model="predicate_type" ng-change="updateFilters()" style="margin: 0px 0px 10px 0px">
-                    <md-option ng-value="and">
+                  <md-select ng-disabled="predicates.length < 2 || !predicates" ng-model="query.predicate_type" ng-change="updateFilters()" style="margin: 0px 0px 10px 0px">
+                    <md-option ng-value="'and'">
                       Match all
                     </md-option>
-                    <md-option ng-value="or">
+                    <md-option ng-value="'or'">
                       Match any
                     </md-option>
                   </md-select>

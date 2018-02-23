@@ -2,12 +2,11 @@
 
 var app = angular.module('myApp.people.directives', []);
 
-app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$routeParams', '$mdDialog', 'showToast', 'showErrors', '$q','pagination_labels', 'gettextCatalog', '$route', function(People,Location,Audience,$location,$routeParams,$mdDialog,showToast,showErrors,$q, pagination_labels, gettextCatalog, $route) {
+app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$location', '$routeParams', '$mdDialog', 'showToast', 'showErrors', '$q','pagination_labels', 'gettextCatalog', '$route', function(People,Location,Audience,$timeout,$location,$routeParams,$mdDialog,showToast,showErrors,$q, pagination_labels, gettextCatalog, $route) {
 
   var link = function(scope, el, attrs, controller) {
 
     scope.currentNavItem = 'people';
-    scope.location = {slug: $routeParams.id};
     scope.predicates_changed = $routeParams.predicates_changed;
 
     var defaultBlob = [{
@@ -67,8 +66,6 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     };
 
     function updatePage() {
-      setParams();
-
       var hash    = {};
 
       hash.page           = scope.query.page;
@@ -284,27 +281,29 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
       });
     };
 
-    // var updateAudience = function(audience_id) {
-    //   Audience.update({}, {
-    //     location_id: $routeParams.id,
-    //     id: audience_id,
-    //     audience: {
-    //       predicates: scope.predicates,
-    //       predicate_type: scope.query.predicate_type
-    //     }
-    //   }).$promise.then(function(results) {
-    //     showToast(gettextCatalog.getString('Audience successfully updated.'));
-    //     getAudiences().then(function() {
-    //       scope.selected_audience = results.id;
-    //     });
-    //   }, function(err) {
-    //     showErrors(err);
-    //   });
-    // };
+    var updateAudience = function(audience_id) {
+      Audience.update({}, {
+        location_id: $routeParams.id,
+        id: audience_id,
+        audience: {
+          blob: encodeBlob($routeParams.blob),
+          predicate_type: scope.query.predicate_type
+        }
+      }).$promise.then(function(results) {
+        showToast(gettextCatalog.getString('Audience successfully updated.'));
+        // scope.audience = results.id;
+        scope.filterByAudience(results.id)
+      }, function(err) {
+        showErrors(err);
+      });
+    };
 
     scope.saveAudience = function() {
-      openDialog(scope.location, scope.query);
-      // updateAudience(scope.selected_audience); add later
+      if (scope.audience_id) {
+        updateAudience(scope.audience_id);
+      } else {
+        openDialog(scope.location, scope.query);
+      }
     };
 
     scope.addRule = function() {
@@ -328,7 +327,11 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
       var params = {
         page: scope.query.page,
         per: scope.query.limit,
+        q: scope.query.filter,
         location_id: scope.location.slug,
+        audience: {
+          predicate_type: scope.query.predicate_type
+        },
         blob: encodeBlob(),
       };
 
@@ -345,14 +348,21 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     };
 
     var checkForGuide = function() {
+      scope.location = JSON.parse(scope.location);
+      if ($location.path().split('/')[2] !== 'people' && (scope.location.setup.splash === false || scope.location.setup.integrations === false || scope.location.paid === false)) {
+        $location.path('/' + scope.location.slug + '/guide');
+      } else {
+        setParams();
+        getAudiences().then(function() {
+          getPeople();
+        });
+      }
     };
 
     var init = function() {
-
-      setParams();
-      getAudiences().then(function() {
-        getPeople();
-      });
+      $timeout(function() {
+        checkForGuide();
+      }, 500);
     };
 
     init();
@@ -360,7 +370,11 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
 
   return {
     link: link,
-    templateUrl: 'components/locations/people/_index.html'
+    templateUrl: 'components/locations/people/_index.html',
+    scope: {
+      location: '@',
+      loading: '='
+    }
   };
 
 }]);

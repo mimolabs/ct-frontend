@@ -401,7 +401,7 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
     };
 
     var setProfilePhoto = function() {
-      if (scope.person.social) {
+      if (scope.person.social && scope.person.social.length > 0) {
         if (scope.person.social[0].facebook_id) {
           scope.person.profile_photo = 'https://graph.facebook.com/' + scope.person.social[0].facebook_id + '/picture?type=large';
           scope.loading  = undefined;

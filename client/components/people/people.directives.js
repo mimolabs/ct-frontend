@@ -282,27 +282,29 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
       });
     };
 
-    // var updateAudience = function(audience_id) {
-    //   Audience.update({}, {
-    //     location_id: $routeParams.id,
-    //     id: audience_id,
-    //     audience: {
-    //       predicates: scope.predicates,
-    //       predicate_type: scope.query.predicate_type
-    //     }
-    //   }).$promise.then(function(results) {
-    //     showToast(gettextCatalog.getString('Audience successfully updated.'));
-    //     getAudiences().then(function() {
-    //       scope.selected_audience = results.id;
-    //     });
-    //   }, function(err) {
-    //     showErrors(err);
-    //   });
-    // };
+    var updateAudience = function(audience_id) {
+      Audience.update({}, {
+        location_id: $routeParams.id,
+        id: audience_id,
+        audience: {
+          blob: encodeBlob($routeParams.blob),
+          predicate_type: scope.query.predicate_type
+        }
+      }).$promise.then(function(results) {
+        showToast(gettextCatalog.getString('Audience successfully updated.'));
+        // scope.audience = results.id;
+        scope.filterByAudience(results.id)
+      }, function(err) {
+        showErrors(err);
+      });
+    };
 
     scope.saveAudience = function() {
-      openDialog(scope.location, scope.query);
-      // updateAudience(scope.selected_audience); add later
+      if (scope.audience_id) {
+        updateAudience(scope.audience_id);
+      } else {
+        openDialog(scope.location, scope.query);
+      }
     };
 
     scope.addRule = function() {

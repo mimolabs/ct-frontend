@@ -7,6 +7,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
   var link = function(scope, el, attrs, controller) {
 
     scope.currentNavItem = 'people';
+    // scope.location = {slug: $routeParams.id};
     scope.predicates_changed = $routeParams.predicates_changed;
 
     var defaultBlob = [{
@@ -338,8 +339,19 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
       updatePage();
     };
 
+    var buildLocation = function() {
+      scope.location = {
+        slug: $routeParams.id,
+        setup: {
+          splash: JSON.parse(attrs.splashSetup),
+          integrations: JSON.parse(attrs.integrationsSetup)
+        },
+        paid: JSON.parse(attrs.locationPaid)
+      };
+    };
+
     var checkForGuide = function() {
-      scope.location = JSON.parse(scope.location);
+      buildLocation();
       if ($location.path().split('/')[2] !== 'people' && (scope.location.setup.splash === false || scope.location.setup.integrations === false || scope.location.paid === false)) {
         $location.path('/' + scope.location.slug + '/guide');
       } else {
@@ -351,9 +363,10 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
     };
 
     var init = function() {
-      $timeout(function() {
+      var t = $timeout(function() {
         checkForGuide();
-      }, 500);
+        $timeout.cancel(t);
+      }, 250);
     };
 
     init();
@@ -363,8 +376,11 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
     link: link,
     templateUrl: 'components/locations/people/_index.html',
     scope: {
-      location: '@',
-      loading: '='
+      loading: '=',
+      paid: '@',
+      splashSetup: '@',
+      integrationsSetup: '@',
+      locationPaid: '@'
     }
   };
 
@@ -385,7 +401,7 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
     };
 
     var setProfilePhoto = function() {
-      if (scope.person.social) {
+      if (scope.person.social && scope.person.social.length > 0) {
         if (scope.person.social[0].facebook_id) {
           scope.person.profile_photo = 'https://graph.facebook.com/' + scope.person.social[0].facebook_id + '/picture?type=large';
           scope.loading  = undefined;

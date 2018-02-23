@@ -109,7 +109,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
       }
     };
 
-    scope.destroy = function(person) {
+    var destroy = function(person) {
       People.destroy({location_id: scope.location.slug, id: person.id}).$promise.then(function(results) {
         removeFromList(person);
       }, function(err) {
@@ -117,18 +117,18 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
       });
     };
 
-    // scope.delete = function(person) {
-    //   var confirm = $mdDialog.confirm()
-    //   .title(gettextCatalog.getString('Delete Person'))
-    //   .textContent(gettextCatalog.getString('Are you sure you want to delete this person?'))
-    //   .ariaLabel(gettextCatalog.getString('Delete Person'))
-    //   .ok(gettextCatalog.getString('Delete'))
-    //   .cancel(gettextCatalog.getString('Cancel'));
-    //   $mdDialog.show(confirm).then(function() {
-    //     scope.destroy(person);
-    //   }, function() {
-    //   });
-    // };
+    scope.delete = function(person) {
+      var confirm = $mdDialog.confirm()
+      .title(gettextCatalog.getString('Delete Person'))
+      .textContent(gettextCatalog.getString('Are you sure you want to delete this person?'))
+      .ariaLabel(gettextCatalog.getString('Delete Person'))
+      .ok(gettextCatalog.getString('Delete'))
+      .cancel(gettextCatalog.getString('Cancel'));
+      $mdDialog.show(confirm).then(function() {
+        destroy(person);
+      }, function() {
+      });
+    };
 
     scope.filterByAudience = function(id) {
       $location.search({audience: id});
@@ -366,7 +366,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
 
 }]);
 
-app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email', 'Code', 'Client', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', '$pusher', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, Social, Guest, Email, Code, Client, $routeParams, $location, $http, $compile, $rootScope, $timeout, $pusher, showToast, showErrors, menu, $mdDialog, gettextCatalog) {
+app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email', 'Code', 'Client', '$q', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', '$pusher', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, Social, Guest, Email, Code, Client, $q, $routeParams, $location, $http, $compile, $rootScope, $timeout, $pusher, showToast, showErrors, menu, $mdDialog, gettextCatalog) {
 
   var link = function(scope, element, attrs) {
 
@@ -381,11 +381,15 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
     };
 
     var setProfilePhoto = function() {
-      if (scope.person.social && scope.person.social[0].facebook_id) {
-        scope.person.profile_photo = 'https://graph.facebook.com/' + scope.person.social[0].facebook_id + '/picture?type=large';
-      } else {
-        scope.person.profile_photo = 'https://s3-eu-west-1.amazonaws.com/mimo-labs/images/mimo-logo.svg';
+      if (scope.person.social) {
+        if (scope.person.social[0].facebook_id) {
+          scope.person.profile_photo = 'https://graph.facebook.com/' + scope.person.social[0].facebook_id + '/picture?type=large';
+          scope.loading  = undefined;
+          return;
+        }
+        scope.person.profile_photo = scope.person.social[0].tw_profile_image;
       }
+      scope.loading  = undefined;
     };
 
     var getSocials = function() {
@@ -396,6 +400,7 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
         scope.person.social = results.social;
         setProfilePhoto();
       }, function(err) {
+        setProfilePhoto();
       });
     };
 
@@ -467,7 +472,6 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
       People.query({location_id: scope.location.slug, id: $routeParams.person_id}).$promise.then(function(res) {
         scope.person = res;
         getRelations();
-        scope.loading  = undefined;
       }, function(err) {
         scope.loading  = undefined;
         console.log(err);

@@ -2,7 +2,7 @@
 
 var app = angular.module('myApp.people.directives', []);
 
-app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$routeParams', '$mdDialog', 'showToast', 'showErrors', '$q','pagination_labels', 'gettextCatalog', '$route', function(People,Location,Audience,$location,$routeParams,$mdDialog,showToast,showErrors,$q, pagination_labels, gettextCatalog, $route) {
+app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$location', '$routeParams', '$mdDialog', 'showToast', 'showErrors', '$q','pagination_labels', 'gettextCatalog', '$route', function(People,Location,Audience,$timeout,$location,$routeParams,$mdDialog,showToast,showErrors,$q, pagination_labels, gettextCatalog, $route) {
 
   var link = function(scope, el, attrs, controller) {
 
@@ -67,8 +67,6 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     };
 
     function updatePage() {
-      setParams();
-
       var hash    = {};
 
       hash.page           = scope.query.page;
@@ -328,7 +326,11 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
       var params = {
         page: scope.query.page,
         per: scope.query.limit,
+        q: scope.query.filter,
         location_id: scope.location.slug,
+        audience: {
+          predicate_type: scope.query.predicate_type
+        },
         blob: encodeBlob(),
       };
 
@@ -345,14 +347,20 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
     };
 
     var checkForGuide = function() {
+      if ($location.path().split('/')[2] !== 'people' && (scope.splash_setup === 'false' || scope.integrations_setup === 'false' || scope.paid === 'false')) {
+        $location.path('/' + scope.location.slug + '/guide');
+      } else {
+        setParams();
+        getAudiences().then(function() {
+          getPeople();
+        });
+      }
     };
 
     var init = function() {
-
-      setParams();
-      getAudiences().then(function() {
-        getPeople();
-      });
+      $timeout(function() {
+        checkForGuide();
+      }, 250);
     };
 
     init();
@@ -360,7 +368,13 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$location', '$ro
 
   return {
     link: link,
-    templateUrl: 'components/locations/people/_index.html'
+    templateUrl: 'components/locations/people/_index.html',
+    scope: {
+      paid: '@',
+      splash_setup: '@',
+      integrations_setup: '@',
+      loading: '='
+    }
   };
 
 }]);

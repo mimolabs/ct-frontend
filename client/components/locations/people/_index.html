@@ -16,7 +16,7 @@
             <div layout="column">
               <div layout="row">
                 <div flex="25" flex-gt-sm="45">
-                  <md-select ng-disabled="predicates.length < 2 || !predicates" ng-model="query.predicate_type" ng-change="updateFilters()" style="margin: 0px 0px 10px 0px">
+                  <md-select ng-disabled="predicates.length < 2 || !predicates" ng-model="query.predicate_type" aria-label="predicate type" ng-change="updateFilters()" style="margin: 0px 0px 10px 0px">
                     <md-option ng-value="'and'">
                       Match all
                     </md-option>
@@ -173,7 +173,7 @@
             <md-button class="" ng-click="saveAudience()" ng-show="focusedCard == undefined" ng-disabled="!predicates_changed">
               Save audience
             </md-button>
-            <md-button class="md-warn" ng-click="destroyAudience(audience_id)" ng-disabled="!audience_id" ng-show="focusedCard == undefined && query.audience != 'no_filter'">
+            <md-button class="md-warn" ng-click="destroyAudience(audience)" ng-disabled="!audience_id" ng-show="focusedCard == undefined && query.audience != 'no_filter'">
               Delete audience
             </md-button>
           </md-card-actions>

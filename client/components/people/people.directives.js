@@ -244,10 +244,8 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
           blob: encodeBlob($routeParams.blob)
         }
       }).$promise.then(function(data) {
-        var hash = {};
-        hash.audience = data.id;
-        $location.search(hash);
         scope.predicates_changed = undefined;
+        scope.filterByAudience(data.id)
         showToast(gettextCatalog.getString('Audience saved.'));
         $mdDialog.cancel();
       }, function(error) {

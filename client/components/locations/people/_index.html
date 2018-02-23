@@ -27,7 +27,10 @@
                 </div>
                 <div flex="10" flex-gt-sm="10"></div>
                 <div flex="25" flex-gt-sm="45">
-                  <md-select ng-disabled="audiences.length < 2" ng-model="audience_id" ng-change="filterByAudience(audience_id)" aria-label="audience" style="margin: 0px 0px 10px 0px">
+                  <md-select ng-disabled="audiences.length < 1" ng-model="audience_id" ng-change="filterByAudience(audience_id)" aria-label="audience" style="margin: 0px 0px 10px 0px">
+                    <md-option ng-value="undefined">
+                      No Audience
+                    </md-option>
                     <md-option ng-repeat="a in audiences" ng-value="a.id">
                       {{a.name}}
                     </md-option>

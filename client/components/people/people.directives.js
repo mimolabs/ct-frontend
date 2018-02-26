@@ -344,24 +344,24 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
     var buildLocation = function() {
       scope.location = {
         slug: $routeParams.id,
-        setup: {
-          splash: JSON.parse(attrs.splashSetup),
-          integrations: JSON.parse(attrs.integrationsSetup)
-        },
-        paid: JSON.parse(attrs.locationPaid)
+        // setup: {
+        //   splash: attrs.splashSetup,
+        //   integrations: JSON.parse(attrs.integrationsSetup)
+        // },
+        // paid: JSON.parse(attrs.locationPaid)
       };
     };
 
     var checkForGuide = function() {
       buildLocation();
-      if ($location.path().split('/')[2] !== 'people' && (scope.location.setup.splash === false || scope.location.setup.integrations === false || scope.location.paid === false)) {
-        $location.path('/' + scope.location.slug + '/guide');
-      } else {
-        setParams();
-        getAudiences().then(function() {
-          getPeople();
-        });
-      }
+      // if ($location.path().split('/')[2] !== 'people' && (scope.location.setup.splash === false || scope.location.setup.integrations === false || scope.location.paid === false)) {
+      //   $location.path('/' + scope.location.slug + '/guide');
+      // } else {
+      setParams();
+      getAudiences().then(function() {
+        getPeople();
+      });
+      // }
     };
 
     var init = function() {

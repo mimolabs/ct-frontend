@@ -44,6 +44,7 @@
                         <md-card-title-text>
                           <span translate>
                             {{ predicate | humanPredicate }}
+                            <!-- {{predicate}} -->
                           </span>
                           <md-switch ng-model="predicate.relative" aria-label="Switch 1" ng-show="focusedCard == $index && (predicate.attribute == 'created_at' || predicate.attribute == 'last_seen')">
                             {{ predicate.relative ? 'Relative' : 'Absolute' }}
@@ -172,7 +173,7 @@
             <md-button class="" ng-click="saveAudience()" ng-show="focusedCard == undefined" ng-disabled="!predicates_changed">
               Save audience
             </md-button>
-            <md-button class="md-warn" ng-click="destroyAudience(audience)" ng-disabled="!audience_id" ng-show="focusedCard == undefined && query.audience != 'no_filter'">
+            <md-button class="md-warn" ng-click="destroyAudience(audience_id)" ng-disabled="!audience_id" ng-show="focusedCard == undefined && query.audience != 'no_filter'">
               Delete audience
             </md-button>
           </md-card-actions>
@@ -257,7 +258,7 @@
             </table>
           </md-table-container>
           <md-card-actions>
-            <md-table-pagination md-limit="query.limit" md-page="query.page" md-limit-options="query.options" md-total="{{::_links.total_entries}}" md-label="{{pagination_labels}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+            <md-table-pagination md-limit="query.limit" md-page="query.page" md-limit-options="query.options" md-total="{{_links.total_entries}}" md-label="{{pagination_labels}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
           </md-card-actions>
         </md-card>
       </div>

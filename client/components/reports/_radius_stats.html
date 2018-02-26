@@ -3,7 +3,7 @@
     <md-card-content>
       <md-list-item class="md-2-line">
         <div class="md-list-item-text">
-          <p translate>New Users</p>
+          <p translate>New Devices</p>
           <h2>{{ stats.new || 0 | number:0 }}</h2>
         </div>
       </md-list-item>
@@ -13,7 +13,7 @@
     <md-card-content>
       <md-list-item class="md-2-line">
         <div class="md-list-item-text">
-          <p translate>Unique Users</p>
+          <p translate>Unique Devices</p>
           <h2>{{ stats.uniques || 0 | number:0 }}</h2>
         </div>
       </md-list-item>
@@ -33,7 +33,7 @@
     <md-card-content>
       <md-list-item class="md-2-line">
         <div class="md-list-item-text">
-          <p translate>Total Visits</p>
+          <p translate>Total Sessions</p>
           <h2>{{ stats.sessions || 0 | number:0 }}</h2>
         </div>
       </md-list-item>
@@ -43,7 +43,7 @@
     <md-card-content>
       <md-list-item class="md-2-line">
         <div class="md-list-item-text">
-          <p translate>Returning Users</p>
+          <p translate>Loyalty</p>
           <span>
             <h2 translate>{{ (stats.loyalty || 0) * 100 | number:0 }}%</h2>
             <md-tooltip>

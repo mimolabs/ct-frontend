@@ -57,6 +57,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
         angular.forEach(scope.audiences, function (value, key) {
           if (value.id === $routeParams.audience) {
             scope.predicates = value.predicates;
+            scope.query.predicate_type = value.predicate_type;
             scope.audience_id = value.id;
           }
         });
@@ -75,7 +76,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
         deferred.resolve();
       }, function(err) {
         // In case there is no audience
-        scope.predicates = defaultBlob;
+        scope.predicates = decodeBlob();
         deferred.resolve();
       });
       return deferred.promise;

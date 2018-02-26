@@ -44,6 +44,7 @@
                         <md-card-title-text>
                           <span translate>
                             {{ predicate | humanPredicate }}
+                            <!-- {{predicate}} -->
                           </span>
                           <md-switch ng-model="predicate.relative" aria-label="Switch 1" ng-show="focusedCard == $index && (predicate.attribute == 'created_at' || predicate.attribute == 'last_seen')">
                             {{ predicate.relative ? 'Relative' : 'Absolute' }}

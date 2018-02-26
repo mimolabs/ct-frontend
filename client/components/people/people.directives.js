@@ -187,11 +187,11 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
       $route.reload(); // lol
     };
 
-    // scope.onPaginate = function (page, limit) {
-    //   scope.query.page = page;
-    //   scope.query.limit = limit;
-    //   scope.updatePage();
-    // };
+    scope.onPaginate = function (page, limit) {
+      scope.query.page = page;
+      scope.query.limit = limit;
+      updatePage();
+    };
 
     scope.cancelRule = function() {
       scope.showChooser = undefined;

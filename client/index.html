@@ -115,15 +115,9 @@
         </md-button>
         <md-menu-content width="3">
           <md-menu-item>
-            <md-button onclick="zE.activate({hideOnClose: true});" target="_blank">
-              <md-icon md-menu-align-target style="margin: auto 3px auto 0;">assistant</md-icon>
-              <span translate>Help Guides</span>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button href="https://docs.oh-mimo.com" target="_blank">
+            <md-button href="http://docs.oh-mimo.com" target="_blank">
               <md-icon md-menu-align-target style="margin: auto 3px auto 0;">school</md-icon>
-              <span translate>Documentation</span>
+              <span translate>Help Centre</span>
             </md-button>
           </md-menu-item>
           <md-menu-item>
@@ -412,48 +406,7 @@
     }}();
   </script>
 
-  <!-- Start of oh-mimo Zendesk Widget script -->
-  <script>/*<![CDATA[*/window.zEmbed||function(e,t){var n,o,d,i,s,a=[],r=document.createElement("iframe");window.zEmbed=function(){a.push(arguments)},window.zE=window.zE||window.zEmbed,r.src="javascript:false",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="display: none",d=document.getElementsByTagName("script"),d=d[d.length-1],d.parentNode.insertBefore(r,d),i=r.contentWindow,s=i.document;try{o=s}catch(e){n=document.domain,r.src='javascript:var d=document.open();d.domain="'+n+'";void(0);',o=s}o.open()._l=function(){var e=this.createElement("script");n&&(this.domain=n),e.id="js-iframe-async",e.src="https://assets.zendesk.com/embeddable_framework/main.js",this.t=+new Date,this.zendeskHost="oh-mimo.zendesk.com",this.zEQueue=a,this.body.appendChild(e)},o.write('<body onload="document._l();">'),o.close()}();
-    /*]]>*/</script>
-  <!-- End of oh-mimo Zendesk Widget script -->
-
-  <script type="text/JavaScript">
-    zE(function() {
-      zE.hide();
-    });
-    window.zESettings = {
-      webWidget: {
-        position: {
-          horizontal: 'left',
-          vertical: 'bottom'     
-        },
-        color: {
-          theme: '#78a300'
-        }
-      }
-    };
-  </script>
-
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId            : '1723020777736393', //217195795525157
-        autoLogAppEvents : true,
-        xfbml            : true,
-        version          : 'v2.12'
-      });
-    };
-
-    (function(d, s, id){
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) {return;}
-      js = d.createElement(s); js.id = id;
-      js.src = "https://connect.facebook.net/en_US/sdk.js";
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>
-
-  <div class="fb-customerchat" page_id="945230345652782" mimimized="true" ref="customer-ref"></div>
+  <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/z62yncmn';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
 
   <script>
     $( document ).ready(function() {
@@ -465,10 +418,7 @@
     });
   </script>
 
-  <!-- <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyD243NSdgNYjRHBVBrWoEKX728FYOxuUgE&libraries=visualization"></script> -->
-  <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script> -->
   <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
   <script src="//js.pusher.com/3.1/pusher.min.js"></script>
-
 </body>
 </html>

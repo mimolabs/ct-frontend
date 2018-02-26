@@ -158,6 +158,17 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
           plan:  user.plan_name,
           createdAt: user.created_at
         });
+
+        window.intercomSettings = {
+          app_id: INTERCOM,
+          user_id: user.accountId,
+          email: user.email,
+          name: user.username,
+          locked: user.locked,
+          created_at: user.created_at,
+          user_hash: user.user_hash,
+        };
+
       }
     });
 

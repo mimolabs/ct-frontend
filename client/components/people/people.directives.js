@@ -29,9 +29,21 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
       return window.btoa(angular.toJson(defaultBlob));
     };
 
+    var formatDates = function(predicates) {
+      // this is kinda silly but doesn't recognise the absolute dates
+      // until converted like this:
+      for (var i = 0; i < predicates.length; i++) {
+        if (['last_seen', 'created_at'].includes(predicates[i].attribute) && typeof(predicates[i].value) === 'string') {
+          predicates[i].value = new Date(predicates[i].value);
+        }
+      }
+      return predicates;
+    };
+
     function decodeBlob() {
       if ($routeParams.blob) {
-        return JSON.parse(window.atob($routeParams.blob));
+        var predicates = JSON.parse(window.atob($routeParams.blob));
+        return formatDates(predicates);
       }
 
       if ($routeParams.audience) {
@@ -54,17 +66,19 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
 
     var setAudiencePredicate = function() {
       if ($routeParams.audience && scope.audiences) {
-        angular.forEach(scope.audiences, function (value, key) {
+        for (var i = 0; i < scope.audiences.length; i++) {
+          var value = scope.audiences[i];
           if (value.id === $routeParams.audience) {
-            scope.predicates = value.predicates;
+
+            scope.predicates = formatDates(value.predicates);
             scope.query.predicate_type = value.predicate_type;
             scope.audience_id = value.id;
           }
-        });
+        }
       }
 
       if (!scope.predicates) {
-        scope.predicates = defaultBlob;
+        scope.predicates = decodeBlob();
       }
     };
 
@@ -114,6 +128,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
       hash.predicate_type = scope.query.predicate_type;
       hash.blob           = encodeBlob();
       hash.audience       = scope.audience;
+      hash.predicates_changed = scope.predicates_changed;
 
       $location.search(hash);
       getAudiences().then(getPeople());

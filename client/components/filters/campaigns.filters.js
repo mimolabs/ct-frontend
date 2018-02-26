@@ -4,7 +4,7 @@ var app = angular.module('myApp.campaigns.filters', []);
 
 app.filter('humanPredicate', [ 'gettextCatalog', function(gettextCatalog) {
   var isNumber = function(number) {
-    if (Number.isInteger(number / 1)) {
+    if (Number.isInteger(number / 1) && (number / 1) < 100000000) {
       return true;
     }
   };
@@ -73,6 +73,6 @@ app.filter('humanPredicate', [ 'gettextCatalog', function(gettextCatalog) {
       phrase = 'on';
     }
 
-    return attr + ' ' + phrase + ' the ' + predicate.value;
+    return attr + ' ' + phrase + ' ' + predicate.value;
   };
 }]);

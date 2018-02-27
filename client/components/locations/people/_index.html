@@ -197,10 +197,15 @@
             </div>
             <div flex="25">
               <form ng-submit="search()">
-                <md-input-container style="margin: 10px 0px 0px 0px">
+                <md-input-container style="margin: 10px 0px 0px 0px" layout="row">
                   <input ng-model="query.filter" placeholder="{{ 'Search' | translate }}"></input>
                 </md-input-container>
               </form>
+            </div>
+            <div flex="5">
+              <md-button class="md-icon-button md-primary" aria-label="Filter" ng-click="clearFilter()" ng-show="query.filter" style="padding: 15px 15px 0px 0px; margin: 0px 0px 0px 0px; border: 0px 0px 0px 0px">
+                <md-icon>clear</md-icon>
+              </md-button>
             </div>
           </div>
           <md-table-container>

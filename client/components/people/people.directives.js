@@ -357,6 +357,11 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
       }
     };
 
+    scope.clearFilter = function () {
+      scope.query.filter = undefined;
+      updatePage();
+    };
+
     var buildLocation = function() {
       scope.location = {
         slug: $routeParams.id,

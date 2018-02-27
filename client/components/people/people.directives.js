@@ -7,7 +7,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
   var link = function(scope, el, attrs, controller) {
 
     scope.currentNavItem = 'people';
-    // scope.location = {slug: $routeParams.id};
+    scope.location = {slug: $routeParams.id};
     scope.predicates_changed = $routeParams.predicates_changed;
 
     var defaultBlob = [{
@@ -357,27 +357,33 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
       }
     };
 
+    scope.clearFilter = function () {
+      scope.query.filter = undefined;
+      updatePage();
+    };
+
     var buildLocation = function() {
       scope.location = {
         slug: $routeParams.id,
-        // setup: {
-        //   splash: attrs.splashSetup,
-        //   integrations: JSON.parse(attrs.integrationsSetup)
-        // },
-        // paid: JSON.parse(attrs.locationPaid)
+        setup: {
+          splash: attrs.splashSetup,
+          integrations: attrs.integrationsSetup
+        },
+        paid: attrs.locationPaid
       };
     };
 
     var checkForGuide = function() {
       buildLocation();
-      // if ($location.path().split('/')[2] !== 'people' && (scope.location.setup.splash === false || scope.location.setup.integrations === false || scope.location.paid === false)) {
-      //   $location.path('/' + scope.location.slug + '/guide');
-      // } else {
+      var falses = [false, 'false'];
+      if ($location.path().split('/')[2] !== 'people' && (falses.includes(scope.location.setup.splash) || falses.includes(scope.location.setup.integrations) || falses.includes(scope.location.paid))) {
+        $location.path('/' + scope.location.slug + '/guide');
+      } else {
       setParams();
       getAudiences().then(function() {
         getPeople();
       });
-      // }
+      }
     };
 
     var init = function() {

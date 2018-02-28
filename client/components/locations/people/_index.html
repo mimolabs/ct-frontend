@@ -181,16 +181,10 @@
       </div>
 
       <div flex="100" flex-gt-sm="70" class="people-table">
-        <!-- <analytics ng-if="!loading" hide show-gt-sm>
-          <client-chart>
-            <div layout="row" layout-wrap>
-              <div flex="100" flex-gt-sm="100" ng-hide="fs && fs.panel != 'usage'">
-                <dash-clients-chart name="New People" type="people.new" bar="true" render="new-people" fake="{{!location.paid}}" show-gt-sm></dash-clients-chart>
-              </div>
-            </div>
-          </client-chart>
-        </analytics> -->
         <md-card class="b-bl">
+          <div class="example-data" ng-show="location.demo === 'true'">
+            This table is currently populated with demo data. You can switch this off in your location settings.
+          </div>
           <div class="md-toolbar-tools" ng-cloak layout="row" layout-align="space-between center">
             <div flex="75">
               <span class="md-subhead">{{ _links.total_entries || 0 }} {{ _links.total_entries == 1 ? 'person' : 'people' }} connected. {{_links.this_week || 0}} connected this week.</span>

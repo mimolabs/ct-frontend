@@ -369,7 +369,8 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
           splash: attrs.splashSetup,
           integrations: attrs.integrationsSetup
         },
-        paid: attrs.locationPaid
+        paid: attrs.locationPaid,
+        demo: attrs.demoData
       };
     };
 

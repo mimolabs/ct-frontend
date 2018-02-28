@@ -737,6 +737,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       }).$promise.then(function(res) {
         scope.splash.updating = undefined;
         scope.splash = res.splash_page;
+        designer.splash = scope.splash;
         if (form) {
           form.$setPristine();
         } else {

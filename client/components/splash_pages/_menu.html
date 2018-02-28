@@ -434,7 +434,7 @@
 
   <md-button class="md-no-style" ng-click="splash.toggle('side')" aria-controls="side">
     <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('side') ? "up" : "down" }}</md-icon>
-    <translate>Side Image</translate>
+    <translate>Advert</translate>
   </md-button>
 
   <div ng-show="splash.isOpen('side')" id="images" class="menu-toggle-list">
@@ -442,13 +442,13 @@
       <img ng-show="splash.splash.location_image_name" src="{{splash.splash.location_image_name}}" class="md-card-image" alt="Background">
       <md-card-title>
         <md-card-title-text>
-          <span class="md-headline" translate>Side Image</span>
+          <span class="md-headline" translate>Advert</span>
         </md-card-title-text>
       </md-card-title>
       <md-card-content>
         <md-switch ng-model="splash.splash.design_id" ng-true-value="2" ng-false-value="1" aria-label="show_side_image" style="margin: 0px 0 20px 0">
-          <span ng-show="splash.splash.design_id == 2" translate>Side Image Enabled</span>
-          <span ng-show="splash.splash.design_id == 1" translate>Side Image Disabled</span>
+          <span ng-show="splash.splash.design_id == 2" translate>Advert Enabled</span>
+          <span ng-show="splash.splash.design_id == 1" translate>Advert Disabled</span>
         </md-switch>
       </md-card-content>
       <md-card-actions layout="row" layout-align="end center">

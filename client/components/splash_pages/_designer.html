@@ -78,8 +78,9 @@
   }
 
   .design-container {
-    float: {{ splash.container_float }}!important;
-    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .splash-container {
@@ -182,6 +183,7 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    background-position: center;
   }
 
   .social.des-facebook {

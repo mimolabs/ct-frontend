@@ -640,7 +640,10 @@ app.directive('splashDesignerForm', ['$compile', function($compile) {
     var init = function() {
       switch(attrs.access) {
       case '1':
-        leform = '<input type="password" class="design-input" placeholder="What\'s the password?">';
+        leform =
+          '<label>Enter the password to get online</label><br>'+
+          '<input type="password" class="design-input" disabled placeholder="What\'s the password"><br>' +
+          '<button class=\'btn\'>{{ btn_text }}</button>';
         break;
       case '2':
         leform =
@@ -658,16 +661,16 @@ app.directive('splashDesignerForm', ['$compile', function($compile) {
           break;
       case '7':
         leform =
-          '<p class=\'btn social des-facebook\'>Facebook</p>';
+          '<a class=\'social des-facebook\'>Continue with Facebook</a>';
         break;
       case '8':
         leform =
           '<p><small>Your other fields will show on the live page.</small></p>' +
-          '<label>Enter your username</label><br>'+
+          '<label>Enter your username to get online</label><br>'+
           '<input style="display:none" type="text" name="fakeinput"/>'+
           '<input style="display:none" type="password" name="fakeinput"/>'+
           '<input type="text" class="design-input" disabled placeholder="What\'s your username"><br>' +
-          '<label>Enter your password</label><br>'+
+          '<label>Enter your password to gt online</label><br>'+
           '<input type="password" class="design-input" disabled placeholder="What\'s the password"><br>' +
           '<button class=\'btn\'>{{ btn_text }}</button>';
           break;

@@ -18,8 +18,7 @@
     <div class="location_address">
       <p>{{splash.address}}</p>
     </div>
-
-    <div class="social">
+    <div class="social" ng-show="splash.twitter_name || splash.google_name || splash.facebook_name || splash.pinterest_name || splash.instagram_name || splash.linkedin_name">
       <a ng-show="splash.twitter_name" href="https://twitter.com/{{splash.twitter_name}}"><img src="https://d247kqobagyqjh.cloudfront.net/api/file/PdwjF22TTiqOHvzQcksA"></a>
       <a ng-show="splash.google_name" href="https://plus.google.com/{{splash.google_name}}/about"><img src="https://d247kqobagyqjh.cloudfront.net/api/file/K3YDlqzUQzIavvIEkesC"></a>
       <a ng-show="splash.facebook_name" href="http://facebook.com/{{splash.facebook_name}}"><img src="https://d247kqobagyqjh.cloudfront.net/api/file/WUhzu2zRTremUtlXxALC"></a>

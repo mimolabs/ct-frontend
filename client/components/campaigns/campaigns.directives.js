@@ -214,15 +214,15 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
       switch(scope.campaign.template) {
         case 'signed_up_now':
           scope.campaign.holding_predicates = [];
-          scope.campaign.holding_predicates.push({operator: 'lte', value: 1, attribute: 'created_at'});
+          scope.campaign.holding_predicates.push({operator: 'lte', value: 1, attribute: 'created_at', relative: true});
           break;
         case 'signed_up_30':
           scope.campaign.holding_predicates = [];
-          scope.campaign.holding_predicates.push({operator: 'eq', value: 30, attribute: 'created_at'});
+          scope.campaign.holding_predicates.push({operator: 'eq', value: 30, attribute: 'created_at', relative: true});
           break;
         case 'last_seen_30':
           scope.campaign.holding_predicates = [];
-          scope.campaign.holding_predicates.push({operator: 'eq', value: 30, attribute: 'last_seen'});
+          scope.campaign.holding_predicates.push({operator: 'eq', value: 30, attribute: 'last_seen', relative: true});
           break;
         case 'custom':
           scope.campaign.holding_predicates = [];

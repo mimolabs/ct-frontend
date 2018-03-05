@@ -38,6 +38,15 @@ app.factory('People', ['$resource', '$localStorage', 'API_END_POINT',
         params: {
           location_id: '@location_id',
         }
+      },
+      destroy_segment: {
+        method: 'DELETE',
+        isArray: false,
+        params: {
+          action: 'destroy_segment',
+          location_id: '@location_id',
+          q: '@q'
+        }
       }
     });
   }]);

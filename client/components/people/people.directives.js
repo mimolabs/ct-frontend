@@ -163,6 +163,37 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
       });
     };
 
+    var deletePeopleSegment = function() {
+      var params = {
+        q: scope.query.filter,
+        location_id: scope.location.slug,
+        audience: {
+          predicate_type: scope.query.predicate_type
+        },
+        blob: encodeBlob(),
+      };
+
+      People.destroy_segment(params, function(data) {
+        showToast(gettextCatalog.getString('People successfully deleted'));
+        scope.people = [];
+        scope._links.total_entries = 0;
+      }, function(err){
+        showErrors(err);
+      });
+    };
+
+    scope.deleteSegment = function() {
+      var confirm = $mdDialog.confirm()
+      .title(gettextCatalog.getString('Delete People Segment'))
+      .textContent(gettextCatalog.getString('Please note this will destroy all currently filtered people and all their related data. This cannot be reversed.'))
+      .ariaLabel(gettextCatalog.getString('Delete People Segment'))
+      .ok(gettextCatalog.getString('Confirm'))
+      .cancel(gettextCatalog.getString('Cancel'));
+      $mdDialog.show(confirm).then(function() {
+        deletePeopleSegment();
+      });
+    };
+
     scope.search = function() {
       updatePage();
     };

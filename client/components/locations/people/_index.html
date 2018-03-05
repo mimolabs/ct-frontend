@@ -182,17 +182,17 @@
               </md-button>
               <md-menu-content width="3">
                 <md-menu-item>
-                  <md-button ng-click="downloadSegment()">
+                  <md-button ng-click="downloadSegment()" ng-disabled="location.demo === 'true'">
                     <md-icon md-menu-align-target style="margin: auto 3px auto 0;">file_download</md-icon>
                     <span translate>Download People</span>
                   </md-button>
                 </md-menu-item>
-                <!-- <md-menu-item>
-                  <md-button ng-click="delete(person)">
+                <md-menu-item>
+                  <md-button ng-click="deleteSegment()" ng-disabled="location.demo === 'true'">
                     <md-icon md-menu-align-target style="margin: auto 3px auto 0;">delete_forever</md-icon>
-                    <span translate>Delete</span>
+                    <span translate>Delete People</span>
                   </md-button>
-                </md-menu-item> -->
+                </md-menu-item>
               </md-menu-content>
             </md-menu>
           </md-card-actions>

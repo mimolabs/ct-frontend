@@ -2,7 +2,7 @@
 
 var app = angular.module('myApp.people.directives', []);
 
-app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$location', '$routeParams', '$mdDialog', 'showToast', 'showErrors', '$q','pagination_labels', 'gettextCatalog', '$route', function(People,Location,Audience,$timeout,$location,$routeParams,$mdDialog,showToast,showErrors,$q, pagination_labels, gettextCatalog, $route) {
+app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeout', '$location', '$routeParams', '$mdDialog', 'showToast', 'showErrors', '$q','pagination_labels', 'gettextCatalog', '$route', function(People,Location,Audience,Report,$timeout,$location,$routeParams,$mdDialog,showToast,showErrors,$q, pagination_labels, gettextCatalog, $route) {
 
   var link = function(scope, el, attrs, controller) {
 
@@ -133,6 +133,35 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
       $location.search(hash);
       getAudiences().then(getPeople());
     }
+
+    var downloadReport = function() {
+      var params = {
+        q: scope.query.filter,
+        location_id: scope.location.slug,
+        audience: {
+          predicate_type: scope.query.predicate_type
+        },
+        blob: encodeBlob(),
+        type: 'people'
+      };
+      Report.create(params).$promise.then(function(results) {
+        showToast(gettextCatalog.getString('Your report will be emailed to you soon'));
+      }, function(err) {
+        showErrors(err);
+      });
+    };
+
+    scope.downloadSegment = function() {
+      var confirm = $mdDialog.confirm()
+      .title(gettextCatalog.getString('Download People Segment'))
+      .textContent(gettextCatalog.getString('Please note this is a beta feature. Reports are sent via email.'))
+      .ariaLabel(gettextCatalog.getString('People Report'))
+      .ok(gettextCatalog.getString('Download'))
+      .cancel(gettextCatalog.getString('Cancel'));
+      $mdDialog.show(confirm).then(function() {
+        downloadReport();
+      });
+    };
 
     scope.search = function() {
       updatePage();

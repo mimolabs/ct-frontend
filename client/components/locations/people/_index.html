@@ -176,6 +176,25 @@
             <md-button class="md-warn" ng-click="destroyAudience(audience_id)" ng-disabled="!audience_id" ng-show="focusedCard == undefined && query.audience != 'no_filter'">
               Delete audience
             </md-button>
+            <md-menu md-position-mode="target target">
+              <md-button aria-label="{{ 'Open Clients Menu' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                <md-icon md-menu-origin md-font-icon="more_black" class="s24">more_vert</md-icon>
+              </md-button>
+              <md-menu-content width="3">
+                <md-menu-item>
+                  <md-button ng-click="downloadSegment()">
+                    <md-icon md-menu-align-target style="margin: auto 3px auto 0;">file_download</md-icon>
+                    <span translate>Download People</span>
+                  </md-button>
+                </md-menu-item>
+                <!-- <md-menu-item>
+                  <md-button ng-click="delete(person)">
+                    <md-icon md-menu-align-target style="margin: auto 3px auto 0;">delete_forever</md-icon>
+                    <span translate>Delete</span>
+                  </md-button>
+                </md-menu-item> -->
+              </md-menu-content>
+            </md-menu>
           </md-card-actions>
         </md-card>
       </div>

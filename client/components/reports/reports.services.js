@@ -144,7 +144,9 @@ app.factory('Report', ['$resource', '$localStorage', 'API_END_POINT',
           start: '@start',
           end: '@end',
           type: '@type',
-          interval: 'day'
+          interval: 'day',
+          q: '@q',
+          blob: '@blob'
         }
       },
     });

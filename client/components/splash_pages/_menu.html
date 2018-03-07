@@ -482,6 +482,42 @@
 
   <div ng-show="splash.isOpen('side')" id="images" class="menu-toggle-list">
     <md-card>
+      <img ng-show="splash.splash.popup_image" src="{{splash.splash.popup_image}}" class="md-card-image" alt="Background">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline" translate>Popup Advert</span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <div layout="row" layout-wrap>
+          <div flex="100" flex-gt-sm="100">
+            <p translate>
+              Upload an image to advertise before seeing the splash page.
+            </p>
+          </div>
+          <div flex="100" flex-gt-sm="100">
+            <md-switch ng-model="splash.splash.popup_ad" aria-label="popup_ad" style="margin: 0px 0 20px 0">
+              <span ng-show="splash.splash.popup_ad == true" translate>Popup Advert Enabled</span>
+              <span ng-show="splash.splash.popup_ad == false" translate>Popup Advert Disabled</span>
+            </md-switch>
+          </div>
+          <div flex="100" flex-gt-sm="100">
+            <md-input-container class="md-block">
+              <label>
+                <translate>Background Colour</translate>
+              </label>
+              <color-picker ng-model="splash.splash.popup_background_colour"></color-picker>
+            </md-input-container>
+          </div>
+        </div>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <span ng-hide="edit_image_url">
+          <filepicker attribute="splash.splash.popup_image" uploading="splash.splash.uploading"></filepicker>
+        </span>
+      </md-card-actions>
+    </md-card>
+    <md-card>
       <img ng-show="splash.splash.location_image_name" src="{{splash.splash.location_image_name}}" class="md-card-image" alt="Background">
       <md-card-title>
         <md-card-title-text>

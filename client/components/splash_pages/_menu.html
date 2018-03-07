@@ -475,12 +475,12 @@
     <!-- </div> -->
   </div>
 
-  <md-button class="md-no-style" ng-click="splash.toggle('side')" aria-controls="side">
-    <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('side') ? "up" : "down" }}</md-icon>
+  <md-button class="md-no-style" ng-click="splash.toggle('adverts')" aria-controls="adverts">
+    <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('adverts') ? "up" : "down" }}</md-icon>
     <translate>Adverts</translate>
   </md-button>
 
-  <div ng-show="splash.isOpen('side')" id="images" class="menu-toggle-list">
+  <div ng-show="splash.isOpen('adverts')" id="images" class="menu-toggle-list">
     <md-card>
       <img ng-show="splash.splash.popup_image" src="{{splash.splash.popup_image}}" class="md-card-image" alt="Background">
       <md-card-title>

@@ -173,7 +173,7 @@
         <md-card-title-text layout="row" layout-align="space-between center">
           <span class="md-headline" translate>Popup Advert</span>
           <md-button ng-click="splash.splash.popup_demo = !splash.splash.popup_demo" aria-controls="adverts" class="md-icon-button {{ splash.splash.popup_demo ? 'md-accent' : '' }}">
-            <md-icon md-font-icon="keyboard_down">{{ splash.splash.popup_demo ? 'visibility' : 'visibility_off' }}</md-icon>
+            <md-icon md-font-icon="visibility">{{ splash.splash.popup_demo ? 'visibility' : 'visibility_off' }}</md-icon>
           </md-button>
         </md-card-title-text>
       </md-card-title>
@@ -493,7 +493,7 @@
         <md-card-title-text layout="row" layout-align="space-between center">
           <span class="md-headline" translate>Popup Advert</span>
           <md-button ng-click="splash.splash.popup_demo = !splash.splash.popup_demo" aria-controls="adverts" class="md-icon-button {{ splash.splash.popup_demo ? 'md-accent' : '' }}">
-            <md-icon md-font-icon="keyboard_down">{{ splash.splash.popup_demo ? 'visibility' : 'visibility_off' }}</md-icon>
+            <md-icon md-font-icon="visibility">{{ splash.splash.popup_demo ? 'visibility' : 'visibility_off' }}</md-icon>
           </md-button>
         </md-card-title-text>
       </md-card-title>
@@ -1047,9 +1047,11 @@
   <div ng-show="splash.isOpen('welcome')" id="welcome" class="menu-toggle-list" layout="column">
     <md-card>
       <md-card-title>
-        <md-card-title-text>
+        <md-card-title-text layout="row" layout-align="space-between center">
           <span class="md-headline" translate>Welcome Page</span>
-          <span class="md-subhead" translate>Appears after a user logs in.</span>
+          <md-button ng-click="splash.splash.welcome_demo = !splash.splash.welcome_demo" class="md-icon-button {{ splash.splash.welcome_demo ? 'md-accent' : '' }}">
+            <md-icon md-font-icon="visibility">{{ welcomeEditing ? 'visibility' : 'visibility_off' }}</md-icon>
+          </md-button>
         </md-card-title-text>
       </md-card-title>
       <md-card-content>

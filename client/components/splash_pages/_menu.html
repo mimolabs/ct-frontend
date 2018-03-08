@@ -490,8 +490,11 @@
     <md-card>
       <img ng-show="splash.splash.popup_image" src="{{splash.splash.popup_image}}" class="md-card-image" alt="Background">
       <md-card-title>
-        <md-card-title-text>
+        <md-card-title-text layout="row" layout-align="space-between center">
           <span class="md-headline" translate>Popup Advert</span>
+          <md-button ng-click="splash.splash.popup_demo = !splash.splash.popup_demo" aria-controls="adverts" class="md-icon-button {{ splash.splash.popup_demo ? 'md-accent' : '' }}">
+            <md-icon md-font-icon="keyboard_down">{{ splash.splash.popup_demo ? 'visibility' : 'visibility_off' }}</md-icon>
+          </md-button>
         </md-card-title-text>
       </md-card-title>
       <md-card-content>

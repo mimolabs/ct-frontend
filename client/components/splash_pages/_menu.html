@@ -182,7 +182,7 @@
             </p>
           </div>
           <div flex="100" flex-gt-sm="100">
-            <md-switch ng-model="splash.splash.popup_ad" aria-label="popup_ad" style="margin: 0px 0 20px 0">
+            <md-switch ng-model="splash.splash.popup_ad" aria-label="popup_ad" style="margin: 0px 0 20px 0" ng-show="splash.splash.popup_image">
               <span ng-show="splash.splash.popup_ad == true" translate>Popup Advert Enabled</span>
               <span ng-show="splash.splash.popup_ad == false" translate>Popup Advert Disabled</span>
             </md-switch>
@@ -198,6 +198,9 @@
         </div>
       </md-card-content>
       <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-warn" ng-disabled="!splash.splash.popup_image" aria-label="{{ 'delete' | translate }}" ng-click="splash.deleteAd(splash.splash,myForm)">
+          <translate>Delete</translate>
+        </md-button>
         <span ng-hide="edit_image_url">
           <filepicker attribute="splash.splash.popup_image" uploading="splash.splash.uploading"></filepicker>
         </span>
@@ -512,6 +515,9 @@
         </div>
       </md-card-content>
       <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-warn" ng-disabled="!splash.splash.popup_image" aria-label="{{ 'delete' | translate }}" ng-click="splash.deleteBg(splash.splash,myForm)">
+          <translate>Delete</translate>
+        </md-button>
         <span ng-hide="edit_image_url">
           <filepicker attribute="splash.splash.popup_image" uploading="splash.splash.uploading"></filepicker>
         </span>

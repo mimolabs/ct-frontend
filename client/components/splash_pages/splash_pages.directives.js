@@ -782,6 +782,11 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       designer.save(splash,form);
     };
 
+    designer.deleteAd = function(splash,form) {
+      splash.popup_image = '';
+      designer.save(splash,form);
+    };
+
     designer.back = function() {
       window.history.back();
     };

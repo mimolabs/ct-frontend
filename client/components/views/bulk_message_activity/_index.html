@@ -1,53 +1,52 @@
 <camp-nav ng-show="!person.id"></camp-nav>
 <people-nav location="location" ng-show="person.id"></people-nav>
 
-<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" style="padding-bottom: 55px">
+<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" style="padding-bottom:0px;margin-bottom:0px;">
   <div flex="100" flex-gt-md="90" flex-gt-lg="80">
-    <md-card>
-      <md-card-content>
-        <md-table-container>
-          <table multiple md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
-            <thead md-head md-order="query.order" md-on-reorder="logOrder">
-              <tr md-row>
-                <th md-column md-order-by="description" md-desc>
-                  <span translate>
-                    Timestamp
-                  </span>
-                </th>
-                <th md-column hide show-gt-xs md-order-by="calledstationid"><span translate>Event</span></th>
-              </tr>
-            </thead>
-            <tbody md-body>
-              <tr md-row md-select="box" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="activity in filtered = ( activity | filter: filter | orderBy: query.order)">
-                <td md-cell>
-                  {{ activity.created_at | humanTime }}
-                </td>
-                <td hide show-gt-xs md-cell>
-                  {{ activity.event | titleCase }}
-                  <md-tooltip ng-show="activity.useragent">{{ activity.useragent }}</md-tooltip>
-                </td>
-                <td md-cell>
-                  <md-menu>
-                    <md-button aria-label="{{ 'Open Boxes Menu' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-                      <md-icon md-menu-origin md-font-icon="more_black" class="s48">more_vert</md-icon>
-                    </md-button>
-                    <md-menu-content width="3" >
-                      <md-menu-item>
-                        <md-button href="/#/{{location.slug}}/{{person.id ? 'people/' + person.id + '/' : 'campaigns/'}}messages/{{activity.message_id}}">
-                          <md-icon>pageview</md-icon>
-                      <p flex translate>View Message</p>
-                        </md-button>
-                      </md-menu-item>
-                    </md-menu-content>
-                  </md-menu>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </md-table-container>
-      </md-card-content>
-      <md-table-pagination md-limit="500" md-limit-options="[500]" md-page="1" md-total="{{activity.length}}" md-on-paginate="onPaginate" md-label="{{pagination_labels}}" md-page-select></md-table-pagination>
-
+    <md-card class="b-pr fixed-table">
+      <md-table-container>
+        <table multiple md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
+          <thead md-head md-order="query.order" md-on-reorder="logOrder">
+            <tr md-row>
+              <th md-column md-order-by="description" md-desc>
+                <span translate>
+                  Timestamp
+                </span>
+              </th>
+              <th md-column hide show-gt-xs md-order-by="calledstationid"><span translate>Event</span></th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row md-select="box" md-on-select="logItem" md-auto-select="options.autoSelect" ng-repeat="activity in filtered = ( activity | filter: filter | orderBy: query.order)">
+              <td md-cell>
+                {{ activity.created_at | humanTime }}
+              </td>
+              <td hide show-gt-xs md-cell>
+                {{ activity.event | titleCase }}
+                <md-tooltip ng-show="activity.useragent">{{ activity.useragent }}</md-tooltip>
+              </td>
+              <td md-cell>
+                <md-menu>
+                  <md-button aria-label="{{ 'Open Boxes Menu' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                    <md-icon md-menu-origin md-font-icon="more_black" class="s48">more_vert</md-icon>
+                  </md-button>
+                  <md-menu-content width="3" >
+                    <md-menu-item>
+                      <md-button href="/#/{{location.slug}}/{{person.id ? 'people/' + person.id + '/' : 'campaigns/'}}messages/{{activity.message_id}}">
+                        <md-icon>pageview</md-icon>
+                    <p flex translate>View Message</p>
+                      </md-button>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+      <md-card-actions>
+        <md-table-pagination md-limit="500" md-limit-options="[500]" md-page="1" md-total="{{activity.length}}" md-on-paginate="onPaginate" md-label="{{pagination_labels}}" md-page-select></md-table-pagination>
+      </md-card-actions>
     </md-card>
   </div>
 </md-content>

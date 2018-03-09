@@ -1292,6 +1292,10 @@ md-card.b-bl::after {
   background: linear-gradient(135deg, #0088bb 7px, rgba(0,0,0,0) 0) top left;
 }
 
+.campaign-chart md-card.b-bl::after {
+  background: linear-gradient(135deg, #8e2d56 7px, rgba(0,0,0,0) 0) top left;
+}
+
 md-card.b-or::after {
   background: linear-gradient(135deg, #f78c6b 7px, rgba(0,0,0,0) 0) top left;
 }

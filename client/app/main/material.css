@@ -231,6 +231,17 @@ table.md-table td.md-cell:last-child, table.md-table th.md-column:last-child {
   padding: 0 24px 0 24px;
 }
 
+.login-container {
+  width: 100%;
+  height: 100vh;
+}
+
+.login-center {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
 /* Temp fixes to address */
 
 .ng-hide.ng-hide-animate{

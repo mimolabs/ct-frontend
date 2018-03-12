@@ -1,6 +1,6 @@
 <camp-nav></camp-nav>
 
-<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta">
+<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" style="padding-bottom: 0px;margin-bottom:0px;">
 
   <div flex="100" flex-gt-md="60" flex-gt-lg="50" ng-if="!campaigns">
     <md-card flex="100" class="b-pr">
@@ -22,13 +22,13 @@
 
 
   <div flex="100" flex-gt-md="90" flex-gt-lg="80" ng-if="campaigns">
-    <md-card class="b-pr">
-      <div class="md-toolbar-tools" ng-cloak>
-        <span class="md-subhead" translate>
-          {{ _links.total_entries || 0 }} campaign(s).
-        </span>
+    <md-card class="b-pr fixed-table">
+      <div class="md-toolbar-tools" ng-cloak layout="row" layout-align="space-between center">
+        <div flex>
+          <span class="md-subhead">{{ _links.total_entries || 0 }} campaign(s).</span>
+        </div>
+        <div flex></div>
       </div>
-      <span flex><span>
       <md-table-container>
         <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise">
           <thead md-head md-order="query.order" md-on-reorder="logOrder">
@@ -118,10 +118,10 @@
           </tbody>
         </table>
       </md-table-container>
-      <md-table-pagination md-limit="query.limit" md-page="query.page" md-limit-options="query.options" md-total="{{::_links.total_entries}}" md-label="{{pagination_labels}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+      <md-card-actions>
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-limit-options="query.options" md-total="{{::_links.total_entries}}" md-label="{{pagination_labels}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+      </md-card-actions>
     </md-card>
-    <div>
-      <md-button class="md-raised md-primary" href="/#/{{ location.slug}}/campaigns/new">NEW</md-button>
-    </div>
+    <md-button class="md-raised md-primary" href="/#/{{ location.slug}}/campaigns/new">NEW</md-button>
   </div>
 </md-content>

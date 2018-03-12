@@ -4,7 +4,7 @@
     <div class="example-data" ng-show="location.paid == false">
       The charts below are populated with example data. To access real data about your location, start your free trial today!
     </div>
-    <div layout-padding layout="row" layout-wrap layout-align="left center">
+    <div layout-padding layout="row" layout-wrap layout-align="left center" style="padding-left:0px;">
       <div flex="100" flex-gt-xs="25" flex-gt-sm="20">
         <md-input-container class="md-block" style="margin:0px;">
           <label>Period</label>
@@ -19,12 +19,12 @@
     <analytics ng-if="!loading">
       <client-chart>
         <email-stats fake="{{!location.paid}}"></email-stats>
-        <div layout="" layout-wrap class="md-padding">
+        <div layout="" layout-wrap>
           <div flex="100" flex-gt-sm="{{fs.panel ? 100 : 50}}" ng-hide="fs && fs.panel != 'usage'">
-            <dash-clients-chart name="Emails Captured" type="emails.new" bar="true" render="new-emails" fake="{{!location.paid}}" show-gt-sm></dash-clients-chart>
+            <dash-clients-chart name="Emails Captured" type="emails.new" bar="true" render="new-emails" fake="{{!location.paid}}" show-gt-sm class="campaign-chart"></dash-clients-chart>
           </div>
           <div flex="100" flex-gt-sm="{{fs.panel ? 100 : 50}}" ng-hide="fs && fs.panel != 'usage'">
-            <dash-clients-chart name="Emails Breakdown" type="emails.breakdown" render="emails-breakdown" fake="{{!location.paid}}" show-gt-sm></dash-clients-chart>
+            <dash-clients-chart name="Emails Breakdown" type="emails.breakdown" render="emails-breakdown" fake="{{!location.paid}}" show-gt-sm class="campaign-chart"></dash-clients-chart>
           </div>
         </div>
       </client-chart>

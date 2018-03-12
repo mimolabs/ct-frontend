@@ -1292,6 +1292,10 @@ md-card.b-bl::after {
   background: linear-gradient(135deg, #0088bb 7px, rgba(0,0,0,0) 0) top left;
 }
 
+.campaign-chart md-card.b-bl::after {
+  background: linear-gradient(135deg, #8e2d56 7px, rgba(0,0,0,0) 0) top left;
+}
+
 md-card.b-or::after {
   background: linear-gradient(135deg, #f78c6b 7px, rgba(0,0,0,0) 0) top left;
 }
@@ -1367,6 +1371,17 @@ table#plans td.md-cell {
 table a {
   font-weight: 600;
   color: rgb(71, 90, 136);
+}
+
+@media (min-width: 960px) {
+  md-card.fixed-table {
+    height: calc(100vh - 150px);
+  }
+  md-card.fixed-table md-table-container {
+    overflow: auto;
+    height: 100%;
+    margin-right:-5px;
+  }
 }
 
 /*WYSIWYG start*/

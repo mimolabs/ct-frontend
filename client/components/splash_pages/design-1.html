@@ -6,10 +6,10 @@
 <div ng-show="splash.header_image_name != undefined || splash.logo_file_name != undefined" class="" ng-class="splash.header_image_type == 1 ? 'logo location_logo' : 'banner'" ><a href="http://{{ splash.website }}"><img src="{{ splash.header_image_type == 1 ? splash.logo_file_name : splash.header_image_name }}" alt="" class=""></a></div>
 
 <div class="ps_inner">
-  <div ng-if="welcomeEditing == true">
+  <div ng-show="splash.welcome_demo == true">
     <div ng-include="'components/splash_pages/_welcome.html'"></div>
   </div>
-  <div ng-hide="welcomeEditing">
+  <div ng-hide="splash.welcome_demo == true">
     <h1>{{ splash.header_text }}</h1>
     <h2><div ng-bind-html="splash.info | sanitize"></div></h2>
     <p ng-bind-html="splash.info_two | sanitize"></p>

@@ -161,6 +161,55 @@
     </md-card>
   </div>
 
+  <md-button class="md-no-style" ng-click="splash.toggle('basic-advert')" aria-controls="bg">
+    <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('basic-advert') ? "up" : "down" }}</md-icon>
+    <translate>Adverts</translate>
+  </md-button>
+
+  <div ng-show="splash.isOpen('basic-advert')" id="basic-advert" class="menu-toggle-list">
+    <md-card>
+      <img ng-show="splash.splash.popup_image" src="{{splash.splash.popup_image}}" class="md-card-image" alt="Background">
+      <md-card-title>
+        <md-card-title-text layout="row" layout-align="space-between center">
+          <span class="md-headline" translate>Popup Advert</span>
+          <md-button ng-click="splash.splash.popup_demo = !splash.splash.popup_demo" aria-controls="adverts" class="md-icon-button {{ splash.splash.popup_demo ? 'md-accent' : '' }}">
+            <md-icon md-font-icon="visibility">{{ splash.splash.popup_demo ? 'visibility' : 'visibility_off' }}</md-icon>
+          </md-button>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <div layout="row" layout-wrap>
+          <div flex="100" flex-gt-sm="100">
+            <p translate>
+              Upload an image to advertise before seeing the splash page.
+            </p>
+          </div>
+          <div flex="100" flex-gt-sm="100">
+            <md-switch ng-model="splash.splash.popup_ad" aria-label="popup_ad" style="margin: 0px 0 20px 0" ng-show="splash.splash.popup_image">
+              <span ng-show="splash.splash.popup_ad == true" translate>Popup Advert Enabled</span>
+              <span ng-show="splash.splash.popup_ad == false" translate>Popup Advert Disabled</span>
+            </md-switch>
+          </div>
+          <div flex="100" flex-gt-sm="100">
+            <md-input-container class="md-block">
+              <label>
+                <translate>Background Colour</translate>
+              </label>
+              <color-picker ng-model="splash.splash.popup_background_colour"></color-picker>
+            </md-input-container>
+          </div>
+        </div>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-warn" ng-disabled="!splash.splash.popup_image" aria-label="{{ 'delete' | translate }}" ng-click="splash.deleteAd(splash.splash,myForm)">
+          <translate>Delete</translate>
+        </md-button>
+        <span ng-hide="edit_image_url">
+          <filepicker attribute="splash.splash.popup_image" uploading="splash.splash.uploading"></filepicker>
+        </span>
+      </md-card-actions>
+    </md-card>
+  </div>
 
   <md-button class="md-no-style" ng-click="splash.toggle('basic-text')" aria-controls="bg">
     <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('bg') ? "up" : "down" }}</md-icon>
@@ -432,17 +481,59 @@
     <!-- </div> -->
   </div>
 
-  <md-button class="md-no-style" ng-click="splash.toggle('side')" aria-controls="side">
-    <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('side') ? "up" : "down" }}</md-icon>
-    <translate>Advert</translate>
+  <md-button class="md-no-style" ng-click="splash.toggle('adverts')" aria-controls="adverts">
+    <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('adverts') ? "up" : "down" }}</md-icon>
+    <translate>Adverts</translate>
   </md-button>
 
-  <div ng-show="splash.isOpen('side')" id="images" class="menu-toggle-list">
+  <div ng-show="splash.isOpen('adverts')" id="images" class="menu-toggle-list">
+    <md-card>
+      <img ng-show="splash.splash.popup_image" src="{{splash.splash.popup_image}}" class="md-card-image" alt="Background">
+      <md-card-title>
+        <md-card-title-text layout="row" layout-align="space-between center">
+          <span class="md-headline" translate>Popup Advert</span>
+          <md-button ng-click="splash.splash.popup_demo = !splash.splash.popup_demo" aria-controls="adverts" class="md-icon-button {{ splash.splash.popup_demo ? 'md-accent' : '' }}">
+            <md-icon md-font-icon="visibility">{{ splash.splash.popup_demo ? 'visibility' : 'visibility_off' }}</md-icon>
+          </md-button>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <div layout="row" layout-wrap>
+          <div flex="100" flex-gt-sm="100">
+            <p translate>
+              Upload an image to advertise before seeing the splash page.
+            </p>
+          </div>
+          <div flex="100" flex-gt-sm="100">
+            <md-switch ng-model="splash.splash.popup_ad" aria-label="popup_ad" style="margin: 0px 0 20px 0" ng-show="splash.splash.popup_image">
+              <span ng-show="splash.splash.popup_ad == true" translate>Popup Advert Enabled</span>
+              <span ng-show="splash.splash.popup_ad == false" translate>Popup Advert Disabled</span>
+            </md-switch>
+          </div>
+          <div flex="100" flex-gt-sm="100">
+            <md-input-container class="md-block">
+              <label>
+                <translate>Background Colour</translate>
+              </label>
+              <color-picker ng-model="splash.splash.popup_background_colour"></color-picker>
+            </md-input-container>
+          </div>
+        </div>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-warn" ng-disabled="!splash.splash.popup_image" aria-label="{{ 'delete' | translate }}" ng-click="splash.deleteAd(splash.splash,myForm)">
+          <translate>Delete</translate>
+        </md-button>
+        <span ng-hide="edit_image_url">
+          <filepicker attribute="splash.splash.popup_image" uploading="splash.splash.uploading"></filepicker>
+        </span>
+      </md-card-actions>
+    </md-card>
     <md-card>
       <img ng-show="splash.splash.location_image_name" src="{{splash.splash.location_image_name}}" class="md-card-image" alt="Background">
       <md-card-title>
         <md-card-title-text>
-          <span class="md-headline" translate>Advert</span>
+          <span class="md-headline" translate>Side Advert</span>
         </md-card-title-text>
       </md-card-title>
       <md-card-content>
@@ -956,9 +1047,11 @@
   <div ng-show="splash.isOpen('welcome')" id="welcome" class="menu-toggle-list" layout="column">
     <md-card>
       <md-card-title>
-        <md-card-title-text>
+        <md-card-title-text layout="row" layout-align="space-between center">
           <span class="md-headline" translate>Welcome Page</span>
-          <span class="md-subhead" translate>Appears after a user logs in.</span>
+          <md-button ng-click="splash.splash.welcome_demo = !splash.splash.welcome_demo" class="md-icon-button {{ splash.splash.welcome_demo ? 'md-accent' : '' }}">
+            <md-icon md-font-icon="visibility">{{ splash.splash.welcome_demo ? 'visibility' : 'visibility_off' }}</md-icon>
+          </md-button>
         </md-card-title-text>
       </md-card-title>
       <md-card-content>

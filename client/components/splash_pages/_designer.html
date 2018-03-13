@@ -73,6 +73,12 @@
     box-shadow: {{splash.button_shadow ? '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);' : '0 0px 0px rgba(0,0,0,0.0)'}};
   }
 
+  .btn, button {
+    min-width: 150px;
+    max-width: 400px;
+    width: 95%;
+  }
+
   small, .small {
     font-size: 11px;
   }
@@ -324,9 +330,61 @@
     margin: 10px;
   }
 
+  #popup_container {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background: rgba(0,0,0,0.5);
+    z-index: 99;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%)translateX(-50%);
+  }
+
+  #popup_ad {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    z-index: 100;
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    padding: 15px;
+    margin: auto;
+    background: {{splash.popup_background_colour}};
+  }
+
+  #popup_ad img {
+    max-width: 100%;
+    height: auto;
+    max-height: 75vh;
+  }
+
+  #popup_ad .button {
+    margin-bottom: 5px;
+    margin-top: 20px;
+  }
+
 </style>
 
 <div class="designer" ng-hide="loading">
+  <div id="popup_container" ng-show="splash.popup_demo">
+    <div id="popup_ad">
+      <div layout="row" layout-align="center center">
+        <div flex="100" flex-gt-sm="100">
+          <img src="{{ splash.popup_image }}">
+        </div>
+      </div>
+      <div layout="row" layout-align="center center">
+        <div flex class="text-align-center">
+        </div>
+          <a class="btn button" id="popupBoxClose">Close</a>
+        <div flex class="text-align-center">
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="dc design-container">
     <div class="splash-container md-padding">
       <splash-design ver='{{ splash.design_id }}'></splash-design>

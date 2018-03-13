@@ -631,11 +631,14 @@ app.directive('splashNew', ['SplashPage', 'Auth', '$location', '$routeParams', '
 
 }]);
 
-app.directive('splashDesignerForm', ['$compile', function($compile) {
+app.directive('splashDesignerForm', ['SplashPage', 'Location', '$compile', function(SplashPage, Location, $compile) {
 
   var link = function(scope,element,attrs) {
 
     var leform;
+
+    scope.splash = angular.fromJson(scope.s);
+    console.log(scope.splash)
 
     var init = function() {
       switch(attrs.access) {
@@ -661,7 +664,11 @@ app.directive('splashDesignerForm', ['$compile', function($compile) {
           break;
       case '7':
         leform =
-          '<a class=\'social des-facebook\'>Continue with Facebook</a>';
+          '<span ng-show=\'splash.fb_login_on\'><a class=\'social des-facebook\'>Continue with Facebook</a><br></span>'+
+          '<span ng-show=\'splash.g_login_on\'><a class=\'social des-google\'>Continue with Google</a><br></span>'+
+          '<span ng-show=\'splash.tw_login_on\'><a class=\'social des-twitter\'>Continue with Twitter</a><br></span>'+
+          '<span ng-show=\'splash.backup_email\'><a class=\'social des-email\'>Continue with Email</a><br></span>'+
+          '<span ng-show=\'splash.backup_vouchers\'><a class=\'social des-voucher\'>Continue with Vouchers</a><br></span>';
         break;
       case '8':
         leform =
@@ -697,7 +704,8 @@ app.directive('splashDesignerForm', ['$compile', function($compile) {
     link: link,
     scope: {
       access: '@',
-      btntext: '@'
+      btntext: '@',
+      s: '@'
     }
   };
 

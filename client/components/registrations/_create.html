@@ -1,67 +1,74 @@
-<div style="margin-top:10%;">
-  <form name="myForm" ng-submit="create()">
-    <div layout="row" layout-align="center end">
-      <div flex="100" flex-gt-sm="40">
-        <img style="max-height:150px;" src="https://s3-eu-west-1.amazonaws.com/mimo-labs/images/mimo-logo.svg"/>
+<style>
+md-toolbar {
+  display: none;
+}
+</style>
+<div class="login-container">
+  <div class="login-center">
+    <form name="myForm" ng-submit="create()">
+      <div layout="row" layout-align="center end">
+        <div flex="100" flex-gt-sm="40" flex-gt-xs="60">
+          <img style="max-height:150px;" src="https://s3-eu-west-1.amazonaws.com/mimo-labs/images/mimo-logo.svg"/>
+        </div>
       </div>
-    </div>
-    <div layout="row" layout-align="center center" class="md-padding">
-      <div flex="100" flex-gt-sm="40">
-        <md-card>
-          <div ng-show="email">
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-headline" translate>
-                  Hello Friend, Thanks for Signing Up!
-                </span>
-                <span class="md-subhead" translate>
-                  We've sent a super-secret code to your email. Go forth and open this email, then click the link you'll find inside. If it doesn't arrive, check that pesky spam folder.
-                </span>
-              </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-              <p><small><translate>Didn't get the invite?&nbsp;</translate> <a href="" ng-click="clearCookies()" translate>Resend it now</a>.</small></p>
-            </md-card-content>
-          </div>
-          <div ng-show="cookies && !email">
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-headline" translate>
-                  OH MIMO! That's gone well.
-                </span>
-                <span class="md-subhead" translate>
-                  We've sent a super-secret code to your email. Go forth and open this email, then click the link you'll find inside. If it doesn't arrive, check that pesky spam folder.
-                </span>
-              </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-              <p><small><translate>Didn't get the invite?&nbsp;</translate> <a href="" ng-click="clearCookies()" translate>Resend it now</a>.</small></p>
-            </md-card-content>
-          </div>
-          <div ng-show="!cookies && loaded" ng-cloak>
-            <md-card-title ng-if="!brand || (brand.reseller && brand.sign_ups_enabled)">
-              <md-card-title-text>
-                <span class="md-headline" translate>
-                  Sign-up for <span ng-if="!brand">{{ ::brand_name }}</span><span ng-if="brand">{{ brand.brand_name }}</span>.
-                </span>
-                <p>Start your engines, you're nearly there. MIMO is an engagement tool that helps build better customer relationships. Already have an account? <a href="https://id.oh-mimo.com/login">Login here</a>.</p>
-              </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-              <div layout="column">
-                <md-input-container class="md-block">
-                  <label>
-                    <translate>What's your work email?</translate>
-                  </label>
-                  <input required ng-model="user.email" type="email">
-                </md-input-container>
-              </div>
-              <md-button type="submit" ng-disabled="myForm.$invalid || myForm.$pristine" class="signup-email md-raised create-18020714"><translate>Get Started</translate></md-button>
-              <p><small>Hello friend, we're looking forward to getting to know you.</small></p>
-            </md-card-content>
-          </div>
-        </md-card>
+      <div layout="row" layout-align="center center" class="md-padding">
+        <div flex="100" flex-gt-sm="40" flex-gt-xs="60">
+          <md-card>
+            <div ng-show="email">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline" translate>
+                    Hello Friend, Thanks for Signing Up!
+                  </span>
+                  <span class="md-subhead" translate>
+                    We've sent a super-secret code to your email. Go forth and open this email, then click the link you'll find inside. If it doesn't arrive, check that pesky spam folder.
+                  </span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content>
+                <p><small><translate>Didn't get the invite?&nbsp;</translate> <a href="" ng-click="clearCookies()" translate>Resend it now</a>.</small></p>
+              </md-card-content>
+            </div>
+            <div ng-show="cookies && !email">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline" translate>
+                    OH MIMO! That's gone well.
+                  </span>
+                  <span class="md-subhead" translate>
+                    We've sent a super-secret code to your email. Go forth and open this email, then click the link you'll find inside. If it doesn't arrive, check that pesky spam folder.
+                  </span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content>
+                <p><small><translate>Didn't get the invite?&nbsp;</translate> <a href="" ng-click="clearCookies()" translate>Resend it now</a>.</small></p>
+              </md-card-content>
+            </div>
+            <div ng-show="!cookies && loaded" ng-cloak>
+              <md-card-title ng-if="!brand || (brand.reseller && brand.sign_ups_enabled)">
+                <md-card-title-text>
+                  <span class="md-headline" translate>
+                    Sign-up for <span ng-if="!brand">{{ ::brand_name }}</span><span ng-if="brand">{{ brand.brand_name }}</span>.
+                  </span>
+                  <p>Start your engines, you're nearly there. MIMO is an engagement tool that helps build better customer relationships. Already have an account? <a href="https://id.oh-mimo.com/login">Login here</a>.</p>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content>
+                <div layout="column">
+                  <md-input-container class="md-block">
+                    <label>
+                      <translate>What's your work email?</translate>
+                    </label>
+                    <input required ng-model="user.email" type="email">
+                  </md-input-container>
+                </div>
+                <md-button type="submit" ng-disabled="myForm.$invalid || myForm.$pristine" class="signup-email md-raised create-18020714"><translate>Get Started</translate></md-button>
+                <p><small>Hello friend, we're looking forward to getting to know you.</small></p>
+              </md-card-content>
+            </div>
+          </md-card>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>

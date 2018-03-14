@@ -73,6 +73,12 @@
     box-shadow: {{splash.button_shadow ? '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);' : '0 0px 0px rgba(0,0,0,0.0)'}};
   }
 
+  .btn, button {
+    min-width: 150px;
+    max-width: 400px;
+    width: 95%;
+  }
+
   small, .small {
     font-size: 11px;
   }
@@ -205,6 +211,92 @@
     border: none;
   }
 
+  .social.des-google {
+    background-color: #4285f4;
+    background-image: url(https://d247kqobagyqjh.cloudfront.net/api/file/1FGFU9fQxK6T7fxp5zwd);
+    background-repeat: no-repeat;
+    background-position: 5px 5px;
+    background-size: 40px;
+    border: none;
+    padding-left: 4rem;
+  }
+
+  .social.des-google:hover,.social.des-google:focus {
+    background-color: #2674f2;
+    background-image: url(https://d247kqobagyqjh.cloudfront.net/api/file/1FGFU9fQxK6T7fxp5zwd);
+    background-repeat: no-repeat;
+    background-position: 5px 5px;
+    background-size: 40px;
+    border: none;
+  }
+
+  .social.des-twitter {
+    background-color: #1DA1F2;
+    background-image: url(https://d247kqobagyqjh.cloudfront.net/api/file/GvF246oSHCmO4A4Jqm2w);
+    background-repeat: no-repeat;
+    background-position: 8px 8px;
+    background-size: 35px;
+    border: none;
+    padding-left: 4rem;
+  }
+
+  .social.des-twitter:hover,.social.des-twitter:focus {
+    background: #0d8bd9;
+    background-image: url(https://d247kqobagyqjh.cloudfront.net/api/file/GvF246oSHCmO4A4Jqm2w);
+    background-repeat: no-repeat;
+    background-position: 8px 8px;
+    background-size: 35px;
+    border: none;
+  }
+
+  .social.des-email, .social.des-voucher {
+    background-color: #FFFFFF;
+    border: 1px solid #CCC;
+    color: #000;
+    min-width: 150px;
+    max-width: 400px;
+    max-height: 50px;
+    width: 95%;
+    margin: 10px 0px 10px 0px;
+    border-radius: 4px;
+    padding-left: 4rem;
+  }
+
+  .social.des-email:hover, .social:focus.des-email:focus, .social.des-voucher:hover, .social:focus.des-voucher:focus {
+    background-color: #EEEEEE!important;
+    border: 1px solid #CCC!important;
+  }
+
+  .social.des-email::after {
+    content: "";
+    background: url(https://d247kqobagyqjh.cloudfront.net/api/file/cvKFLmhbRtkSc2FcLYjM);
+    background-repeat: no-repeat;
+    background-position: 5px 4px;
+    background-size: 40px;
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .social.des-voucher::after {
+    content: "";
+    background: url(https://d247kqobagyqjh.cloudfront.net/api/file/tDYTNvv6R2mFUBM4yLgj);
+    background-repeat: no-repeat;
+    background-position: 6px 4px;
+    background-size: 40px;
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: 1;
+  }
+
   .social {
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -233,14 +325,66 @@
     transition: background-color 300ms ease-out;
     max-height: 50px;
     min-width: 150px;
-    max-width: 320px;
+    max-width: 400px;
     width: 100%;
     margin: 10px;
+  }
+
+  #popup_container {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    background: rgba(0,0,0,0.5);
+    z-index: 99;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%)translateX(-50%);
+  }
+
+  #popup_ad {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 4px;
+    z-index: 100;
+    width: 90%;
+    max-width: 700px;
+    max-height: 90vh;
+    padding: 15px;
+    margin: auto;
+    background: {{splash.popup_background_colour}};
+  }
+
+  #popup_ad img {
+    max-width: 100%;
+    height: auto;
+    max-height: 75vh;
+  }
+
+  #popup_ad .button {
+    margin-bottom: 5px;
+    margin-top: 20px;
   }
 
 </style>
 
 <div class="designer" ng-hide="loading">
+  <div id="popup_container" ng-show="splash.popup_demo">
+    <div id="popup_ad">
+      <div layout="row" layout-align="center center">
+        <div flex="100" flex-gt-sm="100">
+          <img src="{{ splash.popup_image }}">
+        </div>
+      </div>
+      <div layout="row" layout-align="center center">
+        <div flex class="text-align-center">
+        </div>
+          <a class="btn button" id="popupBoxClose">Close</a>
+        <div flex class="text-align-center">
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="dc design-container">
     <div class="splash-container md-padding">
       <splash-design ver='{{ splash.design_id }}'></splash-design>

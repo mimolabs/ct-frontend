@@ -137,6 +137,10 @@ app.directive('filepicker', ['$compile', '$cookies', function ($compile, $cookie
         options = { width: 300, height: 45 };
       }
 
+      else if ( attrs.type === '30') { // popup ad image
+        options = { width: 1400 };
+      }
+
       pickFile(options);
     };
 

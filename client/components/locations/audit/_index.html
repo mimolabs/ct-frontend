@@ -182,6 +182,17 @@
                   <td hide show-gt-xs md-cell ng-show="selected == 'Social'">
                     {{ result.gender == 'male' ? 'M' : 'F' }}
                   </td>
+                  <td md-cell>
+                    <span ng-if="result.facebook_id">
+                      <img src="https://d3e9l1phmgx8f2.cloudfront.net/images/social/facebook.png" width=24px>
+                    </span>
+                    <span ng-if="result.google_id">
+                      <img src="https://d3e9l1phmgx8f2.cloudfront.net/images/social/google.png" width=24px>
+                    </span>
+                    <span ng-if="result.linkedin_id">
+                      <img src="https://d3e9l1phmgx8f2.cloudfront.net/images/social/linkedin.png" width=24px>
+                    </span>
+                  </td>
                 </tr>
               </tbody>
             </table>

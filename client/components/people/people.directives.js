@@ -2,7 +2,7 @@
 
 var app = angular.module('myApp.people.directives', []);
 
-app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$location', '$routeParams', '$mdDialog', 'showToast', 'showErrors', '$q','pagination_labels', 'gettextCatalog', '$route', function(People,Location,Audience,$timeout,$location,$routeParams,$mdDialog,showToast,showErrors,$q, pagination_labels, gettextCatalog, $route) {
+app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeout', '$location', '$routeParams', '$mdDialog', 'showToast', 'showErrors', '$q','pagination_labels', 'gettextCatalog', '$route', function(People,Location,Audience,Report,$timeout,$location,$routeParams,$mdDialog,showToast,showErrors,$q, pagination_labels, gettextCatalog, $route) {
 
   var link = function(scope, el, attrs, controller) {
 
@@ -133,6 +133,66 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
       $location.search(hash);
       getAudiences().then(getPeople());
     }
+
+    var downloadReport = function() {
+      var params = {
+        q: scope.query.filter,
+        location_id: scope.location.slug,
+        audience: {
+          predicate_type: scope.query.predicate_type
+        },
+        blob: encodeBlob(),
+        type: 'people'
+      };
+      Report.create(params).$promise.then(function(results) {
+        showToast(gettextCatalog.getString('Your report will be emailed to you soon'));
+      }, function(err) {
+        showErrors(err);
+      });
+    };
+
+    scope.downloadSegment = function() {
+      var confirm = $mdDialog.confirm()
+      .title(gettextCatalog.getString('Download People Segment'))
+      .textContent(gettextCatalog.getString('Please note this is a beta feature. Reports are sent via email.'))
+      .ariaLabel(gettextCatalog.getString('People Report'))
+      .ok(gettextCatalog.getString('Download'))
+      .cancel(gettextCatalog.getString('Cancel'));
+      $mdDialog.show(confirm).then(function() {
+        downloadReport();
+      });
+    };
+
+    var deletePeopleSegment = function() {
+      var params = {
+        q: scope.query.filter,
+        location_id: scope.location.slug,
+        audience: {
+          predicate_type: scope.query.predicate_type
+        },
+        blob: encodeBlob(),
+      };
+
+      People.destroy_segment(params, function(data) {
+        showToast(gettextCatalog.getString('People successfully deleted'));
+        scope.people = [];
+        scope._links.total_entries = 0;
+      }, function(err){
+        showErrors(err);
+      });
+    };
+
+    scope.deleteSegment = function() {
+      var confirm = $mdDialog.confirm()
+      .title(gettextCatalog.getString('Delete People Segment'))
+      .textContent(gettextCatalog.getString('Please note this will destroy all currently filtered people and all their related data. This cannot be reversed.'))
+      .ariaLabel(gettextCatalog.getString('Delete People Segment'))
+      .ok(gettextCatalog.getString('Confirm'))
+      .cancel(gettextCatalog.getString('Cancel'));
+      $mdDialog.show(confirm).then(function() {
+        deletePeopleSegment();
+      });
+    };
 
     scope.search = function() {
       updatePage();
@@ -369,7 +429,8 @@ app.directive('listPeople', ['People', 'Location', 'Audience', '$timeout', '$loc
           splash: attrs.splashSetup,
           integrations: attrs.integrationsSetup
         },
-        paid: attrs.locationPaid
+        paid: attrs.locationPaid,
+        demo: attrs.demoData
       };
     };
 

@@ -117,6 +117,134 @@
             </md-card>
           </div>
 
+          <md-button class="md-no-style" ng-click="splash.toggle('redirectUrl')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('redirectUrl') ? "up" : "down" }}</md-icon>
+            <translate>Redirect URL</translate>
+          </md-button>
+
+          <div ng-show="splash.isOpen('redirectUrl')" id="redirectUrl" class="menu-toggle-list" layout="column">
+            <md-card>
+              <md-card-content>
+                <div layout="row" layout-wrap>
+                  <div flex="100">
+                    <p style="margin-top:0px;">Guests will be redirected to this URL after they log in</p>
+                  </div>
+                  <div flex="100">
+                    <md-input-container class="md-block">
+                      <label><translate>Redirect URL</translate></label>
+                      <input ng-model="splash.success_url" placeholder="http://my-site.com/awesome" type='url' name="success_url" ng-maximum='255'></input>
+                      <div ng-messages="myForm.success_url.$error">
+                        <div ng-message="max" translate>Must be less than 255 chars.</div>
+                        <div ng-message="url" translate>Must be a valid URL, including http(s).</div>
+                      </div>
+                    </md-input-container>
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
+          </div>
+
+          <md-button class="md-no-style" ng-click="splash.toggle('speedLimits')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('speedLimits') ? "up" : "down" }}</md-icon>
+            <translate>Speed Limits</translate>
+          </md-button>
+
+          <div ng-show="splash.isOpen('speedLimits')" id="speedLimits" class="menu-toggle-list" layout="column">
+            <md-card>
+              <md-card-content>
+                <div layout="column" layout-gt-sm="row" layout-wrap>
+                  <div flex-gt-sm="100">
+                    <div ng-hide="customSpeeds">
+                      <translate>Download Speed {{ (splash.download_speed / 1024) | number }}Mbps</translate>
+                      <md-slider md-discrete ng-model="splash.download_speed" step="256" min="0" max="49134" aria-label="download">
+                      </md-slider>
+
+                      <translate>Upload Speed {{ (splash.upload_speed / 1024) | number }}Mbps</translate>
+                      <md-slider md-discrete ng-model="splash.upload_speed" step="256" min="0" max="49134" aria-label="upload">
+                      </md-slider>
+                    </div>
+                    <div ng-if="customSpeeds" layout="row">
+                      <md-input-container class="md-block">
+                        <label for="splash.download_speed"><translate>Download {{ splash.download_speed | mbps }}</translate></label>
+                        <input name="download" type="number" min="0" ng-model="splash.download_speed"></input>
+                        <div ng-messages="myForm.download.$error">
+                          <div ng-message="min" translate>Must be greater than or equal to 0.</div>
+                        </div>
+                      </md-input-container>
+                      <md-input-container class="md-block">
+                        <label for="splash.upload_speed"><translate>Upload {{ splash.upload_speed | mbps }}</translate></label>
+                        <input name="upload" type="number" min="0" ng-model="splash.upload_speed"></input>
+                        <div ng-messages="myForm.upload.$error">
+                          <div ng-message="min" translate>Must be greater than or equal to 0.</div>
+                        </div>
+                      </md-input-container>
+                    </div>
+                    <p><small><a href="" ng-click="customSpeeds = !customSpeeds" translate>Edit values</a></small></p>
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
+          </div>
+
+          <md-button class="md-no-style" ng-click="splash.toggle('timeOfDay')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('timeOfDay') ? "up" : "down" }}</md-icon>
+            <translate>Time of Day</translate>
+          </md-button>
+
+          <div ng-show="splash.isOpen('timeOfDay')" id="timeOfDay" class="menu-toggle-list" layout="column">
+            <md-card>
+              <md-card-content>
+                <div layout="row" layout-wrap>
+                  <div flex-gt-sm="100">
+                    <p style="margin-top:0px;">Allow guests to only sign in during specific times of day.</p>
+                    <md-input-container class="md-block" style="margin-top: 0px;">
+                      <md-switch ng-model="splash.access_restrict" ng-true-value="'periodic'" ng-false-value="'none'" style="margin: 0px">
+                        <span ng-show="splash.access_restrict === 'periodic'" translate>Enabled</span>
+                        <span ng-show="splash.access_restrict !== 'periodic'" translate>Disabled</span>
+                      </md-switch>
+                    </md-input-container>
+                    <md-radio-group ng-model="splash.access_restrict_period" layout="row" style="padding: 10px 0 20px 0;" ng-if="splash.access_restrict === 'timed' || splash.access_restrict === 'data'" ng-disabled="splash.access_restrict === 'none'">
+                      <md-radio-button value="daily" class="md-primary"><translate>Daily</translate></md-radio-button>
+                      <md-radio-button value="weekly"><translate>Weekly</translate></md-radio-button>
+                      <md-radio-button value="monthly"><translate>Monthly</translate></md-radio-button>
+                    </md-radio-group>
+                  </div>
+                  <div flex-gt-sm="100">
+                    <div layout="column" layout-gt-sm="row" layout-wrap ng-if="splash.access_restrict === 'periodic'">
+                      <div flex-gt-sm="50">
+                        <md-input-container class="md-block">
+                          <label for="available_start"><translate>Start Time</translate></label>
+                          <input ng-model="splash.available_start" placeholder="{{ 'Start' | translate }}"  type='text' name="available_start" ng-pattern="/^([0-9]{2})\:([0-9]{2})$/">
+                        </md-input-container>
+                      </div>
+                      <div flex-gt-sm="50">
+                        <md-input-container class="md-block">
+                          <label for="available_start"><translate>End Time</translate></label>
+                          <input ng-model="splash.available_end" placeholder="{{ 'End' | translate }}" type='text' name="available_end" ng-pattern="/^([0-9]{2})\:([0-9]{2})$/">
+                        </md-input-container>
+                      </div>
+                      <div style="margin-top: -30px;">
+                        <p><small><translate>Allowed Days</translate></small></p>
+                        <day-selector active="true" days="splash.available_days" array="splash.periodic_days" layout="row" layout-wrap layout-align="space-between center"></day-selector>
+                      </div>
+                      <p translate>Set the start and end times to 00:00 to allow access all day</p>
+                    </div>
+                    <div layout="column">
+                      <md-input-container class="md-block" ng-if="splash.access_restrict === 'timed' || splash.access_restrict === 'data'">
+                        <label>
+                          <md-icon md-font-icon="star">stars</md-icon>
+                          <span translate>Over-Usage Message</span>
+                        </label>
+                        <textarea rows=3 ng-model="splash.quota_message" placeholder="{{ 'Message displayed when a customer goes over-limit.' | translate }}" rows="3" ng-disabled="splash.access_restrict === 'periodic'"></textarea>
+                      </md-input-container>
+                    </div>
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
+          </div>
+
+
         </md-content>
       </md-tab-body>
     </md-tab>
@@ -485,6 +613,88 @@
             </md-card>
           </div>
 
+          <md-button class="md-no-style" ng-click="splash.toggle('container')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('container') ? "up" : "down" }}</md-icon>
+            <translate>Container</translate>
+          </md-button>
+
+          <div ng-show="splash.isOpen('container')" id="container" class="menu-toggle-list" layout="column">
+            <md-card>
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline" translate>Container Style</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content>
+                <div layout="row" layout-wrap>
+                  <div flex="100" flex-gt-xs="50">
+                    <md-input-container class="md-block">
+                      <label>
+                        <translate>Width</translate>
+                      </label>
+                      <input type="text" ng-model="splash.splash.container_width" required>
+                    </md-input-container>
+                  </div>
+                  <div flex="100" flex-gt-xs="50">
+                    <md-input-container class="md-block">
+                      <label>
+                        <translate>Padding</translate>
+                      </label>
+                      <input type="text" ng-model="splash.splash.container_inner_padding" required>
+                    </md-input-container>
+                  </div>
+                  <div flex="100" flex-gt-xs="50">
+                    <md-input-container class="md-block">
+                      <label>
+                        <translate>Corner Radius</translate>
+                      </label>
+                      <input type="text" ng-model="splash.splash.container_inner_radius" required>
+                    </md-input-container>
+                  </div>
+                  <div flex="100" flex-gt-xs="100">
+                    <md-input-container class="md-block" style="margin-top: 0px;">
+                      <md-switch ng-model="splash.splash.container_shadow" aria-label="container_shadow" style="margin: 0px 0 20px 0">
+                        <span ng-show="splash.splash.container_shadow == true" translate>Shadow Enabled</span>
+                        <span ng-show="splash.splash.container_shadow == false" translate>Shadow Disabled</span>
+                      </md-switch>
+                    </md-input-container>
+                  </div>
+                </div>
+                <md-radio-group ng-model="splash.splash.container_text_align" layout="row">
+                  <md-radio-button value="left" class="md-primary"><translate>Left</translate></md-radio-button>
+                  <md-radio-button value="center"><translate>Center</translate></md-radio-button>
+                  <md-radio-button value="right"><translate>Right</translate></md-radio-button>
+                </md-radio-group>
+              </md-card-content>
+            </md-card>
+          </div>
+
+          <md-button class="md-no-style" ng-click="splash.toggle('css')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('css') ? "up" : "down" }}</md-icon>
+            <translate>CSS</translate>
+          </md-button>
+
+          <div ng-show="splash.isOpen('css')" id="css" class="menu-toggle-list" layout="column">
+            <md-card>
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline" translate>Custom CSS</span>
+                  <span class="md-subhead" translate>Fine tune your layouts</span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content>
+                <md-input-container class="md-block">
+                  <label>
+                    <translate>External CSS</translate>
+                  </label>
+                  <input ng-model="splash.splash.external_css" placeholder="{{'External CSS' | translate }}" type='text' name="external_css" md-maxlength='255'></input>
+                  <div ng-messages="myForm.external_css.$error">
+                    <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
+                  </div>
+                </md-input-container>
+              </md-card-content>
+            </md-card>
+          </div>
 
         </md-content>
       </md-tab-body>
@@ -759,103 +969,17 @@
       </md-tab-body>
     </md-tab>
 
-    <md-tab id="tab4" ng-disabled="data.secondLocked">
-      <md-tab-label>Advanced</md-tab-label>
-      <md-tab-body>
-        <md-content layout-padding>
-
-          <md-button class="md-no-style" ng-click="splash.toggle('container')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('container') ? "up" : "down" }}</md-icon>
-            <translate>Container</translate>
-          </md-button>
-
-          <div ng-show="splash.isOpen('container')" id="container" class="menu-toggle-list" layout="column">
-            <md-card>
-              <md-card-title>
-                <md-card-title-text>
-                  <span class="md-headline" translate>Container Style</span>
-                </md-card-title-text>
-              </md-card-title>
-              <md-card-content>
-                <div layout="row" layout-wrap>
-                  <div flex="100" flex-gt-xs="50">
-                    <md-input-container class="md-block">
-                      <label>
-                        <translate>Width</translate>
-                      </label>
-                      <input type="text" ng-model="splash.splash.container_width" required>
-                    </md-input-container>
-                  </div>
-                  <div flex="100" flex-gt-xs="50">
-                    <md-input-container class="md-block">
-                      <label>
-                        <translate>Padding</translate>
-                      </label>
-                      <input type="text" ng-model="splash.splash.container_inner_padding" required>
-                    </md-input-container>
-                  </div>
-                  <div flex="100" flex-gt-xs="50">
-                    <md-input-container class="md-block">
-                      <label>
-                        <translate>Corner Radius</translate>
-                      </label>
-                      <input type="text" ng-model="splash.splash.container_inner_radius" required>
-                    </md-input-container>
-                  </div>
-                  <div flex="100" flex-gt-xs="100">
-                    <md-input-container class="md-block" style="margin-top: 0px;">
-                      <md-switch ng-model="splash.splash.container_shadow" aria-label="container_shadow" style="margin: 0px 0 20px 0">
-                        <span ng-show="splash.splash.container_shadow == true" translate>Shadow Enabled</span>
-                        <span ng-show="splash.splash.container_shadow == false" translate>Shadow Disabled</span>
-                      </md-switch>
-                    </md-input-container>
-                  </div>
-                </div>
-                <md-radio-group ng-model="splash.splash.container_text_align" layout="row">
-                  <md-radio-button value="left" class="md-primary"><translate>Left</translate></md-radio-button>
-                  <md-radio-button value="center"><translate>Center</translate></md-radio-button>
-                  <md-radio-button value="right"><translate>Right</translate></md-radio-button>
-                </md-radio-group>
-              </md-card-content>
-            </md-card>
-          </div>
-
-          <md-button class="md-no-style" ng-click="splash.toggle('css')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('css') ? "up" : "down" }}</md-icon>
-            <translate>CSS</translate>
-          </md-button>
-
-          <div ng-show="splash.isOpen('css')" id="css" class="menu-toggle-list" layout="column">
-            <md-card>
-              <md-card-title>
-                <md-card-title-text>
-                  <span class="md-headline" translate>Custom CSS</span>
-                  <span class="md-subhead" translate>Fine tune your layouts</span>
-                </md-card-title-text>
-              </md-card-title>
-              <md-card-content>
-                <md-input-container class="md-block">
-                  <label>
-                    <translate>External CSS</translate>
-                  </label>
-                  <input ng-model="splash.splash.external_css" placeholder="{{'External CSS' | translate }}" type='text' name="external_css" md-maxlength='255'></input>
-                  <div ng-messages="myForm.external_css.$error">
-                    <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
-                  </div>
-                </md-input-container>
-              </md-card-content>
-            </md-card>
-          </div>
-        </md-content>
-      </md-tab-body>
-    </md-tab>
-
   </md-tabs>
 
   <md-content layout-padding>
     <div ng-hide='splash.splash.updating' layout="row" layout-align="space-around center" class="splash-design-buttons">
       <splash-templates></splash-templates>
+      <md-button ng-click="splash.preview()" class="md-fab md-raised md-mini">
+        <md-tooltip md-direction="bottom">Preview</md-tooltip>
+        <md-icon md-font-icon="pageview">pageview</md-icon>
+      </md-button>
       <md-button ng-click="splash.save(splash.splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
+        <md-tooltip md-direction="bottom">Save</md-tooltip>
         <md-icon md-font-icon="save">save</md-icon>
       </md-button>
     </div>

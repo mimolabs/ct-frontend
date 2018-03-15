@@ -2233,6 +2233,7 @@ app.directive('splashTemplates', ['SplashPage', 'designer', '$routeParams', '$lo
     },
     template:
       '<md-button ng-click="openDialog()" aria-label="{{\'Back\' | translate }}" class="md-fab md-raised md-mini">' +
+      '<md-tooltip md-direction="bottom">Templates</md-tooltip>' +
       '<md-icon md-font-icon="view_carousel">view_carousel</md-icon>' +
       '</md-button>'
   };

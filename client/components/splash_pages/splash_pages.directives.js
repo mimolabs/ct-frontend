@@ -637,9 +637,6 @@ app.directive('splashDesignerForm', ['SplashPage', 'Location', '$compile', funct
 
     var leform;
 
-    scope.splash = angular.fromJson(scope.s);
-    console.log(scope.splash)
-
     var init = function() {
       switch(attrs.access) {
       case '1':
@@ -691,22 +688,12 @@ app.directive('splashDesignerForm', ['SplashPage', 'Location', '$compile', funct
       element.html(template);
     };
 
-    attrs.$observe('btntext', function(id) {
-      if (id !== '') {
-        scope.btn_text = attrs.btntext;
-        init();
-      }
-    });
+    init();
 
   };
 
   return {
     link: link,
-    scope: {
-      access: '@',
-      btntext: '@',
-      s: '@'
-    }
   };
 
 }]);
@@ -724,7 +711,6 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       return SplashPage.query({
         location_id: scope.location.slug,
         id: scope.splash.id,
-        designer: true
       }).$promise.then(function(res) {
         scope.splash      = res.splash_page;
         designer.splash   = scope.splash;

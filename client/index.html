@@ -254,21 +254,7 @@
   </div>
 
   <md-sidenav flex-xs flex-gt-sm="20" class="design-sidebar md-sidenav-right md-whiteframe-z2" md-component-id="" md-is-locked-open="vm.menu.Designer == true">
-    <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
-      <md-tab id="tab1">
-        <md-tab-label>Access</md-tab-label>
-        <md-tab-body>
-          Settings and stuff
-          <access-menu></access-menu>
-        </md-tab-body>
-      </md-tab>
-      <md-tab id="tab2" ng-disabled="data.secondLocked">
-        <md-tab-label>Designer</md-tab-label>
-        <md-tab-body>
-          <design-menu ver="designer"></design-menu>
-        </md-tab-body>
-      </md-tab>
-    </md-tabs>
+    <design-menu ver="designer"></design-menu>
   </md-sidenav>
 
   <!--[if lt IE 9]>

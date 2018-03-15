@@ -6,7 +6,117 @@
       <md-tab-label>Access</md-tab-label>
       <md-tab-body>
         <md-content layout-padding>
-          Settings and stuff
+
+          <md-button class="md-no-style" ng-click="splash.toggle('details')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('details') ? "up" : "down" }}</md-icon>
+            <translate>Details</translate>
+          </md-button>
+
+          <div ng-show="splash.isOpen('details')" id="details" class="menu-toggle-list" layout="column">
+            <md-card>
+              <md-card-content>
+                <md-input-container class="md-block">
+                  <label><translate>Splash Name</translate></label>
+                  <input ng-model="splash.splash_name" placeholder="{{ 'Name your splash page' | translate }}" type="text" name="splash_name" md-maxlength='100'>
+                  <div ng-messages="myForm.splash_name.$error">
+                    <div ng-message="md-maxlength" translate>Must be less than 100 characters</div>
+                  </div>
+                </md-input-container>
+                <div flex-gt-sm="100">
+                  <md-switch class="md-accent" ng-model="splash.active" aria-label="active">
+                    <span ng-show="splash.active" translate>Splash Enabled</span>
+                    <span ng-show="!splash.active" translate>Splash Disabled</span>
+                  </md-switch>
+                  <small ng-show="splash.active">Guests will be able to sign-in.</small>
+                  <small ng-show="!splash.active">Guests will not be able to sign-in.</small>
+                </div>
+              </md-card-content>
+            </md-card>
+          </div>
+
+          <md-button class="md-no-style" ng-click="splash.toggle('loginType')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('loginType') ? "up" : "down" }}</md-icon>
+            <translate>Login Type</translate>
+          </md-button>
+
+          <div ng-show="splash.isOpen('loginType')" id="loginType" class="menu-toggle-list" layout="column">
+            <md-card>
+              <md-card-content>
+                <div layout="row" layout-wrap>
+                  <div flex="100">
+                    <p style="margin-top:0px;">What information do you want to capture?</p>
+                  </div>
+                  <div flex="50">
+                    <md-checkbox ng-model="splash.fb_login_on" name="fb_login_on" type="checkbox">
+                      <translate>Facebook</translate>
+                    </md-checkbox>
+                  </div>
+                  <div flex="50">
+                    <md-checkbox ng-model="splash.g_login_on" name="g_login_on" type="checkbox">
+                      <translate>Google+</translate>
+                    </md-checkbox>
+                  </div>
+                  <div flex="50">
+                    <md-checkbox ng-model="splash.tw_login_on" name="tw_login_on" type="checkbox">
+                      <translate>Twitter</translate>
+                    </md-checkbox>
+                  </div>
+                  <div flex="50">
+                    <md-checkbox ng-model="splash.backup_email" name="backup_email" type="checkbox">
+                      <translate>Email</translate>
+                    </md-checkbox>
+                  </div>
+                  <div flex="100" ng-show="splash.fb_login_on">
+                    <md-switch class="md-accent" ng-model="splash.fb_checkin" aria-label="FB Checkin">
+                      <translate>Allow Facebook Checkin</translate>
+                    </md-switch>
+                    <md-input-container class="md-block">
+                      <label translate>Facebook Page ID</label>
+                      <input ng-model="splash.fb_page_id" name="fb_page_id" placeholder="{{'Enter your Page Name/ID' | translate }}" type="text" ng-required="splash.fb_login_on" xxng-pattern="/^-?\d+\.?\d*$/">
+                      <div ng-messages="myForm.fb_page_id.$error" md-auto-hide="false">
+                        <div ng-message="required" translate>Page ID required</div>
+                        <div ng-message="pattern" translate>Invalid Page ID</div>
+                      </div>
+                    </md-input-container>
+                  </div>
+
+                  <div flex="100" ng-show="splash.g_login_on">
+                    <md-input-container class="md-block">
+                      <label>Google Page ID</label>
+                      <input ng-model="splash.g_page_id" name="g_page_id" ng-class="{ 'input-error' : myForm.g_page_id.$error.required }" placeholder="{{ 'Enter your Google Page ID' | translate }}" type="text" ng-required="splash.g_login_on">
+                      <div ng-messages="myForm.g_page_id.$error" md-auto-hide="false">
+                        <div ng-message="md-maxlength">Page ID required.</div>
+                      </div>
+                    </md-input-container>
+                  </div>
+
+                  <div flex="100" ng-show="splash.tw_login_on">
+                    <md-input-container class="md-block">
+                      <label translate>Twitter Handle</label>
+                      <input ng-model="splash.tw_handle" name="tw_handle" placeholder="{{'Enter your Twitter handle' | translate }}" type="text" ng-required="splash.tw_login_on" xxng-pattern="/^-?\d+\.?\d*$/">
+                      <div ng-messages="myForm.tw_handle.$error" md-auto-hide="false">
+                        <div ng-message="required" translate>Twitter Handle required</div>
+                        <div ng-message="pattern" translate>Invalid Twitter Handle</div>
+                      </div>
+                    </md-input-container>
+                  </div>
+
+                  <div flex="100" ng-show="splash.backup_email">
+                    <md-input-container class="md-block">
+                      <label><translate>Email Capture Integration</translate></label>
+                      <md-select ng-model="splash.newsletter_type" ng-change="updateNews()">
+                        <md-option ng-repeat="type in newsletter_types" value="{{ type.value }}">
+                          {{type.key}}
+                        </md-option>
+                      </md-select>
+                    </md-input-container>
+                  </div>
+
+                </div>
+              </md-card-content>
+            </md-card>
+          </div>
+
         </md-content>
       </md-tab-body>
     </md-tab>
@@ -649,7 +759,6 @@
       </md-tab-body>
     </md-tab>
 
-
     <md-tab id="tab4" ng-disabled="data.secondLocked">
       <md-tab-label>Advanced</md-tab-label>
       <md-tab-body>
@@ -743,7 +852,7 @@
 
   </md-tabs>
 
-  <nd-content layout-padding>
+  <md-content layout-padding>
     <div ng-hide='splash.splash.updating' layout="row" layout-align="space-around center" class="splash-design-buttons">
       <splash-templates></splash-templates>
       <md-button ng-click="splash.save(splash.splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">

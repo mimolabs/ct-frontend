@@ -639,49 +639,13 @@ app.directive('splashDesignerForm', ['SplashPage', 'Location', '$compile', funct
 
     var init = function() {
       switch(attrs.access) {
-      case '1':
-        leform =
-          '<label>Enter the password to get online</label><br>'+
-          '<input type="password" class="design-input" disabled placeholder="What\'s the password"><br>' +
-          '<button class=\'btn\'>{{ btn_text }}</button>';
-        break;
-      case '2':
-        leform =
-          '<label>Enter your username</label><br>'+
-          '<input style="display:none" type="text" name="fakeinput"/>'+
-          '<input style="display:none" type="password" name="fakeinput"/>'+
-          '<input type="text" class="design-input" disabled placeholder="What\'s your username"><br>' +
-          '<label>Enter your password</label><br>'+
-          '<input type="password" class="design-input" disabled placeholder="What\'s the password"><br>' +
-          '<button class=\'btn\'>{{ btn_text }}</button>';
-          break;
-      case '3':
-        leform =
-          '<button class=\'btn\'>{{ btn_text }}</button>';
-          break;
-      case '7':
+      default:
         leform =
           '<span ng-show=\'splash.fb_login_on\'><a class=\'social des-facebook\'>Continue with Facebook</a><br></span>'+
           '<span ng-show=\'splash.g_login_on\'><a class=\'social des-google\'>Continue with Google</a><br></span>'+
           '<span ng-show=\'splash.tw_login_on\'><a class=\'social des-twitter\'>Continue with Twitter</a><br></span>'+
           '<span ng-show=\'splash.backup_email\'><a class=\'social des-email\'>Continue with Email</a><br></span>'+
           '<span ng-show=\'splash.backup_vouchers\'><a class=\'social des-voucher\'>Continue with Vouchers</a><br></span>';
-        break;
-      case '8':
-        leform =
-          '<p><small>Your other fields will show on the live page.</small></p>' +
-          '<label>Enter your username to get online</label><br>'+
-          '<input style="display:none" type="text" name="fakeinput"/>'+
-          '<input style="display:none" type="password" name="fakeinput"/>'+
-          '<input type="text" class="design-input" disabled placeholder="What\'s your username"><br>' +
-          '<label>Enter your password to gt online</label><br>'+
-          '<input type="password" class="design-input" disabled placeholder="What\'s the password"><br>' +
-          '<button class=\'btn\'>{{ btn_text }}</button>';
-          break;
-      default:
-        leform =
-          '<button>{{ btn_text }}</button>';
-          // default code block
       }
       var template = $compile('<div>' + leform + '</div>')(scope);
       var compileForm = function() {};

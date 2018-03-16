@@ -233,21 +233,21 @@
             <md-card class="b-bl">
               <md-card-title>
                 <md-card-title-text>
-                  <span class="md-headline" translate>Vouchers Used</span>
+                  <span class="md-headline" translate>SMS Numbers</span>
                 </md-card-title-text>
               </md-card-title>
               <md-table-container>
                 <table multiple md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
                   <thead md-head>
                     <tr md-row>
-                      <th md-column><span translate>Voucher</span></th>
+                      <th md-column><span translate>Number</span></th>
                       <th md-column><span translate>Options</span></th>
                     </tr>
                   </thead>
                   <tbody md-body>
                     <tr md-row ng-repeat="code in person.codes">
                       <td md-cell>
-                        {{code.username}}
+                        {{sms.number}}
                       </td>
                       <td md-cell>
                         <md-button aria-label="{{ 'Open Boxes Menu' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">

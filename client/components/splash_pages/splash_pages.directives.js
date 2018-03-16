@@ -378,8 +378,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
   return {
     link: link,
     scope: {
-      loading: '=',
-      fonts: '='
+      loading: '='
     },
     templateUrl: 'components/splash_pages/_designer.html'
   };

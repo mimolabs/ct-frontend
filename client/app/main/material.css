@@ -422,10 +422,11 @@ md-sidenav .divider {
   margin: 15px 0 10px 0;
 }
 
-md-sidenav.design-sidebar {
-  width: 350px;
+.design-sidebar {
   min-width: 350px;
-  max-width: 350px;
+  max-height: 100vh;
+  overflow: scroll;
+  position:relative;
 }
 
 md-sidenav.md-sidenav-right ul {

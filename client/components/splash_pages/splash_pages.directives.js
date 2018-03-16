@@ -401,12 +401,22 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
 //    };
 // }]);
 
-app.directive('designMenu', ['designer', function(designer) {
+app.directive('designMenu', ['designer', 'gettextCatalog', 'menu', function(designer, gettextCatalog, menu) {
   return {
     link: function(scope, element, attrs) {
       attrs.$observe('ver', function(start) {
+        if (scope.splash.walled_gardens && scope.splash.walled_gardens.length) {
+          scope.splash.walled_gardens_array = scope.splash.walled_gardens.split(',');
+        } else {
+          scope.splash.walled_gardens_array = [];
+        }
         if (start !== '') {
           scope.splash = designer;
+          scope.access_restrict = [{ key: gettextCatalog.getString('Off'), value: 'none'}, {key: gettextCatalog.getString('Periodic'), value: 'periodic'}, {key: gettextCatalog.getString('Data Downloaded'), value: 'data' }, {key: gettextCatalog.getString('Timed Access'), value: 'timed'}];
+          scope.integrations = [{ key: gettextCatalog.getString('Off'), value: 0 }, { key: 'MailChimp', value: 1}, {key: 'CampaignMonitor', value: 2}, {key: 'SendGrid', value: 4}, {key: gettextCatalog.getString('Internal only'), value: 3 }];
+          scope.slider = {};
+          scope.slider.download_speed = 1024;
+          scope.slider.upload_speed = 1024;
           scope.getContentUrl = function() {
             return 'components/splash_pages/_menu.html';
           };

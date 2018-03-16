@@ -1,5 +1,4 @@
 <form name="myForm">
-
   <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
 
     <md-tab id="tab1">
@@ -17,18 +16,18 @@
               <md-card-content>
                 <md-input-container class="md-block">
                   <label><translate>Splash Name</translate></label>
-                  <input ng-model="splash.splash_name" placeholder="{{ 'Name your splash page' | translate }}" type="text" name="splash_name" md-maxlength='100'>
+                  <input ng-model="splash.splash.splash_name" placeholder="{{ 'Name your splash page' | translate }}" type="text" name="splash_name" md-maxlength='100'>
                   <div ng-messages="myForm.splash_name.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 100 characters</div>
                   </div>
                 </md-input-container>
                 <div flex-gt-sm="100">
-                  <md-switch class="md-accent" ng-model="splash.active" aria-label="active">
-                    <span ng-show="splash.active" translate>Splash Enabled</span>
-                    <span ng-show="!splash.active" translate>Splash Disabled</span>
+                  <md-switch class="md-accent" ng-model="splash.splash.active" aria-label="active">
+                    <span ng-show="splash.splash.active" translate>Splash Enabled</span>
+                    <span ng-show="!splash.splash.active" translate>Splash Disabled</span>
                   </md-switch>
-                  <small ng-show="splash.active">Guests will be able to sign-in.</small>
-                  <small ng-show="!splash.active">Guests will not be able to sign-in.</small>
+                  <small ng-show="splash.splash.active">Guests will be able to sign-in.</small>
+                  <small ng-show="!splash.splash.active">Guests will not be able to sign-in.</small>
                 </div>
               </md-card-content>
             </md-card>
@@ -47,32 +46,32 @@
                     <p style="margin-top:0px;">What information do you want to capture?</p>
                   </div>
                   <div flex="50">
-                    <md-checkbox ng-model="splash.fb_login_on" name="fb_login_on" type="checkbox">
+                    <md-checkbox ng-model="splash.splash.fb_login_on" name="fb_login_on" type="checkbox">
                       <translate>Facebook</translate>
                     </md-checkbox>
                   </div>
                   <div flex="50">
-                    <md-checkbox ng-model="splash.g_login_on" name="g_login_on" type="checkbox">
+                    <md-checkbox ng-model="splash.splash.g_login_on" name="g_login_on" type="checkbox">
                       <translate>Google+</translate>
                     </md-checkbox>
                   </div>
                   <div flex="50">
-                    <md-checkbox ng-model="splash.tw_login_on" name="tw_login_on" type="checkbox">
+                    <md-checkbox ng-model="splash.splash.tw_login_on" name="tw_login_on" type="checkbox">
                       <translate>Twitter</translate>
                     </md-checkbox>
                   </div>
                   <div flex="50">
-                    <md-checkbox ng-model="splash.backup_email" name="backup_email" type="checkbox">
+                    <md-checkbox ng-model="splash.splash.backup_email" name="backup_email" type="checkbox">
                       <translate>Email</translate>
                     </md-checkbox>
                   </div>
-                  <div flex="100" ng-show="splash.fb_login_on">
-                    <md-switch class="md-accent" ng-model="splash.fb_checkin" aria-label="FB Checkin">
+                  <div flex="100" ng-show="splash.splash.fb_login_on">
+                    <md-switch class="md-accent" ng-model="splash.splash.fb_checkin" aria-label="FB Checkin">
                       <translate>Allow Facebook Checkin</translate>
                     </md-switch>
                     <md-input-container class="md-block">
                       <label translate>Facebook Page ID</label>
-                      <input ng-model="splash.fb_page_id" name="fb_page_id" placeholder="{{'Enter your Page Name/ID' | translate }}" type="text" ng-required="splash.fb_login_on" xxng-pattern="/^-?\d+\.?\d*$/">
+                      <input ng-model="splash.splash.fb_page_id" name="fb_page_id" placeholder="{{'Enter your Page Name/ID' | translate }}" type="text" ng-required="splash.splash.fb_login_on" xxng-pattern="/^-?\d+\.?\d*$/">
                       <div ng-messages="myForm.fb_page_id.$error" md-auto-hide="false">
                         <div ng-message="required" translate>Page ID required</div>
                         <div ng-message="pattern" translate>Invalid Page ID</div>
@@ -80,35 +79,25 @@
                     </md-input-container>
                   </div>
 
-                  <div flex="100" ng-show="splash.g_login_on">
+                  <div flex="100" ng-show="splash.splash.g_login_on">
                     <md-input-container class="md-block">
                       <label>Google Page ID</label>
-                      <input ng-model="splash.g_page_id" name="g_page_id" ng-class="{ 'input-error' : myForm.g_page_id.$error.required }" placeholder="{{ 'Enter your Google Page ID' | translate }}" type="text" ng-required="splash.g_login_on">
+                      <input ng-model="splash.splash.g_page_id" name="g_page_id" ng-class="{ 'input-error' : myForm.g_page_id.$error.required }" placeholder="{{ 'Enter your Google Page ID' | translate }}" type="text" ng-required="splash.splash.g_login_on">
                       <div ng-messages="myForm.g_page_id.$error" md-auto-hide="false">
-                        <div ng-message="md-maxlength">Page ID required.</div>
+                        <div ng-message="required" translate>Page ID required</div>
+                        <div ng-message="pattern" translate>Invalid Page ID</div>
                       </div>
                     </md-input-container>
                   </div>
 
-                  <div flex="100" ng-show="splash.tw_login_on">
+                  <div flex="100" ng-show="splash.splash.tw_login_on">
                     <md-input-container class="md-block">
                       <label translate>Twitter Handle</label>
-                      <input ng-model="splash.tw_handle" name="tw_handle" placeholder="{{'Enter your Twitter handle' | translate }}" type="text" ng-required="splash.tw_login_on" xxng-pattern="/^-?\d+\.?\d*$/">
+                      <input ng-model="splash.splash.tw_handle" name="tw_handle" placeholder="{{'Enter your Twitter handle' | translate }}" type="text" ng-required="splash.splash.tw_login_on" xxng-pattern="/^-?\d+\.?\d*$/">
                       <div ng-messages="myForm.tw_handle.$error" md-auto-hide="false">
                         <div ng-message="required" translate>Twitter Handle required</div>
                         <div ng-message="pattern" translate>Invalid Twitter Handle</div>
                       </div>
-                    </md-input-container>
-                  </div>
-
-                  <div flex="100" ng-show="splash.backup_email">
-                    <md-input-container class="md-block">
-                      <label><translate>Email Capture Integration</translate></label>
-                      <md-select ng-model="splash.newsletter_type" ng-change="updateNews()">
-                        <md-option ng-repeat="type in newsletter_types" value="{{ type.value }}">
-                          {{type.key}}
-                        </md-option>
-                      </md-select>
                     </md-input-container>
                   </div>
 
@@ -132,7 +121,7 @@
                   <div flex="100">
                     <md-input-container class="md-block">
                       <label><translate>Redirect URL</translate></label>
-                      <input ng-model="splash.success_url" placeholder="http://my-site.com/awesome" type='url' name="success_url" ng-maximum='255'></input>
+                      <input ng-model="splash.splash.success_url" placeholder="http://my-site.com/awesome" type='url' name="success_url" ng-maximum='255'></input>
                       <div ng-messages="myForm.success_url.$error">
                         <div ng-message="max" translate>Must be less than 255 chars.</div>
                         <div ng-message="url" translate>Must be a valid URL, including http(s).</div>
@@ -155,25 +144,25 @@
                 <div layout="column" layout-gt-sm="row" layout-wrap>
                   <div flex-gt-sm="100">
                     <div ng-hide="customSpeeds">
-                      <translate>Download Speed {{ (splash.download_speed / 1024) | number }}Mbps</translate>
-                      <md-slider md-discrete ng-model="splash.download_speed" step="256" min="0" max="49134" aria-label="download">
+                      <translate>Download Speed {{ (splash.splash.download_speed / 1024) | number }}Mbps</translate>
+                      <md-slider md-discrete ng-model="splash.splash.download_speed" step="256" min="0" max="49134" aria-label="download">
                       </md-slider>
 
-                      <translate>Upload Speed {{ (splash.upload_speed / 1024) | number }}Mbps</translate>
-                      <md-slider md-discrete ng-model="splash.upload_speed" step="256" min="0" max="49134" aria-label="upload">
+                      <translate>Upload Speed {{ (splash.splash.upload_speed / 1024) | number }}Mbps</translate>
+                      <md-slider md-discrete ng-model="splash.splash.upload_speed" step="256" min="0" max="49134" aria-label="upload">
                       </md-slider>
                     </div>
                     <div ng-if="customSpeeds" layout="row">
                       <md-input-container class="md-block">
-                        <label for="splash.download_speed"><translate>Download {{ splash.download_speed | mbps }}</translate></label>
-                        <input name="download" type="number" min="0" ng-model="splash.download_speed"></input>
+                        <label for="splash.splash.download_speed"><translate>Download {{ splash.download_speed | mbps }}</translate></label>
+                        <input name="download" type="number" min="0" ng-model="splash.splash.download_speed"></input>
                         <div ng-messages="myForm.download.$error">
                           <div ng-message="min" translate>Must be greater than or equal to 0.</div>
                         </div>
                       </md-input-container>
                       <md-input-container class="md-block">
-                        <label for="splash.upload_speed"><translate>Upload {{ splash.upload_speed | mbps }}</translate></label>
-                        <input name="upload" type="number" min="0" ng-model="splash.upload_speed"></input>
+                        <label for="splash.splash.upload_speed"><translate>Upload {{ splash.upload_speed | mbps }}</translate></label>
+                        <input name="upload" type="number" min="0" ng-model="splash.splash.upload_speed"></input>
                         <div ng-messages="myForm.upload.$error">
                           <div ng-message="min" translate>Must be greater than or equal to 0.</div>
                         </div>
@@ -198,45 +187,31 @@
                   <div flex-gt-sm="100">
                     <p style="margin-top:0px;">Allow guests to only sign in during specific times of day.</p>
                     <md-input-container class="md-block" style="margin-top: 0px;">
-                      <md-switch ng-model="splash.access_restrict" ng-true-value="'periodic'" ng-false-value="'none'" style="margin: 0px">
-                        <span ng-show="splash.access_restrict === 'periodic'" translate>Enabled</span>
-                        <span ng-show="splash.access_restrict !== 'periodic'" translate>Disabled</span>
+                      <md-switch ng-model="splash.splash.access_restrict" ng-true-value="'periodic'" ng-false-value="'none'" style="margin: 0px">
+                        <span ng-show="splash.splash.access_restrict === 'periodic'" translate>Enabled</span>
+                        <span ng-show="splash.splash.access_restrict !== 'periodic'" translate>Disabled</span>
                       </md-switch>
                     </md-input-container>
-                    <md-radio-group ng-model="splash.access_restrict_period" layout="row" style="padding: 10px 0 20px 0;" ng-if="splash.access_restrict === 'timed' || splash.access_restrict === 'data'" ng-disabled="splash.access_restrict === 'none'">
-                      <md-radio-button value="daily" class="md-primary"><translate>Daily</translate></md-radio-button>
-                      <md-radio-button value="weekly"><translate>Weekly</translate></md-radio-button>
-                      <md-radio-button value="monthly"><translate>Monthly</translate></md-radio-button>
-                    </md-radio-group>
                   </div>
                   <div flex-gt-sm="100">
-                    <div layout="column" layout-gt-sm="row" layout-wrap ng-if="splash.access_restrict === 'periodic'">
+                    <div layout="column" layout-gt-sm="row" layout-wrap ng-if="splash.splash.access_restrict === 'periodic'">
                       <div flex-gt-sm="50">
                         <md-input-container class="md-block">
                           <label for="available_start"><translate>Start Time</translate></label>
-                          <input ng-model="splash.available_start" placeholder="{{ 'Start' | translate }}"  type='text' name="available_start" ng-pattern="/^([0-9]{2})\:([0-9]{2})$/">
+                          <input ng-model="splash.splash.available_start" placeholder="{{ 'Start' | translate }}"  type='text' name="available_start" ng-pattern="/^([0-9]{2})\:([0-9]{2})$/">
                         </md-input-container>
                       </div>
                       <div flex-gt-sm="50">
                         <md-input-container class="md-block">
                           <label for="available_start"><translate>End Time</translate></label>
-                          <input ng-model="splash.available_end" placeholder="{{ 'End' | translate }}" type='text' name="available_end" ng-pattern="/^([0-9]{2})\:([0-9]{2})$/">
+                          <input ng-model="splash.splash.available_end" placeholder="{{ 'End' | translate }}" type='text' name="available_end" ng-pattern="/^([0-9]{2})\:([0-9]{2})$/">
                         </md-input-container>
                       </div>
                       <div style="margin-top: -30px;">
                         <p><small><translate>Allowed Days</translate></small></p>
-                        <day-selector active="true" days="splash.available_days" array="splash.periodic_days" layout="row" layout-wrap layout-align="space-between center"></day-selector>
+                        <day-selector active="true" days="splash.splash.available_days" array="splash.splash.periodic_days" layout="row" layout-wrap layout-align="space-between center"></day-selector>
                       </div>
                       <p translate>Set the start and end times to 00:00 to allow access all day</p>
-                    </div>
-                    <div layout="column">
-                      <md-input-container class="md-block" ng-if="splash.access_restrict === 'timed' || splash.access_restrict === 'data'">
-                        <label>
-                          <md-icon md-font-icon="star">stars</md-icon>
-                          <span translate>Over-Usage Message</span>
-                        </label>
-                        <textarea rows=3 ng-model="splash.quota_message" placeholder="{{ 'Message displayed when a customer goes over-limit.' | translate }}" rows="3" ng-disabled="splash.access_restrict === 'periodic'"></textarea>
-                      </md-input-container>
                     </div>
                   </div>
                 </div>
@@ -244,6 +219,45 @@
             </md-card>
           </div>
 
+          <md-button class="md-no-style" ng-click="splash.toggle('walledGarden')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('walledGarden') ? "up" : "down" }}</md-icon>
+            <translate>Walled Garden</translate>
+          </md-button>
+
+          <div ng-show="splash.isOpen('walledGarden')" id="walledGarden" class="menu-toggle-list" layout="column">
+            <md-card>
+              <md-card-content>
+                <md-input-container class="md-block">
+                  <label><translate>Walled Gardens</translate></label>
+                  <md-chips
+                    ng-model="splash.splash.walled_gardens_array"
+                    placeholder="{{ 'Enter a URL' | translate }}"
+                    delete-button-label="{{ 'Remove URL' | translate }}"
+                    delete-hint="{{ 'Press delete to remove URL' | translate }}"
+                    secondary-placeholder="+URL"></md-chips>
+                    <div class="hint">Hit enter after each URL to save multiple addresses</div>
+                </md-input-container>
+            </md-card>
+          </div>
+
+          <md-button class="md-no-style" ng-click="splash.toggle('integrations')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('integrations') ? "up" : "down" }}</md-icon>
+            <translate>Integrations</translate>
+          </md-button>
+
+          <div ng-show="splash.isOpen('integrations')" id="integrations" class="menu-toggle-list" layout="column">
+            <md-card>
+              <md-card-content>
+                <md-input-container class="md-block">
+                  <label><translate>Integration Type</translate></label>
+                  <md-select ng-model="splash.newsletter_type" ng-change="updateNews()">
+                    <md-option ng-repeat="type in newsletter_types" value="{{ type.value }}">
+                      {{type.key}}
+                    </md-option>
+                  </md-select>
+                </md-input-container>
+            </md-card>
+          </div>
 
         </md-content>
       </md-tab-body>

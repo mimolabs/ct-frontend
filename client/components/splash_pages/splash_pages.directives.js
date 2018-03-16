@@ -259,7 +259,7 @@ app.directive('splashDesignerForm', ['SplashPage', 'Location', '$compile', funct
 
 }]);
 
-app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$route', '$routeParams', '$q', 'menu', 'designer', '$timeout', 'showToast', 'showErrors', '$rootScope', 'gettextCatalog', function(Location, SplashPage, SplashPageForm, $route, $routeParams, $q, menu, designer, $timeout, showToast, showErrors, $rootScope, gettextCatalog) {
+app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$route', '$routeParams', '$q', 'menu', '$timeout', 'showToast', 'showErrors', '$rootScope', 'gettextCatalog', function(Location, SplashPage, SplashPageForm, $route, $routeParams, $q, menu , $timeout, showToast, showErrors, $rootScope, gettextCatalog) {
 
   var link = function(scope,element,attrs) {
 
@@ -274,7 +274,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
         id: scope.splash.id,
       }).$promise.then(function(res) {
         scope.splash      = res.splash_page;
-        designer.splash   = scope.splash;
+        // designer.splash   = scope.splash;
         scope.uploadLogo  = (scope.splash.header_image_name === null && scope.splash.logo_file_name === null);
         $timeout(function() {
           menu.Designer = true;
@@ -286,27 +286,27 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       });
     };
 
-    designer.save = function(splash, form) {
-      scope.splash.updating = true;
-      SplashPage.update({
-        location_id: scope.location.slug,
-        id: scope.splash.id,
-        splash_page: splash
-      }).$promise.then(function(res) {
-        scope.splash.updating = undefined;
-        scope.splash = res.splash_page;
-        designer.splash = scope.splash;
-        if (form) {
-          form.$setPristine();
-        } else {
-          $route.reload();
-        }
-        showToast(gettextCatalog.getString('Layout successfully updated.'));
-      }, function(err) {
-        showErrors(err);
-        scope.splash.updating = undefined;
-      });
-    };
+    // designer.save = function(splash, form) {
+    //   scope.splash.updating = true;
+    //   SplashPage.update({
+    //     location_id: scope.location.slug,
+    //     id: scope.splash.id,
+    //     splash_page: splash
+    //   }).$promise.then(function(res) {
+    //     scope.splash.updating = undefined;
+    //     scope.splash = res.splash_page;
+    //     // designer.splash = scope.splash;
+    //     if (form) {
+    //       form.$setPristine();
+    //     } else {
+    //       $route.reload();
+    //     }
+    //     showToast(gettextCatalog.getString('Layout successfully updated.'));
+    //   }, function(err) {
+    //     showErrors(err);
+    //     scope.splash.updating = undefined;
+    //   });
+    // };
 
     scope.setTrans = function() {
       if (scope.nologo) {
@@ -332,38 +332,38 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       }
     };
 
-    designer.deleteBg = function(splash,form) {
-      splash.background_image_name = '';
-      designer.save(splash,form);
-    };
+    // designer.deleteBg = function(splash,form) {
+    //   splash.background_image_name = '';
+    //   designer.save(splash,form);
+    // };
 
-    designer.deleteAd = function(splash,form) {
-      splash.popup_image = '';
-      designer.save(splash,form);
-    };
+    // designer.deleteAd = function(splash,form) {
+    //   splash.popup_image = '';
+    //   designer.save(splash,form);
+    // };
 
-    designer.back = function() {
-      window.history.back();
-    };
+    // designer.back = function() {
+    //   window.history.back();
+    // };
 
-    designer.preview = function() {
-      window.open('http://app.my-wifi.co/'+scope.splash.unique_id+'?cmd=login&mac=FF-FF-FF-FF-FF-FF&apname='+scope.splash.preview_mac+'&vcname=instant-C6:3C:E8','winname','directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1000,height=800');
+    // designer.preview = function() {
+    //   window.open('http://app.my-wifi.co/'+scope.splash.unique_id+'?cmd=login&mac=FF-FF-FF-FF-FF-FF&apname='+scope.splash.preview_mac+'&vcname=instant-C6:3C:E8','winname','directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1000,height=800');
 
-    };
+    // };
 
-    designer.toggle = function(section) {
-      menu.toggleSelectSection(section);
-    };
+    // designer.toggle = function(section) {
+    //   menu.toggleSelectSection(section);
+    // };
 
-    designer.isOpen = function(section) {
-      return menu.isSectionSelected(section);
-    };
+    // designer.isOpen = function(section) {
+    //   return menu.isSectionSelected(section);
+    // };
 
-    designer.editSettings = function () {
-      window.location = window.location.href.replace('/design','');
-    };
+    // designer.editSettings = function () {
+    //   window.location = window.location.href.replace('/design','');
+    // };
 
-    designer.fonts = [
+    scope.fonts = [
       '"Helvetica Neue",sans-serif', 'Arial, "Helvetica Neue", Helvetica, sans-serif', 'Baskerville, "Times New Roman", Times, serif', 'Century Gothic", "Apple Gothic", sans-serif"', '"Copperplate Light", "Copperplate Gothic Light", serif', '"Courier New", Courier, monospace, Futura, "Century Gothic", AppleGothic, sans-serif"', 'Garamond, "Hoefler Text", "Times New Roman", Times, serif"', 'Geneva, "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", Verdana, sans-serif', 'Georgia, Palatino, "Palatino Linotype", Times, "Times New Roman", serif', 'Helvetica, Arial, sans-serif', '"Helvetica Neue", Arial, Helvetica, sans-serif', 'Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif"', '"Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif', '"Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif"', 'Verdana, Geneva, Tahoma, sans-serif', '"Deck Light"'];
 
     $rootScope.$on('$routeChangeStart', function (event, next, current) {

@@ -424,6 +424,7 @@ app.directive('locationSplashPagesShow', ['SplashPage', 'Location', 'Auth', '$ro
         // }
 
         scope.access_types = results.access_types;
+
         scope.access_name();
 
         scope.networks = results.networks;

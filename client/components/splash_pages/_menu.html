@@ -11,23 +11,23 @@
             <translate>Details</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('details')" id="details" class="menu-toggle-list" layout="column">
+          <div iiing-showxxxx="splash.isOpen('details')" id="details" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">
                   <label><translate>Splash Name</translate></label>
-                  <input ng-model="splash.splash.splash_name" placeholder="{{ 'Name your splash page' | translate }}" type="text" name="splash_name" md-maxlength='100'>
+                  <input ng-model="splash_name" placeholder="{{ 'Name your splash page' | translate }}" type="text" name="splash_name" md-maxlength='100'>
                   <div ng-messages="myForm.splash_name.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 100 characters</div>
                   </div>
                 </md-input-container>
                 <div flex-gt-sm="100">
-                  <md-switch class="md-accent" ng-model="splash.splash.active" aria-label="active">
-                    <span ng-show="splash.splash.active" translate>Splash Enabled</span>
-                    <span ng-show="!splash.splash.active" translate>Splash Disabled</span>
+                  <md-switch class="md-accent" ng-model="splash.active" aria-label="active">
+                    <span ng-showxxxx="splash.active" translate>Splash Enabled</span>
+                    <span ng-showxxxx="!splash.active" translate>Splash Disabled</span>
                   </md-switch>
-                  <small ng-show="splash.splash.active">Guests will be able to sign-in.</small>
-                  <small ng-show="!splash.splash.active">Guests will not be able to sign-in.</small>
+                  <small ng-showxxxx="splash.active">Guests will be able to sign-in.</small>
+                  <small ng-showxxxx="!splash.active">Guests will not be able to sign-in.</small>
                 </div>
               </md-card-content>
             </md-card>
@@ -38,7 +38,7 @@
             <translate>Login Type</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('loginType')" id="loginType" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('loginType')" id="loginType" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -46,32 +46,32 @@
                     <p style="margin-top:0px;">What information do you want to capture?</p>
                   </div>
                   <div flex="50">
-                    <md-checkbox ng-model="splash.splash.fb_login_on" name="fb_login_on" type="checkbox">
+                    <md-checkbox ng-model="splash.fb_login_on" name="fb_login_on" type="checkbox">
                       <translate>Facebook</translate>
                     </md-checkbox>
                   </div>
                   <div flex="50">
-                    <md-checkbox ng-model="splash.splash.g_login_on" name="g_login_on" type="checkbox">
+                    <md-checkbox ng-model="splash.g_login_on" name="g_login_on" type="checkbox">
                       <translate>Google+</translate>
                     </md-checkbox>
                   </div>
                   <div flex="50">
-                    <md-checkbox ng-model="splash.splash.tw_login_on" name="tw_login_on" type="checkbox">
+                    <md-checkbox ng-model="splash.tw_login_on" name="tw_login_on" type="checkbox">
                       <translate>Twitter</translate>
                     </md-checkbox>
                   </div>
                   <div flex="50">
-                    <md-checkbox ng-model="splash.splash.backup_email" name="backup_email" type="checkbox">
+                    <md-checkbox ng-model="splash.backup_email" name="backup_email" type="checkbox">
                       <translate>Email</translate>
                     </md-checkbox>
                   </div>
-                  <div flex="100" ng-show="splash.splash.fb_login_on">
-                    <md-switch class="md-accent" ng-model="splash.splash.fb_checkin" aria-label="FB Checkin">
+                  <div flex="100" ng-showxxxx="splash.fb_login_on">
+                    <md-switch class="md-accent" ng-model="splash.fb_checkin" aria-label="FB Checkin">
                       <translate>Allow Facebook Checkin</translate>
                     </md-switch>
                     <md-input-container class="md-block">
                       <label translate>Facebook Page ID</label>
-                      <input ng-model="splash.splash.fb_page_id" name="fb_page_id" placeholder="{{'Enter your Page Name/ID' | translate }}" type="text" ng-required="splash.splash.fb_login_on" xxng-pattern="/^-?\d+\.?\d*$/">
+                      <input ng-model="splash.fb_page_id" name="fb_page_id" placeholder="{{'Enter your Page Name/ID' | translate }}" type="text" ng-required="splash.fb_login_on" xxng-pattern="/^-?\d+\.?\d*$/">
                       <div ng-messages="myForm.fb_page_id.$error" md-auto-hide="false">
                         <div ng-message="required" translate>Page ID required</div>
                         <div ng-message="pattern" translate>Invalid Page ID</div>
@@ -79,10 +79,10 @@
                     </md-input-container>
                   </div>
 
-                  <div flex="100" ng-show="splash.splash.g_login_on">
+                  <div flex="100" ng-showxxxx="splash.g_login_on">
                     <md-input-container class="md-block">
                       <label>Google Page ID</label>
-                      <input ng-model="splash.splash.g_page_id" name="g_page_id" ng-class="{ 'input-error' : myForm.g_page_id.$error.required }" placeholder="{{ 'Enter your Google Page ID' | translate }}" type="text" ng-required="splash.splash.g_login_on">
+                      <input ng-model="splash.g_page_id" name="g_page_id" ng-class="{ 'input-error' : myForm.g_page_id.$error.required }" placeholder="{{ 'Enter your Google Page ID' | translate }}" type="text" ng-required="splash.g_login_on">
                       <div ng-messages="myForm.g_page_id.$error" md-auto-hide="false">
                         <div ng-message="required" translate>Page ID required</div>
                         <div ng-message="pattern" translate>Invalid Page ID</div>
@@ -90,10 +90,10 @@
                     </md-input-container>
                   </div>
 
-                  <div flex="100" ng-show="splash.splash.tw_login_on">
+                  <div flex="100" ng-showxxxx="splash.tw_login_on">
                     <md-input-container class="md-block">
                       <label translate>Twitter Handle</label>
-                      <input ng-model="splash.splash.tw_handle" name="tw_handle" placeholder="{{'Enter your Twitter handle' | translate }}" type="text" ng-required="splash.splash.tw_login_on" xxng-pattern="/^-?\d+\.?\d*$/">
+                      <input ng-model="splash.tw_handle" name="tw_handle" placeholder="{{'Enter your Twitter handle' | translate }}" type="text" ng-required="splash.tw_login_on" xxng-pattern="/^-?\d+\.?\d*$/">
                       <div ng-messages="myForm.tw_handle.$error" md-auto-hide="false">
                         <div ng-message="required" translate>Twitter Handle required</div>
                         <div ng-message="pattern" translate>Invalid Twitter Handle</div>
@@ -111,7 +111,7 @@
             <translate>Redirect URL</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('redirectUrl')" id="redirectUrl" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('redirectUrl')" id="redirectUrl" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -121,7 +121,7 @@
                   <div flex="100">
                     <md-input-container class="md-block">
                       <label><translate>Redirect URL</translate></label>
-                      <input ng-model="splash.splash.success_url" placeholder="http://my-site.com/awesome" type='url' name="success_url" ng-maximum='255'></input>
+                      <input ng-model="splash.success_url" placeholder="http://my-site.com/awesome" type='url' name="success_url" ng-maximum='255'></input>
                       <div ng-messages="myForm.success_url.$error">
                         <div ng-message="max" translate>Must be less than 255 chars.</div>
                         <div ng-message="url" translate>Must be a valid URL, including http(s).</div>
@@ -138,31 +138,31 @@
             <translate>Speed Limits</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('speedLimits')" id="speedLimits" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('speedLimits')" id="speedLimits" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="column" layout-gt-sm="row" layout-wrap>
                   <div flex-gt-sm="100">
                     <div ng-hide="customSpeeds">
-                      <translate>Download Speed {{ (splash.splash.download_speed / 1024) | number }}Mbps</translate>
-                      <md-slider md-discrete ng-model="splash.splash.download_speed" step="256" min="0" max="49134" aria-label="download">
+                      <translate>Download Speed {{ (splash.download_speed / 1024) | number }}Mbps</translate>
+                      <md-slider md-discrete ng-model="splash.download_speed" step="256" min="0" max="49134" aria-label="download">
                       </md-slider>
 
-                      <translate>Upload Speed {{ (splash.splash.upload_speed / 1024) | number }}Mbps</translate>
-                      <md-slider md-discrete ng-model="splash.splash.upload_speed" step="256" min="0" max="49134" aria-label="upload">
+                      <translate>Upload Speed {{ (splash.upload_speed / 1024) | number }}Mbps</translate>
+                      <md-slider md-discrete ng-model="splash.upload_speed" step="256" min="0" max="49134" aria-label="upload">
                       </md-slider>
                     </div>
                     <div ng-if="customSpeeds" layout="row">
                       <md-input-container class="md-block">
-                        <label for="splash.splash.download_speed"><translate>Download {{ splash.download_speed | mbps }}</translate></label>
-                        <input name="download" type="number" min="0" ng-model="splash.splash.download_speed"></input>
+                        <label for="splash.download_speed"><translate>Download {{ splash.download_speed | mbps }}</translate></label>
+                        <input name="download" type="number" min="0" ng-model="splash.download_speed"></input>
                         <div ng-messages="myForm.download.$error">
                           <div ng-message="min" translate>Must be greater than or equal to 0.</div>
                         </div>
                       </md-input-container>
                       <md-input-container class="md-block">
-                        <label for="splash.splash.upload_speed"><translate>Upload {{ splash.upload_speed | mbps }}</translate></label>
-                        <input name="upload" type="number" min="0" ng-model="splash.splash.upload_speed"></input>
+                        <label for="splash.upload_speed"><translate>Upload {{ splash.upload_speed | mbps }}</translate></label>
+                        <input name="upload" type="number" min="0" ng-model="splash.upload_speed"></input>
                         <div ng-messages="myForm.upload.$error">
                           <div ng-message="min" translate>Must be greater than or equal to 0.</div>
                         </div>
@@ -180,36 +180,36 @@
             <translate>Time of Day</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('timeOfDay')" id="timeOfDay" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('timeOfDay')" id="timeOfDay" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
                   <div flex-gt-sm="100">
                     <p style="margin-top:0px;">Allow guests to only sign in during specific times of day.</p>
                     <md-input-container class="md-block" style="margin-top: 0px;">
-                      <md-switch ng-model="splash.splash.access_restrict" ng-true-value="'periodic'" ng-false-value="'none'" style="margin: 0px">
-                        <span ng-show="splash.splash.access_restrict === 'periodic'" translate>Enabled</span>
-                        <span ng-show="splash.splash.access_restrict !== 'periodic'" translate>Disabled</span>
+                      <md-switch ng-model="splash.access_restrict" ng-true-value="'periodic'" ng-false-value="'none'" style="margin: 0px">
+                        <span ng-showxxxx="splash.access_restrict === 'periodic'" translate>Enabled</span>
+                        <span ng-showxxxx="splash.access_restrict !== 'periodic'" translate>Disabled</span>
                       </md-switch>
                     </md-input-container>
                   </div>
                   <div flex-gt-sm="100">
-                    <div layout="column" layout-gt-sm="row" layout-wrap ng-if="splash.splash.access_restrict === 'periodic'">
+                    <div layout="column" layout-gt-sm="row" layout-wrap ng-if="splash.access_restrict === 'periodic'">
                       <div flex-gt-sm="50">
                         <md-input-container class="md-block">
                           <label for="available_start"><translate>Start Time</translate></label>
-                          <input ng-model="splash.splash.available_start" placeholder="{{ 'Start' | translate }}"  type='text' name="available_start" ng-pattern="/^([0-9]{2})\:([0-9]{2})$/">
+                          <input ng-model="splash.available_start" placeholder="{{ 'Start' | translate }}"  type='text' name="available_start" ng-pattern="/^([0-9]{2})\:([0-9]{2})$/">
                         </md-input-container>
                       </div>
                       <div flex-gt-sm="50">
                         <md-input-container class="md-block">
                           <label for="available_start"><translate>End Time</translate></label>
-                          <input ng-model="splash.splash.available_end" placeholder="{{ 'End' | translate }}" type='text' name="available_end" ng-pattern="/^([0-9]{2})\:([0-9]{2})$/">
+                          <input ng-model="splash.available_end" placeholder="{{ 'End' | translate }}" type='text' name="available_end" ng-pattern="/^([0-9]{2})\:([0-9]{2})$/">
                         </md-input-container>
                       </div>
                       <div style="margin-top: -30px;">
                         <p><small><translate>Allowed Days</translate></small></p>
-                        <day-selector active="true" days="splash.splash.available_days" array="splash.splash.periodic_days" layout="row" layout-wrap layout-align="space-between center"></day-selector>
+                        <day-selector active="true" days="splash.available_days" array="splash.periodic_days" layout="row" layout-wrap layout-align="space-between center"></day-selector>
                       </div>
                       <p translate>Set the start and end times to 00:00 to allow access all day</p>
                     </div>
@@ -224,13 +224,13 @@
             <translate>Walled Garden</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('walledGarden')" id="walledGarden" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('walledGarden')" id="walledGarden" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">
                   <label><translate>Walled Gardens</translate></label>
                   <md-chips
-                    ng-model="splash.splash.walled_gardens_array"
+                    ng-model="splash.walled_gardens_array"
                     placeholder="{{ 'Enter a URL' | translate }}"
                     delete-button-label="{{ 'Remove URL' | translate }}"
                     delete-hint="{{ 'Press delete to remove URL' | translate }}"
@@ -245,13 +245,13 @@
             <translate>Integrations</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('integrations')" id="integrations" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('integrations')" id="integrations" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">
                   <label><translate>Integration Type</translate></label>
                   <md-select ng-model="splash.newsletter_type" ng-change="updateNews()">
-                    <md-option ng-repeat="type in newsletter_types" value="{{ type.value }}">
+                    <md-option ng-repeat="type in integrations" value="{{ type.value }}">
                       {{type.key}}
                     </md-option>
                   </md-select>
@@ -273,7 +273,7 @@
             <translate>Theme</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('theme')" id="theme" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('theme')" id="theme" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -282,7 +282,7 @@
                       <label>
                         <translate>Body Background Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.body_background_colour"></color-picker>
+                      <color-picker ng-model="splash.body_background_colour"></color-picker>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -290,7 +290,7 @@
                       <label>
                         <translate>Container Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.container_colour"></color-picker>
+                      <color-picker ng-model="splash.container_colour"></color-picker>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -298,12 +298,12 @@
                       <label>
                         <translate>Border Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.border_colour"></color-picker>
+                      <color-picker ng-model="splash.border_colour"></color-picker>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
-                    <translate>Opacity {{ splash.splash.container_transparency * 100}}%</translate>
-                    <md-slider flex min="0" max="1" step="0.1" ng-model="splash.splash.container_transparency" aria-label="red">
+                    <translate>Opacity {{ splash.container_transparency * 100}}%</translate>
+                    <md-slider flex min="0" max="1" step="0.1" ng-model="splash.container_transparency" aria-label="red">
                     </md-slider>
                   </div>
                 </div>
@@ -316,28 +316,28 @@
             <translate>Background Image</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('bg')" id="images" class="menu-toggle-list">
+          <div ng-showxxxx="splash.isOpen('bg')" id="images" class="menu-toggle-list">
             <md-card>
-              <img ng-show="splash.splash.background_image_name" src="{{splash.splash.background_image_name}}" class="md-card-image" alt="Background">
+              <img ng-showxxxx="splash.background_image_name" src="{{splash.background_image_name}}" class="md-card-image" alt="Background">
               <md-card-content>
                 <p translate>
                   Upload a background image. Please note, large images will delay page load times.
                 </p>
-                <md-input-container class="md-block" ng-show="edit_bg_url">
+                <md-input-container class="md-block" ng-showxxxx="edit_bg_url">
                   <label>
                     <translate>Image URL</translate>
                   </label>
-                  <input type="text" ng-model="splash.splash.background_image_name"></input>
+                  <input type="text" ng-model="splash.background_image_name"></input>
                 </md-input-container>
                 <md-switch aria-label="{{ 'Switch 2' | translate }}" ng-click="edit_bg_url = !edit_bg_url" style="margin-bottom: -20px">
                   <span translate>Edit Background URL</span>
                 </md-switch>
               </md-card-content>
               <md-card-actions layout="row" layout-align="end center">
-                  <md-button ng-hide="edit_bg_url" class="md-warn" ng-disabled="!splash.splash.background_image_name" aria-label="{{ 'delete' | translate }}" ng-click="splash.deleteBg(splash.splash,myForm)">
+                  <md-button ng-hide="edit_bg_url" class="md-warn" ng-disabled="!splash.background_image_name" aria-label="{{ 'delete' | translate }}" ng-click="splash.deleteBg(splash,myForm)">
                     <translate>Delete</translate>
                   </md-button>
-                  <filepicker ng-hide="edit_bg_url" attribute="splash.splash.background_image_name" type="10" uploading="splash.splash.bg_uploading"></filepicker>
+                  <filepicker ng-hide="edit_bg_url" attribute="splash.background_image_name" type="10" uploading="splash.bg_uploading"></filepicker>
               </md-card-actions>
             </md-card>
           </div>
@@ -347,51 +347,51 @@
             <translate>Header Image</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('logo')" id="images" class="menu-toggle-list">
+          <div ng-showxxxx="splash.isOpen('logo')" id="images" class="menu-toggle-list">
             <md-card>
-              <img ng-show="splash.splash.header_image_type == 1 && splash.splash.logo_file_name" src="{{splash.splash.logo_file_name}}" class="md-card-image" alt="Background">
-              <img ng-show="splash.splash.header_image_type == 2 && splash.splash.header_image_name" src="{{splash.splash.header_image_name}}" class="md-card-image" alt="Background">
+              <img ng-showxxxx="splash.header_image_type == 1 && splash.logo_file_name" src="{{splash.logo_file_name}}" class="md-card-image" alt="Background">
+              <img ng-showxxxx="splash.header_image_type == 2 && splash.header_image_name" src="{{splash.header_image_name}}" class="md-card-image" alt="Background">
               <md-card-content>
                 <p>
-                  <span ng-show="splash.splash.header_image_type == 1" translate>
+                  <span ng-showxxxx="splash.header_image_type == 1" translate>
                     Upload your logo which must be 200px by 106px.
                   </span>
-                  <span ng-show="splash.splash.header_image_type == 2" translate>
+                  <span ng-showxxxx="splash.header_image_type == 2" translate>
                     Upload your banner image which must be 851px by 315px.
                   </span>
                 </p>
-                <md-radio-group ng-model="splash.splash.header_image_type" layout="row" style="padding: 0 0 20px 0">
+                <md-radio-group ng-model="splash.header_image_type" layout="row" style="padding: 0 0 20px 0">
                   <md-radio-button value="1" class="md-primary"><translate>Logo</translate></md-radio-button>
                   <md-radio-button value="2"><translate>Banner</translate></md-radio-button>
                 </md-radio-group>
-                <md-input-container class="md-block" ng-show="edit_image_url && splash.splash.header_image_type == 1">
+                <md-input-container class="md-block" ng-showxxxx="edit_image_url && splash.header_image_type == 1">
                   <label>
                     <translate>Image URL</translate>
                   </label>
-                  <input type="text" ng-model="splash.splash.logo_file_name" ng-if="splash.splash.header_image_type == 1"></input>
+                  <input type="text" ng-model="splash.logo_file_name" ng-if="splash.header_image_type == 1"></input>
                 </md-input-container>
-                <md-input-container class="md-block" ng-show="edit_image_url && splash.splash.header_image_type == 2">
+                <md-input-container class="md-block" ng-showxxxx="edit_image_url && splash.header_image_type == 2">
                   <label>
                     <translate>Banner URL</translate>
                   </label>
-                  <input type="text" ng-model="splash.splash.header_image_name"></input>
+                  <input type="text" ng-model="splash.header_image_name"></input>
                 </md-input-container>
-                <div ng-show="splash.splash.header_image_type == 1" class="btn-group">
-                  <md-radio-group ng-model="splash.splash.logo_position" layout="row">
+                <div ng-showxxxx="splash.header_image_type == 1" class="btn-group">
+                  <md-radio-group ng-model="splash.logo_position" layout="row">
                     <md-radio-button value="left" class="md-primary"><translate>Left</translate></md-radio-button>
                     <md-radio-button value="center"><translate>Center</translate></md-radio-button>
                     <md-radio-button value="right"><translate>Right</translate></md-radio-button>
                   </md-radio-group>
                 </div>
                 <md-switch aria-label="{{ 'Switch 1' | translate }}" ng-click="edit_image_url = !edit_image_url" style="margin-bottom: -20px">
-                  <span ng-if="splash.splash.header_image_type == 1" translate>Edit Logo URL</span>
-                  <span ng-if="splash.splash.header_image_type != 1" translate>Edit Banner URL</span>
+                  <span ng-if="splash.header_image_type == 1" translate>Edit Logo URL</span>
+                  <span ng-if="splash.header_image_type != 1" translate>Edit Banner URL</span>
                 </md-switch>
               </md-card-content>
               <md-card-actions layout="row" layout-align="end center">
                 <span ng-hide="edit_image_url">
-                  <filepicker attribute="splash.splash.logo_file_name" type="{{ splash.splash.header_image_type }}" uploading="splash.splash.uploading" ng-if="splash.splash.header_image_type == 1"></filepicker>
-                  <filepicker attribute="splash.splash.header_image_name" type="{{ splash.splash.header_image_type }}" uploading="splash.splash.uploading" ng-if="splash.splash.header_image_type == 2"></filepicker>
+                  <filepicker attribute="splash.logo_file_name" type="{{ splash.header_image_type }}" uploading="splash.uploading" ng-if="splash.header_image_type == 1"></filepicker>
+                  <filepicker attribute="splash.header_image_name" type="{{ splash.header_image_type }}" uploading="splash.uploading" ng-if="splash.header_image_type == 2"></filepicker>
                 </span>
               </md-card-actions>
             </md-card>
@@ -402,7 +402,7 @@
             <translate>Typography</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('typography')" id="typography" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('typography')" id="typography" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -411,7 +411,7 @@
                       <label>
                         <translate>Font</translate>
                       </label>
-                      <md-select ng-model="splash.splash.font_family">
+                      <md-select ng-model="splash.font_family">
                         <md-option ng-repeat="font in splash.fonts" iivalue="{{state.abbrev}}">
                           {{font}}
                         </md-option>
@@ -423,7 +423,7 @@
                       <label>
                         <translate>H1 Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.heading_text_colour"></color-picker>
+                      <color-picker ng-model="splash.heading_text_colour"></color-picker>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -431,7 +431,7 @@
                       <label>
                         <translate>H1 Size</translate>
                       </label>
-                      <input type="text" ng-model="splash.splash.heading_text_size" required>
+                      <input type="text" ng-model="splash.heading_text_size" required>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -439,7 +439,7 @@
                       <label>
                         <translate>H2 Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.heading_2_text_colour"></color-picker>
+                      <color-picker ng-model="splash.heading_2_text_colour"></color-picker>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -447,7 +447,7 @@
                       <label>
                         <translate>H2 Size</translate>
                       </label>
-                      <input type="text" ng-model="splash.splash.heading_2_text_size" required>
+                      <input type="text" ng-model="splash.heading_2_text_size" required>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -455,7 +455,7 @@
                       <label>
                         <translate>H3 Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.heading_3_text_colour"></color-picker>
+                      <color-picker ng-model="splash.heading_3_text_colour"></color-picker>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -463,7 +463,7 @@
                       <label>
                         <translate>H3 Size</translate>
                       </label>
-                      <input type="text" ng-model="splash.splash.heading_3_text_size" required>
+                      <input type="text" ng-model="splash.heading_3_text_size" required>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -471,7 +471,7 @@
                       <label>
                         <translate>Body Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.body_text_colour"></color-picker>
+                      <color-picker ng-model="splash.body_text_colour"></color-picker>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -479,7 +479,7 @@
                       <label>
                         <translate>Body Size</translate>
                       </label>
-                      <input type="text" ng-model="splash.splash.body_font_size" required>
+                      <input type="text" ng-model="splash.body_font_size" required>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -487,7 +487,7 @@
                       <label>
                         <translate>Link Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.link_colour"></color-picker>
+                      <color-picker ng-model="splash.link_colour"></color-picker>
                     </md-input-container>
                   </div>
                 </div>
@@ -500,7 +500,7 @@
             <translate>Login Button</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('btn')" id="btn" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('btn')" id="btn" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -509,7 +509,7 @@
                       <label>
                         <translate>Button Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.button_colour"></color-picker>
+                      <color-picker ng-model="splash.button_colour"></color-picker>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -517,7 +517,7 @@
                       <label>
                         <translate>Border Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.button_border_colour"></color-picker>
+                      <color-picker ng-model="splash.button_border_colour"></color-picker>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -525,7 +525,7 @@
                       <label>
                         <translate>Text Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.btn_font_colour"></color-picker>
+                      <color-picker ng-model="splash.btn_font_colour"></color-picker>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="50">
@@ -533,7 +533,7 @@
                       <label>
                         <translate>Font Size</translate>
                       </label>
-                      <input type="text" ng-model="splash.splash.btn_font_size" required>
+                      <input type="text" ng-model="splash.btn_font_size" required>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-xs="50">
@@ -541,14 +541,14 @@
                       <label>
                         <translate>Corner Radius</translate>
                       </label>
-                      <input type="text" ng-model="splash.splash.button_radius" required>
+                      <input type="text" ng-model="splash.button_radius" required>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-xs="100">
                     <md-input-container class="md-block" style="margin-top: 0px;">
-                      <md-switch ng-model="splash.splash.button_shadow" aria-label="button_shadow" style="margin: 0px 0 20px 0">
-                        <span ng-show="splash.splash.button_shadow == true" translate>Shadow Enabled</span>
-                        <span ng-show="splash.splash.button_shadow == false" translate>Shadow Disabled</span>
+                      <md-switch ng-model="splash.button_shadow" aria-label="button_shadow" style="margin: 0px 0 20px 0">
+                        <span ng-showxxxx="splash.button_shadow == true" translate>Shadow Enabled</span>
+                        <span ng-showxxxx="splash.button_shadow == false" translate>Shadow Disabled</span>
                       </md-switch>
                     </md-input-container>
                   </div>
@@ -562,7 +562,7 @@
             <translate>Input Fields</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('input')" id="input" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('input')" id="input" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -571,7 +571,7 @@
                       <label>
                         <translate>Border Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.input_border_colour"></color-picker>
+                      <color-picker ng-model="splash.input_border_colour"></color-picker>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -579,7 +579,7 @@
                       <label>
                         <translate>Background Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.input_background"></color-picker>
+                      <color-picker ng-model="splash.input_background"></color-picker>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -587,7 +587,7 @@
                       <label>
                         <translate>Text Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.input_text_colour"></color-picker>
+                      <color-picker ng-model="splash.input_text_colour"></color-picker>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-xs="50">
@@ -595,7 +595,7 @@
                       <label>
                         <translate>Height</translate>
                       </label>
-                      <input type="text" ng-model="splash.splash.input_height" required>
+                      <input type="text" ng-model="splash.input_height" required>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-xs="50">
@@ -603,7 +603,7 @@
                       <label>
                         <translate>Padding</translate>
                       </label>
-                      <input type="text" ng-model="splash.splash.input_padding" required>
+                      <input type="text" ng-model="splash.input_padding" required>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-xs="50">
@@ -611,7 +611,7 @@
                       <label>
                         <translate>Radius</translate>
                       </label>
-                      <input type="text" ng-model="splash.splash.input_border_radius" required>
+                      <input type="text" ng-model="splash.input_border_radius" required>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-xs="50">
@@ -619,7 +619,7 @@
                       <label>
                         <translate>Width</translate>
                       </label>
-                      <input type="text" ng-model="splash.splash.input_border_width" required>
+                      <input type="text" ng-model="splash.input_border_width" required>
                     </md-input-container>
                   </div>
                 </div>
@@ -632,7 +632,7 @@
             <translate>Container</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('container')" id="container" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('container')" id="container" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-title>
                 <md-card-title-text>
@@ -646,7 +646,7 @@
                       <label>
                         <translate>Width</translate>
                       </label>
-                      <input type="text" ng-model="splash.splash.container_width" required>
+                      <input type="text" ng-model="splash.container_width" required>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-xs="50">
@@ -654,7 +654,7 @@
                       <label>
                         <translate>Padding</translate>
                       </label>
-                      <input type="text" ng-model="splash.splash.container_inner_padding" required>
+                      <input type="text" ng-model="splash.container_inner_padding" required>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-xs="50">
@@ -662,19 +662,19 @@
                       <label>
                         <translate>Corner Radius</translate>
                       </label>
-                      <input type="text" ng-model="splash.splash.container_inner_radius" required>
+                      <input type="text" ng-model="splash.container_inner_radius" required>
                     </md-input-container>
                   </div>
                   <div flex="100" flex-gt-xs="100">
                     <md-input-container class="md-block" style="margin-top: 0px;">
-                      <md-switch ng-model="splash.splash.container_shadow" aria-label="container_shadow" style="margin: 0px 0 20px 0">
-                        <span ng-show="splash.splash.container_shadow == true" translate>Shadow Enabled</span>
-                        <span ng-show="splash.splash.container_shadow == false" translate>Shadow Disabled</span>
+                      <md-switch ng-model="splash.container_shadow" aria-label="container_shadow" style="margin: 0px 0 20px 0">
+                        <span ng-showxxxx="splash.container_shadow == true" translate>Shadow Enabled</span>
+                        <span ng-showxxxx="splash.container_shadow == false" translate>Shadow Disabled</span>
                       </md-switch>
                     </md-input-container>
                   </div>
                 </div>
-                <md-radio-group ng-model="splash.splash.container_text_align" layout="row">
+                <md-radio-group ng-model="splash.container_text_align" layout="row">
                   <md-radio-button value="left" class="md-primary"><translate>Left</translate></md-radio-button>
                   <md-radio-button value="center"><translate>Center</translate></md-radio-button>
                   <md-radio-button value="right"><translate>Right</translate></md-radio-button>
@@ -688,7 +688,7 @@
             <translate>CSS</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('css')" id="css" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('css')" id="css" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-title>
                 <md-card-title-text>
@@ -701,7 +701,7 @@
                   <label>
                     <translate>External CSS</translate>
                   </label>
-                  <input ng-model="splash.splash.external_css" placeholder="{{'External CSS' | translate }}" type='text' name="external_css" md-maxlength='255'></input>
+                  <input ng-model="splash.external_css" placeholder="{{'External CSS' | translate }}" type='text' name="external_css" md-maxlength='255'></input>
                   <div ng-messages="myForm.external_css.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
                   </div>
@@ -724,14 +724,14 @@
             <translate>Text</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('text')" id="text" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('text')" id="text" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">
                   <label>
                     <translate>Header Text</translate>
                   </label>
-                  <input type='text' ng-model="splash.splash.header_text" placeholder="{{'Location Header'|translate}}" name="header_text" md-maxlength='255'></input>
+                  <input type='text' ng-model="splash.header_text" placeholder="{{'Location Header'|translate}}" name="header_text" md-maxlength='255'></input>
                   <div ng-messages="myForm.header_text.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 250 characters.</div>
                   </div>
@@ -740,7 +740,7 @@
                   <label>
                     <translate>Body Text</translate>
                   </label>
-                  <textarea ng-model="splash.splash.info" placeholder="{{ 'Location Info'  | translate }}" type='text' rows=2 md-maxlength='250' name="info"></textarea>
+                  <textarea ng-model="splash.info" placeholder="{{ 'Location Info'  | translate }}" type='text' rows=2 md-maxlength='250' name="info"></textarea>
                   <div ng-messages="myForm.info.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 250 characters.</div>
                   </div>
@@ -749,7 +749,7 @@
                   <label>
                     <translate>Address</translate>
                   </label>
-                  <input ng-model="splash.splash.address" placeholder="{{ 'Address' | translate }}" type='text' rows=2 md-maxlength='100' name="address"/>
+                  <input ng-model="splash.address" placeholder="{{ 'Address' | translate }}" type='text' rows=2 md-maxlength='100' name="address"/>
                   <div ng-messages="myForm.address.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 100 characters.</div>
                   </div>
@@ -758,7 +758,7 @@
                   <label>
                     <translate>More Info</translate>
                   </label>
-                  <textarea ng-model="splash.splash.info_two" placeholder="{{'Location Info Two' | translate }}" type='text' name="info_two" md-maxlength='500' rows=3></textarea>
+                  <textarea ng-model="splash.info_two" placeholder="{{'Location Info Two' | translate }}" type='text' name="info_two" md-maxlength='500' rows=3></textarea>
                   <div ng-messages="myForm.info_two.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 500 characters.</div>
                   </div>
@@ -767,7 +767,7 @@
                   <label>
                     <translate>Button Text</translate>
                   </label>
-                  <input name="button_text" type="text" require md-maxlength="30" ng-model="splash.splash.btn_text" required>
+                  <input name="button_text" type="text" require md-maxlength="30" ng-model="splash.btn_text" required>
                   <div ng-messages="myForm.button_text.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 15 characters.</div>
                     <div ng-message="required" translate>Button text required.</div>
@@ -782,14 +782,14 @@
             <translate>Advertisement</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('adverts')" id="images" class="menu-toggle-list">
+          <div ng-showxxxx="splash.isOpen('adverts')" id="images" class="menu-toggle-list">
             <md-card>
-              <img ng-show="splash.splash.popup_image" src="{{splash.splash.popup_image}}" class="md-card-image" alt="Background">
+              <img ng-showxxxx="splash.popup_image" src="{{splash.popup_image}}" class="md-card-image" alt="Background">
               <md-card-title>
                 <md-card-title-text layout="row" layout-align="space-between center">
                   <span class="md-headline" translate>Popup Advert</span>
-                  <md-button ng-click="splash.splash.popup_demo = !splash.splash.popup_demo" aria-controls="adverts" class="md-icon-button {{ splash.splash.popup_demo ? 'md-accent' : '' }}">
-                    <md-icon md-font-icon="visibility">{{ splash.splash.popup_demo ? 'visibility' : 'visibility_off' }}</md-icon>
+                  <md-button ng-click="splash.popup_demo = !splash.popup_demo" aria-controls="adverts" class="md-icon-button {{ splash.popup_demo ? 'md-accent' : '' }}">
+                    <md-icon md-font-icon="visibility">{{ splash.popup_demo ? 'visibility' : 'visibility_off' }}</md-icon>
                   </md-button>
                 </md-card-title-text>
               </md-card-title>
@@ -801,9 +801,9 @@
                     </p>
                   </div>
                   <div flex="100" flex-gt-sm="100">
-                    <md-switch ng-model="splash.splash.popup_ad" aria-label="popup_ad" style="margin: 0px 0 20px 0" ng-show="splash.splash.popup_image">
-                      <span ng-show="splash.splash.popup_ad == true" translate>Popup Advert Enabled</span>
-                      <span ng-show="splash.splash.popup_ad == false" translate>Popup Advert Disabled</span>
+                    <md-switch ng-model="splash.popup_ad" aria-label="popup_ad" style="margin: 0px 0 20px 0" ng-showxxxx="splash.popup_image">
+                      <span ng-showxxxx="splash.popup_ad == true" translate>Popup Advert Enabled</span>
+                      <span ng-showxxxx="splash.popup_ad == false" translate>Popup Advert Disabled</span>
                     </md-switch>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -811,17 +811,17 @@
                       <label>
                         <translate>Background Colour</translate>
                       </label>
-                      <color-picker ng-model="splash.splash.popup_background_colour"></color-picker>
+                      <color-picker ng-model="splash.popup_background_colour"></color-picker>
                     </md-input-container>
                   </div>
                 </div>
               </md-card-content>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-warn" ng-disabled="!splash.splash.popup_image" aria-label="{{ 'delete' | translate }}" ng-click="splash.deleteAd(splash.splash,myForm)">
+                <md-button class="md-warn" ng-disabled="!splash.popup_image" aria-label="{{ 'delete' | translate }}" ng-click="splash.deleteAd(splash,myForm)">
                   <translate>Delete</translate>
                 </md-button>
                 <span ng-hide="edit_image_url">
-                  <filepicker attribute="splash.splash.popup_image" uploading="splash.splash.uploading"></filepicker>
+                  <filepicker attribute="splash.popup_image" uploading="splash.uploading"></filepicker>
                 </span>
               </md-card-actions>
             </md-card>
@@ -829,21 +829,21 @@
               <md-card-title>
                 <md-card-title-text layout="row" layout-align="space-between center">
                   <span class="md-headline" translate>Welcome Page</span>
-                  <md-button ng-click="splash.splash.welcome_demo = !splash.splash.welcome_demo" class="md-icon-button {{ splash.splash.welcome_demo ? 'md-accent' : '' }}">
-                    <md-icon md-font-icon="visibility">{{ splash.splash.welcome_demo ? 'visibility' : 'visibility_off' }}</md-icon>
+                  <md-button ng-click="splash.welcome_demo = !splash.welcome_demo" class="md-icon-button {{ splash.welcome_demo ? 'md-accent' : '' }}">
+                    <md-icon md-font-icon="visibility">{{ splash.welcome_demo ? 'visibility' : 'visibility_off' }}</md-icon>
                   </md-button>
                 </md-card-title-text>
               </md-card-title>
               <md-card-content>
-                <md-switch ng-model="splash.splash.show_welcome" aria-label="show_welcome" style="margin: 0px 0 20px 0">
-                  <span ng-show="splash.splash.show_welcome == true" translate>Welcome Page Enabled</span>
-                  <span ng-show="splash.splash.show_welcome == false" translate>Welcome Page Disabled</span>
+                <md-switch ng-model="splash.show_welcome" aria-label="show_welcome" style="margin: 0px 0 20px 0">
+                  <span ng-showxxxx="splash.show_welcome == true" translate>Welcome Page Enabled</span>
+                  <span ng-showxxxx="splash.show_welcome == false" translate>Welcome Page Disabled</span>
                 </md-switch>
                 <md-input-container class="md-block">
                   <label>
                     <translate>Welcome Text</translate>
                   </label>
-                  <textarea ng-click="swapToWelcome()" ng-model="splash.splash.welcome_text" placeholder="{{'Welcome text (Max 1000 chars)' | translate }}" type='text' name="welcome" ng-maxlength='1000' rows=10></textarea>
+                  <textarea ng-click="swapToWelcome()" ng-model="splash.welcome_text" placeholder="{{'Welcome text (Max 1000 chars)' | translate }}" type='text' name="welcome" ng-maxlength='1000' rows=10></textarea>
                   <div ng-messages="myForm.welcome.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 1000 characters.</div>
                   </div>
@@ -852,7 +852,7 @@
                   <label>
                     <translate>Display Welcome For (seconds)</translate>
                   </label>
-                  <input ng-model="splash.splash.welcome_timeout" placeholder="0" type='number' name="welcome_timeout" ng-max='30' ng-min='0'>
+                  <input ng-model="splash.welcome_timeout" placeholder="0" type='number' name="welcome_timeout" ng-max='30' ng-min='0'>
                   <div ng-messages="myForm.welcome_timeout.$error">
                     <div ng-message="max" translate>Must be less than 30 seconds.</div>
                     <div ng-message="min" translate>Must be greater than 0 seconds.</div>
@@ -868,7 +868,7 @@
             <translate>Welcome Page</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('welcome')" id="welcome" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('welcome')" id="welcome" class="menu-toggle-list" layout="column">
             <md-card>
           </div> -->
 
@@ -877,7 +877,7 @@
             <translate>Links</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('links')" id="links" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('links')" id="links" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-title>
                 <md-card-title-text>
@@ -890,7 +890,7 @@
                   <label>
                     <translate>Website</translate>
                   </label>
-                  <input type='text' ng-model="splash.splash.website" placeholder="{{ 'Website' | translate }}" name="website" md-maxlength='255'></input>
+                  <input type='text' ng-model="splash.website" placeholder="{{ 'Website' | translate }}" name="website" md-maxlength='255'></input>
                   <div ng-messages="myForm.website.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 250 characters.</div>
                   </div>
@@ -899,7 +899,7 @@
                   <label>
                     <translate>Twitter Name</translate>
                   </label>
-                  <input type='text' ng-model="splash.splash.twitter_name" placeholder="Twitter" name="twitter" md-maxlength='15'></input>
+                  <input type='text' ng-model="splash.twitter_name" placeholder="Twitter" name="twitter" md-maxlength='15'></input>
                   <div ng-messages="myForm.twitter.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 15 characters.</div>
                   </div>
@@ -908,7 +908,7 @@
                   <label>
                     <translate>Facebook Page</translate>
                   </label>
-                  <input type='text' ng-model="splash.splash.facebook_name" placeholder="Facebook" name="facebook" md-maxlength='50'></input>
+                  <input type='text' ng-model="splash.facebook_name" placeholder="Facebook" name="facebook" md-maxlength='50'></input>
                   <div ng-messages="myForm.facebook.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 50 characters.</div>
                   </div>
@@ -917,7 +917,7 @@
                   <label>
                     <translate>Google+</translate>
                   </label>
-                  <input type='text' ng-model="splash.splash.google_name" placeholder="Google" name="google" md-maxlength='50'></input>
+                  <input type='text' ng-model="splash.google_name" placeholder="Google" name="google" md-maxlength='50'></input>
                   <div ng-messages="myForm.google.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 50 characters.</div>
                   </div>
@@ -926,7 +926,7 @@
                   <label>
                     <translate>LinkedIn Page</translate>
                   </label>
-                  <input type='text' ng-model="splash.splash.linkedin_name" placeholder="LinkedIn" name="linkedin" md-maxlength='50'></input>
+                  <input type='text' ng-model="splash.linkedin_name" placeholder="LinkedIn" name="linkedin" md-maxlength='50'></input>
                   <div ng-messages="myForm.linkedin.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 50 characters.</div>
                   </div>
@@ -935,7 +935,7 @@
                   <label>
                     <translate>Instagram Page</translate>
                   </label>
-                  <input type='text' ng-model="splash.splash.instagram_name" placeholder="Instagram" name="instagram" md-maxlength='50'></input>
+                  <input type='text' ng-model="splash.instagram_name" placeholder="Instagram" name="instagram" md-maxlength='50'></input>
                   <div ng-messages="myForm.instagram.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 50 characters.</div>
                   </div>
@@ -944,7 +944,7 @@
                   <label>
                     <translate>Pinterest Page</translate>
                   </label>
-                  <input type='text' ng-model="splash.splash.pinterest_name" placeholder="Pinterest" name="pinterest" md-maxlength='50'></input>
+                  <input type='text' ng-model="splash.pinterest_name" placeholder="Pinterest" name="pinterest" md-maxlength='50'></input>
                   <div ng-messages="myForm.pinterest.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 50 characters.</div>
                   </div>
@@ -958,22 +958,22 @@
             <translate>Terms</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('terms')" id="terms" class="menu-toggle-list" layout="column">
+          <div ng-showxxxx="splash.isOpen('terms')" id="terms" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">
                   <label>
                     <translate>Terms URL</translate>
                   </label>
-                  <input ng-model="splash.splash.terms_url" placeholder="{{ 'Terms URL' | translate }}" type='url' name="terms_url" ng-maxlength='255' required></input>
+                  <input ng-model="splash.terms_url" placeholder="{{ 'Terms URL' | translate }}" type='url' name="terms_url" ng-maxlength='255' required></input>
                   <div ng-messages="myForm.terms_url.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 250 characters.</div>
                     <div ng-message="url" translate>Must be a valid URL including http(s).</div>
                   </div>
                 </md-input-container>
-                <md-switch ng-model="splash.splash.hide_terms" aria-label="{{'Switch 1' | translate }}" ng-false-value="true" ng-true-value="false" style="margin-top: -30px">
-                  <span ng-if="splash.splash.hide_terms == true" translate>Terms &amp; Conditions Hidden</span>
-                  <span ng-if="splash.splash.hide_terms == false" translate>Terms &amp; Conditions Visible</span>
+                <md-switch ng-model="splash.hide_terms" aria-label="{{'Switch 1' | translate }}" ng-false-value="true" ng-true-value="false" style="margin-top: -30px">
+                  <span ng-if="splash.hide_terms == true" translate>Terms &amp; Conditions Hidden</span>
+                  <span ng-if="splash.hide_terms == false" translate>Terms &amp; Conditions Visible</span>
                 </md-switch>
               </md-card-content>
             </md-card>
@@ -986,19 +986,19 @@
   </md-tabs>
 
   <md-content layout-padding>
-    <div ng-hide='splash.splash.updating' layout="row" layout-align="space-around center" class="splash-design-buttons">
+    <div ng-hide='splash.updating' layout="row" layout-align="space-around center" class="splash-design-buttons">
       <splash-templates></splash-templates>
       <md-button ng-click="splash.preview()" class="md-fab md-raised md-mini">
         <md-tooltip md-direction="bottom">Preview</md-tooltip>
         <md-icon md-font-icon="pageview">pageview</md-icon>
       </md-button>
-      <md-button ng-click="splash.save(splash.splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
+      <md-button ng-click="splash.save(splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
         <md-tooltip md-direction="bottom">Save</md-tooltip>
         <md-icon md-font-icon="save">save</md-icon>
       </md-button>
     </div>
 
-    <div ng-show='splash.splash.updating'>
+    <div ng-showxxxx='splash.updating'>
       <p translate>Saving...</p>
       <md-progress-linear md-mode="query"></md-progress-linear>
     </div>

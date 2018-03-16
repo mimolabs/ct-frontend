@@ -30,10 +30,8 @@ var app = angular.module('myApp.services', [
   'myApp.reports.services',
   'myApp.registrations.services',
   'myApp.social.services',
-  'myApp.splash_codes.services',
   'myApp.splash_integrations.services',
   'myApp.splash_pages.services',
   'myApp.subscriptions.services',
   'myApp.users.services',
-  'myApp.vouchers.services',
 ]);

@@ -3,34 +3,34 @@
 <md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta">
   <div flex="100" flex-gt-md="90" flex-gt-lg="80">
     <div layout="row" layout-align="space-between center" layout-wrap>
-        <md-button id="main" class="md-fab md-mini md-raised" ng-click="back()" aria-label="{{ 'Back to People' | translate }}">
-          <md-tooltip md-direction="bottom">Back to People</md-tooltip>
-          <md-icon>keyboard_return</md-icon>
-        </md-button>
+      <md-button id="main" class="md-fab md-mini md-raised" ng-click="back()" aria-label="{{ 'Back to People' | translate }}">
+        <md-tooltip md-direction="bottom">Back to People</md-tooltip>
+        <md-icon>keyboard_return</md-icon>
+      </md-button>
 
-        <md-menu>
-          <md-button aria-label="{{ 'Open sessions menu' | translate }}" class="md-fab md-raised md-primary md-mini" ng-click="$mdOpenMenu($event)">
-            <md-icon md-menu-origin md-font-icon="more_black" class="s48">more_vert</md-icon>
-          </md-button>
-          <md-menu-content width="3">
-            <send-bulk-message ></send-bulk-message>
-            <md-menu-item>
-              <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/messages">
-                <p flex translate>Messages</p>
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/message_activity">
-                <p flex translate>Message Activity</p>
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button ng-click="">
-                <p flex translate>Delete</p>
-              </md-button>
-            </md-menu-item>
-          </md-menu-content>
-        </md-menu>
+      <md-menu>
+        <md-button aria-label="{{ 'Open sessions menu' | translate }}" class="md-fab md-raised md-primary md-mini" ng-click="$mdOpenMenu($event)">
+          <md-icon md-menu-origin md-font-icon="more_black" class="s48">more_vert</md-icon>
+        </md-button>
+        <md-menu-content width="3">
+          <send-bulk-message ></send-bulk-message>
+          <md-menu-item>
+            <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/messages">
+              <p flex translate>Messages</p>
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/message_activity">
+              <p flex translate>Message Activity</p>
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="">
+              <p flex translate>Delete</p>
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
     </div>
   </div>
 
@@ -109,7 +109,7 @@
             <md-card class="b-bl">
               <md-card-title>
                 <md-card-title-text>
-                  <span class="md-headline" translate>Contact</span>
+                  <span class="md-headline" translate>Email</span>
                 </md-card-title-text>
               </md-card-title>
               <md-table-container>
@@ -233,21 +233,21 @@
             <md-card class="b-bl">
               <md-card-title>
                 <md-card-title-text>
-                  <span class="md-headline" translate>Vouchers Used</span>
+                  <span class="md-headline" translate>SMS Numbers</span>
                 </md-card-title-text>
               </md-card-title>
               <md-table-container>
                 <table multiple md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
                   <thead md-head>
                     <tr md-row>
-                      <th md-column><span translate>Voucher</span></th>
+                      <th md-column><span translate>Number</span></th>
                       <th md-column><span translate>Options</span></th>
                     </tr>
                   </thead>
                   <tbody md-body>
                     <tr md-row ng-repeat="code in person.codes">
                       <td md-cell>
-                        {{code.username}}
+                        {{sms.number}}
                       </td>
                       <td md-cell>
                         <md-button aria-label="{{ 'Open Boxes Menu' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">

@@ -418,7 +418,7 @@
                       </label>
                       {{ splash.font_family }}
                       <md-select ng-model="splash.font_family">
-                        <md-option ng-repeat="font in fonts" iivalue="{{state.abbrev}}">
+                        <md-option ng-repeat="font in fonts" value="{{font}}">
                           {{font}}
                         </md-option>
                       </md-select>

@@ -279,7 +279,7 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
       templateUrl: 'components/splash_pages/guide.html',
       resolve: { loginRequired: loginRequired }
     }).
-    when('/:id/splash_pages/:splash_page_id/design', {
+    when('/:id/splash_pages/:splash_page_id', {
       templateUrl: 'components/splash_pages/design.html',
       controller: 'SplashPagesDesignCtrl as lc',
       resolve: { loginRequired: loginRequired }
@@ -287,17 +287,6 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
     when('/:id/splash_pages/:splash_page_id/store', {
       templateUrl: 'components/splash_pages/store.html',
       reloadOnSearch: false,
-      controller: 'LocationsCtrl as lc',
-      resolve: { loginRequired: loginRequired }
-    }).
-    when('/:id/splash_pages/:splash_page_id/forms', {
-      templateUrl: 'components/splash_pages/forms.html',
-      reloadOnSearch: false,
-      controller: 'LocationsCtrl as lc',
-      resolve: { loginRequired: loginRequired }
-    }).
-    when('/:id/splash_pages/:splash_page_id', {
-      templateUrl: 'components/splash_pages/show.html',
       controller: 'LocationsCtrl as lc',
       resolve: { loginRequired: loginRequired }
     }).

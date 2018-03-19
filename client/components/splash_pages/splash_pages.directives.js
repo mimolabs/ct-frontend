@@ -275,9 +275,19 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
         scope.splash = res.splash_page;
         scope.uploadLogo = (scope.splash.header_image_name === null && scope.splash.logo_file_name === null);
         scope.splash.periodic_days = [];
-        console.log(scope.splash.available_days);
         if (scope.splash.available_days === null) {
           scope.splash.available_days = [];
+        }
+        scope.splash.userdays = [];
+        if (scope.splash.passwd_change_day === null) {
+          scope.splash.passwd_change_day = [];
+        }
+        scope.splash.periodic_days = [];
+        if (scope.splash.available_days === null) {
+          scope.splash.available_days = [];
+        }
+        if (scope.splash.passwd_change_day === undefined) {
+          scope.splash.passwd_change_day = [];
         }
         scope.loading = undefined;
       }, function() {
@@ -287,7 +297,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
     };
 
     scope.save = function(splash, form) {
-      form.$setPristine();
+      if (form) { form.$setPristine(); }
       scope.splash.updating = true;
       SplashPage.update({
         location_id: scope.location.slug,
@@ -496,334 +506,85 @@ app.directive('splashGeneratePassy', ['Code', function(Code) {
   };
 }]);
 
-app.directive('splashStore', ['SplashPage', '$routeParams', '$http', '$location', 'showToast', 'showErrors', '$mdDialog', 'gettextCatalog', function(SplashPage,$routeParams,$http,$location,showToast,showErrors,$mdDialog, gettextCatalog) {
-
-  var link = function(scope,element,attrs) {
-
-    var init = function() {
-
-      scope.merchant_types = [{key:'PayPal Express', value: 'paypal'}, {key: 'Stripe Checkout', value: 'stripe'}, {key: 'SagePay (Form)', value: 'sagepay' }];
-      scope.location = { slug: $routeParams.id };
-      scope.splash = { id: $routeParams.splash_page_id };
-
-      scope.product_tab_label = gettextCatalog.getString('Products');
-      scope.merchant_tab_label = gettextCatalog.getString('Merchant Settings');
-
-      SplashPage.store({location_id: scope.location.slug, id: scope.splash.id}).$promise.then(function(results) {
-        scope.store = results ? results.store : undefined;
-        if (results && results.products === undefined) {
-          // createProducts();
-        } else if (results && results.products ) {
-          scope.products = results.products;
-        }
-
-        scope.loading = undefined;
-      });
-    };
-
-    // function createProducts() {
-    //   var product = {
-    //     duration: 60,
-    //     type: 'multiuse',
-    //     distance: 'minutes',
-    //     download_speed: 2048,
-    //     upload_speed: 1024,
-    //     dummy: true,
-    //     value: 300,
-    //     devices: 2
-    //   };
-
-    //   scope.products = [];
-    //   scope.products.push(product);
-    // }
-
-    scope.environments = [{key: gettextCatalog.getString('Test'), value: 'test'}, {key: gettextCatalog.getString('Production'), value: 'production'}];
-
-    scope.addProduct = function() {
-      add();
-    };
-
-    var add = function() {
-      $mdDialog.show({
-        templateUrl: 'components/splash_pages/_store_product.html',
-        clickOutsideToClose: true,
-        parent: angular.element(document.body),
-        controller: ProductsController,
-      });
-    };
-
-    function ProductsController($scope) {
-      var date = new Date();
-      $scope.minDate = new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        date.getDate()) + 1;
-
-      $scope.templates = scope.templates;
-      $scope.distances = [{key: gettextCatalog.getString('Minutes'), value: 'minutes'}, {key: gettextCatalog.getString('Hours'), value: 'hours'}, {key: gettextCatalog.getString('Days'), value: 'days'}, {key: gettextCatalog.getString('Weeks'), value: 'weeks'}, {key:gettextCatalog.getString('Months'), value: 'months'}];
-      $scope.product = {
-        description: gettextCatalog.getString('A product for immediate purchase, enjoy.'),
-        template_id: 1,
-        duration: 60,
-        session_timeout: 60,
-        type: 'multiuse',
-        distance: 'minutes',
-        download_speed: 2048,
-        upload_speed: 1024,
-        devices: 3,
-        value: 300
-      };
-      $scope.close = function() {
-        $mdDialog.cancel();
-      };
-
-      $scope.save = function() {
-        $mdDialog.cancel();
-        scope.saveProduct($scope.product);
-      };
-
-    }
-    ProductsController.$inject = ['$scope'];
-
-    scope.saveProduct = function(product) {
-      scope.products = scope.products || [];
-      scope.products.push(product);
-      scope.update(gettextCatalog.getString('Product added to store'));
-    };
-
-    scope.removeProduct = function(index) {
-      var confirm = $mdDialog.confirm()
-      .title(gettextCatalog.getString('Delete Product'))
-      .textContent(gettextCatalog.getString('Are you sure you want to delete this product?'))
-      .ariaLabel(gettextCatalog.getString('Delete'))
-      .ok(gettextCatalog.getString('Delete'))
-      .cancel(gettextCatalog.getString('Cancel'));
-      $mdDialog.show(confirm).then(function() {
-        scope.products[index]._destroy = 1;
-        scope.update(gettextCatalog.getString('Product removed from store'));
-      }, function() {
-      });
-    };
-
-    scope.update = function(msg, form) {
-
-      if (form) {
-        form.$setPristine();
-      }
-
-      if (scope.products) {
-        scope.store.store_products_attributes = scope.products;
-      }
-
-      SplashPage.update_store({
-        location_id: scope.location.slug,
-        splash_id: scope.splash.id,
-        store: scope.store
-      }).$promise.then(function(results) {
-        if (results && results.products ) {
-          scope.products = results.products;
-        } else {
-          scope.products = undefined;
-        }
-        showToast(msg);
-      }, function(err) {
-        scope.products.splice(-1,1);
-        showErrors(err);
-      });
-    };
-
-    scope.templates = [];
-
-    var twentymins = {
-      duration: 20,
-      session_timeout: 20,
-      type: 'singleuse',
-      distance: 'minutes',
-      download_speed: 2048,
-      upload_speed: 1024,
-      devices: 1,
-      description: gettextCatalog.getString('A single-use voucher valid for 20 minutes from the time you login'),
-      value: 100
-    };
-    scope.templates.push({name: gettextCatalog.getString('20 minute, quickcode'),  val: twentymins, id: 1 });
-
-    var sixtymins = {
-      duration: 60,
-      session_timeout: 60,
-      type: 'multiuse',
-      distance: 'minutes',
-      download_speed: 2048,
-      upload_speed: 1024,
-      devices: 1,
-      description: gettextCatalog.getString('A 60 minute, multi-use voucher. Use me until my minutes have expired.'),
-      value: 100
-    };
-    scope.templates.push({name: gettextCatalog.getString('60 minute, multi-use voucher'), val: sixtymins, id: 2 });
-
-    var twenty4 = {
-      duration: 24,
-      session_timeout: 60,
-      type: 'singleuse',
-      distance: 'hours',
-      download_speed: 2048,
-      upload_speed: 1024,
-      devices: 3,
-      description: gettextCatalog.getString('A 24 hour voucher, for up to 3 devices. Valid for one 24 hour period.'),
-      value: 500
-    };
-    scope.templates.push({name: gettextCatalog.getString('24 hour, single-use voucher'), val: twenty4, id: 3 });
-
-    var sevendays = {
-      duration: 7,
-      session_timeout: 60,
-      type: 'singleuse',
-      distance: 'days',
-      download_speed: 2048,
-      upload_speed: 1024,
-      devices: 3,
-      description: gettextCatalog.getString('A 7 day voucher, for up to 3 devices. Valid for 7 consecutive days.'),
-      value: 500
-    };
-    scope.templates.push({name: gettextCatalog.getString('7 day, unlimited voucher'), val: sevendays, id: 4 });
-
-    var month = {
-      duration: 30,
-      session_timeout: 60,
-      type: 'singleuse',
-      distance: 'days',
-      download_speed: 2048,
-      upload_speed: 1024,
-      description: gettextCatalog.getString('A monthly voucher for 5 up to devices. Valid for 30 consecutive days.'),
-      devices: 5,
-    };
-    scope.templates.push({name: '30 day, unlimited voucher', val: month, id: 5 });
-
-    scope.selectTemplate = function() {
-      angular.forEach(scope.templates, function (value) {
-        if (value.id === scope.product.template_id) {
-          scope.product.duration          = value.val.duration;
-          scope.product.session_timeout   = value.val.session_timeout;
-          scope.product.type              = value.val.type;
-          scope.product.distance          = value.val.distance;
-          scope.product.description       = value.val.description;
-        }
-      });
-    };
-
-    scope.createStore = function() {
-      scope.creating = true;
-      SplashPage.create_store({
-        location_id: scope.location.slug,
-        splash_id: scope.splash.id,
-        store: scope.store
-      }).$promise.then(function(results) {
-        showToast(gettextCatalog.getString('Store created successfully.'));
-        scope.store = results;
-        scope.creating = undefined;
-      }, function(err) {
-        scope.creating = undefined;
-        showErrors(err);
-      });
-    };
-
-    scope.back = function() {
-      window.location.href = '/#/' + scope.location.slug + '/splash_pages/' + scope.splash.id;
-    };
-
-    init();
-
-  };
-
-  return {
-    link: link,
-    scope: {
-      store: '=',
-      loading: '='
-    },
-    templateUrl: 'components/splash_pages/view-store.html'
-  };
-
-}]);
-
-app.directive('splashTemplates', ['SplashPage', 'designer', '$routeParams', '$location', '$rootScope', '$timeout', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', function(SplashPage, designer, $routeParams, $location, $rootScope, $timeout, $mdDialog, showToast, showErrors, gettextCatalog) {
+app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$location', '$rootScope', '$timeout', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', function(SplashPage, $route, $routeParams, $location, $rootScope, $timeout, $mdDialog, showToast, showErrors, gettextCatalog) {
 
   var link = function(scope, element, attrs) {
 
     var SplashTemplates = {
-      "material_red": {
-        "terms_url": null,
-        "logo_file_name": "https://d247kqobagyqjh.cloudfront.net/api/file/72JuQ4lfQECFPpK6xFWe",
-        "background_image_name": "https://d247kqobagyqjh.cloudfront.net/api/file/ri25tvzERHStdU8M7Xqf",
-        "location_image_name": null,
-        "location_image_name_svg": null,
-        "header_image_name": null,
-        "header_image_name_svg": null,
-        "header_image_type": 1,
-        "header_text": "Fast and Free WiFi",
-        "info": "Sign in below to enjoy!\n",
-        "info_two": null,
-        "address": "24 Stone Road",
-        "error_message_text": null,
-        "website": "",
-        "facebook_name": null,
-        "twitter_name": null,
-        "google_name": null,
-        "linkedin_name": null,
-        "instagram_name": null,
-        "pinterest_name": null,
-        "container_width": "400px",
-        "container_text_align": "center",
-        "body_background_colour": "rgb(243, 33, 33)",
-        "heading_text_colour": "#000000",
-        "body_text_colour": "rgb(51, 51, 51)",
-        "border_colour": "rgb(255, 255, 255)",
-        "link_colour": "#2B68B6",
-        "container_colour": "rgb(255, 255, 255)",
-        "button_colour": "rgb(255, 64, 129)",
-        "button_radius": "4px",
-        "button_border_colour": "rgb(255, 64, 129)",
-        "button_padding": "0px 16px",
-        "button_shadow": true,
-        "container_shadow": true,
-        "header_colour": "#FFFFFF",
-        "error_colour": "#ED561B",
-        "container_transparency": 1.0,
-        "container_float": "center",
-        "container_inner_width": "100%",
-        "container_inner_padding": "20px",
-        "container_inner_radius": "4px",
-        "bg_dimension": "full",
-        "words_position": "right",
-        "logo_position": "center",
-        "hide_terms": false,
-        "font_family": "'Helvetica Neue', Arial, Helvetica, sans-serif",
-        "body_font_size": "14px",
-        "heading_text_size": "22px",
-        "heading_2_text_size": "16px",
-        "heading_2_text_colour": "rgb(0, 0, 0)",
-        "heading_3_text_size": "14px",
-        "heading_3_text_colour": "rgb(0, 0, 0)",
-        "btn_text": "Login Now",
-        "reg_btn_text": "Register",
-        "btn_font_size": "18px",
-        "btn_font_colour": "rgb(255, 255, 255)",
-        "input_required_colour": "#CCC",
-        "input_required_size": "10px",
-        "welcome_text": null,
-        "welcome_timeout": null,
-        "show_welcome": false,
-        "external_css": "",
-        "custom_css": null,
-        "input_height": "40px",
-        "input_padding": "10px 15px",
-        "input_border_colour": "#d0d0d0",
-        "input_border_radius": "0px",
-        "input_border_width": "1px",
-        "input_background": "#ffffff",
-        "input_text_colour": "#3d3d3d",
-        "input_max_width": "400px",
-        "footer_text_colour": "#CCC",
-        "preview_mac": null
+      'material_red': {
+        'terms_url': null,
+        'logo_file_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/72JuQ4lfQECFPpK6xFWe',
+        'background_image_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/ri25tvzERHStdU8M7Xqf',
+        'location_image_name': null,
+        'location_image_name_svg': null,
+        'header_image_name': null,
+        'header_image_name_svg': null,
+        'header_image_type': 1,
+        'header_text': 'Fast and Free WiFi',
+        'info': 'Sign in below to enjoy!\n',
+        'info_two': null,
+        'address': '24 Stone Road',
+        'error_message_text': null,
+        'website': '',
+        'facebook_name': null,
+        'twitter_name': null,
+        'google_name': null,
+        'linkedin_name': null,
+        'instagram_name': null,
+        'pinterest_name': null,
+        'container_width': '400px',
+        'container_text_align': 'center',
+        'body_background_colour': 'rgb(243, 33, 33)',
+        'heading_text_colour': '#000000',
+        'body_text_colour': 'rgb(51, 51, 51)',
+        'border_colour': 'rgb(255, 255, 255)',
+        'link_colour': '#2B68B6',
+        'container_colour': 'rgb(255, 255, 255)',
+        'button_colour': 'rgb(255, 64, 129)',
+        'button_radius': '4px',
+        'button_border_colour': 'rgb(255, 64, 129)',
+        'button_padding': '0px 16px',
+        'button_shadow': true,
+        'container_shadow': true,
+        'header_colour': '#FFFFFF',
+        'error_colour': '#ED561B',
+        'container_transparency': 1.0,
+        'container_float': 'center',
+        'container_inner_width': '100%',
+        'container_inner_padding': '20px',
+        'container_inner_radius': '4px',
+        'bg_dimension': 'full',
+        'words_position': 'right',
+        'logo_position': 'center',
+        'hide_terms': false,
+        'font_family': '\'Helvetica Neue\', Arial, Helvetica, sans-serif',
+        'body_font_size': '14px',
+        'heading_text_size': '22px',
+        'heading_2_text_size': '16px',
+        'heading_2_text_colour': 'rgb(0, 0, 0)',
+        'heading_3_text_size': '14px',
+        'heading_3_text_colour': 'rgb(0, 0, 0)',
+        'btn_text': 'Login Now',
+        'reg_btn_text': 'Register',
+        'btn_font_size': '18px',
+        'btn_font_colour': 'rgb(255, 255, 255)',
+        'input_required_colour': '#CCC',
+        'input_required_size': '10px',
+        'welcome_text': null,
+        'welcome_timeout': null,
+        'show_welcome': false,
+        'external_css': '',
+        'custom_css': null,
+        'input_height': '40px',
+        'input_padding': '10px 15px',
+        'input_border_colour': '#d0d0d0',
+        'input_border_radius': '0px',
+        'input_border_width': '1px',
+        'input_background': '#ffffff',
+        'input_text_colour': '#3d3d3d',
+        'input_max_width': '400px',
+        'footer_text_colour': '#CCC',
+        'preview_mac': null
       },
       "material_yellow": {
         "terms_url": null,
@@ -1754,9 +1515,10 @@ app.directive('splashTemplates', ['SplashPage', 'designer', '$routeParams', '$lo
 
     var updateSplash = function() {
       scope.location = { slug: $routeParams.id };
-      scope.splash_page = { id: $routeParams.splash_page_id};
+      scope.splash_page = { id: $routeParams.splash_page_id };
       var fullTemplate = SplashTemplates[scope.template];
-      designer.save(fullTemplate)
+      scope.save(fullTemplate)
+      $route.reload();
     };
 
     function DialogController($scope,loading) {
@@ -1778,30 +1540,16 @@ app.directive('splashTemplates', ['SplashPage', 'designer', '$routeParams', '$lo
     }
 
     DialogController.$inject = ['$scope', 'loading'];
-
-    //
-    // disabled because when we do this automatic templates pop-up it never closes:
-    //
-    // $rootScope.$on('$routeChangeStart', function (event, next, current) {
-    //   $mdDialog.cancel();
-    //   if ($location.search().wizard === 'yas') {
-    //     scope.openDialog();
-    //     $location.search({});
-    //   }
-    // });
   };
 
   return {
     link: link,
-    scope: {
-    },
     template:
       '<md-button ng-click="openDialog()" aria-label="{{\'Back\' | translate }}" class="md-fab md-raised md-mini">' +
       '<md-tooltip md-direction="bottom">Templates</md-tooltip>' +
       '<md-icon md-font-icon="view_carousel">view_carousel</md-icon>' +
       '</md-button>'
   };
-
 }]);
 
 app.directive('splashGuide', ['Location', '$routeParams', '$location', '$http', '$compile', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', 'SplashIntegration', function(Location, $routeParams, $location, $http, $compile, $mdDialog, showToast, showErrors, gettextCatalog, SplashIntegration) {

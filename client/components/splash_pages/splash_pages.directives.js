@@ -355,6 +355,9 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
     };
 
     scope.isOpen = function(section) {
+      if (section === 'loginType') {
+        return !menu.isSectionSelected(section);
+      }
       return menu.isSectionSelected(section);
     };
 

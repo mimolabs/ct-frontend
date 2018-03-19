@@ -422,11 +422,22 @@ md-sidenav .divider {
   margin: 15px 0 10px 0;
 }
 
-.design-sidebar {
+splash-designer .design-sidebar {
   min-width: 350px;
-  max-height: 100vh;
+  max-height: 100vh!important;
   overflow: scroll;
-  position:relative;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.design-sidebar md-tabs {
+  height: calc(100vh - 100px);
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+.design-sidebar md-tabs md-tabs-wrapper {
+  /*position: absolute;
+  width: 100%;
+  z-index: 42;*/
 }
 
 md-sidenav.md-sidenav-right ul {
@@ -435,8 +446,6 @@ md-sidenav.md-sidenav-right ul {
 
 .splash-design-buttons {
   position: relative;
-  margin-top: 5%;
-  margin-bottom: 5%;
 }
 
 .md-button.md-fab.md-fab-bottom-right {

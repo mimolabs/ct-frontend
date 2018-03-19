@@ -175,8 +175,7 @@ app.directive('splashNew', ['SplashPage', 'Auth', '$location', '$routeParams', '
         }
       }).$promise.then(function(results) {
         $mdDialog.cancel();
-        // window.location.href = '/#/' + $routeParams.id + '/splash_pages/' + results.id + '/design?wizard=yas';
-        $location.path('/' + $routeParams.id + '/splash_pages/' + results.id + '/design');
+        $location.path('/' + $routeParams.id + '/splash_pages/' + results.id);
         $location.search({wizard: 'yas'});
       }, function(err) {
         $mdDialog.cancel();

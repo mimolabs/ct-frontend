@@ -1373,7 +1373,7 @@ app.directive('vszSetup', ['Location', '$routeParams', '$location', '$http', '$m
     link: link,
     scope: {
     },
-    templateUrl: 'components/locations/new/_vsz_setup.html'
+    templateUrl: 'components/locations/integrations/_vsz_setup.html'
   };
 
 }]);

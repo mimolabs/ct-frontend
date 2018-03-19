@@ -6,12 +6,12 @@
       <md-tab-body>
         <md-content layout-padding>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('details')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('details') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('details')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('details') ? "up" : "down" }}</md-icon>
             <translate>Details</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('details')" id="details" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('details')" id="details" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">
@@ -33,12 +33,12 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('loginType')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('loginType') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('loginType')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('loginType') ? "up" : "down" }}</md-icon>
             <translate>Login Type</translate>
           </md-button>
 
-          <div ng-show="splash.isOpen('loginType')" id="loginType" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('loginType')" id="loginType" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -61,11 +61,18 @@
                     </md-checkbox>
                   </div>
                   <div flex="50">
+                    <md-checkbox ng-model="splash.sms_access" name="sms_access" type="checkbox">
+                      <translate>SMS</translate>
+                    </md-checkbox>
+                    {{splash.sms_access}}
+                    {{sms_access}}
+                  </div>
+                  <div flex="50">
                     <md-checkbox ng-model="splash.backup_email" name="backup_email" type="checkbox">
                       <translate>Email</translate>
                     </md-checkbox>
                   </div>
-                  <div flex="100" ng-showxxxx="splash.fb_login_on">
+                  <div flex="100" ng-show="splash.fb_login_on">
                     <md-switch class="md-accent" ng-model="splash.fb_checkin" aria-label="FB Checkin">
                       <translate>Allow Facebook Checkin</translate>
                     </md-switch>
@@ -78,7 +85,7 @@
                       </div>
                     </md-input-container>
                   </div>
-                  <div flex="100" ng-showxxxx="splash.g_login_on">
+                  <div flex="100" ng-show="splash.g_login_on">
                     <md-input-container class="md-block">
                       <label>Google Page ID</label>
                       <input ng-model="splash.g_page_id" name="g_page_id" ng-class="{ 'input-error' : myForm.g_page_id.$error.required }" placeholder="{{ 'Enter your Google Page ID' | translate }}" type="text" ng-required="splash.g_login_on">
@@ -88,7 +95,7 @@
                       </div>
                     </md-input-container>
                   </div>
-                  <div flex="100" ng-showxxxx="splash.tw_login_on">
+                  <div flex="100" ng-show="splash.tw_login_on">
                     <md-input-container class="md-block">
                       <label translate>Twitter Handle</label>
                       <input ng-model="splash.tw_handle" name="tw_handle" placeholder="{{'Enter your Twitter handle' | translate }}" type="text" ng-required="splash.tw_login_on" xxng-pattern="/^-?\d+\.?\d*$/">
@@ -103,12 +110,12 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('redirectUrl')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('redirectUrl') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('redirectUrl')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('redirectUrl') ? "up" : "down" }}</md-icon>
             <translate>Redirect URL</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('redirectUrl')" id="redirectUrl" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('redirectUrl')" id="redirectUrl" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -130,12 +137,12 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('speedLimits')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('speedLimits') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('speedLimits')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('speedLimits') ? "up" : "down" }}</md-icon>
             <translate>Speed Limits</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('speedLimits')" id="speedLimits" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('speedLimits')" id="speedLimits" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="column" layout-gt-sm="row" layout-wrap>
@@ -172,12 +179,12 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('timeOfDay')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('timeOfDay') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('timeOfDay')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('timeOfDay') ? "up" : "down" }}</md-icon>
             <translate>Time of Day</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('timeOfDay')" id="timeOfDay" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('timeOfDay')" id="timeOfDay" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -185,8 +192,8 @@
                     <p style="margin-top:0px;">Allow guests to only sign in during specific times of day.</p>
                     <md-input-container class="md-block" style="margin-top: 0px;">
                       <md-switch ng-model="splash.access_restrict" ng-true-value="'periodic'" ng-false-value="'none'" style="margin: 0px">
-                        <span ng-showxxxx="splash.access_restrict === 'periodic'" translate>Enabled</span>
-                        <span ng-showxxxx="splash.access_restrict !== 'periodic'" translate>Disabled</span>
+                        <span ng-show="splash.access_restrict === 'periodic'" translate>Enabled</span>
+                        <span ng-show="splash.access_restrict !== 'periodic'" translate>Disabled</span>
                       </md-switch>
                     </md-input-container>
                   </div>
@@ -216,12 +223,12 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('walledGarden')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('walledGarden') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('walledGarden')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('walledGarden') ? "up" : "down" }}</md-icon>
             <translate>Walled Garden</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('walledGarden')" id="walledGarden" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('walledGarden')" id="walledGarden" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">
@@ -237,12 +244,12 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('integrations')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('integrations') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('integrations')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('integrations') ? "up" : "down" }}</md-icon>
             <translate>Integrations</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('integrations')" id="integrations" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('integrations')" id="integrations" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">
@@ -265,12 +272,12 @@
       <md-tab-body>
         <md-content layout-padding>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('theme')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('theme') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('theme')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('theme') ? "up" : "down" }}</md-icon>
             <translate>Theme</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('theme')" id="theme" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('theme')" id="theme" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -308,19 +315,19 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('bg')" aria-controls="bg">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('bg') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('bg')" aria-controls="bg">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('bg') ? "up" : "down" }}</md-icon>
             <translate>Background Image</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('bg')" id="images" class="menu-toggle-list">
+          <div ng-show="isOpen('bg')" id="images" class="menu-toggle-list">
             <md-card>
-              <img ng-showxxxx="splash.background_image_name" src="{{splash.background_image_name}}" class="md-card-image" alt="Background">
+              <img ng-show="splash.background_image_name" src="{{splash.background_image_name}}" class="md-card-image" alt="Background">
               <md-card-content>
                 <p translate>
                   Upload a background image. Please note, large images will delay page load times.
                 </p>
-                <md-input-container class="md-block" ng-showxxxx="edit_bg_url">
+                <md-input-container class="md-block" ng-show="edit_bg_url">
                   <label>
                     <translate>Image URL</translate>
                   </label>
@@ -339,21 +346,21 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('logo')" aria-controls="logo">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('logo') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('logo')" aria-controls="logo">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('logo') ? "up" : "down" }}</md-icon>
             <translate>Header Image</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('logo')" id="images" class="menu-toggle-list">
+          <div ng-show="isOpen('logo')" id="images" class="menu-toggle-list">
             <md-card>
-              <img ng-showxxxx="splash.header_image_type == 1 && splash.logo_file_name" src="{{splash.logo_file_name}}" class="md-card-image" alt="Background">
-              <img ng-showxxxx="splash.header_image_type == 2 && splash.header_image_name" src="{{splash.header_image_name}}" class="md-card-image" alt="Background">
+              <img ng-show="splash.header_image_type == 1 && splash.logo_file_name" src="{{splash.logo_file_name}}" class="md-card-image" alt="Background">
+              <img ng-show="splash.header_image_type == 2 && splash.header_image_name" src="{{splash.header_image_name}}" class="md-card-image" alt="Background">
               <md-card-content>
                 <p>
-                  <span ng-showxxxx="splash.header_image_type == 1" translate>
+                  <span ng-show="splash.header_image_type == 1" translate>
                     Upload your logo which must be 200px by 106px.
                   </span>
-                  <span ng-showxxxx="splash.header_image_type == 2" translate>
+                  <span ng-show="splash.header_image_type == 2" translate>
                     Upload your banner image which must be 851px by 315px.
                   </span>
                 </p>
@@ -361,19 +368,19 @@
                   <md-radio-button value="1" class="md-primary"><translate>Logo</translate></md-radio-button>
                   <md-radio-button value="2"><translate>Banner</translate></md-radio-button>
                 </md-radio-group>
-                <md-input-container class="md-block" ng-showxxxx="edit_image_url && splash.header_image_type == 1">
+                <md-input-container class="md-block" ng-show="edit_image_url && splash.header_image_type == 1">
                   <label>
                     <translate>Image URL</translate>
                   </label>
                   <input type="text" ng-model="splash.logo_file_name" ng-if="splash.header_image_type == 1"></input>
                 </md-input-container>
-                <md-input-container class="md-block" ng-showxxxx="edit_image_url && splash.header_image_type == 2">
+                <md-input-container class="md-block" ng-show="edit_image_url && splash.header_image_type == 2">
                   <label>
                     <translate>Banner URL</translate>
                   </label>
                   <input type="text" ng-model="splash.header_image_name"></input>
                 </md-input-container>
-                <div ng-showxxxx="splash.header_image_type == 1" class="btn-group">
+                <div ng-show="splash.header_image_type == 1" class="btn-group">
                   <md-radio-group ng-model="splash.logo_position" layout="row">
                     <md-radio-button value="left" class="md-primary"><translate>Left</translate></md-radio-button>
                     <md-radio-button value="center"><translate>Center</translate></md-radio-button>
@@ -394,12 +401,12 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('typography')" aria-controls="typography">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('typography') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('typography')" aria-controls="typography">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('typography') ? "up" : "down" }}</md-icon>
             <translate>Typography</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('typography')" id="typography" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('typography')" id="typography" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -493,12 +500,12 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('btn')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('btn') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('btn')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('btn') ? "up" : "down" }}</md-icon>
             <translate>Login Button</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('btn')" id="btn" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('btn')" id="btn" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -545,8 +552,8 @@
                   <div flex="100" flex-gt-xs="100">
                     <md-input-container class="md-block" style="margin-top: 0px;">
                       <md-switch ng-model="splash.button_shadow" aria-label="button_shadow" style="margin: 0px 0 20px 0">
-                        <span ng-showxxxx="splash.button_shadow == true" translate>Shadow Enabled</span>
-                        <span ng-showxxxx="splash.button_shadow == false" translate>Shadow Disabled</span>
+                        <span ng-show="splash.button_shadow == true" translate>Shadow Enabled</span>
+                        <span ng-show="splash.button_shadow == false" translate>Shadow Disabled</span>
                       </md-switch>
                     </md-input-container>
                   </div>
@@ -555,12 +562,12 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('input')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('input') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('input')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('input') ? "up" : "down" }}</md-icon>
             <translate>Input Fields</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('input')" id="input" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('input')" id="input" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -625,12 +632,12 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('container')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('container') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('container')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('container') ? "up" : "down" }}</md-icon>
             <translate>Container</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('container')" id="container" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('container')" id="container" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-title>
                 <md-card-title-text>
@@ -666,8 +673,8 @@
                   <div flex="100" flex-gt-xs="100">
                     <md-input-container class="md-block" style="margin-top: 0px;">
                       <md-switch ng-model="splash.container_shadow" aria-label="container_shadow" style="margin: 0px 0 20px 0">
-                        <span ng-showxxxx="splash.container_shadow == true" translate>Shadow Enabled</span>
-                        <span ng-showxxxx="splash.container_shadow == false" translate>Shadow Disabled</span>
+                        <span ng-show="splash.container_shadow == true" translate>Shadow Enabled</span>
+                        <span ng-show="splash.container_shadow == false" translate>Shadow Disabled</span>
                       </md-switch>
                     </md-input-container>
                   </div>
@@ -681,12 +688,12 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('css')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('css') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('css')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('css') ? "up" : "down" }}</md-icon>
             <translate>CSS</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('css')" id="css" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('css')" id="css" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-title>
                 <md-card-title-text>
@@ -717,12 +724,12 @@
       <md-tab-body>
         <md-content layout-padding>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('text')" aria-controls="text">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('text') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('text')" aria-controls="text">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('text') ? "up" : "down" }}</md-icon>
             <translate>Text</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('text')" id="text" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('text')" id="text" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">
@@ -775,14 +782,14 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('adverts')" aria-controls="adverts">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('adverts') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('adverts')" aria-controls="adverts">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('adverts') ? "up" : "down" }}</md-icon>
             <translate>Advertisement</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('adverts')" id="images" class="menu-toggle-list">
+          <div ng-show="isOpen('adverts')" id="images" class="menu-toggle-list">
             <md-card>
-              <img ng-showxxxx="splash.popup_image" src="{{splash.popup_image}}" class="md-card-image" alt="Background">
+              <img ng-show="splash.popup_image" src="{{splash.popup_image}}" class="md-card-image" alt="Background">
               <md-card-title>
                 <md-card-title-text layout="row" layout-align="space-between center">
                   <span class="md-headline" translate>Popup Advert</span>
@@ -799,9 +806,9 @@
                     </p>
                   </div>
                   <div flex="100" flex-gt-sm="100">
-                    <md-switch ng-model="splash.popup_ad" aria-label="popup_ad" style="margin: 0px 0 20px 0" ng-showxxxx="splash.popup_image">
-                      <span ng-showxxxx="splash.popup_ad == true" translate>Popup Advert Enabled</span>
-                      <span ng-showxxxx="splash.popup_ad == false" translate>Popup Advert Disabled</span>
+                    <md-switch ng-model="splash.popup_ad" aria-label="popup_ad" style="margin: 0px 0 20px 0" ng-show="splash.popup_image">
+                      <span ng-show="splash.popup_ad == true" translate>Popup Advert Enabled</span>
+                      <span ng-show="splash.popup_ad == false" translate>Popup Advert Disabled</span>
                     </md-switch>
                   </div>
                   <div flex="100" flex-gt-sm="100">
@@ -834,8 +841,8 @@
               </md-card-title>
               <md-card-content>
                 <md-switch ng-model="splash.show_welcome" aria-label="show_welcome" style="margin: 0px 0 20px 0">
-                  <span ng-showxxxx="splash.show_welcome == true" translate>Welcome Page Enabled</span>
-                  <span ng-showxxxx="splash.show_welcome == false" translate>Welcome Page Disabled</span>
+                  <span ng-show="splash.show_welcome == true" translate>Welcome Page Enabled</span>
+                  <span ng-show="splash.show_welcome == false" translate>Welcome Page Disabled</span>
                 </md-switch>
                 <md-input-container class="md-block">
                   <label>
@@ -861,21 +868,12 @@
 
           </div>
 
-          <!-- <md-button class="md-no-style" ng-click="splash.toggle('welcome')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('welcome') ? "up" : "down" }}</md-icon>
-            <translate>Welcome Page</translate>
-          </md-button>
-
-          <div ng-showxxxx="splash.isOpen('welcome')" id="welcome" class="menu-toggle-list" layout="column">
-            <md-card>
-          </div> -->
-
-          <md-button class="md-no-style" ng-click="splash.toggle('links')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('links') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('links')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('links') ? "up" : "down" }}</md-icon>
             <translate>Links</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('links')" id="links" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('links')" id="links" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-title>
                 <md-card-title-text>
@@ -951,12 +949,12 @@
             </md-card>
           </div>
 
-          <md-button class="md-no-style" ng-click="splash.toggle('terms')" aria-controls="theme">
-            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ splash.isOpen('terms') ? "up" : "down" }}</md-icon>
+          <md-button class="md-no-style" ng-click="toggle('terms')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('terms') ? "up" : "down" }}</md-icon>
             <translate>Terms</translate>
           </md-button>
 
-          <div ng-showxxxx="splash.isOpen('terms')" id="terms" class="menu-toggle-list" layout="column">
+          <div ng-show="isOpen('terms')" id="terms" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">
@@ -986,17 +984,17 @@
   <md-content layout-padding>
     <div ng-hide='splash.updating' layout="row" layout-align="space-around center" class="splash-design-buttons">
       <splash-templates></splash-templates>
-      <md-button ng-click="splash.preview()" class="md-fab md-raised md-mini">
+      <md-button ng-click="preview()" class="md-fab md-raised md-mini">
         <md-tooltip md-direction="bottom">Preview</md-tooltip>
         <md-icon md-font-icon="pageview">pageview</md-icon>
       </md-button>
-      <md-button ng-click="splash.save(splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
+      <md-button ng-click="save(splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
         <md-tooltip md-direction="bottom">Save</md-tooltip>
         <md-icon md-font-icon="save">save</md-icon>
       </md-button>
     </div>
 
-    <div ng-showxxxx='splash.updating'>
+    <div ng-show='splash.updating'>
       <p translate>Saving...</p>
       <md-progress-linear md-mode="query"></md-progress-linear>
     </div>

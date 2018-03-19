@@ -11,7 +11,7 @@
             <translate>Login Type</translate>
           </md-button>
 
-          <div ng-show="isOpen('loginType')" id="loginType" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('loginType')" id="loginType" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -86,7 +86,7 @@
             <translate>Redirect URL</translate>
           </md-button>
 
-          <div ng-show="isOpen('redirectUrl')" id="redirectUrl" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('redirectUrl')" id="redirectUrl" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -113,7 +113,7 @@
             <translate>Speed Limits</translate>
           </md-button>
 
-          <div ng-show="isOpen('speedLimits')" id="speedLimits" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('speedLimits')" id="speedLimits" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="column" layout-gt-sm="row" layout-wrap>
@@ -155,7 +155,7 @@
             <translate>Time of Day</translate>
           </md-button>
 
-          <div ng-show="isOpen('timeOfDay')" id="timeOfDay" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('timeOfDay')" id="timeOfDay" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -198,7 +198,7 @@
             <translate>Walled Garden</translate>
           </md-button>
 
-          <div ng-show="isOpen('walledGarden')" id="walledGarden" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('walledGarden')" id="walledGarden" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">
@@ -219,7 +219,7 @@
             <translate>Integrations</translate>
           </md-button>
 
-          <div ng-show="isOpen('integrations')" id="integrations" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('integrations')" id="integrations" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">
@@ -238,7 +238,7 @@
             <translate>Settings</translate>
           </md-button>
 
-          <div ng-show="isOpen('details')" id="details" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('details')" id="details" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">
@@ -274,7 +274,7 @@
             <translate>Theme</translate>
           </md-button>
 
-          <div ng-show="isOpen('theme')" id="theme" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('theme')" id="theme" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -317,7 +317,7 @@
             <translate>Background Image</translate>
           </md-button>
 
-          <div ng-show="isOpen('bg')" id="images" class="menu-toggle-list">
+          <div ng-if="isOpen('bg')" id="images" class="menu-toggle-list">
             <md-card>
               <img ng-show="splash.background_image_name" src="{{splash.background_image_name}}" class="md-card-image" alt="Background">
               <md-card-content>
@@ -348,7 +348,7 @@
             <translate>Header Image</translate>
           </md-button>
 
-          <div ng-show="isOpen('logo')" id="images" class="menu-toggle-list">
+          <div ng-if="isOpen('logo')" id="images" class="menu-toggle-list">
             <md-card>
               <img ng-show="splash.header_image_type == 1 && splash.logo_file_name" src="{{splash.logo_file_name}}" class="md-card-image" alt="Background">
               <img ng-show="splash.header_image_type == 2 && splash.header_image_name" src="{{splash.header_image_name}}" class="md-card-image" alt="Background">
@@ -403,7 +403,7 @@
             <translate>Typography</translate>
           </md-button>
 
-          <div ng-show="isOpen('typography')" id="typography" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('typography')" id="typography" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -502,7 +502,7 @@
             <translate>Login Button</translate>
           </md-button>
 
-          <div ng-show="isOpen('btn')" id="btn" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('btn')" id="btn" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -564,7 +564,7 @@
             <translate>Input Fields</translate>
           </md-button>
 
-          <div ng-show="isOpen('input')" id="input" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('input')" id="input" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <div layout="row" layout-wrap>
@@ -634,7 +634,7 @@
             <translate>Container</translate>
           </md-button>
 
-          <div ng-show="isOpen('container')" id="container" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('container')" id="container" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-title>
                 <md-card-title-text>
@@ -690,7 +690,7 @@
             <translate>CSS</translate>
           </md-button>
 
-          <div ng-show="isOpen('css')" id="css" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('css')" id="css" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-title>
                 <md-card-title-text>
@@ -726,7 +726,7 @@
             <translate>Text</translate>
           </md-button>
 
-          <div ng-show="isOpen('text')" id="text" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('text')" id="text" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">
@@ -784,7 +784,7 @@
             <translate>Advertisement</translate>
           </md-button>
 
-          <div ng-show="isOpen('adverts')" id="images" class="menu-toggle-list">
+          <div ng-if="isOpen('adverts')" id="images" class="menu-toggle-list">
             <md-card>
               <img ng-show="splash.popup_image" src="{{splash.popup_image}}" class="md-card-image" alt="Background">
               <md-card-title>
@@ -870,7 +870,7 @@
             <translate>Links</translate>
           </md-button>
 
-          <div ng-show="isOpen('links')" id="links" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('links')" id="links" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-title>
                 <md-card-title-text>
@@ -951,7 +951,7 @@
             <translate>Terms</translate>
           </md-button>
 
-          <div ng-show="isOpen('terms')" id="terms" class="menu-toggle-list" layout="column">
+          <div ng-if="isOpen('terms')" id="terms" class="menu-toggle-list" layout="column">
             <md-card>
               <md-card-content>
                 <md-input-container class="md-block">

@@ -1373,7 +1373,7 @@ app.directive('vszSetup', ['Location', '$routeParams', '$location', '$http', '$m
     link: link,
     scope: {
     },
-    templateUrl: 'components/locations/new/_vsz_setup.html'
+    templateUrl: 'components/locations/integrations/_vsz_setup.html'
   };
 
 }]);
@@ -1955,7 +1955,7 @@ app.directive('locationSettingsNav', ['Location', function(Location) {
   };
 }]);
 
-app.directive('locationAudit', ['Session', 'Email', 'Location', 'Report', 'Social', '$routeParams', '$rootScope', '$location', '$timeout', '$q', '$localStorage', 'Locations', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', function(Session, Email, Location, Report, Social, $routeParams, $rootScope, $location, $timeout, $q, $localStorage, Locations, $mdDialog, showToast, showErrors, gettextCatalog) {
+app.directive('locationAudit', ['Session', 'Email', 'Location', 'Report', 'Social', 'SMSLog', '$routeParams', '$rootScope', '$location', '$timeout', '$q', '$localStorage', 'Locations', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', function(Session, Email, Location, Report, Social, SMSLog, $routeParams, $rootScope, $location, $timeout, $q, $localStorage, Locations, $mdDialog, showToast, showErrors, gettextCatalog) {
 
   var link = function(scope,element,attrs,controller) {
 
@@ -1967,13 +1967,14 @@ app.directive('locationAudit', ['Session', 'Email', 'Location', 'Report', 'Socia
     var weekAgoEpoch = Math.floor(scope.startDate.getTime() / 1000);
     var nowEpoch = Math.floor(scope.endDate.getTime() / 1000);
 
-    scope.audit_models = ['Radius Sessions', 'Emails', 'Social'];
+    scope.audit_models = ['Radius Sessions', 'Emails', 'Social', 'SMS logs'];
     scope.loading = true;
 
     var mailerType = {
       'Radius Sessions': 'radius',
       'Emails': 'email',
-      'Social': 'social'
+      'Social': 'social',
+      'SMS logs': 'sms_log'
     };
 
     scope.selected = 'Radius Sessions' || $routeParams.type;
@@ -2049,6 +2050,21 @@ app.directive('locationAudit', ['Session', 'Email', 'Location', 'Report', 'Socia
       });
     };
 
+    var findSMSLog = function() {
+      getParams();
+      params.location_id = scope.location.slug;
+      SMSLog.get(params).$promise.then(function(data, err) {
+        scope.selected = 'SMS logs';
+        scope.results = data.logs;
+        scope.links = data._links;
+        $location.search();
+        scope.loading = undefined;
+      }, function(err) {
+        console.log(err);
+        clearTable();
+      });
+    };
+
     var downloadReport = function() {
       var params = {
         start: scope.query.start,
@@ -2071,6 +2087,9 @@ app.directive('locationAudit', ['Session', 'Email', 'Location', 'Report', 'Socia
           break;
         case 'Social':
           findSocial();
+          break;
+        case 'SMS logs':
+          findSMSLog();
           break;
         default:
           findSessions();

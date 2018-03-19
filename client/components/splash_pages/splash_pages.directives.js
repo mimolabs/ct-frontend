@@ -387,21 +387,6 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
 
 }]);
 
-// app.directive('splashDesign', [function() {
-//   return {
-//     link: function(scope, element, attrs) {
-//       attrs.$observe('ver', function(start) {
-//         if (start !== '') {
-//           scope.getContentUrl = function() {
-//             return 'components/splash_pages/design-' + attrs.ver + '.html';
-//           };
-//         }
-//       });
-//     },
-//     template: '<div ng-include="getContentUrl()"></div>'
-//    };
-// }]);
-
 app.directive('designMenu', ['designer', 'gettextCatalog', 'menu', function(designer, gettextCatalog, menu) {
   return {
     link: function(scope, element, attrs) {

@@ -160,12 +160,9 @@
               <md-card-content>
                 <div layout="row" layout-wrap>
                   <div flex-gt-sm="100">
-                    <!-- <p style="margin-top:0px;">Allow guests to only sign in during specific times of day.</p> -->
                     <md-input-container class="md-block" style="margin-top: 0px;">
                       <md-switch ng-model="splash.access_restrict" ng-true-value="'periodic'" ng-false-value="'none'" style="margin: 0px">
                         Allow guests to only sign in during specific times of day.
-                        <!-- <span ng-show="splash.access_restrict === 'periodic'" translate>Enabled</span> -->
-                        <!-- <span ng-show="splash.access_restrict !== 'periodic'" translate>Disabled</span> -->
                       </md-switch>
                     </md-input-container>
                   </div>
@@ -173,8 +170,9 @@
                     <div layout="column" layout-gt-sm="row" layout-wrap ng-if="splash.access_restrict === 'periodic'">
                       <div flex-gt-sm="50">
                         <md-input-container class="md-block">
+
                           <label for="available_start"><translate>Start Time</translate></label>
-                          <input ng-model="splash.available_start" placeholder="{{ 'Start' | translate }}"  type='text' name="available_start" ng-pattern="/^([0-9]{2})\:([0-9]{2})$/">
+                          <input ng-model="splash.available_start" placeholder="{{ 'Start' | translate }}"  type='text' name="available_start" ng-pattern="/^([0-9]{1,2})\:([0-9]{2})$/">
                         </md-input-container>
                       </div>
                       <div flex-gt-sm="50">
@@ -960,7 +958,7 @@
                   <label>
                     <translate>Terms URL</translate>
                   </label>
-                  <input ng-model="splash.terms_url" placeholder="{{ 'Terms URL' | translate }}" type='url' name="terms_url" ng-maxlength='255' required></input>
+                  <input ng-model="splash.terms_url" placeholder="{{ 'Terms URL' | translate }}" type='url' name="terms_url" ng-maxlength='255'></input>
                   <div ng-messages="myForm.terms_url.$error">
                     <div ng-message="md-maxlength" translate>Must be less than 250 characters.</div>
                     <div ng-message="url" translate>Must be a valid URL including http(s).</div>
@@ -987,7 +985,7 @@
         <md-tooltip md-direction="bottom">Preview</md-tooltip>
         <md-icon md-font-icon="pageview">pageview</md-icon>
       </md-button>
-      <md-button ng-click="save(splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
+      <md-button ng-disabled="myForm.$pristine || myForm.$invalid" ng-click="save(splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
         <md-tooltip md-direction="bottom">Save</md-tooltip>
         <md-icon md-font-icon="save">save</md-icon>
       </md-button>

@@ -284,6 +284,11 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
     //   controller: 'SplashPagesDesignCtrl as lc',
     //   resolve: { loginRequired: loginRequired }
     // }).
+    when('/:id/splash_pages/new', {
+      templateUrl: 'components/splash_pages/design.html',
+      controller: 'SplashPagesDesignCtrl as lc',
+      resolve: { loginRequired: loginRequired }
+    }).
     when('/:id/splash_pages/:splash_page_id', {
       templateUrl: 'components/splash_pages/design.html',
       controller: 'SplashPagesDesignCtrl as lc',

@@ -272,20 +272,22 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
         location_id: scope.location.slug,
         id: scope.splash.id,
       }).$promise.then(function(res) {
-        scope.splash      = res.splash_page;
-        // designer.splash   = scope.splash;
-        scope.uploadLogo  = (scope.splash.header_image_name === null && scope.splash.logo_file_name === null);
-        $timeout(function() {
-          menu.Designer = true;
-          scope.loading     = undefined;
-        }, 500);
+        scope.splash = res.splash_page;
+        scope.uploadLogo = (scope.splash.header_image_name === null && scope.splash.logo_file_name === null);
+        scope.splash.periodic_days = [];
+        console.log(scope.splash.available_days);
+        if (scope.splash.available_days === null) {
+          scope.splash.available_days = [];
+        }
+        scope.loading = undefined;
       }, function() {
-        scope.loading     = undefined;
-        scope.errors      = true;
+        scope.loading = undefined;
+        scope.errors = true;
       });
     };
 
     scope.save = function(splash, form) {
+      form.$setPristine();
       scope.splash.updating = true;
       SplashPage.update({
         location_id: scope.location.slug,
@@ -293,13 +295,6 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
         splash_page: splash
       }).$promise.then(function(res) {
         scope.splash.updating = undefined;
-        scope.splash = res.splash_page;
-        // designer.splash = scope.splash;
-        if (form) {
-          form.$setPristine();
-        } else {
-          $route.reload();
-        }
         showToast(gettextCatalog.getString('Layout successfully updated.'));
       }, function(err) {
         showErrors(err);

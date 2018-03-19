@@ -47,7 +47,6 @@ app.controller('SplashPagesDesignCtrl', ['$location', '$scope', '$routeParams', 
     });
 
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
-      menu.Designer = undefined;
       menu.hideMainNav = undefined;
       menu.hideToolbar = undefined;
       menu.isOpen = true;

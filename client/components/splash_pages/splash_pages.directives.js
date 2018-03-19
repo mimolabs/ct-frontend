@@ -139,93 +139,39 @@ app.directive('listSplash', ['Location', 'SplashPage', '$routeParams', '$locatio
 
 }]);
 
-app.directive('splashNew', ['SplashPage', 'Auth', '$location', '$routeParams', '$rootScope', '$mdDialog', '$localStorage', 'showToast', 'showErrors', 'gettextCatalog', function(SplashPage,Auth,$location,$routeParams,$rootScope,$mdDialog,$localStorage,showToast,showErrors,gettextCatalog) {
+// app.directive('splashNew', ['SplashPage', 'Auth', '$location', '$routeParams', '$rootScope', '$mdDialog', '$localStorage', 'showToast', 'showErrors', 'gettextCatalog', function(SplashPage,Auth,$location,$routeParams,$rootScope,$mdDialog,$localStorage,showToast,showErrors,gettextCatalog) {
 
-  var link = function(scope, element, attrs) {
+//   var link = function(scope, element, attrs) {
 
-    scope.obj = {};
-    scope.splash = {};
-    scope.location = { slug: $routeParams.id };
+//     scope.obj = {};
+//     scope.splash = {};
+//     scope.location = { slug: $routeParams.id };
 
-    var getSplashPages = function() {
-      return SplashPage.get({location_id: scope.location.slug }).$promise.then(function(results) {
-        scope.obj.access_types = results.access_types;
-        scope.splash.primary_access_id = scope.obj.access_types[0].id;
-        scope.obj.loading = undefined;
-      }, function(error) {
-      });
-    };
+//     var create = function(form) {
+//       SplashPage.create({
+//         location_id: scope.location.slug,
+//         splash_page: {
+//           splash_name: scope.splash_name,
+//         }
+//       }).$promise.then(function(results) {
+//         $mdDialog.cancel();
+//         $location.path('/' + $routeParams.id + '/splash_pages/' + results.id);
+//         $location.search({wizard: 'yas'});
+//       }, function(err) {
+//         $mdDialog.cancel();
+//         showErrors(err);
+//       });
+//     };
+//   };
 
-    var create = function(form) {
-      form.$setPristine();
-      if (scope.splash.ssid) {
-        scope.splash.network_id = undefined;
-      }
-      if ($localStorage && $localStorage.mimo_user) {
-        scope.splash.powered_by = !$localStorage.mimo_user.custom;
-      }
-      SplashPage.create({
-        location_id: scope.location.slug,
-        splash_page: {
-          ssid: scope.splash.ssid,
-          network_ids: scope.splash.network_id,
-          splash_name: scope.splash_name,
-          primary_access_id: scope.splash.primary_access_id,
-          powered_by: scope.splash.powered_by
-        }
-      }).$promise.then(function(results) {
-        $mdDialog.cancel();
-        $location.path('/' + $routeParams.id + '/splash_pages/' + results.id);
-        $location.search({wizard: 'yas'});
-      }, function(err) {
-        $mdDialog.cancel();
-        showErrors(err);
-      });
-    };
+//   return {
+//     link: link,
+//     scope: {
+//     },
+//     templateUrl: 'components/splash_pages/_designer.html',
+//   };
 
-    scope.open = function(network) {
-      $mdDialog.show({
-        templateUrl: 'components/splash_pages/_form.html',
-        parent: angular.element(document.body),
-        controller: DialogController,
-        clickOutsideToClose: false,
-        locals: {
-          obj: scope.obj,
-          splash: scope.splash
-        }
-      });
-    };
-
-    function DialogController ($scope,obj,splash) {
-      $scope.obj = obj;
-      $scope.obj.loading = true;
-      $scope.splash = splash;
-
-      getSplashPages();
-
-      $scope.save = function(form) {
-        create(form);
-      };
-      $scope.close = function() {
-        $mdDialog.cancel();
-      };
-    }
-    DialogController.$inject = ['$scope','obj','splash'];
-
-    scope.style = attrs.style;
-
-  };
-
-  return {
-    link: link,
-    scope: {
-      pages: '=',
-      style: '@'
-    },
-    templateUrl: 'components/splash_pages/_splash_new.html',
-  };
-
-}]);
+// }]);
 
 app.directive('splashDesignerForm', ['SplashPage', 'Location', '$compile', function(SplashPage, Location, $compile) {
 
@@ -258,37 +204,40 @@ app.directive('splashDesignerForm', ['SplashPage', 'Location', '$compile', funct
 
 }]);
 
-app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$route', '$routeParams', '$q', 'menu', '$timeout', 'showToast', 'showErrors', '$rootScope', 'gettextCatalog', function(Location, SplashPage, SplashPageForm, $route, $routeParams, $q, menu , $timeout, showToast, showErrors, $rootScope, gettextCatalog) {
+app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$route', '$routeParams', '$q', 'menu', '$location', 'showToast', 'showErrors', '$rootScope', 'gettextCatalog', function(Location, SplashPage, SplashPageForm, $route, $routeParams, $q, menu , $location, showToast, showErrors, $rootScope, gettextCatalog) {
 
   var link = function(scope,element,attrs) {
 
-    menu.hideToolbar = true;
-    menu.isOpen = false;
-    scope.location = { slug: $routeParams.id };
     scope.splash = { id: $routeParams.splash_page_id };
+
+    scope.location = { slug: $routeParams.id };
+
+    var setDefaults = function() {
+      scope.uploadLogo = (scope.splash.header_image_name === null && scope.splash.logo_file_name === null);
+      scope.splash.periodic_days = [];
+      if (scope.splash.available_days === null) {
+        scope.splash.available_days = [];
+      }
+      scope.splash.userdays = [];
+      if (scope.splash.passwd_change_day === null) {
+        scope.splash.passwd_change_day = [];
+      }
+      scope.splash.periodic_days = [];
+      if (scope.splash.available_days === null) {
+        scope.splash.available_days = [];
+      }
+      if (scope.splash.passwd_change_day === undefined) {
+        scope.splash.passwd_change_day = [];
+      }
+    };
 
     var init = function() {
       return SplashPage.query({
         location_id: scope.location.slug,
-        id: scope.splash.id,
+        id: $routeParams.splash_page_id,
       }).$promise.then(function(res) {
         scope.splash = res.splash_page;
-        scope.uploadLogo = (scope.splash.header_image_name === null && scope.splash.logo_file_name === null);
-        scope.splash.periodic_days = [];
-        if (scope.splash.available_days === null) {
-          scope.splash.available_days = [];
-        }
-        scope.splash.userdays = [];
-        if (scope.splash.passwd_change_day === null) {
-          scope.splash.passwd_change_day = [];
-        }
-        scope.splash.periodic_days = [];
-        if (scope.splash.available_days === null) {
-          scope.splash.available_days = [];
-        }
-        if (scope.splash.passwd_change_day === undefined) {
-          scope.splash.passwd_change_day = [];
-        }
+        setDefaults();
         scope.loading = undefined;
       }, function() {
         scope.loading = undefined;
@@ -296,7 +245,19 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       });
     };
 
-    scope.save = function(splash, form) {
+    var create = function() {
+      SplashPage.create({}, {
+        location_id: scope.location.slug,
+        splash_page: scope.splash
+      }).$promise.then(function(results) {
+        showToast(gettextCatalog.getString('Splash created successfully'));
+        $location.path($routeParams.id + '/splash_pages/' + results.splash_page.id)
+      }, function(err) {
+        showErrors(err);
+      });
+    };
+
+    var save = function(splash, form) {
       if (form) { form.$setPristine(); }
       scope.splash.updating = true;
       SplashPage.update({
@@ -310,6 +271,10 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
         showErrors(err);
         scope.splash.updating = undefined;
       });
+    };
+
+    scope.save = function(splash, form) {
+      if (scope.splash.id) { save(splash, form); } else { create(); }
     };
 
     scope.setTrans = function() {
@@ -352,7 +317,6 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
 
     scope.preview = function() {
       window.open('http://app.my-wifi.co/'+scope.splash.unique_id+'?cmd=login&mac=FF-FF-FF-FF-FF-FF&apname='+scope.splash.preview_mac+'&vcname=instant-C6:3C:E8','winname','directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1000,height=800');
-
     };
 
     scope.toggle = function(section) {
@@ -390,7 +354,84 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       menu.isOpen = true;
     });
 
-    init();
+    if ($routeParams.splash_page_id === 'new') {
+      scope.splash = {
+	'primary_access_id': 20,
+	'splash_name': 'MIMO Splash',
+	'active': true,
+	'passwd_change_day': [],
+        'passwd_auto_gen': false,
+        'fb_login_on': false,
+        'info': 'Welcome, please login below.',
+	'backup_sms': false,
+	'backup_email': true,
+	'access_restrict': 'none',
+	'powered_by': true,
+	'newsletter_active': false,
+	'newsletter_checked': true,
+	'newsletter_type': 0,
+	'walled_gardens': '',
+	'design_id': 1,
+	'logo_file_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/aZgRK0aqQ1a8o8c5mCjy',
+	'background_image_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/DhOaaHbNQEu3WMnSzEIo',
+	'header_image_type': 1,
+	'header_text': 'Sign In Below',
+	'container_width': '850px',
+	'container_text_align': 'center',
+	'body_background_colour': '#FFFFFF',
+	'heading_text_colour': 'rgb(50, 50, 73)',
+	'body_text_colour': 'rgb(50, 50, 73)',
+	'border_colour': 'rgba(255, 255, 255, 0)',
+	'link_colour': 'rgb(66, 103, 178)',
+	'container_colour': 'rgba(255, 255, 255, 0)',
+	'button_colour': 'rgb(50, 50, 73)',
+	'button_radius': '4px',
+	'button_border_colour': 'rgb(50, 50, 73)',
+	'button_padding': '0px 16px',
+	'button_shadow': false,
+	'container_shadow': false,
+	'header_colour': '#FFFFFF',
+	'error_colour': '#ED561B',
+	'container_transparency': 1,
+	'container_float': 'center',
+	'container_inner_width': '100%',
+	'container_inner_padding': '20px',
+	'container_inner_radius': '4px',
+	'bg_dimension': 'full',
+	'words_position': 'right',
+	'logo_position': 'center',
+	'hide_terms': false,
+        'font_family': '\'Helvetica Neue\', Arial, Helvetica, sans-serif',
+	'body_font_size': '14px',
+	'heading_text_size': '22px',
+	'heading_2_text_size': '16px',
+	'heading_2_text_colour': 'rgb(50, 50, 73)',
+	'heading_3_text_size': '14px',
+	'heading_3_text_colour': 'rgb(50, 50, 73)',
+	'btn_text': 'Login Now',
+	'btn_font_size': '18px',
+	'btn_font_colour': 'rgba(255, 255, 255, 0.9)',
+	'input_required_colour': '#CCC',
+	'show_welcome': false,
+	'input_height': '40px',
+	'input_padding': '10px 15px',
+	'input_border_colour': '#d0d0d0',
+	'input_border_radius': '0px',
+	'input_border_width': '1px',
+	'input_background': '#FFFFFF',
+	'input_text_colour': '#3D3D3D',
+	'input_max_width': '400px',
+	'footer_text_colour': '#CCC',
+	'popup_ad': false,
+	'popup_background_colour': 'rgb(255,255,255)',
+	'periodic_days': [],
+	'userdays': []
+      };
+      setDefaults();
+      scope.loading = undefined;
+    } else {
+      init();
+    }
 
   };
 
@@ -407,26 +448,27 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
 app.directive('designMenu', ['designer', 'gettextCatalog', 'menu', function(designer, gettextCatalog, menu) {
   return {
     link: function(scope, element, attrs) {
-      attrs.$observe('ver', function(start) {
-        if (scope.splash.walled_gardens && scope.splash.walled_gardens.length) {
-          scope.splash.walled_gardens_array = scope.splash.walled_gardens.split(',');
-        } else {
-          scope.splash.walled_gardens_array = [];
-        }
-        if (start !== '') {
-          scope.splash = designer;
-          scope.access_restrict = [{ key: gettextCatalog.getString('Off'), value: 'none'}, {key: gettextCatalog.getString('Periodic'), value: 'periodic'}, {key: gettextCatalog.getString('Data Downloaded'), value: 'data' }, {key: gettextCatalog.getString('Timed Access'), value: 'timed'}];
-          scope.integrations = [{ key: gettextCatalog.getString('Off'), value: 0 }, { key: 'MailChimp', value: 1}, {key: 'CampaignMonitor', value: 2}, {key: 'SendGrid', value: 4}, {key: gettextCatalog.getString('Internal only'), value: 3 }];
-          scope.slider = {};
-          scope.slider.download_speed = 1024;
-          scope.slider.upload_speed = 1024;
-          scope.getContentUrl = function() {
-            return 'components/splash_pages/_menu.html';
-          };
-        }
-      });
+      // attrs.$observe('ver', function(start) {
+      //   if (scope.splash.walled_gardens && scope.splash.walled_gardens.length) {
+      //     scope.splash.walled_gardens_array = scope.splash.walled_gardens.split(',');
+      //   } else {
+      //     scope.splash.walled_gardens_array = [];
+      //   }
+      //   if (start !== '') {
+      //     // scope.splash = designer;
+      //     scope.access_restrict = [{ key: gettextCatalog.getString('Off'), value: 'none'}, {key: gettextCatalog.getString('Periodic'), value: 'periodic'}, {key: gettextCatalog.getString('Data Downloaded'), value: 'data' }, {key: gettextCatalog.getString('Timed Access'), value: 'timed'}];
+      //     scope.integrations = [{ key: gettextCatalog.getString('Off'), value: 0 }, { key: 'MailChimp', value: 1}, {key: 'CampaignMonitor', value: 2}, {key: 'SendGrid', value: 4}, {key: gettextCatalog.getString('Internal only'), value: 3 }];
+      //     scope.slider = {};
+      //     scope.slider.download_speed = 1024;
+      //     scope.slider.upload_speed = 1024;
+      //     scope.getContentUrl = function() {
+      //       return 'components/splash_pages/_menu.html';
+      //     };
+      //   }
+      // });
     },
-    template: '<div ng-include="getContentUrl()"></div>'
+    // template: '<div ng-include="getContentUrl()"></div>'
+    templateUrl: 'components/splash_pages/_menu.html'
    };
 }]);
 

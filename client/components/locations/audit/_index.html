@@ -11,7 +11,7 @@
     <md-card class="b-or">
       <md-card-content layout="row" layout-wrap>
         <div class="md-toolbar-tools">
-          <span translate translate-n="{{links.total_entries}}" translate-plural="{{links.total_entries || 0}} {{selected}}">1 {{selected}}</span><span hide show-gt-sm ng-if="query.start" translate><span ng-if="selected == 'Emails' || selected == 'Sales' || selected == 'Guests' || selected == 'Radius Sessions'">&nbsp;created</span><span ng-if="selected == 'Social' || selected == 'Clients'">&nbsp;seen</span> between {{ query.start | humanDate }} and {{ query.end | humanDate }}</span>
+          <span translate translate-n="{{links.total_entries}}" translate-plural="{{links.total_entries || 0}} {{selected}}">1 {{selected}}</span><span hide show-gt-sm ng-if="query.start" translate><span ng-if="selected == 'Emails' || selected == 'Sales' || selected == 'Guests' || selected == 'Radius Sessions' || selected == 'SMS logs'">&nbsp;created</span><span ng-if="selected == 'Social' || selected == 'Clients'">&nbsp;seen</span> between {{ query.start | humanDate }} and {{ query.end | humanDate }}</span>
           <div flex></div>
           <div style="margin-top:20px;">
             <div flex="100">
@@ -74,12 +74,18 @@
                   <th hide show-gt-sm md-column ng-show="selected == 'Emails'"><span translate>Type</span></th>
                   <th hide show-gt-md md-column ng-show="selected == 'Sales'"><span translate>Voucher</span></th>
                   <th hide show-gt-xs md-column ng-show="selected == 'Sales'"><span translate>Total</span></th>
-                  <th hide show-gt-sm md-column ng-show="selected == 'Emails' || selected ==  'Guests' || selected ==  'Sales' || selected == 'Clients'"><span translate>Created</span></th>
+                  <th hide show-gt-sm md-column ng-show="selected == 'Emails' || selected ==  'Guests' || selected ==  'Sales' || selected == 'Clients' || selected == 'SMS logs'"><span translate>Created</span></th>
                   <th hide show-gt-md md-column ng-show="selected == 'Sales' || selected == 'Guests'"><span translate>Mac</span></th>
                   <th hide show-gt-sm md-column ng-show="selected == 'Sales'"><span translate>Merchant</span></th>
                   <th hide show-gt-md md-column ng-show="selected == 'Social' || selected == 'Clients'"><span translate>Last Seen</span></th>
                   <th hide show-gt-xs md-column ng-show="selected == 'Social'"><span translate>Gender</span></th>
                   <th hide show-gt-xs md-column ng-show="selected == 'Social'"><span translate>Networks</span></th>
+                  <th hide show-gt-xs md-column ng-show="selected == 'SMS logs'"><span translate>From</span></th>
+                  <th hide show-gt-xs md-column ng-show="selected == 'SMS logs'"><span translate>To</span></th>
+                  <th hide show-gt-xs md-column ng-show="selected == 'SMS logs'"><span translate>Body</span></th>
+                  <th hide show-gt-xs md-column ng-show="selected == 'SMS logs'"><span translate>Type</span></th>
+                  <th hide show-gt-xs md-column ng-show="selected == 'SMS logs'"><span translate>Splash Page</span></th>
+                  <th hide show-gt-xs md-column ng-show="selected == 'SMS logs'"><span translate>Success</span></th>
                 </tr>
               </thead>
               <tbody md-body>
@@ -167,7 +173,7 @@
                   </td>
                   <td hide show-gt-md md-cell ng-show="selected == 'Sales'">{{ ::(result.vouchers | truncate:20) }}</td>
                   <td hide show-gt-xs md-cell ng-show="selected == 'Sales'">{{ result.total / 100 | currency:result.currency }}</td>
-                  <td hide show-gt-sm md-cell ng-show="selected == 'Emails' || selected == 'Guests' || selected == 'Sales' || selected == 'Clients'">
+                  <td hide show-gt-sm md-cell ng-show="selected == 'SMS logs' || selected == 'Emails' || selected == 'Guests' || selected == 'Sales' || selected == 'Clients'">
                     {{ ::(result.created_at | humanTimeShort ) }}
                   </td>
                   <td hide show-gt-md md-cell ng-show="selected == 'Sales'">{{ ::(result.client_mac) }}</td>
@@ -182,7 +188,7 @@
                   <td hide show-gt-xs md-cell ng-show="selected == 'Social'">
                     {{ result.gender == 'male' ? 'M' : 'F' }}
                   </td>
-                  <td md-cell>
+                  <td md-cell ng-show="selected == 'Social'">
                     <span ng-if="result.facebook_id">
                       <img src="https://d3e9l1phmgx8f2.cloudfront.net/images/social/facebook.png" width=24px>
                     </span>
@@ -192,6 +198,24 @@
                     <span ng-if="result.linkedin_id">
                       <img src="https://d3e9l1phmgx8f2.cloudfront.net/images/social/linkedin.png" width=24px>
                     </span>
+                  </td>
+                  <td hide show-gt-xs md-cell ng-show="selected == 'SMS logs'">
+                    {{ result.from }}
+                  </td>
+                  <td hide show-gt-xs md-cell ng-show="selected == 'SMS logs'">
+                    {{ result.to }}
+                  </td>
+                  <td hide show-gt-xs md-cell ng-show="selected == 'SMS logs'">
+                    {{ result.body }}
+                  </td>
+                  <td hide show-gt-xs md-cell ng-show="selected == 'SMS logs'">
+                    {{ result.sms_type }}
+                  </td>
+                  <td hide show-gt-xs md-cell ng-show="selected == 'SMS logs'">
+                    {{ result.splash_page_id }}
+                  </td>
+                  <td hide show-gt-xs md-cell ng-show="selected == 'SMS logs'">
+                    {{ result.success }}
                   </td>
                 </tr>
               </tbody>

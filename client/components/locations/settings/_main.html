@@ -82,9 +82,11 @@
                     </md-option>
                   </md-select>
                 </md-input-container>
-                <md-switch class="md-accent" ng-model="location.demo" aria-label="{{ 'Location Demo Data' | translate }}">
-                  <span translate>Demo data {{location.demo ? 'enabled' : 'disabled'}}</span>
-                </md-switch>
+                <div layout="column">
+                  <md-switch class="md-accent" ng-model="location.demo" aria-label="{{ 'Location Demo Data' | translate }}">
+                    <span translate>Display demo data<a>&nbsp;(?)<md-tooltip>Displays demo people data instead of real data for the location, to give you an idea of what can be captured</md-tooltip></a></span>
+                  </md-switch>
+                </div>
               </div>
             </md-card-content>
           </md-card>

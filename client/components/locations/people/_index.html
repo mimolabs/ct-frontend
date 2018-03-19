@@ -182,7 +182,7 @@
               </md-button>
               <md-menu-content width="3">
                 <md-menu-item>
-                  <md-button ng-click="downloadSegment()" ng-disabled="location.demo === 'true'">
+                  <md-button ng-click="downloadSegment()">
                     <md-icon md-menu-align-target style="margin: auto 3px auto 0;">file_download</md-icon>
                     <span translate>Download People</span>
                   </md-button>
@@ -202,7 +202,7 @@
       <div flex="100" flex-gt-sm="70" class="people-table">
         <md-card class="b-bl">
           <div class="example-data" ng-show="location.demo === 'true'">
-            This table is currently populated with demo data. You can switch this off in your location settings.
+            This table is currently populated with demo data. You can switch this off in your <a href="/#/{{location.slug}}/settings">location settings</a>.
           </div>
           <div class="md-toolbar-tools" ng-cloak layout="row" layout-align="space-between center">
             <div flex="75">

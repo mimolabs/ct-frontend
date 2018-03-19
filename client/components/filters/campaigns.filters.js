@@ -24,7 +24,7 @@ app.filter('humanPredicate', [ 'gettextCatalog', function(gettextCatalog) {
         attr = 'Last seen';
         break;
       case 'login_count':
-        attr = 'Logins';
+        attr = 'Logged in';
         break;
       case 'email':
         attr = 'Email address';
@@ -41,7 +41,7 @@ app.filter('humanPredicate', [ 'gettextCatalog', function(gettextCatalog) {
     }
 
     if (['email', 'username', 'first_name', 'last_name'].includes(predicate.attribute)) {
-      return attr + ' matches "' + predicate.value + '"';
+      return attr + ' includes \'' + predicate.value + '\'';
     }
 
     if (predicate.attribute === 'login_count') {
@@ -50,7 +50,7 @@ app.filter('humanPredicate', [ 'gettextCatalog', function(gettextCatalog) {
       } else {
         phrase = 'less than';
       }
-      return attr + ' ' + phrase + ' ' + (predicate.value || 0) + ' logins';
+      return attr + ' ' + phrase + ' ' + (predicate.value || 0) + ' times';
     }
 
     if (isNumber(predicate.value)) {
@@ -73,6 +73,6 @@ app.filter('humanPredicate', [ 'gettextCatalog', function(gettextCatalog) {
       phrase = 'on';
     }
 
-    return attr + ' ' + phrase + ' ' + predicate.value;
+    return attr + ' ' + phrase + ' ' + String(predicate.value).split(' ').slice(0,4).join(' ');
   };
 }]);

@@ -29,12 +29,11 @@ var app = angular.module('myApp.services', [
   'myApp.quotas.services',
   'myApp.reports.services',
   'myApp.registrations.services',
+  'myApp.sms.services',
   'myApp.sms_logs.services',
   'myApp.social.services',
-  'myApp.splash_codes.services',
   'myApp.splash_integrations.services',
   'myApp.splash_pages.services',
   'myApp.subscriptions.services',
   'myApp.users.services',
-  'myApp.vouchers.services',
 ]);

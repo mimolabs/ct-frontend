@@ -73,7 +73,7 @@
     box-shadow: {{splash.button_shadow ? '0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);' : '0 0px 0px rgba(0,0,0,0.0)'}};
   }
 
-  .btn, button {
+  .designer .btn, .designer button {
     min-width: 150px;
     max-width: 400px;
     width: 95%;
@@ -127,15 +127,6 @@
     padding: 14px 0;
   }
 
-  .social {
-    margin: 10px 0 0 -5px;
-  }
-
-  .social img {
-    width: 32px;
-    height: 32px;
-  }
-
   #container-c1 {
 
   }
@@ -180,7 +171,8 @@
   }
 
   .designer {
-    height:100vh;
+    position: relative;
+    height: 100vh;
     padding: 0 10px 0 10px;
     margin: 0 auto;
     background-image: url({{ splash.background_image_name }} );
@@ -190,6 +182,25 @@
     -o-background-size: cover;
     background-size: cover;
     background-position: center;
+  }
+
+  .social.des-sms {
+    background-color: #ef5350;
+    background-image: url(https://d247kqobagyqjh.cloudfront.net/api/file/Twod7nCQemBNJ8lBP8MQ);
+    background-repeat: no-repeat;
+    background-position: 5px 5px;
+    background-size: 40px;
+    border: none;
+    padding-left: 4rem;
+  }
+
+  .social.des-sms:hover,.social.des-sms:focus {
+    background: #e53935;
+    background-image: url(https://d247kqobagyqjh.cloudfront.net/api/file/Twod7nCQemBNJ8lBP8MQ);
+    background-repeat: no-repeat;
+    background-position: 5px 5px;
+    background-size: 40px;
+    border: none;
   }
 
   .social.des-facebook {
@@ -253,12 +264,6 @@
     background-color: #FFFFFF;
     border: 1px solid #CCC;
     color: #000;
-    min-width: 150px;
-    max-width: 400px;
-    max-height: 50px;
-    width: 95%;
-    margin: 10px 0px 10px 0px;
-    border-radius: 4px;
     padding-left: 4rem;
   }
 
@@ -307,7 +312,6 @@
     font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
     font-weight: normal;
     line-height: normal;
-    margin: 0 0 1.25rem;
     position: relative;
     text-decoration: none;
     text-align: center;
@@ -326,12 +330,17 @@
     max-height: 50px;
     min-width: 150px;
     max-width: 400px;
-    width: 100%;
-    margin: 10px;
+    width: 95%;
+    margin: 10px 0 0 -5px;
+  }
+
+  .social img {
+    width: 32px;
+    height: 32px;
   }
 
   #popup_container {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     position: absolute;
     background: rgba(0,0,0,0.5);
@@ -368,26 +377,69 @@
 
 </style>
 
-<div class="designer" ng-hide="loading">
-  <div id="popup_container" ng-show="splash.popup_demo">
-    <div id="popup_ad">
-      <div layout="row" layout-align="center center">
-        <div flex="100" flex-gt-sm="100">
-          <img src="{{ splash.popup_image }}">
+<div layout="row">
+  <div flex="75" hide show-gt-xs >
+    <div class="designer" ng-hide="loading">
+      <div id="popup_container" ng-show="splash.popup_demo">
+        <div id="popup_ad">
+          <div layout="row" layout-align="center center">
+            <div flex="100" flex-gt-sm="100" style="text-align:center;">
+              <img src="{{ splash.popup_image }}">
+            </div>
+          </div>
+          <div layout="row" layout-align="center center">
+            <div flex class="text-align-center">
+            </div>
+            <a class="btn button" id="popupBoxClose">Close</a>
+            <div flex class="text-align-center">
+            </div>
+          </div>
         </div>
       </div>
-      <div layout="row" layout-align="center center">
-        <div flex class="text-align-center">
-        </div>
-          <a class="btn button" id="popupBoxClose">Close</a>
-        <div flex class="text-align-center">
+
+      <div class="dc design-container">
+        <div class="splash-container md-padding">
+          <!-- <splash-design ver='{{ splash.design_id }}'></splash-design> -->
+          <div style="height: 150px" ng-hide="splash.header_image_name || splash.logo_file_name">
+          </div>
+
+          <div ng-show="splash.header_image_name != undefined || splash.logo_file_name != undefined" class="" ng-class="splash.header_image_type == 1 ? 'logo location_logo' : 'banner'" ><a href="http://{{ splash.website }}"><img src="{{ splash.header_image_type == 1 ? splash.logo_file_name : splash.header_image_name }}" alt="" class=""></a></div>
+
+          <div class="ps_inner">
+            <div ng-show="splash.welcome_demo == true">
+              <div ng-include="'components/splash_pages/_welcome.html'"></div>
+            </div>
+            <div ng-hide="splash.welcome_demo == true">
+              <h1>{{ splash.header_text }}</h1>
+              <h2><div ng-bind-html="splash.info | sanitize"></div></h2>
+              <p ng-bind-html="splash.info_two | sanitize"></p>
+              <splash-designer-form access="{{splash.primary_access_id}}" btntext="{{ splash.btn_text }}"></splash-designer-form>
+              <p class="small" ng-hide="splash.hide_terms" translate>By logging in, you agree to our <a href="{{ splash.terms_url }}">terms of use</a></p>
+              <div class="location_address">
+                <p>{{splash.address}}</p>
+              </div>
+              <div class="social" ng-show="splash.twitter_name || splash.google_name || splash.facebook_name || splash.pinterest_name || splash.instagram_name || splash.linkedin_name">
+                <a ng-show="splash.twitter_name" href="https://twitter.com/{{splash.twitter_name}}"><img src="https://d247kqobagyqjh.cloudfront.net/api/file/PdwjF22TTiqOHvzQcksA"></a>
+                <a ng-show="splash.google_name" href="https://plus.google.com/{{splash.google_name}}/about"><img src="https://d247kqobagyqjh.cloudfront.net/api/file/K3YDlqzUQzIavvIEkesC"></a>
+                <a ng-show="splash.facebook_name" href="http://facebook.com/{{splash.facebook_name}}"><img src="https://d247kqobagyqjh.cloudfront.net/api/file/WUhzu2zRTremUtlXxALC"></a>
+                <a ng-show="splash.pinterest_name" href="http://pinterest.com/{{splash.pinterest_name}}"><img src="https://d247kqobagyqjh.cloudfront.net/api/file/LntaNNciSKKXjiMQKVLg"></a>
+                <a ng-show="splash.instagram_name" href="http://instagram.com/{{splash.instagram_name}}"><img src="https://d247kqobagyqjh.cloudfront.net/api/file/1HF1iim8TZiWlw1lOQha"></a>
+                <a ng-show="splash.linkedin_name" href="http://linkedin.com/{{splash.linkedin_name}}"><img src="https://d247kqobagyqjh.cloudfront.net/api/file/7sYXABsjSFKJ0a4OaVKK"></a>
+              </div>
+              <p><a href="http://{{splash.website}}">{{ splash.website }}</a></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="dc design-container">
-    <div class="splash-container md-padding">
-      <splash-design ver='{{ splash.design_id }}'></splash-design>
-    </div>
+  <div flex="100" flex-gt-xs="25" class="design-sidebar" style="">
+    <design-menu ver="designer"></design-menu>
   </div>
 </div>
+
+
+<!-- <div style="width: 200px; height: 100"> -->
+<!-- <1!-- <md-sidenav flex-xs flex-gt-sm="25" class="design-sidebar md-sidenav-right md-whiteframe-z2" md-component-id="" md-is-locked-open="vm.menu.Designer == true"> --1> -->
+<!--   <design-menu ver="designer"></design-menu> -->
+<!-- <1!-- </md-sidenav> --1> -->

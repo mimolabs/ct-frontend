@@ -338,80 +338,91 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       menu.isOpen = true;
     });
 
+    // if (scope.splash.walled_gardens && scope.splash.walled_gardens.length) {
+    //   scope.splash.walled_gardens_array = scope.splash.walled_gardens.split(',');
+    // } else {
+    //   scope.splash.walled_gardens_array = [];
+    // }
+    scope.access_restrict = [{ key: gettextCatalog.getString('Off'), value: 'none'}, {key: gettextCatalog.getString('Periodic'), value: 'periodic'}, {key: gettextCatalog.getString('Data Downloaded'), value: 'data' }, {key: gettextCatalog.getString('Timed Access'), value: 'timed'}];
+    scope.integrations = [{ key: gettextCatalog.getString('Off'), value: 0 }, { key: 'MailChimp', value: 1}, {key: 'CampaignMonitor', value: 2}, {key: 'SendGrid', value: 4}, {key: gettextCatalog.getString('Internal only'), value: 3 }];
+    scope.slider = {};
+    scope.slider.download_speed = 1024;
+    scope.slider.upload_speed = 1024;
+
     if (!$routeParams.splash_page_id) {
       scope.splash = {
         'available_start': '00:00',
         'available_end': '00:00',
-	'primary_access_id': 20,
-	'splash_name': 'MIMO Splash',
-	'active': true,
-	'passwd_change_day': [],
+      	'primary_access_id': 20,
+      	'splash_name': 'MIMO Splash',
+      	'active': true,
+      	'passwd_change_day': [],
         'passwd_auto_gen': false,
         'fb_login_on': false,
         'info': 'Welcome, please login below.',
-	'backup_sms': false,
-	'backup_email': true,
-	'access_restrict': 'none',
-	'powered_by': true,
-	'newsletter_active': false,
-	'newsletter_checked': true,
-	'newsletter_type': 0,
-	'walled_gardens': '',
-	'design_id': 1,
-	'logo_file_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/aZgRK0aqQ1a8o8c5mCjy',
-	'background_image_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/DhOaaHbNQEu3WMnSzEIo',
-	'header_image_type': 1,
-	'header_text': 'Sign In Below',
-	'container_width': '850px',
-	'container_text_align': 'center',
-	'body_background_colour': '#FFFFFF',
-	'heading_text_colour': 'rgb(50, 50, 73)',
-	'body_text_colour': 'rgb(50, 50, 73)',
-	'border_colour': 'rgba(255, 255, 255, 0)',
-	'link_colour': 'rgb(66, 103, 178)',
-	'container_colour': 'rgba(255, 255, 255, 0)',
-	'button_colour': 'rgb(50, 50, 73)',
-	'button_radius': '4px',
-	'button_border_colour': 'rgb(50, 50, 73)',
-	'button_padding': '0px 16px',
-	'button_shadow': false,
-	'container_shadow': false,
-	'header_colour': '#FFFFFF',
-	'error_colour': '#ED561B',
-	'container_transparency': 1,
-	'container_float': 'center',
-	'container_inner_width': '100%',
-	'container_inner_padding': '20px',
-	'container_inner_radius': '4px',
-	'bg_dimension': 'full',
-	'words_position': 'right',
-	'logo_position': 'center',
-	'hide_terms': false,
+      	'backup_sms': false,
+      	'backup_email': true,
+      	'access_restrict': 'none',
+      	'powered_by': true,
+      	'newsletter_active': false,
+      	'newsletter_checked': true,
+      	'newsletter_type': 0,
+      	'walled_gardens': '',
+      	'design_id': 1,
+      	'logo_file_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/aZgRK0aqQ1a8o8c5mCjy',
+      	'background_image_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/DhOaaHbNQEu3WMnSzEIo',
+      	'header_image_type': 1,
+      	'header_text': 'Sign In Below',
+      	'container_width': '850px',
+      	'container_text_align': 'center',
+      	'body_background_colour': '#FFFFFF',
+      	'heading_text_colour': 'rgb(50, 50, 73)',
+      	'body_text_colour': 'rgb(50, 50, 73)',
+      	'border_colour': 'rgba(255, 255, 255, 0)',
+      	'link_colour': 'rgb(66, 103, 178)',
+      	'container_colour': 'rgba(255, 255, 255, 0)',
+      	'button_colour': 'rgb(50, 50, 73)',
+      	'button_radius': '4px',
+      	'button_border_colour': 'rgb(50, 50, 73)',
+      	'button_padding': '0px 16px',
+      	'button_shadow': false,
+      	'container_shadow': false,
+      	'header_colour': '#FFFFFF',
+      	'error_colour': '#ED561B',
+      	'container_transparency': 1,
+      	'container_float': 'center',
+      	'container_inner_width': '100%',
+      	'container_inner_padding': '20px',
+      	'container_inner_radius': '4px',
+      	'bg_dimension': 'full',
+      	'words_position': 'right',
+      	'logo_position': 'center',
+      	'hide_terms': false,
         'font_family': '\'Helvetica Neue\', Arial, Helvetica, sans-serif',
-	'body_font_size': '14px',
-	'heading_text_size': '22px',
-	'heading_2_text_size': '16px',
-	'heading_2_text_colour': 'rgb(50, 50, 73)',
-	'heading_3_text_size': '14px',
-	'heading_3_text_colour': 'rgb(50, 50, 73)',
-	'btn_text': 'Login Now',
-	'btn_font_size': '18px',
-	'btn_font_colour': 'rgba(255, 255, 255, 0.9)',
-	'input_required_colour': '#CCC',
-	'show_welcome': false,
-	'input_height': '40px',
-	'input_padding': '10px 15px',
-	'input_border_colour': '#d0d0d0',
-	'input_border_radius': '0px',
-	'input_border_width': '1px',
-	'input_background': '#FFFFFF',
-	'input_text_colour': '#3D3D3D',
-	'input_max_width': '400px',
-	'footer_text_colour': '#CCC',
-	'popup_ad': false,
-	'popup_background_colour': 'rgb(255,255,255)',
-	'periodic_days': [],
-	'userdays': []
+      	'body_font_size': '14px',
+      	'heading_text_size': '22px',
+      	'heading_2_text_size': '16px',
+      	'heading_2_text_colour': 'rgb(50, 50, 73)',
+      	'heading_3_text_size': '14px',
+      	'heading_3_text_colour': 'rgb(50, 50, 73)',
+      	'btn_text': 'Login Now',
+      	'btn_font_size': '18px',
+      	'btn_font_colour': 'rgba(255, 255, 255, 0.9)',
+      	'input_required_colour': '#CCC',
+      	'show_welcome': false,
+      	'input_height': '40px',
+      	'input_padding': '10px 15px',
+      	'input_border_colour': '#d0d0d0',
+      	'input_border_radius': '0px',
+      	'input_border_width': '1px',
+      	'input_background': '#FFFFFF',
+      	'input_text_colour': '#3D3D3D',
+      	'input_max_width': '400px',
+      	'footer_text_colour': '#CCC',
+      	'popup_ad': false,
+      	'popup_background_colour': 'rgb(255,255,255)',
+      	'periodic_days': [],
+      	'userdays': []
       };
       setDefaults();
       scope.loading = undefined;
@@ -434,24 +445,6 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
 app.directive('designMenu', ['designer', 'gettextCatalog', 'menu', function(designer, gettextCatalog, menu) {
   return {
     link: function(scope, element, attrs) {
-      // attrs.$observe('ver', function(start) {
-      //   if (scope.splash.walled_gardens && scope.splash.walled_gardens.length) {
-      //     scope.splash.walled_gardens_array = scope.splash.walled_gardens.split(',');
-      //   } else {
-      //     scope.splash.walled_gardens_array = [];
-      //   }
-      //   if (start !== '') {
-      //     // scope.splash = designer;
-      //     scope.access_restrict = [{ key: gettextCatalog.getString('Off'), value: 'none'}, {key: gettextCatalog.getString('Periodic'), value: 'periodic'}, {key: gettextCatalog.getString('Data Downloaded'), value: 'data' }, {key: gettextCatalog.getString('Timed Access'), value: 'timed'}];
-      //     scope.integrations = [{ key: gettextCatalog.getString('Off'), value: 0 }, { key: 'MailChimp', value: 1}, {key: 'CampaignMonitor', value: 2}, {key: 'SendGrid', value: 4}, {key: gettextCatalog.getString('Internal only'), value: 3 }];
-      //     scope.slider = {};
-      //     scope.slider.download_speed = 1024;
-      //     scope.slider.upload_speed = 1024;
-      //     scope.getContentUrl = function() {
-      //       return 'components/splash_pages/_menu.html';
-      //     };
-      //   }
-      // });
     },
     // template: '<div ng-include="getContentUrl()"></div>'
     templateUrl: 'components/splash_pages/_menu.html'

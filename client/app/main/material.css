@@ -434,6 +434,18 @@ splash-designer .design-sidebar {
   border-bottom: 1px solid rgba(0,0,0,0.12);
 }
 
+@media (max-width: 960px) {
+  .design-sidebar md-tabs {
+    height: calc(100vh - 150px);
+  }
+  splash-designer .design-sidebar {
+    height: calc(100vh - 50px);
+  }
+  .designer {
+    height: calc(100vh - 50px)!important;
+  }
+}
+
 .design-sidebar md-tabs md-tabs-wrapper {
   /*position: absolute;
   width: 100%;

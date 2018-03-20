@@ -339,7 +339,7 @@
                 </md-switch>
               </md-card-content>
               <md-card-actions layout="row" layout-align="end center">
-                  <md-button ng-hide="edit_bg_url" class="md-warn" ng-disabled="!splash.background_image_name" aria-label="{{ 'delete' | translate }}" ng-click="splash.deleteBg(splash,myForm)">
+                  <md-button ng-hide="edit_bg_url" class="md-warn" ng-disabled="!splash.background_image_name" aria-label="{{ 'delete' | translate }}" ng-click="deleteBg(splash,myForm)">
                     <translate>Delete</translate>
                   </md-button>
                   <filepicker ng-hide="edit_bg_url" attribute="splash.background_image_name" type="10" uploading="splash.bg_uploading"></filepicker>
@@ -822,7 +822,7 @@
                 </div>
               </md-card-content>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-warn" ng-disabled="!splash.popup_image" aria-label="{{ 'delete' | translate }}" ng-click="splash.deleteAd(splash,myForm)">
+                <md-button class="md-warn" ng-disabled="!splash.popup_image" aria-label="{{ 'delete' | translate }}" ng-click="deleteAd(splash,myForm)">
                   <translate>Delete</translate>
                 </md-button>
                 <span ng-hide="edit_image_url">

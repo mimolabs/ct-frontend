@@ -638,7 +638,6 @@ app.directive('splashDesignerForm', ['SplashPage', 'Location', '$compile', funct
     var leform;
 
     scope.splash = angular.fromJson(scope.s);
-    console.log(scope.splash)
 
     var init = function() {
       switch(attrs.access) {

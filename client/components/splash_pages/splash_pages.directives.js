@@ -196,6 +196,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
     scope.location = { slug: $routeParams.id };
 
     var setDefaults = function() {
+      console.log(scope.splash);
       scope.uploadLogo = (scope.splash.header_image_name === null && scope.splash.logo_file_name === null);
       scope.splash.periodic_days = [];
       if (scope.splash.available_days === null) {
@@ -339,6 +340,8 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
 
     if (!$routeParams.splash_page_id) {
       scope.splash = {
+        'available_start': '00:00',
+        'available_end': '00:00',
 	'primary_access_id': 20,
 	'splash_name': 'MIMO Splash',
 	'active': true,

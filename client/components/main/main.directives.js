@@ -20,22 +20,21 @@ app.directive('daySelector', ['gettextCatalog', function(gettextCatalog) {
       { id: 0, name: gettextCatalog.getString('Sun') }
     ];
 
-    // Not sure this ever got called
-    // scope.updateDays = function() {
-    //   for (var day in scope.array ) {
-    //     if (scope.array[day] === 1) {
-    //       var i = scope.days.indexOf(day);
-    //       if(i === -1) {
-    //         scope.days.push(day);
-    //       }
-    //     } else {
-    //       var j = scope.days.indexOf(day);
-    //       if(j !== -1) {
-    //         scope.days.splice(j, 1);
-    //       }
-    //     }
-    //   }
-    // };
+    scope.updateDays = function() {
+      for (var day in scope.array ) {
+        if (scope.array[day] === 1) {
+          var i = scope.days.indexOf(day);
+          if(i === -1) {
+            scope.days.push(day);
+          }
+        } else {
+          var j = scope.days.indexOf(day);
+          if(j !== -1) {
+            scope.days.splice(j, 1);
+          }
+        }
+      }
+    };
 
     var updateDays = function() {
       if (scope.days !== null && scope.days !== undefined) {

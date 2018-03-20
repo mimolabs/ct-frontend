@@ -234,7 +234,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
         location_id: scope.location.slug,
         splash_page: scope.splash
       }).$promise.then(function(results) {
-        $location.path($routeParams.id + '/splash_pages/' + results.splash_page.id);
+        $location.path('/' + $routeParams.id + '/splash_pages/' + results.splash_page.id + '/design');
         showToast(gettextCatalog.getString('Splash created successfully'));
       }, function(err) {
         showErrors(err);

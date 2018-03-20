@@ -43,7 +43,7 @@
           <div flex-xs="100" flex-sm="50" flex-gt-sm="100">
             <md-card class="b-bl">
               <md-card-title>
-                <img src="{{person.profile_photo || 'https://s3-eu-west-1.amazonaws.com/mimo-labs/images/mimo-logo.svg'}}" style="max-height:120px;border-radius:60px;"></img>
+                <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/IpVwFwAATiuUMn1dkSeu'}}" style="max-height:120px;border-radius:60px;"></img>
                 <span flex></span>
                 <md-button ng-if="edit_username !== true" ng-click="editName(edit_username)" aria-controls="{{'splash' | translate }}" class="md-secondary md-icon-button" aria-label="{{ 'call' | translate }}">
                   <md-icon md-font-icon="mode_edit">mode_edit</md-icon>
@@ -145,45 +145,51 @@
               </md-card-title>
               <md-list flex>
                 <md-list-item class="md-2-line">
-                  <div class="md-list-item-text" layout="column">
-                    <h3 translate>Facebook</h3>
-                    <a href="{{person.social[0].fb_link}}" ng-show="person.social[0].fb_link && location.demo !== true" target="_blank">View Profile</a>
-                    <a href="" ng-show="person.social[0].fb_link && location.demo === true" target="_blank">
+                  <img src="https://d247kqobagyqjh.cloudfront.net/api/file/WUhzu2zRTremUtlXxALC" style="border-radius:0px;" class="person-social"/>
+                  <div class="md-list-item-text">
+                    <h3>Facebook</h3>
+                    <p ng-show="!person.social[0].fb_link">No Profile</p>
+                    <p><a href="{{person.social[0].fb_link}}" ng-show="person.social[0].fb_link && location.demo !== true" target="_blank">View Profile</a></p>
+                    <p><a href="" ng-show="person.social[0].fb_link && location.demo === true" target="_blank">
                       <span>
                         View Profile
                         <md-tooltip>
                           You are currently viewing demo data
                         </md-tooltip>
                       </span>
-                    </a>
+                    </a></p>
                   </div>
                 </md-list-item>
                 <md-list-item class="md-2-line">
+                  <img src="https://d247kqobagyqjh.cloudfront.net/api/file/K3YDlqzUQzIavvIEkesC" style="border-radius:0px;" class="person-social"/>
                   <div class="md-list-item-text" layout="column">
                     <h3 translate>Google+</h3>
-                    <a href="{{person.social[0].g_link}}" ng-show="person.social[0].g_link && location.demo !== true" target="_blank">View Profile</a>
-                    <a href="" ng-show="person.social[0].g_link && location.demo === true" target="_blank">
+                    <p ng-show="!person.social[0].g_link">No Profile</p>
+                    <p><a href="{{person.social[0].g_link}}" ng-show="person.social[0].g_link && location.demo !== true" target="_blank">View Profile</a></p>
+                    <p><a href="" ng-show="person.social[0].g_link && location.demo === true" target="_blank">
                       <span>
                         View Profile
                         <md-tooltip>
                           You are currently viewing demo data
                         </md-tooltip>
                       </span>
-                    </a>
+                    </a></p>
                   </div>
                 </md-list-item>
                 <md-list-item class="md-2-line">
+                  <img src="https://d247kqobagyqjh.cloudfront.net/api/file/PdwjF22TTiqOHvzQcksA" style="border-radius:0px;" class="person-social"/>
                   <div class="md-list-item-text" layout="column">
                     <h3 translate>Twitter</h3>
-                    <a href="{{person.social[0].tw_url}}" ng-show="person.social[0].tw_url && location.demo !== true" target="_blank">View Profile</a>
-                    <a href="" ng-show="person.social[0].tw_url && location.demo === true" target="_blank">
+                    <p ng-show="!person.social[0].tw_url">No Profile</p>
+                    <p><a href="{{person.social[0].tw_url}}" ng-show="person.social[0].tw_url && location.demo !== true" target="_blank">View Profile</a></p>
+                    <p><a href="" ng-show="person.social[0].tw_url && location.demo === true" target="_blank">
                       <span>
                         View Profile
                         <md-tooltip>
                           You are currently viewing demo data
                         </md-tooltip>
                       </span>
-                    </a>
+                    </a></p>
                   </div>
                 </md-list-item>
               </md-list>

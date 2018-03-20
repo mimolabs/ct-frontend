@@ -471,7 +471,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
 
 }]);
 
-app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email', 'Code', 'Client', '$q', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', '$pusher', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, Social, Guest, Email, Code, Client, $q, $routeParams, $location, $http, $compile, $rootScope, $timeout, $pusher, showToast, showErrors, menu, $mdDialog, gettextCatalog) {
+app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email', 'Sms', 'Client', '$q', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', '$pusher', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, Social, Guest, Email, Sms, Client, $q, $routeParams, $location, $http, $compile, $rootScope, $timeout, $pusher, showToast, showErrors, menu, $mdDialog, gettextCatalog) {
 
   var link = function(scope, element, attrs) {
 
@@ -529,12 +529,12 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
       });
     };
 
-    var getCodes = function() {
-      Code.get({
+    var getSms = function() {
+      Sms.query({
         person_id: scope.person.id,
         location_id: scope.location.slug
       }).$promise.then(function(results) {
-        scope.person.codes = results.codes;
+        scope.person.sms = results.sms;
       }, function(err) {
       });
     };
@@ -553,7 +553,7 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
       getSocials();
       getGuests();
       getEmails();
-      getCodes();
+      getSms();
       getClients();
     };
 

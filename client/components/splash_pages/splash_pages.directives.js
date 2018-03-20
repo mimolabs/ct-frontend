@@ -196,7 +196,6 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
     scope.location = { slug: $routeParams.id };
 
     var setDefaults = function() {
-      console.log(scope.splash);
       scope.uploadLogo = (scope.splash.header_image_name === null && scope.splash.logo_file_name === null);
       scope.splash.periodic_days = [];
       if (scope.splash.available_days === null) {

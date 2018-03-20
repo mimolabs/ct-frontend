@@ -338,11 +338,11 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       menu.isOpen = true;
     });
 
-    // if (scope.splash.walled_gardens && scope.splash.walled_gardens.length) {
-    //   scope.splash.walled_gardens_array = scope.splash.walled_gardens.split(',');
-    // } else {
-    //   scope.splash.walled_gardens_array = [];
-    // }
+    if (scope.splash.walled_gardens && scope.splash.walled_gardens.length) {
+      scope.splash.walled_gardens_array = scope.splash.walled_gardens.split(',');
+    } else {
+      scope.splash.walled_gardens_array = [];
+    }
     scope.access_restrict = [{ key: gettextCatalog.getString('Off'), value: 'none'}, {key: gettextCatalog.getString('Periodic'), value: 'periodic'}, {key: gettextCatalog.getString('Data Downloaded'), value: 'data' }, {key: gettextCatalog.getString('Timed Access'), value: 'timed'}];
     scope.integrations = [{ key: gettextCatalog.getString('Off'), value: 0 }, { key: 'MailChimp', value: 1}, {key: 'CampaignMonitor', value: 2}, {key: 'SendGrid', value: 4}, {key: gettextCatalog.getString('Internal only'), value: 3 }];
     scope.slider = {};

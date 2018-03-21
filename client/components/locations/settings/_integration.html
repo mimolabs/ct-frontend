@@ -55,7 +55,7 @@
 <md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" ng-show="integration.type && integration.active">
   <div flex="100" flex-gt-md="90" flex-gt-lg="80">
     <div layout="row" layout-align="center center">
-      <div flex="100" flex-gt-sm="100">
+      <div flex="100" flex-gt-sm="40">
 
         <form name="myForm" ng-submit="save(myForm)">
           <md-card class="b-or">
@@ -70,7 +70,7 @@
 
             <md-card-content ng-if="integration.type == 'unifi'">
               <div layout="row" layout-wrap>
-                <md-input-container flex="100" flex-gt-sm="40">
+                <md-input-container flex="100" flex-gt-sm="100">
                   <label>
                     <translate>Integration Type</translate>
                   </label>
@@ -78,7 +78,7 @@
                 </md-input-container>
               </div>
               <div layout="row" layout-wrap>
-                <md-input-container flex="100" flex-gt-sm="40">
+                <md-input-container flex="100" flex-gt-sm="100">
                   <label>
                     <translate>Hostname</translate>
                   </label>
@@ -90,14 +90,16 @@
                 </md-input-container>
               </div>
               <div layout="row" layout-wrap>
-                <md-input-container flex="100" flex-gt-xs="40">
+                <md-input-container flex="100" flex-gt-xs="100">
                   <label>
                     <translate>Username</translate>
                   </label>
                   <input ng-model="integration.username" type="text" md-maxlength='255'required></input>
                 </md-input-container>
-                <span flex-gt-xs="10"></span>
-                <md-input-container flex="100" flex-gt-xs="40">
+              </div>
+              <div layout="row" layout-wrap>
+                <!-- <span flex-gt-xs="10"></span> -->
+                <md-input-container flex="100" flex-gt-xs="100">
                   <label>
                     <translate>Password</translate>
                   </label>
@@ -114,7 +116,7 @@
 
             <md-card-content ng-if="integration.type == 'vsz'">
               <div layout="row" layout-wrap>
-                <md-input-container flex="100" flex-gt-sm="40">
+                <md-input-container flex="100" flex-gt-sm="100">
                   <label>
                     <translate>Integration Type</translate>
                   </label>
@@ -122,7 +124,7 @@
                 </md-input-container>
               </div>
               <div layout="row" layout-wrap>
-                <md-input-container flex="100" flex-gt-sm="40">
+                <md-input-container flex="100" flex-gt-sm="100">
                   <label>
                     <translate>Hostname</translate>
                   </label>
@@ -134,14 +136,14 @@
                 </md-input-container>
               </div>
               <div layout="row" layout-wrap>
-                <md-input-container flex="100" flex-gt-xs="40">
+                <md-input-container flex="100" flex-gt-xs="100">
                   <label>
                     <translate>Username</translate>
                   </label>
                   <input ng-model="integration.username" type="text" md-maxlength='255'required></input>
                 </md-input-container>
                 <span flex-gt-xs="10"></span>
-                <md-input-container flex="100" flex-gt-xs="40">
+                <md-input-container flex="100" flex-gt-xs="100">
                   <label>
                     <translate>Password</translate>
                   </label>
@@ -158,7 +160,7 @@
 
             <md-card-content ng-if="integration.type == 'cloudtrax'">
               <div layout="row" layout-wrap>
-                <md-input-container flex="100" flex-gt-sm="40">
+                <md-input-container flex="100" flex-gt-sm="100">
                   <label>
                     <translate>Integration Type</translate>
                   </label>
@@ -191,7 +193,7 @@
 
             <md-card-content ng-if="integration.type == 'meraki'">
               <div layout="row" layout-wrap>
-                <md-input-container flex="100" flex-gt-sm="40">
+                <md-input-container flex="100" flex-gt-sm="100">
                   <label>
                     <translate>Integration Type</translate>
                   </label>

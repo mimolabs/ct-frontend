@@ -16,7 +16,7 @@
         </md-card-title>
         <md-card-content>
           <div layout="row" layout-wrap>
-            <md-input-container flex="100" flex-gt-sm="100">
+            <md-input-container flex="100" flex-gt-sm="45">
               <label>
                 <translate>Campaign Name</translate>
               </label>
@@ -27,15 +27,39 @@
                 <div ng-message="required" translate>Please enter a campaign name.</div>
               </div>
             </md-input-container>
+            <span flex-gt-sm="10"></span>
+            <md-input-container flex="100" flex-gt-sm="45">
+              <label>
+                <translate>Campaign Type</translate>
+              </label>
+              <md-select ng-model="campaign.campaign_type" name="campaign_type" placeholder="{{ 'Choose campaign type' | translate }}">
+                <md-option ng-repeat="type in campaign_types" ng-value="type.value">
+                  {{type.name}}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div flex="100" flex-gt-md="90" flex-gt-lg="80" ng-show="campaign.campaign_type == 'email'">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline" translate>
+              Email Sender
+            </span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <div layout="row" layout-wrap>
             <md-input-container flex="100" flex-gt-sm="45">
               <label>
                 <translate>Who's it from</translate>
               </label>
-              <input md-autofocus ng-model="campaign.from_name" name="from_name" placeholder="{{ 'Enter a name' | translate }}" type="text" ng-minlength="5" md-maxlength='100' required>
+              <input md-autofocus ng-model="campaign.from_name" name="from_name" placeholder="{{ 'Enter a name' | translate }}" type="text" md-maxlength='100'>
               <div ng-messages="myForm.from_name.$error" md-auto-hide="false">
                 <div ng-message="max" translate>Must be less than 100 characters</div>
-                <div ng-message="min" translate>Must be greater than 5 characters</div>
-                <div ng-message="required" translate>Please enter a name.</div>
               </div>
             </md-input-container>
             <span flex-gt-sm="10"></span>
@@ -43,14 +67,70 @@
               <label>
                 <translate>From email</translate>
               </label>
-              <input md-autofocus ng-model="campaign.from_email" name="from_email" placeholder="{{ 'Enter a email' | translate }}" type="email" ng-minlength="5" md-maxlength='100' required>
+              <input md-autofocus ng-model="campaign.from_email" name="from_email" placeholder="{{ 'Enter a email' | translate }}" type="email" md-maxlength='100'>
               <div ng-messages="myForm.from_email.$error" md-auto-hide="false">
                 <div ng-message="max" translate>Must be less than 100 characters</div>
-                <div ng-message="min" translate>Must be greater than 5 characters</div>
-                <div ng-message="required" translate>Please enter an email.</div>
               </div>
             </md-input-container>
             <p>You may need to validate your `from email` before sending a campaign.</p>
+          </div>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div flex="100" flex-gt-md="90" flex-gt-lg="80" ng-show="campaign.campaign_type == 'twitter'">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline" translate>
+              Twitter Credentials
+            </span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <div layout="row" layout-wrap>
+            <md-input-container flex="100" flex-gt-sm="45">
+              <label>
+                <translate>Twitter Username</translate>
+              </label>
+              <input md-autofocus ng-model="campaign.from_twitter" name="from_twitter" placeholder="{{ 'Enter your username' | translate }}" type="text" md-maxlength='100'>
+              <div ng-messages="myForm.from_email.$error" md-auto-hide="false">
+                <div ng-message="max" translate>Must be less than 100 characters</div>
+              </div>
+            </md-input-container>
+            <span flex-gt-sm="10"></span>
+            <md-input-container flex="100" flex-gt-sm="45">
+              <label>
+                <translate>A key or something</translate>
+              </label>
+              <input md-autofocus ng-model="campaign.from_email" name="twitter_key" placeholder="{{ 'API key' | translate }}" type="text" d-maxlength='100'>
+              <div ng-messages="myForm.from_email.$error" md-auto-hide="false">
+                <div ng-message="max" translate>Must be less than 100 characters</div>
+              </div>
+            </md-input-container>
+          </div>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div flex="100" flex-gt-md="90" flex-gt-lg="80" ng-show="campaign.campaign_type == 'sms'">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline" translate>
+              SMS Sender
+            </span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <div layout="row" layout-wrap>
+            <md-input-container flex="100" flex-gt-sm="100">
+              <label>
+                <translate>SMS Number</translate>
+              </label>
+              <input md-autofocus ng-model="campaign.from_sms" name="from_sms" placeholder="{{ 'Enter your phone number' | translate }}" type="text" md-maxlength='17'>
+              <div ng-messages="myForm.from_email.$error" md-auto-hide="false">
+                <div ng-message="max" translate>Must be a valid phone number</div>
+              </div>
+            </md-input-container>
           </div>
         </md-card-content>
       </md-card>
@@ -192,22 +272,44 @@
           </md-card-title-text>
         </md-card-title>
         <md-card-content>
-          <div layout="column">
+          <div layout="column" ng-show="campaign.campaign_type == 'email'">
             <md-input-container flex="100" flex-gt-sm="100" style="margin-bottom:-12px;">
               <label>
                 <translate>Message Subject</translate>
               </label>
-              <input ng-focus="hideOthers()" ng-model="campaign.title" name="campaign_title" placeholder="{{ 'Enter a title' | translate }}" type="text" ng-minlength="5" md-maxlength='100' required>
+              <input ng-focus="hideOthers()" ng-model="campaign.title" name="campaign_title" placeholder="{{ 'Enter a title' | translate }}" type="text" md-maxlength='100'>
               <div ng-messages="myForm.campaign_title.$error" md-auto-hide="false">
                 <div ng-message="max" translate>Must be less than 100 characters</div>
-                <div ng-message="min" translate>Must be greater than 5 characters</div>
-                <div ng-message="required" translate>Please enter a location name.</div>
               </div>
             </md-input-container>
             <span ng-if="tinymceOptions">
               <textarea ui-tinymce="tinymceOptions" ng-model="campaign.content"></textarea>
             </span>
             <p>You can insert any html in the content field. Dynamic variables must be wrapped in {{}} brackets. Find more in the <a href="http://docs.oh-mimo.com/campaigns/dynamic-campaign-fields-and-html" target='_blank'>docs</a>.</p>
+          </div>
+          <div layout="column" ng-show="campaign.campaign_type == 'twitter'">
+            <md-input-container flex="100" flex-gt-sm="100" style="margin-bottom:-12px;">
+              <label>
+                <translate>Tweet</translate>
+              </label>
+              <input ng-focus="hideOthers()" ng-model="campaign.content" name="campaign_title" type="text" md-maxlength='100'>
+              <div ng-messages="myForm.campaign_title.$error" md-auto-hide="false">
+                <div ng-message="max" translate>Must be less than 100 characters</div>
+              </div>
+            </md-input-container>
+            <p>Dynamic variables must be wrapped in {{}} brackets. Find more in the <a href="http://docs.oh-mimo.com/campaigns/dynamic-campaign-fields-and-html" target='_blank'>docs</a>.</p>
+          </div>
+          <div layout="column" ng-show="campaign.campaign_type == 'sms'">
+            <md-input-container flex="100" flex-gt-sm="100" style="margin-bottom:-12px;">
+              <label>
+                <translate>Message</translate>
+              </label>
+              <input ng-focus="hideOthers()" ng-model="campaign.content" name="campaign_title" type="text" md-maxlength='500'>
+              <div ng-messages="myForm.campaign_title.$error" md-auto-hide="false">
+                <div ng-message="max" translate>Must be less than 500 characters</div>
+              </div>
+            </md-input-container>
+            <p>Dynamic variables must be wrapped in {{}} brackets. Find more in the <a href="http://docs.oh-mimo.com/campaigns/dynamic-campaign-fields-and-html" target='_blank'>docs</a>.</p>
           </div>
         </md-card-content>
       </md-card>

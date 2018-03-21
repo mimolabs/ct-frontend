@@ -121,6 +121,11 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
     scope.campaign = { slug: $routeParams.campaign_id };
     scope.currentNavItem = 'campaigns';
 
+    scope.campaign_types = [];
+    scope.campaign_types.push({name: 'Email', value: 'email'});
+    scope.campaign_types.push({name: 'Twitter', value: 'twitter'});
+    scope.campaign_types.push({name: 'SMS', value: 'sms'});
+
     scope.available_options = [];
     scope.available_options.push({value: 'created_at', name: 'First seen', desc: 'When the user first signed in through your WiFi network'});
     scope.available_options.push({value: 'last_seen', name: 'Last seen', desc: 'The last time they were seen on your network'});

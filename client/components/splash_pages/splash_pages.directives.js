@@ -356,6 +356,19 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
     scope.slider = {};
     scope.slider.download_speed = 1024;
     scope.slider.upload_speed = 1024;
+    
+    scope.updateNews = function() {
+      if ((scope.splash.newsletter_type === '0' || scope.splash.newsletter_type === 0) && scope.splash.newsletter_active === true) {
+        scope.splash.newsletter_active = false;
+      } else if ((scope.splash.newsletter_type !== '0' && scope.splash.newsletter_type !== 0) && scope.splash.newsletter_active === false) {
+        scope.splash.newsletter_active = true;
+      }
+      if (scope.splash.newsletter_type === '4') {
+        scope.newsletter_placeholder = placeholderNewsletterPass;
+      } else {
+        scope.newsletter_placeholder =  placeholderNewsletterToken;
+      }
+    };
 
     if (!$routeParams.splash_page_id) {
       scope.splash = {

@@ -32,7 +32,7 @@
               <label>
                 <translate>Campaign Type</translate>
               </label>
-              <md-select ng-model="campaign.campaign_type" name="campaign_type" placeholder="{{ 'Choose campaign type' | translate }}">
+              <md-select ng-model="campaign.campaign_type" name="campaign_type" placeholder="{{ 'Choose campaign type' | translate }}" required>
                 <md-option ng-repeat="type in campaign_types" ng-value="type.value">
                   {{type.name}}
                 </md-option>

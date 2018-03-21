@@ -207,12 +207,14 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
         scope.splash.passwd_change_day = [];
       }
       scope.splash.periodic_days = [];
+
       if (scope.splash.available_days === null) {
         scope.splash.available_days = [];
       }
       if (scope.splash.passwd_change_day === undefined) {
         scope.splash.passwd_change_day = [];
       }
+      console.log(scope.splash.walled_gardens);
       if (scope.splash.walled_gardens && scope.splash.walled_gardens.length) {
         scope.splash.walled_gardens_array = scope.splash.walled_gardens.split(',');
       } else {
@@ -234,7 +236,12 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       });
     };
 
+    var formatWalledGardens = function(splash) {
+      return splash.walled_gardens_array.join(',');
+    };
+
     var create = function() {
+      scope.splash.walled_gardens = formatWalledGardens(scope.splash);
       SplashPage.create({}, {
         location_id: scope.location.slug,
         splash_page: scope.splash
@@ -249,6 +256,8 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
     var save = function(splash, form) {
       if (form) { form.$setPristine(); }
       scope.splash.updating = true;
+      splash.walled_gardens = formatWalledGardens(scope.splash);
+
       SplashPage.update({
         location_id: scope.location.slug,
         id: scope.splash.id,

@@ -422,10 +422,34 @@ md-sidenav .divider {
   margin: 15px 0 10px 0;
 }
 
-md-sidenav.design-sidebar {
-  width: 350px;
+splash-designer .design-sidebar {
   min-width: 350px;
-  max-width: 350px;
+  max-height: 100vh!important;
+  overflow: scroll;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.design-sidebar md-tabs {
+  height: calc(100vh - 100px);
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+
+@media (max-width: 960px) {
+  .design-sidebar md-tabs {
+    height: calc(100vh - 150px);
+  }
+  splash-designer .design-sidebar {
+    height: calc(100vh - 50px);
+  }
+  .designer {
+    height: calc(100vh - 50px)!important;
+  }
+}
+
+.design-sidebar md-tabs md-tabs-wrapper {
+  /*position: absolute;
+  width: 100%;
+  z-index: 42;*/
 }
 
 md-sidenav.md-sidenav-right ul {
@@ -434,8 +458,6 @@ md-sidenav.md-sidenav-right ul {
 
 .splash-design-buttons {
   position: relative;
-  margin-top: 5%;
-  margin-bottom: 5%;
 }
 
 .md-button.md-fab.md-fab-bottom-right {

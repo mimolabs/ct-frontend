@@ -249,26 +249,26 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
       controller: 'LocationsCtrl as lc',
       resolve: { loginRequired: loginRequired }
     }).
-    when('/:id/splash_codes', {
-      controller: 'LocationsCtrl as lc',
-      templateUrl: 'components/splash_codes/index.html',
-      resolve: { loginRequired: loginRequired }
-    }).
-    when('/:id/splash_codes/new', {
-      templateUrl: 'components/splash_codes/new.html',
-      controller: 'LocationsCtrl as lc',
-      resolve: { loginRequired: loginRequired }
-    }).
-    when('/:id/splash_codes/:splash_code_id', {
-      controller: 'LocationsCtrl as lc',
-      templateUrl: 'components/splash_codes/show.html',
-      resolve: { loginRequired: loginRequired }
-    }).
-    when('/:id/splash_codes/:splash_code_id/sessions/:username', {
-      controller: 'LocationsCtrl as lc',
-      templateUrl: 'components/splash_codes/sessions.html',
-      resolve: { loginRequired: loginRequired }
-    }).
+    // when('/:id/splash_codes', {
+    //   controller: 'LocationsCtrl as lc',
+    //   templateUrl: 'components/splash_codes/index.html',
+    //   resolve: { loginRequired: loginRequired }
+    // }).
+    // when('/:id/splash_codes/new', {
+    //   templateUrl: 'components/splash_codes/new.html',
+    //   controller: 'LocationsCtrl as lc',
+    //   resolve: { loginRequired: loginRequired }
+    // }).
+    // when('/:id/splash_codes/:splash_code_id', {
+    //   controller: 'LocationsCtrl as lc',
+    //   templateUrl: 'components/splash_codes/show.html',
+    //   resolve: { loginRequired: loginRequired }
+    // }).
+    // when('/:id/splash_codes/:splash_code_id/sessions/:username', {
+    //   controller: 'LocationsCtrl as lc',
+    //   templateUrl: 'components/splash_codes/sessions.html',
+    //   resolve: { loginRequired: loginRequired }
+    // }).
     when('/:id/splash_pages', {
       controller: 'LocationsCtrl as lc',
       templateUrl: 'components/splash_pages/index.html',
@@ -279,7 +279,17 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
       templateUrl: 'components/splash_pages/guide.html',
       resolve: { loginRequired: loginRequired }
     }).
-    when('/:id/splash_pages/:splash_page_id/design', {
+    // when('/:id/splash_pages/new', {
+    //   templateUrl: 'components/splash_pages/design.html',
+    //   controller: 'SplashPagesDesignCtrl as lc',
+    //   resolve: { loginRequired: loginRequired }
+    // }).
+    when('/:id/splash_pages/new', {
+      templateUrl: 'components/splash_pages/design.html',
+      controller: 'SplashPagesDesignCtrl as lc',
+      resolve: { loginRequired: loginRequired }
+    }).
+    when('/:id/splash_pages/:splash_page_id', {
       templateUrl: 'components/splash_pages/design.html',
       controller: 'SplashPagesDesignCtrl as lc',
       resolve: { loginRequired: loginRequired }
@@ -287,17 +297,6 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
     when('/:id/splash_pages/:splash_page_id/store', {
       templateUrl: 'components/splash_pages/store.html',
       reloadOnSearch: false,
-      controller: 'LocationsCtrl as lc',
-      resolve: { loginRequired: loginRequired }
-    }).
-    when('/:id/splash_pages/:splash_page_id/forms', {
-      templateUrl: 'components/splash_pages/forms.html',
-      reloadOnSearch: false,
-      controller: 'LocationsCtrl as lc',
-      resolve: { loginRequired: loginRequired }
-    }).
-    when('/:id/splash_pages/:splash_page_id', {
-      templateUrl: 'components/splash_pages/show.html',
       controller: 'LocationsCtrl as lc',
       resolve: { loginRequired: loginRequired }
     }).
@@ -408,37 +407,37 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
       controller: 'UsersShowController',
       resolve: { loginRequired: loginRequired }
     }).
-    when('/:id/vouchers', {
-      templateUrl: 'components/vouchers/index.html',
-      controller: 'LocationsCtrl as lc',
-      resolve: { loginRequired: loginRequired },
-      // reloadOnSearch: false
-    }).
-    when('/:id/vouchers/new', {
-      templateUrl: 'components/vouchers/new.html',
-      controller: 'LocationsCtrl as lc',
-      resolve: { loginRequired: loginRequired }
-    }).
-    when('/:id/vouchers/:voucher_id/edit', {
-      templateUrl: 'components/vouchers/edit.html',
-      controller: 'LocationsCtrl as lc',
-      resolve: { loginRequired: loginRequired }
-    }).
-    when('/:id/vouchers/:voucher_id', {
-      templateUrl: 'components/vouchers/show.html',
-      controller: 'LocationsCtrl as lc',
-      resolve: { loginRequired: loginRequired }
-    }).
-    when('/:id/vouchers/:voucher_id/codes', {
-      templateUrl: 'components/codes/vouchers_index.html',
-      controller: 'LocationsCtrl as lc',
-      resolve: { loginRequired: loginRequired }
-    }).
-    when('/:id/vouchers/:voucher_id/codes/:username', {
-      templateUrl: 'components/codes/voucher_sessions.html',
-      controller: 'LocationsCtrl as lc',
-      resolve: { loginRequired: loginRequired }
-    }).
+    // when('/:id/vouchers', {
+    //   templateUrl: 'components/vouchers/index.html',
+    //   controller: 'LocationsCtrl as lc',
+    //   resolve: { loginRequired: loginRequired },
+    //   // reloadOnSearch: false
+    // }).
+    // when('/:id/vouchers/new', {
+    //   templateUrl: 'components/vouchers/new.html',
+    //   controller: 'LocationsCtrl as lc',
+    //   resolve: { loginRequired: loginRequired }
+    // }).
+    // when('/:id/vouchers/:voucher_id/edit', {
+    //   templateUrl: 'components/vouchers/edit.html',
+    //   controller: 'LocationsCtrl as lc',
+    //   resolve: { loginRequired: loginRequired }
+    // }).
+    // when('/:id/vouchers/:voucher_id', {
+    //   templateUrl: 'components/vouchers/show.html',
+    //   controller: 'LocationsCtrl as lc',
+    //   resolve: { loginRequired: loginRequired }
+    // }).
+    // when('/:id/vouchers/:voucher_id/codes', {
+    //   templateUrl: 'components/codes/vouchers_index.html',
+    //   controller: 'LocationsCtrl as lc',
+    //   resolve: { loginRequired: loginRequired }
+    // }).
+    // when('/:id/vouchers/:voucher_id/codes/:username', {
+    //   templateUrl: 'components/codes/voucher_sessions.html',
+    //   controller: 'LocationsCtrl as lc',
+    //   resolve: { loginRequired: loginRequired }
+    // }).
     otherwise({
       templateUrl: 'components/home/404.html',
       controller: function(menu) {

@@ -44,12 +44,6 @@ app.directive('listSplash', ['Location', 'SplashPage', '$routeParams', '$locatio
       });
 
       scope.menu.push({
-        name: gettextCatalog.getString('Design'),
-        icon: 'format_paint',
-        type: 'design'
-      });
-
-      scope.menu.push({
         name: gettextCatalog.getString('Delete'),
         icon: 'delete_forever',
         type: 'delete'
@@ -356,7 +350,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
     scope.slider = {};
     scope.slider.download_speed = 1024;
     scope.slider.upload_speed = 1024;
-    
+
     scope.updateNews = function() {
       if ((scope.splash.newsletter_type === '0' || scope.splash.newsletter_type === 0) && scope.splash.newsletter_active === true) {
         scope.splash.newsletter_active = false;

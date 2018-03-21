@@ -30,7 +30,6 @@ app.directive('listSplash', ['Location', 'SplashPage', '$routeParams', '$locatio
       limit:      $routeParams.per || 25,
       page:       $routeParams.page || 1,
       options:    [5,10,25,50,100],
-      // direction:  $routeParams.direction || 'desc'
     };
 
     var createMenu = function() {
@@ -198,7 +197,6 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
     scope.location = { slug: $routeParams.id };
 
     var setDefaults = function() {
-      console.log(scope.splash);
       scope.uploadLogo = (scope.splash.header_image_name === null && scope.splash.logo_file_name === null);
       scope.splash.periodic_days = [];
       if (scope.splash.available_days === null) {
@@ -214,6 +212,11 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       }
       if (scope.splash.passwd_change_day === undefined) {
         scope.splash.passwd_change_day = [];
+      }
+      if (scope.splash.walled_gardens && scope.splash.walled_gardens.length) {
+        scope.splash.walled_gardens_array = scope.splash.walled_gardens.split(',');
+      } else {
+        scope.splash.walled_gardens_array = [];
       }
     };
 
@@ -306,13 +309,12 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
     };
 
     scope.toggle = function(section) {
+      scope.logicTypeAccordian = undefined;
       menu.toggleSelectSection(section);
     };
 
+    scope.logicTypeAccordian = true;
     scope.isOpen = function(section) {
-      if (section === 'loginType') {
-        return !menu.isSectionSelected(section);
-      }
       return menu.isSectionSelected(section);
     };
 
@@ -340,11 +342,6 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       menu.isOpen = true;
     });
 
-    if (scope.splash.walled_gardens && scope.splash.walled_gardens.length) {
-      scope.splash.walled_gardens_array = scope.splash.walled_gardens.split(',');
-    } else {
-      scope.splash.walled_gardens_array = [];
-    }
     scope.access_restrict = [{ key: gettextCatalog.getString('Off'), value: 'none'}, {key: gettextCatalog.getString('Periodic'), value: 'periodic'}, {key: gettextCatalog.getString('Data Downloaded'), value: 'data' }, {key: gettextCatalog.getString('Timed Access'), value: 'timed'}];
     scope.integrations = [{ key: gettextCatalog.getString('Off'), value: 0 }, { key: 'MailChimp', value: 1}, {key: 'CampaignMonitor', value: 2}, {key: 'SendGrid', value: 4}, {key: gettextCatalog.getString('Internal only'), value: 3 }];
     scope.slider = {};

@@ -474,6 +474,18 @@ app.directive('campSenders', ['Campaign', 'Location', '$routeParams', '$location
       });
     };
 
+    scope.editSender = function() {
+      $mdDialog.show({
+        templateUrl: 'components/campaigns/senders/_edit.html',
+        parent: angular.element(document.body),
+        clickOutsideToClose: true,
+        controller: DialogController,
+        locals: {
+          loading: scope.loading
+        }
+      });
+    };
+
     function DialogController($scope,loading) {
       $scope.loading = loading;
 

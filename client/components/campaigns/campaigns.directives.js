@@ -492,12 +492,8 @@ app.directive('campSenders', ['Campaign', 'Location', '$routeParams', '$location
       $scope.close = function() {
         $mdDialog.cancel();
       };
-      $scope.next = function() {
-        showConfirm($scope.splash.template);
-      };
       $scope.save = function() {
-        updateSplash();
-        $mdDialog.cancel();
+        // showConfirm($scope.splash.template);
       };
       $scope.back = function() {
         scope.openDialog();

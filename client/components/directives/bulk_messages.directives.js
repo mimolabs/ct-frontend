@@ -60,7 +60,7 @@ app.directive('sendBulkMessage', ['$routeParams', 'BulkMessage', '$mdDialog', 's
             console.log(err);
             $scope.error = err.data.message[0];
             return;
-          } 
+          }
           $scope.valid = false;
         });
       };
@@ -86,7 +86,7 @@ app.directive('sendBulkMessage', ['$routeParams', 'BulkMessage', '$mdDialog', 's
 
   var template =
 
-    '<md-menu-item><md-button ng-click="compose()">Send Message</md-button></md-menu-item>';
+    '<md-menu-item><md-button ng-click="compose()">Send Email</md-button></md-menu-item>';
 
   return {
     link: link,

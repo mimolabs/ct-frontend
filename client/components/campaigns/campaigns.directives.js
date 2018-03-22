@@ -455,3 +455,64 @@ app.directive('validateCampaignEmail', ['CampaignValidate', '$routeParams', '$ti
     templateUrl: 'components/campaigns/_validate.html'
   };
 }]);
+
+app.directive('campSenders', ['Campaign', 'Location', '$routeParams', '$location', '$mdDialog', function(Campaign, Location, $routeParams, $location, $mdDialog) {
+
+  var link = function(scope, element, attrs) {
+
+    scope.currentNavItem = 'senders';
+
+    scope.newSender = function() {
+      $mdDialog.show({
+        templateUrl: 'components/campaigns/senders/_new.html',
+        parent: angular.element(document.body),
+        clickOutsideToClose: true,
+        controller: DialogController,
+        locals: {
+          loading: scope.loading
+        }
+      });
+    };
+
+    function DialogController($scope,loading) {
+      $scope.loading = loading;
+
+      $scope.close = function() {
+        $mdDialog.cancel();
+      };
+      $scope.next = function() {
+        showConfirm($scope.splash.template);
+      };
+      $scope.save = function() {
+        updateSplash();
+        $mdDialog.cancel();
+      };
+      $scope.back = function() {
+        scope.openDialog();
+      };
+    }
+
+    DialogController.$inject = ['$scope', 'loading'];
+
+    var init = function() {
+      Location.get({id: $routeParams.id}, function(data) {
+        scope.location = data;
+        scope.loading = undefined;
+      }, function(err){
+        console.log(err);
+      });
+    };
+
+    init();
+
+  };
+
+  return {
+    link: link,
+    scope: {
+      loading: '='
+    },
+    templateUrl: 'components/campaigns/senders/_index.html'
+  };
+
+}]);

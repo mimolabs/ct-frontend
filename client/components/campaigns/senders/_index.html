@@ -1,0 +1,89 @@
+<camp-nav></camp-nav>
+
+<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" style="padding-bottom: 0px;margin-bottom:0px;">
+
+  <div flex="100" flex-gt-md="90" flex-gt-lg="80">
+    <md-card class="b-pr fixed-table">
+      <md-table-container>
+        <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise">
+          <thead md-head md-order="query.order" md-on-reorder="logOrder">
+            <tr md-row>
+              <th md-column md-order-by="active"><span translate>Verified</span></th>
+              <th md-column><span translate>Name</span></th>
+              <th md-column><span translate>Senders</span></th>
+              <th md-column><span translate>Address</span></th>
+              <th md-column><span translate>Options</span></th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <!-- <tr md-row ng-repeat="campaign in campaigns"> -->
+            <tr md-row>
+              <td md-cell>
+                <md-icon md-menu-origin md-font-icon="">{{ campaign.active && campaign.state == 'live' ? "check_circle" : "cancel" }}
+                </md-icon>
+                <md-tooltip>
+                  State:
+                  <span ng-if="campaign.active && campaign.state == 'live'">
+                    Running (campaign live)
+                  </span>
+                  <span ng-if="campaign.active && campaign.state == 'draft'">
+                    Editing (not live)
+                  </span>
+                  <span ng-if="!campaign.active">
+                    Campaign disabled
+                  </span>
+                </md-tooltip>
+              </td>
+              <td md-cell class="predicates">
+                Bob's Burgers
+              </td>
+              <td md-cell>
+                <md-list-item class="md-3-line" style="padding:0px;">
+                  <div class="md-list-item-text" layout="column">
+                    <p>Name: Bob Bobbington</p>
+                    <small class="muted">From: bob@bob.bob</small>
+                    <small class="muted">Reply: alan@alan.alan</small>
+                  </div>
+                </md-list-item>
+              </td>
+              <td md-cell>
+                42 Hillstreat, W5 1VI, London, United Kingdom
+              </td>
+              <td md-cell>
+                <md-menu md-position-mode="target target">
+                  <md-button aria-label="{{ 'Open Clients Menu' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                    <md-icon md-menu-origin md-font-icon="more_black" class="s24">more_vert</md-icon>
+                  </md-button>
+                  <md-menu-content width="3">
+                    <md-menu-item>
+                      <md-button ng-href="/#/{{ location.slug }}/campaigns/{{ campaign.slug}}">
+                        <md-icon md-menu-align-target style="margin: auto 3px auto 0;">mail</md-icon>
+                        <span translate>Resend Verification</span>
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button ng-href="/#/{{ location.slug }}/campaigns/{{ campaign.slug}}">
+                        <md-icon md-menu-align-target style="margin: auto 3px auto 0;">settings</md-icon>
+                        <span translate>Edit</span>
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button ng-click="delete(campaign)">
+                        <md-icon md-menu-align-target style="margin: auto 3px auto 0;">delete_forever</md-icon>
+                        <span translate>Delete</span>
+                      </md-button>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+      <md-card-actions>
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-limit-options="query.options" md-total="{{::_links.total_entries}}" md-label="{{pagination_labels}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+      </md-card-actions>
+    </md-card>
+    <md-button class="md-raised md-primary" ng-click="newSender()">NEW</md-button>
+  </div>
+</md-content>

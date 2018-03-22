@@ -8,7 +8,9 @@
       <div class="md-dialog-content">
         <div layout="row" layout-wrap>
           <div flex="100">
-            <p>Sender Type</p>
+            <p>Select the type of Sender you want to create.</p>
+          </div>
+          <div flex="100">
             <md-radio-group ng-model="sender.type" layout="row">
               <md-radio-button aria-label="email" value="email">Email</md-radio-button>
               <md-radio-button aria-label="sms" value="sms">SMS</md-radio-button>
@@ -17,9 +19,11 @@
           </div>
         </div>
 
-        <span ng-show="sender.type == 'email'">
+        <div ng-show="sender.type == 'email'" class="animate-show ng-hide">
           <div layout="row" layout-wrap>
-            <p>Sender Details</p>
+            <div flex="100">
+              <p>Configure your email settings below.</p>
+            </div>
             <md-input-container flex="100" flex-gt-xs="100">
               <label>
                 <translate>Sender Name</translate>
@@ -102,6 +106,27 @@
               </label>
               <country-select country="location.country"></country-select>
             </md-input-container>
+          </div>
+        </div>
+
+        <span ng-show="sender.type == 'sms'" class="animate-show ng-hide">
+          <div layout="row" layout-wrap>
+            <div flex="100">
+              <p>Configure your SMS settings below.</p>
+            </div>
+            <md-input-container flex="100" flex-gt-xs="100">
+              <label>
+                <translate>Sender Name</translate>
+              </label>
+              <input ng-model="a.a" placeholder="Bob's Burgers" type='text' name="sender_name" md-maxlength='255'></input>
+              <div ng-messages="myForm.sender_name.$error">
+                <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
+              </div>
+              <small class="muted">This is for your reference only - the recipient will not see this.</small>
+            </md-input-container>
+            <div flex="100">
+              <p>A phone number will be generated for you.</p>
+            </div>
           </div>
         </span>
 

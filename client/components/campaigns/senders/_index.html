@@ -10,8 +10,8 @@
             <tr md-row>
               <th md-column md-order-by="active"><span translate>Verified</span></th>
               <th md-column><span translate>Name</span></th>
-              <th md-column><span translate>Senders</span></th>
-              <th md-column><span translate>Address</span></th>
+              <th md-column><span translate>Type</span></th>
+              <th md-column><span translate>Sent From</span></th>
               <th md-column><span translate>Options</span></th>
             </tr>
           </thead>
@@ -38,16 +38,130 @@
                 Bob's Burgers
               </td>
               <td md-cell>
+                Email
+              </td>
+              <td md-cell>
                 <md-list-item class="md-3-line" style="padding:0px;">
                   <div class="md-list-item-text" layout="column">
-                    <p>Name: Bob Bobbington</p>
-                    <small class="muted">From: bob@bob.bob</small>
-                    <small class="muted">Reply: alan@alan.alan</small>
+                    <p>bob@burgers.com</p>
                   </div>
                 </md-list-item>
               </td>
               <td md-cell>
-                42 Hillstreat, W5 1VI, London, United Kingdom
+                <md-menu md-position-mode="target target">
+                  <md-button aria-label="{{ 'Open Clients Menu' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                    <md-icon md-menu-origin md-font-icon="more_black" class="s24">more_vert</md-icon>
+                  </md-button>
+                  <md-menu-content width="3">
+                    <md-menu-item>
+                      <md-button ng-href="/#/{{ location.slug }}/campaigns/{{ campaign.slug}}">
+                        <md-icon md-menu-align-target style="margin: auto 3px auto 0;">mail</md-icon>
+                        <span translate>Resend Verification</span>
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button ng-href="/#/{{ location.slug }}/campaigns/{{ campaign.slug}}">
+                        <md-icon md-menu-align-target style="margin: auto 3px auto 0;">settings</md-icon>
+                        <span translate>Edit</span>
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button ng-click="delete(campaign)">
+                        <md-icon md-menu-align-target style="margin: auto 3px auto 0;">delete_forever</md-icon>
+                        <span translate>Delete</span>
+                      </md-button>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </td>
+            </tr>
+            <tr md-row>
+              <td md-cell>
+                <md-icon md-menu-origin md-font-icon="">{{ campaign.active && campaign.state == 'live' ? "check_circle" : "cancel" }}
+                </md-icon>
+                <md-tooltip>
+                  State:
+                  <span ng-if="campaign.active && campaign.state == 'live'">
+                    Running (campaign live)
+                  </span>
+                  <span ng-if="campaign.active && campaign.state == 'draft'">
+                    Editing (not live)
+                  </span>
+                  <span ng-if="!campaign.active">
+                    Campaign disabled
+                  </span>
+                </md-tooltip>
+              </td>
+              <td md-cell class="predicates">
+                Bob's Burgers
+              </td>
+              <td md-cell>
+                Twitter
+              </td>
+              <td md-cell>
+                <md-list-item class="md-3-line" style="padding:0px;">
+                  <div class="md-list-item-text" layout="column">
+                    <p>@BobsBurgers</p>
+                  </div>
+                </md-list-item>
+              </td>
+              <td md-cell>
+                <md-menu md-position-mode="target target">
+                  <md-button aria-label="{{ 'Open Clients Menu' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                    <md-icon md-menu-origin md-font-icon="more_black" class="s24">more_vert</md-icon>
+                  </md-button>
+                  <md-menu-content width="3">
+                    <md-menu-item>
+                      <md-button ng-href="/#/{{ location.slug }}/campaigns/{{ campaign.slug}}">
+                        <md-icon md-menu-align-target style="margin: auto 3px auto 0;">mail</md-icon>
+                        <span translate>Resend Verification</span>
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button ng-href="/#/{{ location.slug }}/campaigns/{{ campaign.slug}}">
+                        <md-icon md-menu-align-target style="margin: auto 3px auto 0;">settings</md-icon>
+                        <span translate>Edit</span>
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button ng-click="delete(campaign)">
+                        <md-icon md-menu-align-target style="margin: auto 3px auto 0;">delete_forever</md-icon>
+                        <span translate>Delete</span>
+                      </md-button>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </td>
+            </tr>
+            <tr md-row>
+              <td md-cell>
+                <md-icon md-menu-origin md-font-icon="">{{ campaign.active && campaign.state == 'live' ? "check_circle" : "cancel" }}
+                </md-icon>
+                <md-tooltip>
+                  State:
+                  <span ng-if="campaign.active && campaign.state == 'live'">
+                    Running (campaign live)
+                  </span>
+                  <span ng-if="campaign.active && campaign.state == 'draft'">
+                    Editing (not live)
+                  </span>
+                  <span ng-if="!campaign.active">
+                    Campaign disabled
+                  </span>
+                </md-tooltip>
+              </td>
+              <td md-cell class="predicates">
+                Bob's Burgers
+              </td>
+              <td md-cell>
+                SMS
+              </td>
+              <td md-cell>
+                <md-list-item class="md-3-line" style="padding:0px;">
+                  <div class="md-list-item-text" layout="column">
+                    <p>+449876146133</p>
+                  </div>
+                </md-list-item>
               </td>
               <td md-cell>
                 <md-menu md-position-mode="target target">

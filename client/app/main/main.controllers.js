@@ -9,7 +9,6 @@ var app = angular.module('myApp.controllers', [
   'myApp.splash_pages.controller',
   'myApp.registrations.controller',
   'myApp.users.controller',
-  'myApp.vouchers.controller'
 ]);
 
 app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage', '$window', '$location', '$routeParams', 'AccessToken', 'RefreshToken', 'Auth', 'API_END_POINT', '$pusher', '$route', 'onlineStatus', '$cookies', 'locationHelper', 'CTLogin', 'User', 'Me', 'AUTH_URL', 'menu', 'designer', '$mdSidenav', '$mdMedia', '$q', 'INTERCOM', 'PUSHER', 'gettextCatalog', 'Translate', 'COMMITHASH', '$mdDialog',

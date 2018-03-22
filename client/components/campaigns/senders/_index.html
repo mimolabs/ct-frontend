@@ -21,18 +21,6 @@
               <td md-cell>
                 <md-icon md-menu-origin md-font-icon="">{{ campaign.active && campaign.state == 'live' ? "check_circle" : "cancel" }}
                 </md-icon>
-                <md-tooltip>
-                  State:
-                  <span ng-if="campaign.active && campaign.state == 'live'">
-                    Running (campaign live)
-                  </span>
-                  <span ng-if="campaign.active && campaign.state == 'draft'">
-                    Editing (not live)
-                  </span>
-                  <span ng-if="!campaign.active">
-                    Campaign disabled
-                  </span>
-                </md-tooltip>
               </td>
               <td md-cell class="predicates">
                 Bob's Burgers

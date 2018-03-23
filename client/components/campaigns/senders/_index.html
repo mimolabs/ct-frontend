@@ -2,7 +2,25 @@
 
 <md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" style="padding-bottom: 0px;margin-bottom:0px;">
 
-  <div flex="100" flex-gt-md="90" flex-gt-lg="80">
+  <div flex="100" flex-gt-md="60" flex-gt-lg="50" ng-if="!senders">
+    <md-card flex="100" class="b-pr">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">
+            <translate>Get Started with Senders</translate>
+          </span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <p translate>Set up your senders so you can start engaging with your end users.</p>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-raised md-primary" ng-click="newSender()">Create</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+
+  <div flex="100" flex-gt-md="90" flex-gt-lg="80" ng-if="senders">
     <md-card class="b-pr fixed-table">
       <md-table-container>
         <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise">

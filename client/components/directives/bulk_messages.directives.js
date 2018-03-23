@@ -2,7 +2,7 @@
 
 var app = angular.module('myApp.bulk_messages.directives', []);
 
-app.directive('sendBulkMessage', ['$routeParams', 'BulkMessage', '$mdDialog', 'showToast', 'showErrors', 'Campaign', function($routeParams,BulkMessage,$mdDialog, showToast, showErrors, Campaign) {
+app.directive('sendBulkMessage', ['$routeParams', 'BulkMessage', 'Sender', '$mdDialog', '$q', 'showToast', 'showErrors', 'Campaign', function($routeParams,BulkMessage, Sender, $mdDialog, $q, showToast, showErrors, Campaign) {
 
   var link = function( scope, element, attrs ) {
 
@@ -18,9 +18,22 @@ app.directive('sendBulkMessage', ['$routeParams', 'BulkMessage', '$mdDialog', 's
       });
     };
 
-    function DialogController($scope, valid) {
+    var getSenders = function() {
+      var deferred = $q.defer();
+      Sender.query({location_id: $routeParams.id, type: attrs.type}, function(data) {
+        scope.senders = data.senders;
+        deferred.resolve();
+      }, function(err) {
+        deferred.resolve();
+      });
+      return deferred.promise;
+    };
 
-      scope.message = {};
+    function DialogController($scope, valid, senders) {
+
+      $scope.valid = valid;
+      $scope.senders = senders;
+      $scope.message = {type: attrs.type};
 
       $scope.selectedIndex = 0;
 
@@ -65,20 +78,23 @@ app.directive('sendBulkMessage', ['$routeParams', 'BulkMessage', '$mdDialog', 's
         });
       };
     }
-    DialogController.$inject = ['$scope', 'valid'];
+    DialogController.$inject = ['$scope', 'valid', 'senders'];
 
     scope.compose = function(ev) {
-      $mdDialog.show({
-        controller: DialogController,
-        templateUrl: 'components/views/bulk_messages/_compose.tmpl.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose:true,
-        locals: {
-          valid: false
-        }
-      }).then(function(answer) {
-      }, function() {
+      getSenders().then(function() {
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: 'components/views/bulk_messages/_compose.tmpl.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          locals: {
+            valid: false,
+            senders: scope.senders
+          }
+        }).then(function(answer) {
+        }, function() {
+        });
       });
     };
 

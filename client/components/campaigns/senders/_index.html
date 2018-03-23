@@ -2,6 +2,7 @@
 
 <md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" style="padding-bottom: 0px;margin-bottom:0px;">
 
+<p>aa{{senders}}</p>
   <div flex="100" flex-gt-md="60" flex-gt-lg="50" ng-if="!senders">
     <md-card flex="100" class="b-pr">
       <md-card-title>
@@ -46,10 +47,20 @@
                 {{sender.sender_type}}
               </td>
               <td md-cell ng-show="sender.from_email">
-                {{sender.from_name}} ({{sender.from_email}})
+                <span>
+                  {{sender.from_email}}
+                  <md-tooltip>
+                    From Name: {{sender.sender_name}} | Reply To: {{sender.reply_email}}
+                  </md-tooltip>
+                </span>
               </td>
               <td md-cell ng-show="sender.from_sms">
-                {{sender.from_sms}}
+                <span>
+                  {{sender.from_sms}}
+                  <md-tooltip>
+                    From Number
+                  </md-tooltip>
+                </span>
               </td>
               <td md-cell>
                 <md-menu md-position-mode="target target">

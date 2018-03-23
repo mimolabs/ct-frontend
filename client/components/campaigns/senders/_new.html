@@ -14,7 +14,7 @@
             <md-radio-group ng-model="sender.sender_type" layout="row">
               <md-radio-button aria-label="email" value="email">Email</md-radio-button>
               <md-radio-button aria-label="sms" value="sms">SMS</md-radio-button>
-              <md-radio-button aria-label="twitter" value="twitter">Twitter</md-radio-button>
+              <!-- <md-radio-button aria-label="twitter" value="twitter">Twitter</md-radio-button> -->
             </md-radio-group>
           </div>
         </div>
@@ -59,7 +59,7 @@
                 <translate>Reply To Address</translate>
               </label>
               <input ng-model="sender.reply_email" placeholder="bob@burgers.com" type='text' name="reply_email" md-maxlength='255'></input>
-              <div ng-messages="myForm.reply_eail.$error">
+              <div ng-messages="myForm.reply_email.$error">
                 <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
               </div>
             </md-input-container>

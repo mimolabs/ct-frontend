@@ -13,8 +13,8 @@
           <md-icon md-menu-origin md-font-icon="more_black" class="s48">more_vert</md-icon>
         </md-button>
         <md-menu-content width="3">
-          <send-bulk-message type="Email"></send-bulk-message>
-          <send-bulk-message type="SMS"></send-bulk-message>
+          <send-bulk-message type="Email" ng-show="person.emails.length > 0"></send-bulk-message>
+          <send-bulk-message type="SMS" ng-show="person.sms.length > 0"></send-bulk-message>
           <md-menu-item>
             <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/messages">
               <p flex translate>Messages</p>

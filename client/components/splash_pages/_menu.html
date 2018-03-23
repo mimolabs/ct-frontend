@@ -534,7 +534,7 @@
 
           <md-button class="md-no-style" ng-click="toggle('btn')" aria-controls="theme">
             <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('btn') ? "up" : "down" }}</md-icon>
-            <translate>Login Button</translate>
+            <translate>Login Buttons</translate>
           </md-button>
 
           <div ng-if="isOpen('btn')" id="btn" class="menu-toggle-list" layout="column">
@@ -542,47 +542,16 @@
               <md-card-content>
                 <div layout="row" layout-wrap>
                   <div flex="100" flex-gt-sm="100">
-                    <md-input-container class="md-block">
-                      <label>
-                        <translate>Button Colour</translate>
-                      </label>
-                      <color-picker ng-model="splash.button_colour"></color-picker>
-                    </md-input-container>
-                  </div>
-                  <div flex="100" flex-gt-sm="100">
-                    <md-input-container class="md-block">
-                      <label>
-                        <translate>Border Colour</translate>
-                      </label>
-                      <color-picker ng-model="splash.button_border_colour"></color-picker>
-                    </md-input-container>
-                  </div>
-                  <div flex="100" flex-gt-sm="100">
-                    <md-input-container class="md-block">
-                      <label>
-                        <translate>Text Colour</translate>
-                      </label>
-                      <color-picker ng-model="splash.btn_font_colour"></color-picker>
-                    </md-input-container>
-                  </div>
-                  <div flex="100" flex-gt-sm="50">
-                    <md-input-container class="md-block">
-                      <label>
-                        <translate>Font Size</translate>
-                      </label>
-                      <input type="text" ng-model="splash.btn_font_size" required>
-                    </md-input-container>
-                  </div>
-                  <div flex="100" flex-gt-xs="50">
-                    <md-input-container class="md-block">
-                      <label>
-                        <translate>Corner Radius</translate>
-                      </label>
-                      <input type="text" ng-model="splash.button_radius" required>
-                    </md-input-container>
+                    <small class="muted label">Corner Radius</small>
+                    <md-radio-group class="label" ng-model="splash.button_radius" layout="row" layout-wrap>
+                      <md-radio-button aria-label="square" value="0px">Square</md-radio-button>
+                      <md-radio-button aria-label="soft" value="8px">Soft</md-radio-button>
+                      <md-radio-button aria-label="round" value="9001px">Round</md-radio-button>
+                    </md-radio-group>
                   </div>
                   <div flex="100" flex-gt-xs="100">
-                    <md-input-container class="md-block" style="margin-top: 0px;">
+                    <md-input-container class="md-block">
+                      <small class="muted label">Drop Shadow</small>
                       <md-switch ng-model="splash.button_shadow" aria-label="button_shadow" style="margin: 0px 0 20px 0">
                         <span ng-show="splash.button_shadow == true" translate>Shadow Enabled</span>
                         <span ng-show="splash.button_shadow == false" translate>Shadow Disabled</span>
@@ -601,8 +570,22 @@
 
           <div ng-if="isOpen('input')" id="input" class="menu-toggle-list" layout="column">
             <md-card>
+              <md-card-title-text layout="row" layout-align="space-between center">
+                <span class="md-headline" translate></span>
+                <md-button ng-click="splash.form_demo = !splash.form_demo" class="md-icon-button {{ splash.form_demo ? 'md-accent' : '' }}">
+                  <md-icon md-font-icon="visibility">{{ splash.form_demo ? 'visibility' : 'visibility_off' }}</md-icon>
+                </md-button>
+              </md-card-title-text>
               <md-card-content>
                 <div layout="row" layout-wrap>
+                  <div flex="100" flex-gt-sm="100">
+                    <small class="muted label">Corner Radius</small>
+                    <md-radio-group class="label" ng-model="splash.input_border_radius" layout="row" layout-wrap>
+                      <md-radio-button aria-label="square" value="0px">Square</md-radio-button>
+                      <md-radio-button aria-label="soft" value="8px">Soft</md-radio-button>
+                      <md-radio-button aria-label="round" value="9001px">Round</md-radio-button>
+                    </md-radio-group>
+                  </div>
                   <div flex="100" flex-gt-sm="100">
                     <md-input-container class="md-block">
                       <label>
@@ -638,23 +621,7 @@
                   <div flex="100" flex-gt-xs="50">
                     <md-input-container class="md-block">
                       <label>
-                        <translate>Padding</translate>
-                      </label>
-                      <input type="text" ng-model="splash.input_padding" required>
-                    </md-input-container>
-                  </div>
-                  <div flex="100" flex-gt-xs="50">
-                    <md-input-container class="md-block">
-                      <label>
-                        <translate>Radius</translate>
-                      </label>
-                      <input type="text" ng-model="splash.input_border_radius" required>
-                    </md-input-container>
-                  </div>
-                  <div flex="100" flex-gt-xs="50">
-                    <md-input-container class="md-block">
-                      <label>
-                        <translate>Width</translate>
+                        <translate>Border Width</translate>
                       </label>
                       <input type="text" ng-model="splash.input_border_width" required>
                     </md-input-container>

@@ -1261,6 +1261,17 @@ md-bottom-sheet .md-subheader {
 
 /*general changes*/
 
+.muted.label {
+  font-size: 12px;
+  padding-left: 2px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+md-radio-group.label md-radio-button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .example-data {
   background-color: #ffe9b4;
   margin: 7px;

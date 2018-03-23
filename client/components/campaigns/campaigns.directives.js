@@ -461,11 +461,35 @@ app.directive('validateCampaignEmail', ['CampaignValidate', '$routeParams', '$ti
   };
 }]);
 
-app.directive('campSenders', ['Campaign', 'Location', '$routeParams', '$location', '$mdDialog', function(Campaign, Location, $routeParams, $location, $mdDialog) {
+app.directive('campSenders', ['Sender', 'Location', '$routeParams', '$location', '$mdDialog', function(Sender, Location, $routeParams, $location, $mdDialog) {
 
   var link = function(scope, element, attrs) {
 
     scope.currentNavItem = 'senders';
+
+    function DialogController($scope,loading) {
+      $scope.loading = loading;
+
+      $scope.close = function() {
+        $mdDialog.cancel();
+      };
+      $scope.save = function() {
+        Sender.create({}, {
+          location_id: $routeParams.id,
+          sender: $scope.sender
+        }, function(data) {
+          init();
+          $mdDialog.cancel();
+        }, function(err) {
+          console.log(err);
+        });
+      };
+      $scope.back = function() {
+        scope.openDialog();
+      };
+    }
+
+    DialogController.$inject = ['$scope', 'loading'];
 
     scope.newSender = function() {
       $mdDialog.show({
@@ -491,28 +515,13 @@ app.directive('campSenders', ['Campaign', 'Location', '$routeParams', '$location
       });
     };
 
-    function DialogController($scope,loading) {
-      $scope.loading = loading;
-
-      $scope.close = function() {
-        $mdDialog.cancel();
-      };
-      $scope.save = function() {
-        // showConfirm($scope.splash.template);
-      };
-      $scope.back = function() {
-        scope.openDialog();
-      };
-    }
-
-    DialogController.$inject = ['$scope', 'loading'];
-
     var init = function() {
-      Location.get({id: $routeParams.id}, function(data) {
-        scope.location = data;
+      Sender.query({location_id: $routeParams.id}, function(data) {
+        scope.senders = data.senders;
         scope.loading = undefined;
-      }, function(err){
+      }, function(err) {
         console.log(err);
+        scope.loading = undefined;
       });
     };
 

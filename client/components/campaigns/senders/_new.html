@@ -11,7 +11,7 @@
             <p>Select the type of Sender you want to create.</p>
           </div>
           <div flex="100">
-            <md-radio-group ng-model="sender.type" layout="row">
+            <md-radio-group ng-model="sender.sender_type" layout="row">
               <md-radio-button aria-label="email" value="email">Email</md-radio-button>
               <md-radio-button aria-label="sms" value="sms">SMS</md-radio-button>
               <md-radio-button aria-label="twitter" value="twitter">Twitter</md-radio-button>
@@ -19,7 +19,7 @@
           </div>
         </div>
 
-        <div ng-show="sender.type == 'email'" class="animate-show ng-hide">
+        <div ng-show="sender.sender_type == 'email'" class="animate-show ng-hide">
           <div layout="row" layout-wrap>
             <div flex="100">
               <p>Configure your email settings below.</p>
@@ -28,7 +28,7 @@
               <label>
                 <translate>Sender Name</translate>
               </label>
-              <input ng-model="a.a" placeholder="Bob's Burgers" type='text' name="sender_name" md-maxlength='255'></input>
+              <input ng-model="sender.sender_name" placeholder="Bob's Burgers" type='text' name="sender_name" md-maxlength='255'></input>
               <div ng-messages="myForm.sender_name.$error">
                 <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
               </div>
@@ -38,7 +38,7 @@
               <label>
                 <translate>From Name</translate>
               </label>
-              <input ng-model="a.a" placeholder="Bob Richards" type='text' name="from_name" md-maxlength='255'></input>
+              <input ng-model="sender.from_name" placeholder="Bob Richards" type='text' name="from_name" md-maxlength='255'></input>
               <div ng-messages="myForm.from_name.$error">
                 <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
               </div>
@@ -48,7 +48,7 @@
               <label>
                 <translate>From Address</translate>
               </label>
-              <input ng-model="a.a" placeholder="bob@burgers.com" type='email' name="from_email" md-maxlength='255'></input>
+              <input ng-model="sender.from_email" placeholder="bob@burgers.com" type='email' name="from_email" md-maxlength='255'></input>
               <div ng-messages="myForm.from_email.$error">
                 <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
               </div>
@@ -58,7 +58,7 @@
               <label>
                 <translate>Reply To Address</translate>
               </label>
-              <input ng-model="a.a" placeholder="bob@burgers.com" type='text' name="reply_email" md-maxlength='255'></input>
+              <input ng-model="sender.reply_email" placeholder="bob@burgers.com" type='text' name="reply_email" md-maxlength='255'></input>
               <div ng-messages="myForm.reply_eail.$error">
                 <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
               </div>
@@ -72,7 +72,7 @@
               <label>
                 <translate>Street Address</translate>
               </label>
-              <input ng-model="location.location_address" name="address" type="text" md-maxlength='255' placeholder="{{ 'Street Name' | translate }}"></input>
+              <input ng-model="sender.address" name="address" type="text" md-maxlength='255' placeholder="{{ 'Street Name' | translate }}"></input>
               <div ng-messages="myForm.address.$error">
                 <div ng-message="md-maxlength" translate>Must be less than 255 characters</div>
                 <div ng-message="required" translate>You must enter an address</div>
@@ -83,7 +83,7 @@
               <label>
                 <translate>City</translate>
               </label>
-              <input ng-model="location.town" name="town" type="text" md-maxlength='255' placeholder="{{ 'Enter a town or city.' | translate }}"></input>
+              <input ng-model="sender.town" name="town" type="text" md-maxlength='255' placeholder="{{ 'Enter a town or city.' | translate }}"></input>
               <div ng-messages="myForm.town.$error">
                 <div ng-message="md-maxlength" translate>Must be less than 255 characters</div>
                 <div ng-message="required" translate>You must enter a town</div>
@@ -93,7 +93,7 @@
               <label>
                 <translate>Postcode (Zipcode)</translate>
               </label>
-              <input ng-model="location.postcode" name="postcode" type="text" md-maxlength='255' placeholder="{{ 'Postcode' | translate }}"></input>
+              <input ng-model="sender.postcode" name="postcode" type="text" md-maxlength='255' placeholder="{{ 'Postcode' | translate }}"></input>
               <div ng-messages="myForm.postcode.$error" md-auto-hide="false">
                 <div ng-message="md-maxlength" translate>Must be less than 255 characters</div>
                 <div ng-message="required" translate>You must enter a postcode</div>
@@ -104,12 +104,12 @@
               <label>
                 <translate>Country</translate>
               </label>
-              <country-select country="location.country"></country-select>
+              <country-select country="sender.country"></country-select>
             </md-input-container>
           </div>
         </div>
 
-        <span ng-show="sender.type == 'sms'" class="animate-show ng-hide">
+        <span ng-show="sender.sender_type == 'sms'" class="animate-show ng-hide">
           <div layout="row" layout-wrap>
             <div flex="100">
               <p>Configure your SMS settings below.</p>
@@ -118,7 +118,7 @@
               <label>
                 <translate>Sender Name</translate>
               </label>
-              <input ng-model="a.a" placeholder="Bob's Burgers" type='text' name="sender_name" md-maxlength='255'></input>
+              <input ng-model="sender.sender_name" placeholder="Bob's Burgers" type='text' name="sender_name" md-maxlength='255'></input>
               <div ng-messages="myForm.sender_name.$error">
                 <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
               </div>
@@ -136,7 +136,7 @@
       <md-button ng-click="close()" translate>
         Close
       </md-button>
-      <md-button class="md-raised md-primary" ng-click="save()" ng-disabled="!splash.template" translate>
+      <md-button class="md-raised md-primary" ng-click="save()" translate>
         Save
       </md-button>
     </md-dialog-actions>

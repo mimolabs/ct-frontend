@@ -108,7 +108,7 @@ app.directive('listCampaigns', ['Campaign', 'Location', '$routeParams', '$rootSc
 
 }]);
 
-app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience', 'Auth', '$q', '$routeParams', '$rootScope', '$http', '$location', 'showToast', 'showErrors', '$sce', 'gettextCatalog', '$mdDialog', function (Campaign, Location, Integration, Audience, Auth, $q, $routeParams, $rootScope, $http, $location, showToast, showErrors, $sce, gettextCatalog, $mdDialog) {
+app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience', 'Sender', 'Auth', '$q', '$routeParams', '$rootScope', '$http', '$location', 'showToast', 'showErrors', '$sce', 'gettextCatalog', '$mdDialog', function (Campaign, Location, Integration, Audience, Sender, Auth, $q, $routeParams, $rootScope, $http, $location, showToast, showErrors, $sce, gettextCatalog, $mdDialog) {
 
   var link = function(scope,element,attrs) {
 
@@ -337,6 +337,14 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
       });
     };
 
+    var getSenders = function() {
+      Sender.query({location_id: $routeParams.id}, function(data) {
+        scope.senders = data.senders;
+      }, function(err) {
+        console.log(err);
+      });
+    };
+
     var init = function() {
       if ($routeParams.campaign_id) {
         getCampaign();
@@ -344,6 +352,7 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
         buildCampaign();
         getAudiences();
       }
+      getSenders();
     };
 
     init();
@@ -467,12 +476,7 @@ app.directive('campSenders', ['Sender', 'Location', 'showErrors', 'showToast', '
 
     scope.currentNavItem = 'senders';
 
-    var init = function() {
-      Location.get({id: $routeParams.id}, function(data) {
-        scope.location = data;
-      }, function(err){
-        console.log(err);
-      });
+    var getSenders = function() {
       Sender.query({location_id: $routeParams.id}, function(data) {
         scope.senders = data.senders;
         scope.loading = undefined;
@@ -480,6 +484,20 @@ app.directive('campSenders', ['Sender', 'Location', 'showErrors', 'showToast', '
         console.log(err);
         scope.loading = undefined;
       });
+    };
+
+    var getLocation = function() {
+      Location.get({id: $routeParams.id}, function(data) {
+        scope.location = data;
+        scope.loading = undefined;
+      }, function(err){
+        console.log(err);
+      });
+    };
+
+    var init = function() {
+      getLocation();
+      getSenders();
     };
 
     function DialogController($scope,loading) {

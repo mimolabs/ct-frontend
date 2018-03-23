@@ -1515,6 +1515,26 @@ table a {
 
 /*WYSIWYG end*/
 
+/*animate show/hide*/
+
+.animate-show {
+  -webkit-transition: 0.5s ease-in all;
+  transition:  0.5s ease-in all;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.animate-show.ng-hide-remove,
+.animate-show.ng-hide-add,.animate-show.ng-hide {
+  display: block!important;
+}
+
+.animate-show.ng-hide {
+  max-height: 0px;
+  -webkit-transition: 0.5s ease-out all;
+  transition:  0.5s ease-out all;
+}
+
 /*people page*/
 
 .people-filter md-card-content {

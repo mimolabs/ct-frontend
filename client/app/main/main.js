@@ -224,6 +224,11 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
       controller: 'LocationsCtrl as lc',
       resolve: { loginRequired: loginRequired }
     }).
+    when('/:id/campaigns/senders', {
+      templateUrl: 'components/campaigns/senders/index.html',
+      controller: 'LocationsCtrl as lc',
+      resolve: { loginRequired: loginRequired },
+    }).
     when('/:id/campaigns/:campaign_id', {
       templateUrl: 'components/campaigns/edit/edit.html',
       resolve: { loginRequired: loginRequired },

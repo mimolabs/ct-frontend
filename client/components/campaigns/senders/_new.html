@@ -1,0 +1,143 @@
+<md-dialog aria-label="{{ 'Site Setup' | translate }}">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2 translate>New Sender</h2>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <div layout="row" layout-wrap>
+          <div flex="100">
+            <p>Select the type of Sender you want to create.</p>
+          </div>
+          <div flex="100">
+            <md-radio-group ng-model="sender.type" layout="row">
+              <md-radio-button aria-label="email" value="email">Email</md-radio-button>
+              <md-radio-button aria-label="sms" value="sms">SMS</md-radio-button>
+              <md-radio-button aria-label="twitter" value="twitter">Twitter</md-radio-button>
+            </md-radio-group>
+          </div>
+        </div>
+
+        <div ng-show="sender.type == 'email'" class="animate-show ng-hide">
+          <div layout="row" layout-wrap>
+            <div flex="100">
+              <p>Configure your email settings below.</p>
+            </div>
+            <md-input-container flex="100" flex-gt-xs="100">
+              <label>
+                <translate>Sender Name</translate>
+              </label>
+              <input ng-model="a.a" placeholder="Bob's Burgers" type='text' name="sender_name" md-maxlength='255'></input>
+              <div ng-messages="myForm.sender_name.$error">
+                <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
+              </div>
+              <small class="muted">This is for your reference only - the recipient will not see this.</small>
+            </md-input-container>
+            <md-input-container flex="100" flex-gt-xs="45">
+              <label>
+                <translate>From Name</translate>
+              </label>
+              <input ng-model="a.a" placeholder="Bob Richards" type='text' name="from_name" md-maxlength='255'></input>
+              <div ng-messages="myForm.from_name.$error">
+                <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
+              </div>
+            </md-input-container>
+            <div flex="100" flex-gt-xs="55"></div>
+            <md-input-container flex="100" flex-gt-xs="45">
+              <label>
+                <translate>From Address</translate>
+              </label>
+              <input ng-model="a.a" placeholder="bob@burgers.com" type='email' name="from_email" md-maxlength='255'></input>
+              <div ng-messages="myForm.from_email.$error">
+                <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
+              </div>
+            </md-input-container>
+            <div flex="100" flex-gt-xs="10"></div>
+            <md-input-container flex="100" flex-gt-xs="45">
+              <label>
+                <translate>Reply To Address</translate>
+              </label>
+              <input ng-model="a.a" placeholder="bob@burgers.com" type='text' name="reply_email" md-maxlength='255'></input>
+              <div ng-messages="myForm.reply_eail.$error">
+                <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
+              </div>
+            </md-input-container>
+          </div>
+          <div layout="row" layout-wrap>
+            <div flex="100">
+              <p>You will need to include the below information in the footer of every promotional email sent in order to comply with anti-spam laws.</p>
+            </div>
+            <md-input-container flex="100" flex-gt-xs="45">
+              <label>
+                <translate>Street Address</translate>
+              </label>
+              <input ng-model="location.location_address" name="address" type="text" md-maxlength='255' placeholder="{{ 'Street Name' | translate }}"></input>
+              <div ng-messages="myForm.address.$error">
+                <div ng-message="md-maxlength" translate>Must be less than 255 characters</div>
+                <div ng-message="required" translate>You must enter an address</div>
+              </div>
+            </md-input-container>
+            <div flex-gt-xs="10"></div>
+            <md-input-container flex="100" flex-gt-xs="45">
+              <label>
+                <translate>City</translate>
+              </label>
+              <input ng-model="location.town" name="town" type="text" md-maxlength='255' placeholder="{{ 'Enter a town or city.' | translate }}"></input>
+              <div ng-messages="myForm.town.$error">
+                <div ng-message="md-maxlength" translate>Must be less than 255 characters</div>
+                <div ng-message="required" translate>You must enter a town</div>
+              </div>
+            </md-input-container>
+            <md-input-container flex="100" flex-gt-xs="45">
+              <label>
+                <translate>Postcode (Zipcode)</translate>
+              </label>
+              <input ng-model="location.postcode" name="postcode" type="text" md-maxlength='255' placeholder="{{ 'Postcode' | translate }}"></input>
+              <div ng-messages="myForm.postcode.$error" md-auto-hide="false">
+                <div ng-message="md-maxlength" translate>Must be less than 255 characters</div>
+                <div ng-message="required" translate>You must enter a postcode</div>
+              </div>
+            </md-input-container>
+            <div flex-gt-xs="10"></div>
+            <md-input-container flex="100" flex-gt-xs="45">
+              <label>
+                <translate>Country</translate>
+              </label>
+              <country-select country="location.country"></country-select>
+            </md-input-container>
+          </div>
+        </div>
+
+        <span ng-show="sender.type == 'sms'" class="animate-show ng-hide">
+          <div layout="row" layout-wrap>
+            <div flex="100">
+              <p>Configure your SMS settings below.</p>
+            </div>
+            <md-input-container flex="100" flex-gt-xs="100">
+              <label>
+                <translate>Sender Name</translate>
+              </label>
+              <input ng-model="a.a" placeholder="Bob's Burgers" type='text' name="sender_name" md-maxlength='255'></input>
+              <div ng-messages="myForm.sender_name.$error">
+                <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>
+              </div>
+              <small class="muted">This is for your reference only - the recipient will not see this.</small>
+            </md-input-container>
+            <div flex="100">
+              <p>A phone number will be generated for you.</p>
+            </div>
+          </div>
+        </span>
+
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" layout-align="end center">
+      <md-button ng-click="close()" translate>
+        Close
+      </md-button>
+      <md-button class="md-raised md-primary" ng-click="save()" ng-disabled="!splash.template" translate>
+        Save
+      </md-button>
+    </md-dialog-actions>
+</md-dialog>

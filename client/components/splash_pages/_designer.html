@@ -145,7 +145,8 @@
     margin-top: 0.2rem;
   }
 
-  input.design-input, textarea.designer-input {
+  input.design-input,
+  textarea.designer-input {
     font-family: {{ splash.font_family }}!important;
     max-width: {{ splash.input_max_width || '400px' }}!important;
     width: 95%;
@@ -155,12 +156,17 @@
     border: {{ splash.input_border_width}} solid {{ splash.input_border_colour}}!important;
     border-radius: {{ splash.input_border_radius }}!important;
     box-shadow: inset 0 0px 0px rgb(255, 255, 255)!important;
-    background-color: #ffffff!important;
+    background-color: {{ splash.input_background }}!important;
 
     border-width: 1px!important;
     border-color: {{ splash.input_border_width}} solid {{ splash.input_border_colour}}!important;
     margin: 0 0 0.5rem -5px!important;
-    color: #3d3d3d!important;
+    color: {{ splash.input_text_colour }}!important;
+  }
+
+  input.design-input::placeholder,
+  textarea.designer-input::placeholder {
+    color: {{ splash.input_text_colour }}!important;
   }
 
   .designer label {
@@ -406,10 +412,16 @@
           <div ng-show="splash.header_image_name != undefined || splash.logo_file_name != undefined" class="" ng-class="splash.header_image_type == 1 ? 'logo location_logo' : 'banner'" ><a href="http://{{ splash.website }}"><img src="{{ splash.header_image_type == 1 ? splash.logo_file_name : splash.header_image_name }}" alt="" class=""></a></div>
 
           <div class="ps_inner">
+            <div ng-show="splash.form_demo == true">
+              <h1>{{ splash.header_text }}</h1>
+              <h2><div ng-bind-html="splash.info | sanitize"></div></h2>
+              <p ng-bind-html="splash.info_two | sanitize"></p>
+              <input type="text" class="design-input" placeholder="Example Field">
+            </div>
             <div ng-show="splash.welcome_demo == true">
               <div ng-include="'components/splash_pages/_welcome.html'"></div>
             </div>
-            <div ng-hide="splash.welcome_demo == true">
+            <div ng-hide="splash.welcome_demo == true || splash.form_demo == true">
               <h1>{{ splash.header_text }}</h1>
               <h2><div ng-bind-html="splash.info | sanitize"></div></h2>
               <p ng-bind-html="splash.info_two | sanitize"></p>

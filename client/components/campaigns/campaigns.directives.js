@@ -461,7 +461,7 @@ app.directive('validateCampaignEmail', ['CampaignValidate', '$routeParams', '$ti
   };
 }]);
 
-app.directive('campSenders', ['Sender', 'Location', 'showErrors', '$routeParams', '$location', '$mdDialog', function(Sender, Location, showErrors, $routeParams, $location, $mdDialog) {
+app.directive('campSenders', ['Sender', 'Location', 'showErrors', 'showToast', 'gettextCatalog', '$routeParams', '$location', '$mdDialog', function(Sender, Location, showErrors, showToast, gettextCatalog, $routeParams, $location, $mdDialog) {
 
   var link = function(scope, element, attrs) {
 

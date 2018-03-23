@@ -468,6 +468,11 @@ app.directive('campSenders', ['Sender', 'Location', 'showErrors', '$routeParams'
     scope.currentNavItem = 'senders';
 
     var init = function() {
+      Location.get({id: $routeParams.id}, function(data) {
+        scope.location = data;
+      }, function(err){
+        console.log(err);
+      });
       Sender.query({location_id: $routeParams.id}, function(data) {
         scope.senders = data.senders;
         scope.loading = undefined;

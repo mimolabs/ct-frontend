@@ -461,11 +461,21 @@ app.directive('validateCampaignEmail', ['CampaignValidate', '$routeParams', '$ti
   };
 }]);
 
-app.directive('campSenders', ['Sender', 'Location', '$routeParams', '$location', '$mdDialog', function(Sender, Location, $routeParams, $location, $mdDialog) {
+app.directive('campSenders', ['Sender', 'Location', 'showErrors', '$routeParams', '$location', '$mdDialog', function(Sender, Location, showErrors, $routeParams, $location, $mdDialog) {
 
   var link = function(scope, element, attrs) {
 
     scope.currentNavItem = 'senders';
+
+    var init = function() {
+      Sender.query({location_id: $routeParams.id}, function(data) {
+        scope.senders = data.senders;
+        scope.loading = undefined;
+      }, function(err) {
+        console.log(err);
+        scope.loading = undefined;
+      });
+    };
 
     function DialogController($scope,loading) {
       $scope.loading = loading;
@@ -481,7 +491,7 @@ app.directive('campSenders', ['Sender', 'Location', '$routeParams', '$location',
           init();
           $mdDialog.cancel();
         }, function(err) {
-          console.log(err);
+          showErrors(err);
         });
       };
       $scope.back = function() {
@@ -515,13 +525,21 @@ app.directive('campSenders', ['Sender', 'Location', '$routeParams', '$location',
       });
     };
 
-    var init = function() {
-      Sender.query({location_id: $routeParams.id}, function(data) {
-        scope.senders = data.senders;
-        scope.loading = undefined;
+    var removeFromList = function(sender) {
+      for (var i = 0, len = scope.senders.length; i < len; i++) {
+        if (scope.senders[i].id === sender.id) {
+          scope.senders.splice(i, 1);
+          showToast(gettextCatalog.getString('Sender successfully deleted.'));
+          break;
+        }
+      }
+    };
+
+    scope.delete = function(sender) {
+      Sender.destroy({location_id: $routeParams.id, id: sender.id}).$promise.then(function(results) {
+        removeFromList(sender);
       }, function(err) {
-        console.log(err);
-        scope.loading = undefined;
+        showErrors(err);
       });
     };
 

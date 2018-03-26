@@ -1261,6 +1261,17 @@ md-bottom-sheet .md-subheader {
 
 /*general changes*/
 
+.muted.label {
+  font-size: 12px;
+  padding-left: 2px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+md-radio-group.label md-radio-button {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .example-data {
   background-color: #ffe9b4;
   margin: 7px;
@@ -1584,4 +1595,50 @@ md-card.md-default-theme, md-card {
   margin-right: 20px;
   height: 40px;
   width: 40px;
+}
+
+@media (min-width: 960px) {
+  md-card.people-prof {
+    height: calc(100vh - 203px);
+    min-height: 496px;
+  }
+  md-card.people-prof md-card-title {
+    min-height: 120px;
+  }
+  md-card.people-prof md-card-content {
+    padding: 0px;
+    overflow: auto;
+    height: 100%;
+  }
+  md-card.people-email {
+    height: calc(100vh - 510px);
+    min-height: 190px;
+  }
+  md-card.people-email md-table-container {
+    overflow: auto;
+    height: 100%;
+    margin-right:-5px;
+  }
+  md-card.people-socials {
+    height: 290px;
+  }
+  md-card.people-devices {
+    height: calc(50vh - 110px);
+    min-height: 240px;
+  }
+  md-card.people-devices md-table-container {
+    overflow: auto;
+    height: 100%;
+    margin-right:-5px;
+  }
+  md-card.people-sms {
+    height: calc(50vh - 110px);
+    min-height: 240px;
+  }
+  md-card.people-sms md-table-container {
+    overflow: auto;
+    height: 100%;
+    margin-right:-5px;
+  }
+
 }

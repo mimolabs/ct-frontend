@@ -1,6 +1,6 @@
 <people-nav location="location"></people-nav>
 
-<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta">
+<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" style="margin-bottom:0px;">
   <div flex="100" flex-gt-md="90" flex-gt-lg="80">
     <div layout="row" layout-align="space-between center" layout-wrap>
       <md-button id="main" class="md-fab md-mini md-raised" ng-click="back()" aria-label="{{ 'Back to People' | translate }}">
@@ -41,8 +41,8 @@
       <div flex="100" flex-gt-sm="30">
         <div layout-gt-sm="row" layout-sm="row" layout-xs="column" layout-wrap>
 
-          <div flex-xs="100" flex-sm="50" flex-gt-sm="100">
-            <md-card class="b-bl">
+          <div flex="100">
+            <md-card class="people-prof b-bl">
               <md-card-title>
                 <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/IpVwFwAATiuUMn1dkSeu'}}" style="max-height:120px;border-radius:60px;"></img>
                 <span flex></span>
@@ -50,48 +50,50 @@
                   <md-icon md-font-icon="mode_edit">mode_edit</md-icon>
                 </md-button>
               </md-card-title>
-              <md-list flex>
-                <md-list-item class="md-2-line">
-                  <div class="md-list-item-text" layout="column">
-                    <h3 translate>Name</h3>
-                    <p ng-if="edit_username !== true">{{ person.username ? person.username : 'Splash Guest'}}</p>
-                    <div layout="row">
-                      <form ng-submit="saveUsername()">
-                        <input type="text" ng-model="person.username" ng-if="edit_username === true"></input>
-                        <md-button ng-if="edit_username === true" ng-click="saveUsername()" aria-controls="{{'splash' | translate }}" class="md-secondary md-icon-button" aria-label="{{ 'call' | translate }}">
-                          <md-icon md-font-icon="mode_edit">save</md-icon>
-                        </md-button>
-                      </form>
+              <md-card-content>
+                <md-list flex layout="column" layout-gt-xs="row" layout-gt-sm="column">
+                  <md-list-item class="md-2-line">
+                    <div class="md-list-item-text" layout="column">
+                      <h3 translate>Name</h3>
+                      <p ng-if="edit_username !== true">{{ person.username ? person.username : 'Splash Guest'}}</p>
+                      <div layout="row">
+                        <form ng-submit="saveUsername()">
+                          <input type="text" ng-model="person.username" ng-if="edit_username === true"></input>
+                          <md-button ng-if="edit_username === true" ng-click="saveUsername()" aria-controls="{{'splash' | translate }}" class="md-secondary md-icon-button" aria-label="{{ 'call' | translate }}">
+                            <md-icon md-font-icon="mode_edit">save</md-icon>
+                          </md-button>
+                        </form>
+                      </div>
                     </div>
-                  </div>
-                </md-list-item>
-                <md-list-item class="md-2-line">
-                  <div class="md-list-item-text" layout="column">
-                    <h3 translate>Visits</h3>
-                    <p>{{ person.login_count || 1 }}</p>
-                  </div>
-                </md-list-item>
-                <md-list-item class="md-2-line">
-                  <div class="md-list-item-text" layout="column">
-                    <h3 translate>Last Seen</h3>
-                    <p>{{ person.last_seen | humanDate }}</p>
-                  </div>
-                </md-list-item>
-                <md-list-item class="md-2-line">
-                  <div class="md-list-item-text" layout="column">
-                    <h3 translate>First Seen</h3>
-                    <p>{{ person.created_at | humanDate }}</p>
-                  </div>
-                </md-list-item>
-              </md-list>
+                  </md-list-item>
+                  <md-list-item class="md-2-line">
+                    <div class="md-list-item-text" layout="column">
+                      <h3 translate>Visits</h3>
+                      <p>{{ person.login_count || 1 }}</p>
+                    </div>
+                  </md-list-item>
+                  <md-list-item class="md-2-line">
+                    <div class="md-list-item-text" layout="column">
+                      <h3 translate>Last Seen</h3>
+                      <p>{{ person.last_seen | humanDate }}</p>
+                    </div>
+                  </md-list-item>
+                  <md-list-item class="md-2-line">
+                    <div class="md-list-item-text" layout="column">
+                      <h3 translate>First Seen</h3>
+                      <p>{{ person.created_at | humanDate }}</p>
+                    </div>
+                  </md-list-item>
+                </md-list>
+              </md-card-content>
             </md-card>
           </div>
         </div>
       </div>
 
 
-      <div flex="100" flex-gt-sm="40">
-        <div layout-gt-sm="row" layout="column" layout-wrap>
+      <div flex="100" flex-gt-sm="35">
+        <div layout="row" layout-wrap>
 
           <!-- <div flex-gt-sm="100">
             <md-card class="b-bl">
@@ -106,8 +108,8 @@
             </md-card>
           </div> -->
 
-          <div flex-gt-sm="100">
-            <md-card class="b-bl">
+          <div flex="100" flex-gt-xs="50" flex-gt-sm="100">
+            <md-card class="people-email b-bl">
               <md-card-title>
                 <md-card-title-text>
                   <span class="md-headline" translate>Email</span>
@@ -137,74 +139,76 @@
             </md-card>
           </div>
 
-          <div flex-xs="100" flex-sm="50" flex-gt-sm="100">
-            <md-card class="b-bl">
+          <div flex="100" flex-gt-xs="50" flex-gt-sm="100">
+            <md-card class="people-socials b-bl">
               <md-card-title>
                 <md-card-title-text>
                   <span class="md-headline" translate>Socials</span>
                 </md-card-title-text>
               </md-card-title>
-              <md-list flex>
-                <md-list-item class="md-2-line">
-                  <img src="https://d247kqobagyqjh.cloudfront.net/api/file/WUhzu2zRTremUtlXxALC" style="border-radius:0px;" class="person-social"/>
-                  <div class="md-list-item-text">
-                    <h3>Facebook</h3>
-                    <p ng-show="!person.social[0].fb_link">No Profile</p>
-                    <p><a href="{{person.social[0].fb_link}}" ng-show="person.social[0].fb_link && location.demo !== true" target="_blank">View Profile</a></p>
-                    <p><a href="" ng-show="person.social[0].fb_link && location.demo === true" target="_blank">
-                      <span>
-                        View Profile
-                        <md-tooltip>
-                          You are currently viewing demo data
-                        </md-tooltip>
-                      </span>
-                    </a></p>
-                  </div>
-                </md-list-item>
-                <md-list-item class="md-2-line">
-                  <img src="https://d247kqobagyqjh.cloudfront.net/api/file/K3YDlqzUQzIavvIEkesC" style="border-radius:0px;" class="person-social"/>
-                  <div class="md-list-item-text" layout="column">
-                    <h3 translate>Google+</h3>
-                    <p ng-show="!person.social[0].g_link">No Profile</p>
-                    <p><a href="{{person.social[0].g_link}}" ng-show="person.social[0].g_link && location.demo !== true" target="_blank">View Profile</a></p>
-                    <p><a href="" ng-show="person.social[0].g_link && location.demo === true" target="_blank">
-                      <span>
-                        View Profile
-                        <md-tooltip>
-                          You are currently viewing demo data
-                        </md-tooltip>
-                      </span>
-                    </a></p>
-                  </div>
-                </md-list-item>
-                <md-list-item class="md-2-line">
-                  <img src="https://d247kqobagyqjh.cloudfront.net/api/file/PdwjF22TTiqOHvzQcksA" style="border-radius:0px;" class="person-social"/>
-                  <div class="md-list-item-text" layout="column">
-                    <h3 translate>Twitter</h3>
-                    <p ng-show="!person.social[0].tw_url">No Profile</p>
-                    <p><a href="{{person.social[0].tw_url}}" ng-show="person.social[0].tw_url && location.demo !== true" target="_blank">View Profile</a></p>
-                    <p><a href="" ng-show="person.social[0].tw_url && location.demo === true" target="_blank">
-                      <span>
-                        View Profile
-                        <md-tooltip>
-                          You are currently viewing demo data
-                        </md-tooltip>
-                      </span>
-                    </a></p>
-                  </div>
-                </md-list-item>
-              </md-list>
+              <md-card-content>
+                <md-list flex>
+                  <md-list-item class="md-2-line">
+                    <img src="https://d247kqobagyqjh.cloudfront.net/api/file/WUhzu2zRTremUtlXxALC" style="border-radius:0px;" class="person-social"/>
+                    <div class="md-list-item-text">
+                      <h3>Facebook</h3>
+                      <p ng-show="!person.social[0].fb_link">No Profile</p>
+                      <p><a href="{{person.social[0].fb_link}}" ng-show="person.social[0].fb_link && location.demo !== true" target="_blank">View Profile</a></p>
+                      <p><a href="" ng-show="person.social[0].fb_link && location.demo === true" target="_blank">
+                        <span>
+                          View Profile
+                          <md-tooltip>
+                            You are currently viewing demo data
+                          </md-tooltip>
+                        </span>
+                      </a></p>
+                    </div>
+                  </md-list-item>
+                  <md-list-item class="md-2-line">
+                    <img src="https://d247kqobagyqjh.cloudfront.net/api/file/K3YDlqzUQzIavvIEkesC" style="border-radius:0px;" class="person-social"/>
+                    <div class="md-list-item-text" layout="column">
+                      <h3 translate>Google+</h3>
+                      <p ng-show="!person.social[0].g_link">No Profile</p>
+                      <p><a href="{{person.social[0].g_link}}" ng-show="person.social[0].g_link && location.demo !== true" target="_blank">View Profile</a></p>
+                      <p><a href="" ng-show="person.social[0].g_link && location.demo === true" target="_blank">
+                        <span>
+                          View Profile
+                          <md-tooltip>
+                            You are currently viewing demo data
+                          </md-tooltip>
+                        </span>
+                      </a></p>
+                    </div>
+                  </md-list-item>
+                  <md-list-item class="md-2-line">
+                    <img src="https://d247kqobagyqjh.cloudfront.net/api/file/PdwjF22TTiqOHvzQcksA" style="border-radius:0px;" class="person-social"/>
+                    <div class="md-list-item-text" layout="column">
+                      <h3 translate>Twitter</h3>
+                      <p ng-show="!person.social[0].tw_url">No Profile</p>
+                      <p><a href="{{person.social[0].tw_url}}" ng-show="person.social[0].tw_url && location.demo !== true" target="_blank">View Profile</a></p>
+                      <p><a href="" ng-show="person.social[0].tw_url && location.demo === true" target="_blank">
+                        <span>
+                          View Profile
+                          <md-tooltip>
+                            You are currently viewing demo data
+                          </md-tooltip>
+                        </span>
+                      </a></p>
+                    </div>
+                  </md-list-item>
+                </md-list>
+              </md-card-content>
             </md-card>
           </div>
 
         </div>
       </div>
 
-      <div flex="100" flex-gt-sm="30">
-        <div layout-gt-sm="row" layout-sm="row" layout-xs="column" layout-wrap>
+      <div flex="100" flex-gt-sm="35">
+        <div layout="row" layout-wrap>
 
-          <div flex-xs="100" flex-sm="50" flex-gt-sm="100">
-            <md-card class="b-bl">
+          <div flex="100" flex-gt-xs="50" flex-gt-sm="100">
+            <md-card class="people-devices b-bl">
               <md-card-title>
                 <md-card-title-text>
                   <span class="md-headline" translate>Devices</span>
@@ -236,8 +240,8 @@
             </md-card>
           </div>
 
-          <div flex-xs="100" flex-sm="50" flex-gt-sm="100">
-            <md-card class="b-bl">
+          <div flex="100" flex-gt-xs="50" flex-gt-sm="100">
+            <md-card class="people-sms b-bl">
               <md-card-title>
                 <md-card-title-text>
                   <span class="md-headline" translate>SMS Numbers</span>

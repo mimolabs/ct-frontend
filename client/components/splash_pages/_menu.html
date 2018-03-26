@@ -570,12 +570,14 @@
 
           <div ng-if="isOpen('input')" id="input" class="menu-toggle-list" layout="column">
             <md-card>
-              <md-card-title-text layout="row" layout-align="space-between center">
-                <span class="md-headline" translate></span>
-                <md-button ng-click="splash.form_demo = !splash.form_demo" class="md-icon-button {{ splash.form_demo ? 'md-accent' : '' }}">
-                  <md-icon md-font-icon="visibility">{{ splash.form_demo ? 'visibility' : 'visibility_off' }}</md-icon>
-                </md-button>
-              </md-card-title-text>
+              <md-card-title>
+                <md-card-title-text layout="row" layout-align="space-between center">
+                  <span class="md-headline" translate>Form Style</span>
+                  <md-button ng-click="splash.form_demo = !splash.form_demo" class="md-icon-button {{ splash.form_demo ? 'md-accent' : '' }}">
+                    <md-icon md-font-icon="visibility">{{ splash.form_demo ? 'visibility' : 'visibility_off' }}</md-icon>
+                  </md-button>
+                </md-card-title-text>
+              </md-card-title>
               <md-card-content>
                 <div layout="row" layout-wrap>
                   <div flex="100" flex-gt-sm="100">

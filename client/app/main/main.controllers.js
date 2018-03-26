@@ -159,13 +159,9 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
           paid_plan: user.paid_plan
         };
 
-        console.log(params)
-
         window.amplitude.getInstance().setUserId(user.accountId);
         window.amplitude.getInstance().setUserProperties(params);
 
-        // window.amplitude.getInstance().logEvent('LOGOUT');
-        // window.amplitude.getInstance().init('bb0d649c1c561de903dfc82fb1aadc35', user.accountId, {includeReferrer: true, includeUtm: true});
         if (INTERCOM && INTERCOM !== '' && INTERCOM !== undefined) {
           params.app_id = INTERCOM;
           params.user_hash = user.user_hash;

@@ -756,7 +756,7 @@ app.directive('integrationSelect', ['Location', '$routeParams', '$location', '$h
 
     scope.save = function(type) {
       if (scope.location.paid) {
-        window.amplitude.getInstance().logEvent('Integration etup', type);
+        window.amplitude.getInstance().logEvent('Integration setup', type);
         $location.path($routeParams.id + '/integration/' + type + '/auth');
       }
     };

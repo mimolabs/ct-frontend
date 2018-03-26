@@ -828,6 +828,7 @@ app.directive('integrations', ['Location', '$routeParams', '$location', '$http',
         id: integration.id,
         location_id: $routeParams.id,
       }).$promise.then(function(results) {
+        window.amplitude.getInstance().logEvent('Integration deleted');
         showToast('Successfully deleted integration');
         deferred.resolve(results);
       }, function(error) {
@@ -1864,7 +1865,7 @@ app.directive('integrationComplete', ['Location', '$routeParams', '$location', '
     controller.fetch().then(function(integration) {
       scope.integration = integration;
       window.amplitude.getInstance().logEvent(
-        'Integration complete', scope.integration.type
+        'Integration complete' + scope.integration.type
       );
       scope.loading = undefined;
     }, function(err) { console.log(err); });

@@ -23,7 +23,7 @@
   <div flex="100" flex-gt-md="90" flex-gt-lg="80" ng-if="senders">
     <md-card class="b-pr fixed-table">
       <md-table-container>
-        <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise">
+        <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise" class="senders-table">
           <thead md-head md-order="query.order" md-on-reorder="logOrder">
             <tr md-row>
               <th md-column md-order-by="active"><span translate>Validated</span></th>

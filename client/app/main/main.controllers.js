@@ -144,6 +144,7 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
         }
         $cookies.remove('_ctp');
         $scope.ct_login = undefined;
+        window.amplitude.getInstance().logEvent('LOGIN');
         // Translate.load();
       });
     }

@@ -1,37 +1,67 @@
 <div layout-gt-xs="row" layout="column">
-  <md-card flex-gt-xs="33" class="b-pr">
+  <md-card flex="100" class="b-pr">
     <md-card-content>
-      <md-list-item class="md-2-line">
-        <div class="md-list-item-text">
-          <p translate>Total Sent</p>
-          <h2>{{ stats.total || 0 | number:0 }}</h2>
+
+      <div layout="row" layout-wrap>
+        <div flex="100" flex-gt-xs="25" flex-gt-sm="100">
+          <div layout="row" class="email-stats-top" layout-wrap>
+            <md-list-item class="md-2-line" flex="50" flex-gt-xs="100" flex-gt-sm="50">
+              <div class="md-list-item-text">
+                <p translate>Total Sent</p>
+                <h2>{{ stats.total || 0 | number:0 }}</h2>
+              </div>
+            </md-list-item>
+            <md-list-item class="md-2-line" flex="50" flex-gt-xs="100" flex-gt-sm="50">
+              <div class="md-list-item-text">
+                <p class="muted" translate>Reputation</p>
+                <h2 translate>{{ stats.reputation || 0 | number:0 }}</h2>
+              </div>
+            </md-list-item>
+          </div>
         </div>
-      </md-list-item>
-    </md-card-content>
-  </md-card>
-  <md-card flex-gt-xs="33" class="b-pr">
-    <md-card-content>
-      <md-list-item class="md-2-line">
-        <div class="md-list-item-text">
-          <p translate>Opened</p>
-          <h2>{{ stats.opened || 0 | number:0 }}</h2>
+
+        <div flex="100" flex-gt-xs="75" flex-gt-sm="100">
+          <div layout="row" class="email-stats-bottom" layout-wrap>
+            <md-list-item class="md-2-line" flex="50">
+              <div class="md-list-item-text">
+                <p translate>Delivered</p>
+                <h2>{{ stats.delivered || 0 | number:0 }} ({{ stats.breakdown.delivered || 0 | number:0 }}%)</h2>
+              </div>
+            </md-list-item>
+            <md-list-item class="md-2-line" flex="50">
+              <div class="md-list-item-text">
+                <p translate>Opened</p>
+                <h2>{{ stats.opened || 0 | number:0 }} ({{ stats.breakdown.opened || 0 | number:0 }}%)</h2>
+              </div>
+            </md-list-item>
+            <md-list-item class="md-2-line" flex="50">
+              <div class="md-list-item-text">
+                <p translate>Clicked</p>
+                <h2 translate>{{ stats.clicked || 0 | number:0 }} ({{ stats.breakdown.clicked || 0 | number:0 }}%)</h2>
+              </div>
+            </md-list-item>
+            <md-list-item class="md-2-line" flex="50">
+              <div class="md-list-item-text">
+                <p translate>Bounced</p>
+                <h2>{{ stats.bounced || 0 | number:0 }} ({{ stats.breakdown.bounced || 0 | number:0 }}%)</h2>
+              </div>
+            </md-list-item>
+            <md-list-item class="md-2-line" flex="50">
+              <div class="md-list-item-text">
+                <p translate>Spam</p>
+                <h2 translate>{{ stats.spam || 0 | number:0 }} ({{ stats.breakdown.spam || 0 | number:0 }}%)</h2>
+              </div>
+            </md-list-item>
+          </div>
         </div>
-      </md-list-item>
-    </md-card-content>
-  </md-card>
-  <md-card flex-gt-xs="33" class="b-pr">
-    <md-card-content>
-      <md-list-item class="md-2-line">
-        <div class="md-list-item-text">
-          <p translate>Reputation Score</p>
-          <h2 translate>{{ stats.reputation || 0 | number:0 }}</h2>
-        </div>
-      </md-list-item>
+
+      </div>
+
     </md-card-content>
   </md-card>
 </div>
 
-<div layout-gt-xs="row" layout="column">
+<!-- <div layout-gt-xs="row" layout="column">
   <md-card flex-gt-xs="20" class="b-pr">
     <md-card-content>
       <md-list-item class="md-2-line">
@@ -82,4 +112,4 @@
       </md-list-item>
     </md-card-content>
   </md-card>
-</div>
+</div> -->

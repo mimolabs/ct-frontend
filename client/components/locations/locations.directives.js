@@ -1865,7 +1865,7 @@ app.directive('integrationComplete', ['Location', '$routeParams', '$location', '
     controller.fetch().then(function(integration) {
       scope.integration = integration;
       window.amplitude.getInstance().logEvent(
-        'Integration complete' + scope.integration.type
+        'Integration complete ' + scope.integration.type
       );
       scope.loading = undefined;
     }, function(err) { console.log(err); });

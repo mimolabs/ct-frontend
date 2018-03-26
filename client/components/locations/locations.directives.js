@@ -1562,7 +1562,7 @@ app.directive('merakiSetup', ['Location', '$routeParams', '$location', '$http', 
     link: link,
     scope: {
     },
-    templateUrl: 'components/locations/new/_meraki_setup.html'
+    templateUrl: 'components/locations/integrations/_meraki_setup.html'
   };
 
 }]);

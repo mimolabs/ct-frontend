@@ -37,7 +37,7 @@
       <md-list-item class="md-2-line">
         <div class="md-list-item-text">
           <p translate>Delivered</p>
-          <h2>{{ stats.breakdown.delivered || 0 | number:0 }}%</h2>
+          <h2>{{ stats.delivered || 0 | number:0 }} ({{ stats.breakdown.delivered || 0 | number:0 }}%)</h2>
         </div>
       </md-list-item>
     </md-card-content>
@@ -47,7 +47,7 @@
       <md-list-item class="md-2-line">
         <div class="md-list-item-text">
           <p translate>Opened</p>
-          <h2>{{ stats.breakdown.opened || 0 | number:0 }}%</h2>
+          <h2>{{ stats.opened || 0 | number:0 }} ({{ stats.breakdown.opened || 0 | number:0 }}%)</h2>
         </div>
       </md-list-item>
     </md-card-content>
@@ -57,7 +57,7 @@
       <md-list-item class="md-2-line">
         <div class="md-list-item-text">
           <p translate>Clicked</p>
-          <h2 translate>{{ stats.breakdown.clicked || 0 | number:0 }}%</h2>
+          <h2 translate>{{ stats.clicked || 0 | number:0 }} ({{ stats.breakdown.clicked || 0 | number:0 }}%)</h2>
         </div>
       </md-list-item>
     </md-card-content>
@@ -67,7 +67,7 @@
       <md-list-item class="md-2-line">
         <div class="md-list-item-text">
           <p translate>Bounced</p>
-          <h2>{{ stats.breakdown.bounced || 0 | number:0 }}%</h2>
+          <h2>{{ stats.bounced || 0 | number:0 }} ({{ stats.breakdown.bounced || 0 | number:0 }}%)</h2>
         </div>
       </md-list-item>
     </md-card-content>
@@ -77,7 +77,7 @@
       <md-list-item class="md-2-line">
         <div class="md-list-item-text">
           <p translate>Spam</p>
-          <h2 translate>{{ stats.breakdown.spam || 0 | number:0 }}%</h2>
+          <h2 translate>{{ stats.spam || 0 | number:0 }} ({{ stats.breakdown.spam || 0 | number:0 }}%)</h2>
         </div>
       </md-list-item>
     </md-card-content>

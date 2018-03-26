@@ -144,31 +144,34 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
         }
         $cookies.remove('_ctp');
         $scope.ct_login = undefined;
-        window.amplitude.getInstance().logEvent('LOGIN');
         // Translate.load();
       });
     }
 
     $scope.$on('intercom', function(args,event) {
-      if (Auth.currentUser() && INTERCOM && INTERCOM !== '' && INTERCOM !== undefined) {
+      if (Auth.currentUser()) {
         var user = Auth.currentUser();
-        window.analytics.identify(user.accountId, {
-          name:  user.username,
-          email: user.email,
-          plan:  user.plan_name,
-          createdAt: user.created_at
-        });
-
-        window.intercomSettings = {
-          app_id: INTERCOM,
-          user_id: user.accountId,
+        var params = {
           email: user.email,
           name: user.username,
-          locked: user.locked,
-          created_at: user.created_at,
-          user_hash: user.user_hash,
+          created_at: user.created_at / 1000,
+          plan_name: user.plan_name,
+          paid_plan: user.paid_plan
         };
 
+        console.log(params)
+
+        window.amplitude.getInstance().setUserId(user.accountId);
+        window.amplitude.getInstance().setUserProperties(params);
+
+        // window.amplitude.getInstance().logEvent('LOGOUT');
+        // window.amplitude.getInstance().init('bb0d649c1c561de903dfc82fb1aadc35', user.accountId, {includeReferrer: true, includeUtm: true});
+        if (INTERCOM && INTERCOM !== '' && INTERCOM !== undefined) {
+          params.app_id = INTERCOM;
+          params.user_hash = user.user_hash;
+          params.user_id = user.accountId;
+          window.intercomSettings = params;
+        }
       }
     });
 

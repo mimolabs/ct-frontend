@@ -8,6 +8,10 @@ app.controller('LocationsCtrl', ['$scope', '$routeParams', 'Location', '$locatio
     $scope.loading = true;
     $scope.location = { slug: $routeParams.id };
 
+    var identify = new window.amplitude.Identify().add('karma', 1);
+    window.amplitude.getInstance().identify(identify);
+    window.amplitude.getInstance().logEvent('Viewed Home Page');
+
     function isOpen(section) {
       return menu.isSectionSelected(section);
     }

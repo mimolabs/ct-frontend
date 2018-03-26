@@ -756,6 +756,7 @@ app.directive('integrationSelect', ['Location', '$routeParams', '$location', '$h
 
     scope.save = function(type) {
       if (scope.location.paid) {
+        window.amplitude.getInstance().logEvent('Integration etup', type);
         $location.path($routeParams.id + '/integration/' + type + '/auth');
       }
     };
@@ -1000,8 +1001,6 @@ app.directive('cloudtraxSetup', ['Location', '$routeParams', '$location', '$http
         location_id: $routeParams.id,
         splash_integration: {
           metadata: {
-            // unifi_site_name:  site.name,
-            // unifi_site_id:    site.id,
             ssid: scope.ct.ssid
           },
           action: 'create_setup'

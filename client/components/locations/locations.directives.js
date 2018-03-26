@@ -1125,6 +1125,7 @@ app.directive('unifiAuth', ['Location', '$routeParams', '$location', '$http', '$
 
     var create = function() {
       controller.save(scope.integration).then(function() {
+        window.amplitude.getInstance().logEvent('Integration validated UniFi');
         scope.validated = true;
       });
     };
@@ -1224,6 +1225,7 @@ app.directive('unifiSetup', ['Location', '$routeParams', '$location', '$http', '
       } else if (integration.active) {
         $location.path('/' + $routeParams.id + '/settings/integrations');
       } else {
+        window.amplitude.getInstance().logEvent('Integration finalise UniFi');
         scope.integration = integration;
         fetchSites();
       }
@@ -1861,6 +1863,9 @@ app.directive('integrationComplete', ['Location', '$routeParams', '$location', '
 
     controller.fetch().then(function(integration) {
       scope.integration = integration;
+      window.amplitude.getInstance().logEvent(
+        'Integration complete', scope.integration.type
+      );
       scope.loading = undefined;
     }, function(err) { console.log(err); });
   };

@@ -160,8 +160,8 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
           plan_name: user.plan_name,
           paid_plan: user.paid_plan
         };
-        if (AMPLITUDE && AMPLITUDE !== '') {
-          window.amplitude.getInstance().init('c30c4533d73e352ca59fd94f7e773a5f');
+        if (AMPLITUDE && AMPLITUDE !== '' && AMPLITUDE !== undefined) {
+          window.amplitude.getInstance().init(AMPLITUDE);
           window.amplitude.getInstance().setUserId(user.accountId);
           window.amplitude.getInstance().setUserProperties(params);
         }

@@ -830,9 +830,6 @@ app.directive('integrations', ['Location', '$routeParams', '$location', '$http',
         id: integration.id,
         location_id: $routeParams.id,
       }).$promise.then(function(results) {
-        var msg = 'Integration deleted';
-        console.log(msg);
-        window.amplitude.getInstance().logEvent(msg);
         showToast('Successfully deleted integration');
         deferred.resolve(results);
       }, function(error) {
@@ -919,6 +916,9 @@ app.directive('cloudtraxAuth', ['Location', '$routeParams', '$location', '$http'
 
     var create = function() {
       controller.save(scope.integration).then(function() {
+        var msg = 'Integration validated OpenMesh';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg);
         scope.validated = true;
       });
     };
@@ -1097,6 +1097,9 @@ app.directive('cloudtraxSetup', ['Location', '$routeParams', '$location', '$http
       } else if (integration.active) {
         $location.path('/' + $routeParams.id + '/settings/integrations');
       } else {
+        var msg = 'Integration settings OpenMesh';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg);
         scope.integration = integration;
         fetchSites();
       }
@@ -1269,6 +1272,9 @@ app.directive('vszAuth', ['Location', '$routeParams', '$location', '$http', '$md
 
     var create = function() {
       controller.save(scope.integration).then(function() {
+        var msg = 'Integration validated VSZ';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg);
         scope.validated = true;
       });
     };
@@ -1369,6 +1375,9 @@ app.directive('vszSetup', ['Location', '$routeParams', '$location', '$http', '$m
       } else if (integration.active) {
         $location.path('/' + $routeParams.id + '/settings/integrations');
       } else {
+        var msg = 'Integration settings VSZ';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg);
         scope.integration = integration;
         fetchSites();
       }
@@ -1404,6 +1413,9 @@ app.directive('merakiAuth', ['Location', '$routeParams', '$location', '$http', '
 
     var create = function() {
       controller.save(scope.integration).then(function() {
+        var msg = 'Integration validated Meraki';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg);
         scope.validated = true;
       });
     };
@@ -1558,6 +1570,9 @@ app.directive('merakiSetup', ['Location', '$routeParams', '$location', '$http', 
       } else if (integration.active) {
         $location.path('/' + $routeParams.id + '/settings/integrations');
       } else {
+        var msg = 'Integration settings Meraki';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg);
         scope.integration = integration;
         fetchSites();
       }
@@ -1922,6 +1937,9 @@ app.directive('integrationSettings', ['Location', '$routeParams', '$location', '
 
     scope.destroy = function() {
       if (confirm("Are you sure you want to delete this integration?")) {
+        var msg = 'Integration deleted';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg);
         controller.destroy(scope.integration).then(function() {
           scope.integration = {};
         });

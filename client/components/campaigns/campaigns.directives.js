@@ -380,6 +380,7 @@ app.directive('campGuide', [function() {
 
   return {
     link: link,
+    scope: {},
     templateUrl: 'components/campaigns/_guide.html'
   };
 }]);
@@ -500,54 +501,6 @@ app.directive('campSenders', ['Sender', 'Location', 'showErrors', 'showToast', '
       getSenders();
     };
 
-    function DialogController($scope,loading) {
-      $scope.loading = loading;
-
-      $scope.close = function() {
-        $mdDialog.cancel();
-      };
-      $scope.save = function() {
-        Sender.create({}, {
-          location_id: $routeParams.id,
-          sender: $scope.sender
-        }, function(data) {
-          init();
-          $mdDialog.cancel();
-        }, function(err) {
-          showErrors(err);
-        });
-      };
-      $scope.back = function() {
-        scope.openDialog();
-      };
-    }
-
-    DialogController.$inject = ['$scope', 'loading'];
-
-    scope.newSender = function() {
-      $mdDialog.show({
-        templateUrl: 'components/campaigns/senders/_new.html',
-        parent: angular.element(document.body),
-        clickOutsideToClose: true,
-        controller: DialogController,
-        locals: {
-          loading: scope.loading
-        }
-      });
-    };
-
-    scope.editSender = function() {
-      $mdDialog.show({
-        templateUrl: 'components/campaigns/senders/_edit.html',
-        parent: angular.element(document.body),
-        clickOutsideToClose: true,
-        controller: DialogController,
-        locals: {
-          loading: scope.loading
-        }
-      });
-    };
-
     var removeFromList = function(sender) {
       for (var i = 0, len = scope.senders.length; i < len; i++) {
         if (scope.senders[i].id === sender.id) {
@@ -576,6 +529,50 @@ app.directive('campSenders', ['Sender', 'Location', 'showErrors', 'showToast', '
       loading: '='
     },
     templateUrl: 'components/campaigns/senders/_index.html'
+  };
+
+}]);
+
+app.directive('newSenders', ['Sender', 'Location', 'showErrors', 'showToast', 'gettextCatalog', '$routeParams', '$location', '$mdDialog', function(Sender, Location, showErrors, showToast, gettextCatalog, $routeParams, $location, $mdDialog) {
+
+  var link = function(scope, element, attrs) {
+
+    scope.currentNavItem = 'senders';
+
+    var getLocation = function() {
+      Location.get({id: $routeParams.id}, function(data) {
+        scope.location = data;
+        scope.loading = undefined;
+      }, function(err){
+        console.log(err);
+      });
+    };
+
+    var init = function() {
+      getLocation();
+    };
+
+    scope.save = function() {
+      Sender.create({}, {
+        location_id: $routeParams.id,
+        sender: scope.sender
+      }, function(data) {
+        $location.path($routeParams.id + '/campaigns/senders');
+      }, function(err) {
+        showErrors(err);
+      });
+    };
+
+    init();
+
+  };
+
+  return {
+    link: link,
+    scope: {
+      loading: '='
+    },
+    templateUrl: 'components/campaigns/senders/_new.html'
   };
 
 }]);

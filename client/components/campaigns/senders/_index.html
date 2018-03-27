@@ -70,7 +70,7 @@
                         <span translate>Resend Verification</span>
                       </md-button>
                     </md-menu-item>
-                    <md-menu-item>
+                    <!-- <md-menu-item>
                       <md-button ng-click="editSender()">
                         <md-icon md-menu-align-target style="margin: auto 3px auto 0;">settings</md-icon>
                         <span translate>Edit</span>
@@ -81,7 +81,7 @@
                         <md-icon md-menu-align-target style="margin: auto 3px auto 0;">delete_forever</md-icon>
                         <span translate>Delete</span>
                       </md-button>
-                    </md-menu-item>
+                    </md-menu-item> -->
                   </md-menu-content>
                 </md-menu>
               </td>
@@ -93,6 +93,6 @@
         <md-table-pagination md-limit="query.limit" md-page="query.page" md-limit-options="query.options" md-total="{{::_links.total_entries}}" md-label="{{pagination_labels}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
       </md-card-actions>
     </md-card>
-    <md-button class="md-raised md-primary" ng-click="newSender()">NEW</md-button>
+    <md-button class="md-raised md-primary" ng-href="/#/{{location.slug}}/campaigns/senders/new">NEW</md-button>
   </div>
 </md-content>

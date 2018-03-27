@@ -437,12 +437,20 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
     var checkForGuide = function() {
       buildLocation();
       var falses = [false, 'false'];
-      if ($location.path().split('/')[2] !== 'people' && (falses.includes(scope.location.setup.splash) || falses.includes(scope.location.setup.integrations) || falses.includes(scope.location.paid))) {
+      if ($location.path().split('/')[2] !== 'people' && 
+        (falses.includes(scope.location.setup.splash) || 
+          falses.includes(scope.location.setup.integrations) || 
+          falses.includes(scope.location.paid)
+        )) {
         $location.path('/' + scope.location.slug + '/guide');
+        window.amplitude.getInstance().logEvent('Viewed Getting Started');
       } else {
-      setParams();
-      getAudiences().then(function() {
+        setParams();
+        getAudiences().then(function() {
         getPeople();
+        var identify = new window.amplitude.Identify().add('karma', 1);
+        window.amplitude.getInstance().identify(identify);
+        window.amplitude.getInstance().logEvent('Viewed People Dashboard');
       });
       }
     };

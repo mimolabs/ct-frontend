@@ -159,10 +159,10 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
           paid_plan: user.paid_plan
         };
 
-        window.amplitude.getInstance().setUserId(user.accountId);
-        window.amplitude.getInstance().setUserProperties(params);
-
         if (INTERCOM && INTERCOM !== '' && INTERCOM !== undefined) {
+          window.amplitude.getInstance().setUserId(user.accountId);
+          window.amplitude.getInstance().setUserProperties(params);
+
           params.app_id = INTERCOM;
           params.user_hash = user.user_hash;
           params.user_id = user.accountId;

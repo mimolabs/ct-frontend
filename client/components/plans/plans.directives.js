@@ -60,6 +60,9 @@ app.directive('userPlans', ['Plan', '$routeParams', '$location', '$mdDialog', '$
         $mdDialog.cancel();
       };
       $scope.save = function(email) {
+        var msg = 'Cancel Plan';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg, { plan_id: scope.user.new_plan });
         $mdDialog.cancel();
         cancel(email);
       };
@@ -80,7 +83,13 @@ app.directive('userPlans', ['Plan', '$routeParams', '$location', '$mdDialog', '$
     var upgrade = function() {
       scope.user.subscribing = true;
       Subscription.create({plan_id: scope.user.new_plan}).$promise.then(function(data) {
+        var msg = 'Change Plan Success';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg, { plan_id: scope.user.new_plan });
       }, function(err) {
+        var msg = 'Change Plan Failed';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg);
         scope.user.subscribing = undefined;
         scope.user.errors = err.data.message;
       });
@@ -154,6 +163,9 @@ app.directive('userPlans', ['Plan', '$routeParams', '$location', '$mdDialog', '$
     };
 
     scope.changePlan = function(id) {
+      var msg = 'Click Change Plan';
+      console.log(msg);
+      window.amplitude.getInstance().logEvent(msg);
       $mdDialog.show({
         templateUrl: 'components/users/plans/_change_dialog.html',
         parent: angular.element(document.body),

@@ -49,6 +49,9 @@ app.directive('showUser', ['User', '$routeParams', '$location', '$route', 'Auth'
 
     function DialogController($scope) {
       $scope.delete = function(email) {
+        var msg = 'Delete Account';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg, { plan_id: scope.user.new_plan });
         scope.confirmDelete(email);
         $mdDialog.cancel();
       };

@@ -10,11 +10,12 @@
           <p>Select the type of Sender you want to create.</p>
         </div>
         <div flex="100">
-          <md-radio-group ng-model="sender.sender_type" layout="row">
+          <md-radio-group ng-model="sender.sender_type" layout="row" style="margin-bottom:10px;">
             <md-radio-button aria-label="email" value="email">Email</md-radio-button>
-            <md-radio-button aria-label="sms" value="sms">SMS</md-radio-button>
-            <!-- <md-radio-button aria-label="twitter" value="twitter">Twitter</md-radio-button> -->
+            <!-- <md-radio-button aria-label="sms" value="sms">SMS</md-radio-button>
+            <md-radio-button aria-label="twitter" value="twitter">Twitter</md-radio-button> -->
           </md-radio-group>
+          <small class="muted">Twitter & SMS coming soon</small>
         </div>
       </md-card-content>
     </md-card>

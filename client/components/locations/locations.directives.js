@@ -6,7 +6,6 @@ app.directive('locationShow', ['Location', '$routeParams', '$location', '$localS
 
   var link = function(scope,element,attrs,controller) {
 
-    scope.currentNavItem = 'devices';
     var channel;
 
     scope.favourite = function() {
@@ -916,7 +915,7 @@ app.directive('cloudtraxAuth', ['Location', '$routeParams', '$location', '$http'
 
     var create = function() {
       controller.save(scope.integration).then(function() {
-        var msg = 'Integration validated';
+        var msg = 'Integration Validated';
         console.log(msg);
         window.amplitude.getInstance().logEvent(msg, { type: 'OpenMesh' });
         scope.validated = true;
@@ -1603,6 +1602,12 @@ app.directive('gettingStarted', ['Location', '$routeParams', '$location', '$http
     };
     scope.currentNavItem = 'guide';
 
+    scope.integrationClick = function(type) {
+      var msg = 'Wizard Clicked';
+      console.log(msg);
+      window.amplitude.getInstance().logEvent(msg, {type: type});
+    };
+
     scope.$watch('location',function(nv){
       if (nv !== undefined && scope.location.setup) {
         if (scope.location.setup && scope.location.setup.splash && scope.location.setup.integrations && scope.location.paid) {
@@ -1847,7 +1852,7 @@ app.directive('getWithThePlan', ['Location', '$routeParams', '$location', 'Subsc
 
       var msg = 'Clicked Sign-Up';
       console.log(msg);
-      window.amplitude.getInstance().logEvent(msg);
+      window.amplitude.getInstance().logEvent(msg, { mgs: scope.label });
 
       var loadPlans = function() {
         Plan.query({
@@ -1900,9 +1905,9 @@ app.directive('integrationComplete', ['Location', '$routeParams', '$location', '
 
     controller.fetch().then(function(integration) {
       scope.integration = integration;
-      var msg = 'Integration complete ' + scope.integration.type;
+      var msg = 'Integration Complete';
       console.log(msg);
-      window.amplitude.getInstance().logEvent(msg);
+      window.amplitude.getInstance().logEvent(msg, { type: scope.integration.type });
       scope.loading = undefined;
     }, function(err) { console.log(err); });
   };
@@ -1950,7 +1955,7 @@ app.directive('integrationSettings', ['Location', '$routeParams', '$location', '
 
     scope.destroy = function() {
       if (confirm("Are you sure you want to delete this integration?")) {
-        var msg = 'Integration deleted';
+        var msg = 'Integration Deleted';
         console.log(msg);
         window.amplitude.getInstance().logEvent(msg);
         controller.destroy(scope.integration).then(function() {

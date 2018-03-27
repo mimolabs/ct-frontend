@@ -21,6 +21,8 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
     $scope.ct_login = CTLogin;
 
     $scope.home = function() {
+      var msg = 'Clicked Home';
+      window.amplitude.getInstance().logEvent(msg);
       if ($routeParams.id && $location.path().split('/')[1] !== 'users') {
         $location.path('/' + $routeParams.id);
       } else {

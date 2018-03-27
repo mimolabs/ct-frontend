@@ -1632,6 +1632,14 @@ email-stats md-list-item h2 {
 email-stats md-list-item p {
   color: rgba(0, 0, 0, 0.50);
 }
+email-stats .email-stats-bottom md-list-item h2 {
+  font-size:18px;
+
+}
+email-stats .email-stats-bottom md-list-item p {
+  font-size:12px;
+}
+
 
 @media (min-width: 960px) {
 

@@ -1639,10 +1639,7 @@ email-stats .email-stats-bottom md-list-item h2 {
 email-stats .email-stats-bottom md-list-item p {
   font-size:12px;
 }
-
-
 @media (min-width: 960px) {
-
   .email-stats-top {
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 10px;
@@ -1651,14 +1648,12 @@ email-stats .email-stats-bottom md-list-item p {
     padding-top: 10px;
   }
 }
-
 @media (max-width: 960px) {
   .email-stats-top {
     border-right: 1px solid #e0e0e0;
     height: 100%;
   }
 }
-
 @media (max-width: 600px) {
   .email-stats-top {
     border-bottom: 1px solid #e0e0e0;

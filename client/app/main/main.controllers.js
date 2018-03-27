@@ -161,11 +161,11 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
           paid_plan: user.paid_plan
         };
         if (AMPLITUDE && AMPLITUDE !== '') {
+          window.amplitude.getInstance().init('c30c4533d73e352ca59fd94f7e773a5f');
           window.amplitude.getInstance().setUserId(user.accountId);
           window.amplitude.getInstance().setUserProperties(params);
         }
         if (INTERCOM && INTERCOM !== '' && INTERCOM !== undefined) {
-
           params.app_id = INTERCOM;
           params.user_hash = user.user_hash;
           params.user_id = user.accountId;

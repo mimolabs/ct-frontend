@@ -480,8 +480,11 @@ app.directive('campSenders', ['Sender', 'Location', 'showErrors', 'showToast', '
   var link = function(scope, element, attrs) {
 
     scope.currentNavItem = 'senders';
+    scope.location = {slug: $routeParams.id};
 
-    var getSenders = function() {
+    var init = function() {
+      location.setup = {campaign: attrs.setupCampaigns};
+      location.paid = attrs.paidLocation;
       Sender.query({location_id: $routeParams.id}, function(data) {
         scope.senders = data.senders;
         scope.loading = undefined;
@@ -489,20 +492,6 @@ app.directive('campSenders', ['Sender', 'Location', 'showErrors', 'showToast', '
         console.log(err);
         scope.loading = undefined;
       });
-    };
-
-    var getLocation = function() {
-      Location.get({id: $routeParams.id}, function(data) {
-        scope.location = data;
-        scope.loading = undefined;
-      }, function(err){
-        console.log(err);
-      });
-    };
-
-    var init = function() {
-      getLocation();
-      getSenders();
     };
 
     var removeFromList = function(sender) {
@@ -530,7 +519,9 @@ app.directive('campSenders', ['Sender', 'Location', 'showErrors', 'showToast', '
   return {
     link: link,
     scope: {
-      loading: '='
+      loading: '=',
+      paidLocation: '@',
+      setupCampaigns: '@'
     },
     templateUrl: 'components/campaigns/senders/_index.html'
   };
@@ -543,19 +534,6 @@ app.directive('newSenders', ['Sender', 'Location', 'showErrors', 'showToast', 'g
 
     scope.currentNavItem = 'senders';
 
-    var getLocation = function() {
-      Location.get({id: $routeParams.id}, function(data) {
-        scope.location = data;
-        scope.loading = undefined;
-      }, function(err){
-        console.log(err);
-      });
-    };
-
-    var init = function() {
-      getLocation();
-    };
-
     scope.save = function() {
       Sender.create({}, {
         location_id: $routeParams.id,
@@ -566,15 +544,11 @@ app.directive('newSenders', ['Sender', 'Location', 'showErrors', 'showToast', 'g
         showErrors(err);
       });
     };
-
-    init();
-
   };
 
   return {
     link: link,
     scope: {
-      loading: '='
     },
     templateUrl: 'components/campaigns/senders/_new.html'
   };

@@ -11,9 +11,9 @@ var app = angular.module('myApp.controllers', [
   'myApp.users.controller',
 ]);
 
-app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage', '$window', '$location', '$routeParams', 'AccessToken', 'RefreshToken', 'Auth', 'API_END_POINT', '$pusher', '$route', 'onlineStatus', '$cookies', 'locationHelper', 'CTLogin', 'User', 'Me', 'AUTH_URL', 'menu', 'designer', '$mdSidenav', '$mdMedia', '$q', 'INTERCOM', 'PUSHER', 'gettextCatalog', 'Translate', 'COMMITHASH', '$mdDialog',
+app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage', '$window', '$location', '$routeParams', 'AccessToken', 'RefreshToken', 'Auth', 'API_END_POINT', '$pusher', '$route', 'onlineStatus', '$cookies', 'locationHelper', 'CTLogin', 'User', 'Me', 'AUTH_URL', 'menu', 'designer', '$mdSidenav', '$mdMedia', '$q', 'INTERCOM', 'PUSHER', 'AMPLITUDE', 'gettextCatalog', 'Translate', 'COMMITHASH', '$mdDialog',
 
-  function ($rootScope, Location, $scope, $localStorage, $window, $location, $routeParams, AccessToken, RefreshToken, Auth, API, $pusher, $route, onlineStatus, $cookies, locationHelper, CTLogin, User, Me, AUTH_URL, menu, designer, $mdSidenav, $mdMedia, $q, INTERCOM, PUSHER, gettextCatalog, Translate, COMMITHASH, $mdDialog) {
+  function ($rootScope, Location, $scope, $localStorage, $window, $location, $routeParams, AccessToken, RefreshToken, Auth, API, $pusher, $route, onlineStatus, $cookies, locationHelper, CTLogin, User, Me, AUTH_URL, menu, designer, $mdSidenav, $mdMedia, $q, INTERCOM, PUSHER, AMPLITUDE, gettextCatalog, Translate, COMMITHASH, $mdDialog) {
 
     var domain = 'oh-mimo.com';
 
@@ -158,10 +158,11 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
           plan_name: user.plan_name,
           paid_plan: user.paid_plan
         };
-
-        if (INTERCOM && INTERCOM !== '' && INTERCOM !== undefined) {
+        if (AMPLITUDE && AMPLITUDE !== '') {
           window.amplitude.getInstance().setUserId(user.accountId);
           window.amplitude.getInstance().setUserProperties(params);
+        }
+        if (INTERCOM && INTERCOM !== '' && INTERCOM !== undefined) {
 
           params.app_id = INTERCOM;
           params.user_hash = user.user_hash;

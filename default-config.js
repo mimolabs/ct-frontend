@@ -26,6 +26,7 @@ module.exports = {
             DEBUG: true,
             COLOURS: '#009688 #FF5722 #03A9F4 #607D8B #F44336 #00BCD4',
             COMMITHASH: commitHash.stdout,
+            AMPLITUDE: 'bb0d649c1c561de903dfc82fb1aadc35', 
             THEMES: [
                 "pink",
                 "orange",

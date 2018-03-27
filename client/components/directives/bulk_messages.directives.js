@@ -112,13 +112,15 @@ app.directive('sendBulkMessage', ['$routeParams', 'BulkMessage', 'Sender', '$mdD
 
 }]);
 
-app.directive('bulkMessages', ['$routeParams', 'BulkMessage', 'People', 'Location', '$mdDialog', '$location', function($routeParams,BulkMessage,People,Location,$mdDialog,$location) {
+app.directive('bulkMessages', ['$routeParams', 'BulkMessage', 'BulkMessageActivity', 'People', 'Location', '$mdDialog', '$location', function($routeParams,BulkMessage,BulkMessageActivity,People,Location,$mdDialog,$location) {
 
   var link = function( scope, element, attrs ) {
 
     scope.person = {};
     scope.location = {slug: $routeParams.id};
     scope.currentNavItem = 'messages';
+    scope.message_types = ['Emails', 'Email Activity', 'SMS', 'Tweets'];
+    scope.selected_type = 'Emails';
 
     var fetchMessages = function() {
       BulkMessage.index({}, {
@@ -130,6 +132,31 @@ app.directive('bulkMessages', ['$routeParams', 'BulkMessage', 'People', 'Locatio
         scope.loading = undefined;
         scope.messages = results.messages;
       });
+    };
+
+    var fetchMessageActivity = function() {
+      BulkMessageActivity.index({}, {
+        location_id:  scope.location.slug,
+        start:        $routeParams.start,
+        end:          $routeParams.end,
+        message_id:   $routeParams.message_id,
+        person_id:    scope.person.id
+      }).$promise.then(function(results) {
+        scope.loading = undefined;
+        scope.activity = results.activity;
+      });
+    };
+
+    scope.updateMessages = function() {
+      scope.loading = true;
+      switch(scope.selected_type) {
+        case 'Emails':
+          fetchMessages();
+          break;
+        case 'Email Activity':
+          fetchMessageActivity();
+          break;
+      }
     };
 
     var fetchPerson = function() {
@@ -162,15 +189,6 @@ app.directive('bulkMessages', ['$routeParams', 'BulkMessage', 'People', 'Locatio
     } else {
       fetchMessages();
     }
-
-    // BulkMessageActivity.index({}, {
-    //   location_id:  $routeParams.id,
-    //   start:        $routeParams.start,
-    //   end:          $routeParams.end
-    // }).$promise.then(function(results) {
-    //   scope.loading = undefined;
-    //   console.log(results)
-    // });
 
   };
 

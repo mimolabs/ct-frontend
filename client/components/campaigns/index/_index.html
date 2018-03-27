@@ -70,7 +70,7 @@
                 </ul>
               </td>
               <td md-cell>
-                {{ campaign.campaign_type }}
+                {{ campaign.campaign_type | titleCase}}
               </td>
               <td md-cell>
                 {{ campaign.created_at | humanTimeShortest }}

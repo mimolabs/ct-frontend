@@ -22,7 +22,6 @@ var app = angular.module('myApp.directives', [
   'myApp.quotas.directives',
   'myApp.registrations.directives',
   'myApp.reports.v2.directives',
-  'myApp.sms.directives',
   'myApp.splash_pages.directives',
   'myApp.users.directives',
 ]);

@@ -129,8 +129,9 @@ app.directive('bulkMessages', ['$routeParams', 'BulkMessage', 'BulkMessageActivi
         start:        $routeParams.start,
         end:          $routeParams.end
       }).$promise.then(function(results) {
-        scope.loading = undefined;
+        scope.location.demo = attrs.demo;
         scope.messages = results.messages;
+        scope.loading = undefined;
       });
     };
 
@@ -142,8 +143,9 @@ app.directive('bulkMessages', ['$routeParams', 'BulkMessage', 'BulkMessageActivi
         message_id:   $routeParams.message_id,
         person_id:    scope.person.id
       }).$promise.then(function(results) {
-        scope.loading = undefined;
+        scope.location.demo = attrs.demo;
         scope.activity = results.activity;
+        scope.loading = undefined;
       });
     };
 
@@ -195,7 +197,8 @@ app.directive('bulkMessages', ['$routeParams', 'BulkMessage', 'BulkMessageActivi
   return {
     link: link,
     scope: {
-      loading: '='
+      loading: '=',
+      demo: '@'
     },
     templateUrl: 'components/views/bulk_messages/_index.html'
   };

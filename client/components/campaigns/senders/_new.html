@@ -11,9 +11,7 @@
         </div>
         <div flex="100">
           <md-radio-group ng-model="sender.sender_type" layout="row" style="margin-bottom:10px;">
-            <md-radio-button aria-label="email" value="email">Email</md-radio-button>
-            <!-- <md-radio-button aria-label="sms" value="sms">SMS</md-radio-button>
-            <md-radio-button aria-label="twitter" value="twitter">Twitter</md-radio-button> -->
+            <md-radio-button ng-repeat="type in sender_types" aria-label="{{type.value}}" ng-value="type.value" ng-disabled="type.value == 'twitter' || type.value == 'sms'">{{type.name}}</md-radio-button>
           </md-radio-group>
           <small class="muted">Twitter & SMS coming soon</small>
         </div>
@@ -76,7 +74,7 @@
     <md-card ng-if="sender.sender_type == 'email'" flex="100" flex-gt-md="90" flex-gt-lg="80" class="b-pr">
       <md-card-content layout="row" layout-wrap>
         <div flex="100">
-          <p>You will need to include the below information in the footer of every promotional email sent in order to comply with anti-spam laws.</p>
+          <p>You’re required to include your contact information, including a physical address, inside every email you send in order to comply with anti-spam laws such as <a href="https://en.wikipedia.org/wiki/CAN-SPAM_Act_of_2003" target="_blank">CAN-SPAM</a> and <a href="https://en.wikipedia.org/wiki/Fighting_Internet_and_Wireless_Spam_Act" target="_blank">CASL</a>.</p>
         </div>
         <md-input-container flex="100" flex-gt-xs="45">
           <label>

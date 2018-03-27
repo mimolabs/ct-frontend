@@ -12,10 +12,10 @@
         </md-card-title-text>
       </md-card-title>
       <md-card-content>
-        <p translate>Set up your senders so you can start engaging with your end users.</p>
+        <p translate>Set up your senders so you can start engaging with your customers.</p>
       </md-card-content>
       <md-card-actions layout="row" layout-align="end center">
-        <md-button class="md-raised md-primary" ng-click="newSender()">Create</md-button>
+        <md-button class="md-raised md-primary" ng-href="/#/{{location.slug}}/campaigns/senders/new">Create</md-button>
       </md-card-actions>
     </md-card>
   </div>
@@ -43,7 +43,7 @@
                 {{sender.sender_name}}
               </td>
               <td md-cell>
-                {{sender.sender_type}}
+                {{sender.sender_type | titleCase}}
               </td>
               <td md-cell ng-show="sender.from_email">
                 <span>

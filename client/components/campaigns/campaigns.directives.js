@@ -533,6 +533,13 @@ app.directive('newSenders', ['Sender', 'Location', 'showErrors', 'showToast', 'g
   var link = function(scope, element, attrs) {
 
     scope.currentNavItem = 'senders';
+    scope.sender = {sender_type: 'email'};
+    scope.location = {slug: $routeParams.id};
+
+    scope.sender_types = [];
+    scope.sender_types.push({name: 'Email', value: 'email'});
+    scope.sender_types.push({name: 'Twitter', value: 'twitter'});
+    scope.sender_types.push({name: 'SMS', value: 'sms'});
 
     scope.save = function() {
       Sender.create({}, {

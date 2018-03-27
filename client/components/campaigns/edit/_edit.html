@@ -2,7 +2,7 @@
 
 <form name="myForm" ng-submit="save(myForm)">
   <md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta">
-    <div flex="100" flex-gt-md="90" flex-gt-lg="80">
+    <div flex="100" flex-gt-md="70" flex-gt-lg="60">
       <div class="example-data" ng-show="campaign.id && campaign.state == 'draft'">
         This campaign is not active yet. To start sending, set the campaign to live below.
       </div>
@@ -28,43 +28,31 @@
               </div>
             </md-input-container>
             <span flex-gt-sm="10"></span>
+            <span flex="100" flex-gt-sm="45">
+              <small class="muted label">Campaign Type</small>
+              <md-radio-group class="label" ng-model="campaign.campaign_type" layout="row" style="margin-bottom:10px;">
+                <md-radio-button ng-repeat="type in campaign_types" aria-label="{{type.value}}" ng-value="type.value" ng-disabled="type.value == 'twitter' || type.value == 'sms'">{{type.name}}</md-radio-button>
+              </md-radio-group>
+              <small class="muted">Twitter & SMS coming soon</small>
+            </span>
             <md-input-container flex="100" flex-gt-sm="45">
               <label>
-                <translate>Campaign Type</translate>
+                <translate>Sender</translate>
               </label>
-              <md-select ng-model="campaign.campaign_type" name="campaign_type" placeholder="{{ 'Choose campaign type' | translate }}" required>
-                <md-option ng-repeat="type in campaign_types" ng-value="type.value">
-                  {{type.name}}
-                </md-option>
+              <md-select ng-model="campaign.sender" placeholder="{{ 'Select sender' | translate }}" required>
+                <span ng-repeat='sender in senders'>
+                  <md-option ng-disabled="sender.sender_type != campaign.campaign_type" ng-value="sender.id">
+                    {{sender.sender_name}} ({{sender.from_email || sender.from_sms}})
+                  </md-option>
+                </span>
               </md-select>
+              <p ng-show="!senders || senders.length < 1"><b>No senders found, please create one <a href="/#/{{location.slug}}/campaigns/senders/new">here</a>.</b></p>
             </md-input-container>
           </div>
         </md-card-content>
       </md-card>
     </div>
-    <div flex="100" flex-gt-md="90" flex-gt-lg="80">
-      <md-card>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline" translate>
-              Sender
-            </span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content>
-          <div layout="row" layout-wrap>
-            <md-select ng-model="campaign.sender" placeholder="{{ 'Select sender' | translate }}" required>
-              <span ng-repeat='sender in senders'>
-                <md-option ng-disabled="sender.sender_type != campaign.campaign_type" ng-value="sender.id">
-                  {{sender.sender_name}} ({{sender.from_email || sender.from_sms}})
-                </md-option>
-              </span>
-            </md-select>
-          </div>
-        </md-card-content>
-      </md-card>
-    </div>
-    <div flex="100" flex-gt-md="90" flex-gt-lg="80">
+    <div flex="100" flex-gt-md="70" flex-gt-lg="60" ng-show="campaign.sender">
       <md-card>
         <md-card-title>
           <md-card-title-text>
@@ -77,17 +65,9 @@
           <span ng-show="!campaign.id">
             <p>People who match these rules:</p>
             <md-radio-group ng-click="setRules()" ng-model="campaign.template">
-              <md-radio-button value="signed_up_now" class="md-primary">Just signed up</md-radio-button>
+              <md-radio-button value="signed_up_now" class="md-primary">Just signed-up</md-radio-button>
               <md-radio-button value="signed_up_30" class="md-primary">Signed-up 30 days ago</md-radio-button>
               <md-radio-button value="last_seen_30">Not seen for 30 days</md-radio-button>
-              <!-- <span ng-repeat="audience in audiences">
-                <md-radio-button value="audience_{{$index}}" class="md-primary">
-                  {{audience.name}}
-                  <small ng-show="selected_audience == audience.id" ng-repeat="predicate in audience.predicates">
-                    <br>{{predicate | humanPredicate}}
-                  </small>
-                </md-radio-button>
-              </span> -->
               <md-radio-button value="custom">Custom</md-radio-button>
             </md-radio-group>
           </span>
@@ -191,7 +171,7 @@
         </md-card-content>
       </md-card>
     </div>
-    <div flex="100" flex-gt-md="90" flex-gt-lg="80">
+    <div flex="100" flex-gt-md="70" flex-gt-lg="60" ng-show="campaign.sender">
       <md-card>
         <md-card-title>
           <md-card-title-text>
@@ -243,7 +223,7 @@
         </md-card-content>
       </md-card>
     </div>
-    <div flex="100" flex-gt-md="90" flex-gt-lg="80">
+    <div flex="100" flex-gt-md="70" flex-gt-lg="60" ng-show="campaign.sender">
       <md-card>
         <md-card-title>
           <md-card-title-text>
@@ -273,7 +253,7 @@
         </md-card-content>
       </md-card>
     </div>
-    <div flex="100" flex-gt-md="90" flex-gt-lg="80">
+    <div flex="100" flex-gt-md="70" flex-gt-lg="60">
       <md-button type="submit" class="md-raised" ng-disabled="myForm.$pristine || myForm.$invalid">
         Save
       </md-button>

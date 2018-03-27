@@ -14,6 +14,9 @@
   </div>
   <div flex="100" flex-gt-md="90" flex-gt-lg="80" ng-show="selected_type == 'Emails'">
     <md-card class="b-pr fixed-table">
+      <div class="example-data" ng-show="location.demo === 'true'">
+        This table is currently populated with demo data. You can switch this off in your <a href="/#/{{location.slug}}/settings">location settings</a>.
+      </div>
       <md-table-container>
         <table multiple md-table md-row-select="options.rowSelection" multiple="{{options.multiSelect}}" ng-model="selected" md-progress="promise">
           <thead md-head md-order="query.order" md-on-reorder="logOrder">

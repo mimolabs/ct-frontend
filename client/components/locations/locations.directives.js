@@ -756,7 +756,9 @@ app.directive('integrationSelect', ['Location', '$routeParams', '$location', '$h
 
     scope.save = function(type) {
       if (scope.location.paid) {
-        window.amplitude.getInstance().logEvent('Integration setup ' + type);
+        var msg = 'Integration select ' + type
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg);
         $location.path($routeParams.id + '/integration/' + type + '/auth');
       }
     };
@@ -828,7 +830,9 @@ app.directive('integrations', ['Location', '$routeParams', '$location', '$http',
         id: integration.id,
         location_id: $routeParams.id,
       }).$promise.then(function(results) {
-        window.amplitude.getInstance().logEvent('Integration deleted');
+        var msg = 'Integration deleted';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg);
         showToast('Successfully deleted integration');
         deferred.resolve(results);
       }, function(error) {
@@ -1126,7 +1130,9 @@ app.directive('unifiAuth', ['Location', '$routeParams', '$location', '$http', '$
 
     var create = function() {
       controller.save(scope.integration).then(function() {
-        window.amplitude.getInstance().logEvent('Integration validated UniFi');
+        var msg = 'Integration validated UniFi';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg);
         scope.validated = true;
       });
     };
@@ -1226,7 +1232,9 @@ app.directive('unifiSetup', ['Location', '$routeParams', '$location', '$http', '
       } else if (integration.active) {
         $location.path('/' + $routeParams.id + '/settings/integrations');
       } else {
-        window.amplitude.getInstance().logEvent('Integration finalise UniFi');
+        var msg = 'Integration settings UniFi';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg);
         scope.integration = integration;
         fetchSites();
       }
@@ -1864,9 +1872,9 @@ app.directive('integrationComplete', ['Location', '$routeParams', '$location', '
 
     controller.fetch().then(function(integration) {
       scope.integration = integration;
-      window.amplitude.getInstance().logEvent(
-        'Integration complete ' + scope.integration.type
-      );
+      var msg = 'Integration complete ' + scope.integration.type;
+      console.log(msg);
+      window.amplitude.getInstance().logEvent(msg);
       scope.loading = undefined;
     }, function(err) { console.log(err); });
   };

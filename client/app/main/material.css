@@ -1261,6 +1261,11 @@ md-bottom-sheet .md-subheader {
 
 /*general changes*/
 
+td.md-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .muted.label {
   font-size: 12px;
   padding-left: 2px;

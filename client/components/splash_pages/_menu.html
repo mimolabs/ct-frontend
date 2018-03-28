@@ -56,16 +56,6 @@
                       </div>
                     </md-input-container>
                   </div>
-                  <div flex="100" ng-show="splash.g_login_on">
-                    <md-input-container class="md-block">
-                      <label>Google Page ID</label>
-                      <input ng-model="splash.g_page_id" name="g_page_id" ng-class="{ 'input-error' : myForm.g_page_id.$error.required }" placeholder="{{ 'Enter your Google Page ID' | translate }}" type="text" ng-required="splash.g_login_on">
-                      <div ng-messages="myForm.g_page_id.$error" md-auto-hide="false">
-                        <div ng-message="required" translate>Page ID required</div>
-                        <div ng-message="pattern" translate>Invalid Page ID</div>
-                      </div>
-                    </md-input-container>
-                  </div>
                   <div flex="100" ng-show="splash.tw_login_on">
                     <md-input-container class="md-block">
                       <label translate>Twitter Handle</label>

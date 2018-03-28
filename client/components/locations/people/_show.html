@@ -8,30 +8,39 @@
         <md-icon>keyboard_return</md-icon>
       </md-button>
 
-      <md-menu>
-        <md-button aria-label="{{ 'Open sessions menu' | translate }}" class="md-fab md-raised md-primary md-mini" ng-click="$mdOpenMenu($event)">
-          <md-icon md-menu-origin md-font-icon="more_black" class="s48">more_vert</md-icon>
-        </md-button>
-        <md-menu-content width="3">
-          <send-bulk-message type="Email" ng-show="person.emails.length > 0"></send-bulk-message>
-          <send-bulk-message type="SMS" ng-show="person.sms.length > 0"></send-bulk-message>
-          <md-menu-item>
-            <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/messages">
-              <p flex translate>Messages</p>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/message_activity">
-              <p flex translate>Email Activity</p>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ng-click="">
-              <p flex translate>Delete</p>
-            </md-button>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
+      <div>
+        <md-menu>
+          <md-button aria-label="{{ 'Open sessions menu' | translate }}" class="md-fab md-raised md-primary md-mini" ng-click="$mdOpenMenu($event)" ng-disabled="(!person.emails || person.emails.length < 1) && (!person.sms || person.sms.length < 1)">
+            <md-icon md-menu-origin md-font-icon="send" class="s48">send</md-icon>
+          </md-button>
+          <md-menu-content width="3">
+            <send-bulk-message type="Email" ng-show="person.emails.length > 0"></send-bulk-message>
+            <send-bulk-message type="SMS" ng-show="person.sms.length > 0"></send-bulk-message>
+          </md-menu-content>
+        </md-menu>
+        <md-menu>
+          <md-button aria-label="{{ 'Open sessions menu' | translate }}" class="md-fab md-raised md-mini" ng-click="$mdOpenMenu($event)">
+            <md-icon md-menu-origin md-font-icon="more_black" class="s48">more_vert</md-icon>
+          </md-button>
+          <md-menu-content width="3">
+            <md-menu-item>
+              <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/messages">
+                <p flex translate>Messages</p>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/message_activity">
+                <p flex translate>Email Activity</p>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="">
+                <p flex translate>Delete</p>
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
     </div>
   </div>
 
@@ -43,6 +52,7 @@
 
           <div flex="100">
             <md-card class="people-prof b-bl">
+              {{person.emails.length}}e : {{person.sms.length}}s
               <md-card-title>
                 <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/IpVwFwAATiuUMn1dkSeu'}}" class="people-avatar"></img>
                 <span flex></span>

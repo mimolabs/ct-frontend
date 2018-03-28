@@ -384,7 +384,9 @@ app.directive('campGuide', [function() {
 
   return {
     link: link,
-    scope: {},
+    scope: {
+      loading: '='
+    },
     templateUrl: 'components/campaigns/_guide.html'
   };
 }]);

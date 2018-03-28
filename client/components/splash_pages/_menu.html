@@ -985,7 +985,7 @@
   <md-content layout-padding>
     <div ng-hide='splash.updating' layout="row" layout-align="space-around center" class="splash-design-buttons">
       <splash-templates></splash-templates>
-      <md-button ng-disabled="(myForm.$pristine || myForm.$invalid) && splash.id" ng-click="save(splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
+      <md-button ng-disabled="(myForm.$pristine || myForm.$invalid)" ng-click="save(splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
         <md-tooltip md-direction="bottom">Save</md-tooltip>
         <md-icon md-font-icon="save">save</md-icon>
       </md-button>

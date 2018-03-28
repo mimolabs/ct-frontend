@@ -56,16 +56,6 @@
                       </div>
                     </md-input-container>
                   </div>
-                  <div flex="100" ng-show="splash.g_login_on">
-                    <md-input-container class="md-block">
-                      <label>Google Page ID</label>
-                      <input ng-model="splash.g_page_id" name="g_page_id" ng-class="{ 'input-error' : myForm.g_page_id.$error.required }" placeholder="{{ 'Enter your Google Page ID' | translate }}" type="text" ng-required="splash.g_login_on">
-                      <div ng-messages="myForm.g_page_id.$error" md-auto-hide="false">
-                        <div ng-message="required" translate>Page ID required</div>
-                        <div ng-message="pattern" translate>Invalid Page ID</div>
-                      </div>
-                    </md-input-container>
-                  </div>
                   <div flex="100" ng-show="splash.tw_login_on">
                     <md-input-container class="md-block">
                       <label translate>Twitter Handle</label>
@@ -985,7 +975,7 @@
   <md-content layout-padding>
     <div ng-hide='splash.updating' layout="row" layout-align="space-around center" class="splash-design-buttons">
       <splash-templates></splash-templates>
-      <md-button ng-disabled="(myForm.$pristine || myForm.$invalid) && splash.id" ng-click="save(splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
+      <md-button ng-disabled="(myForm.$pristine || myForm.$invalid)" ng-click="save(splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
         <md-tooltip md-direction="bottom">Save</md-tooltip>
         <md-icon md-font-icon="save">save</md-icon>
       </md-button>

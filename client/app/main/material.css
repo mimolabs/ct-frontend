@@ -1553,6 +1553,17 @@ table a {
 
 /*people page*/
 
+.people-icon {
+  border-radius: 30px;
+  max-height: 30px;
+  margin-right: 20px;
+}
+
+.people-avatar {
+  border-radius: 120px;
+  max-height: 120px;
+}
+
 .people-filter md-card-content {
   padding-top: 0px;
 }

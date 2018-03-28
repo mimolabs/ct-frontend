@@ -373,19 +373,27 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
 
 }]);
 
-app.directive('campGuide', [function() {
+app.directive('campGuide', ['$routeParams', function($routeParams) {
 
   var link = function(scope, element, attrs) {
 
     scope.loading = undefined;
     scope.currentNavItem = 'guide';
-
+    scope.location = {
+      slug: $routeParams.id,
+      paid: attrs.paidLocation,
+      setup: {
+        campaigns: attrs.setupCampaigns
+      }
+    };
   };
 
   return {
     link: link,
     scope: {
-      loading: '='
+      loading: '=',
+      paidLocation: '@',
+      setupCampaigns: '@'
     },
     templateUrl: 'components/campaigns/_guide.html'
   };

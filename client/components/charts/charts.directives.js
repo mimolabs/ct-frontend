@@ -2438,6 +2438,10 @@ app.directive('emailStats', ['$timeout', 'Report', '$routeParams', 'COLOURS', 'g
       total: Math.floor((Math.random() * 100) + 500),
       opened: Math.floor((Math.random() * 50) + 400),
       reputation: Math.floor((Math.random() * 20) + 80),
+      delivered: Math.floor((Math.random() * 60) + 400),
+      clicked: Math.floor((Math.random() * 30) + 300),
+      bounced: Math.floor((Math.random() * 10) + 10),
+      spam: Math.floor((Math.random() * 20) + 10),
       breakdown: {
         delivered: Math.floor((Math.random() * 10) + 90),
         opened: Math.floor((Math.random() * 30) + 50),

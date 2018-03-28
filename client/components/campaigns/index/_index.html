@@ -20,7 +20,6 @@
     </md-card>
   </div>
 
-
   <div flex="100" flex-gt-md="90" flex-gt-lg="80" ng-if="campaigns">
     <md-card class="b-pr fixed-table">
       <div class="md-toolbar-tools" ng-cloak layout="row" layout-align="space-between center">
@@ -35,6 +34,7 @@
             <tr md-row>
               <th md-column md-order-by="active"><span translate>Active</span></th>
               <th md-column><span translate>Name</span></th>
+              <th md-column><span translate>Type</span></th>
               <th md-column><span translate>Created</span></th>
               <th md-column><span translate>Sent</span></th>
               <th md-column><span translate>Delivered</span></th>
@@ -68,6 +68,9 @@
                 <ul ng-repeat="predicate in campaign.predicates">
                   <li><small class="muted">{{ predicate | humanPredicate }}</small></li>
                 </ul>
+              </td>
+              <td md-cell>
+                {{ campaign.campaign_type | titleCase}}
               </td>
               <td md-cell>
                 {{ campaign.created_at | humanTimeShortest }}

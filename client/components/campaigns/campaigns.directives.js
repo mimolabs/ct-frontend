@@ -108,7 +108,7 @@ app.directive('listCampaigns', ['Campaign', 'Location', '$routeParams', '$rootSc
 
 }]);
 
-app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience', 'Auth', '$q', '$routeParams', '$rootScope', '$http', '$location', 'showToast', 'showErrors', '$sce', 'gettextCatalog', '$mdDialog', function (Campaign, Location, Integration, Audience, Auth, $q, $routeParams, $rootScope, $http, $location, showToast, showErrors, $sce, gettextCatalog, $mdDialog) {
+app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience', 'Sender', 'Auth', '$q', '$routeParams', '$rootScope', '$http', '$location', 'showToast', 'showErrors', '$sce', 'gettextCatalog', '$mdDialog', function (Campaign, Location, Integration, Audience, Sender, Auth, $q, $routeParams, $rootScope, $http, $location, showToast, showErrors, $sce, gettextCatalog, $mdDialog) {
 
   var link = function(scope,element,attrs) {
 
@@ -120,6 +120,11 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
 
     scope.campaign = { slug: $routeParams.campaign_id };
     scope.currentNavItem = 'campaigns';
+
+    scope.campaign_types = [];
+    scope.campaign_types.push({name: 'Email', value: 'email'});
+    scope.campaign_types.push({name: 'Twitter', value: 'twitter'});
+    scope.campaign_types.push({name: 'SMS', value: 'sms'});
 
     scope.available_options = [];
     scope.available_options.push({value: 'created_at', name: 'First seen', desc: 'When the user first signed in through your WiFi network'});
@@ -336,6 +341,14 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
       });
     };
 
+    var getSenders = function() {
+      Sender.query({location_id: $routeParams.id}, function(data) {
+        scope.senders = data.senders;
+      }, function(err) {
+        console.log(err);
+      });
+    };
+
     var init = function() {
       if ($routeParams.campaign_id) {
         getCampaign();
@@ -343,6 +356,7 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
         buildCampaign();
         getAudiences();
       }
+      getSenders();
     };
 
     init();
@@ -370,6 +384,7 @@ app.directive('campGuide', [function() {
 
   return {
     link: link,
+    scope: {},
     templateUrl: 'components/campaigns/_guide.html'
   };
 }]);
@@ -458,4 +473,91 @@ app.directive('validateCampaignEmail', ['CampaignValidate', '$routeParams', '$ti
     },
     templateUrl: 'components/campaigns/_validate.html'
   };
+}]);
+
+app.directive('campSenders', ['Sender', 'Location', 'showErrors', 'showToast', 'gettextCatalog', '$routeParams', '$location', '$mdDialog', function(Sender, Location, showErrors, showToast, gettextCatalog, $routeParams, $location, $mdDialog) {
+
+  var link = function(scope, element, attrs) {
+
+    scope.currentNavItem = 'senders';
+    scope.location = {slug: $routeParams.id};
+
+    var init = function() {
+      location.setup = {campaign: attrs.setupCampaigns};
+      location.paid = attrs.paidLocation;
+      Sender.query({location_id: $routeParams.id}, function(data) {
+        scope.senders = data.senders;
+        scope.loading = undefined;
+      }, function(err) {
+        console.log(err);
+        scope.loading = undefined;
+      });
+    };
+
+    var removeFromList = function(sender) {
+      for (var i = 0, len = scope.senders.length; i < len; i++) {
+        if (scope.senders[i].id === sender.id) {
+          scope.senders.splice(i, 1);
+          showToast(gettextCatalog.getString('Sender successfully deleted.'));
+          break;
+        }
+      }
+    };
+
+    scope.delete = function(sender) {
+      Sender.destroy({location_id: $routeParams.id, id: sender.id}).$promise.then(function(results) {
+        removeFromList(sender);
+      }, function(err) {
+        showErrors(err);
+      });
+    };
+
+    init();
+
+  };
+
+  return {
+    link: link,
+    scope: {
+      loading: '=',
+      paidLocation: '@',
+      setupCampaigns: '@'
+    },
+    templateUrl: 'components/campaigns/senders/_index.html'
+  };
+
+}]);
+
+app.directive('newSenders', ['Sender', 'Location', 'showErrors', 'showToast', 'gettextCatalog', '$routeParams', '$location', '$mdDialog', function(Sender, Location, showErrors, showToast, gettextCatalog, $routeParams, $location, $mdDialog) {
+
+  var link = function(scope, element, attrs) {
+
+    scope.currentNavItem = 'senders';
+    scope.sender = {sender_type: 'email'};
+    scope.location = {slug: $routeParams.id};
+
+    scope.sender_types = [];
+    scope.sender_types.push({name: 'Email', value: 'email'});
+    scope.sender_types.push({name: 'Twitter', value: 'twitter'});
+    scope.sender_types.push({name: 'SMS', value: 'sms'});
+
+    scope.save = function() {
+      Sender.create({}, {
+        location_id: $routeParams.id,
+        sender: scope.sender
+      }, function(data) {
+        $location.path($routeParams.id + '/campaigns/senders');
+      }, function(err) {
+        showErrors(err);
+      });
+    };
+  };
+
+  return {
+    link: link,
+    scope: {
+    },
+    templateUrl: 'components/campaigns/senders/_new.html'
+  };
+
 }]);

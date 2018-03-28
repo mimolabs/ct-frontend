@@ -1412,6 +1412,11 @@ table#plans td.md-cell {
   text-align: center;
 }
 
+.senders-table td.md-cell:nth-of-type(1) {
+  width: 60px;
+  text-align: center;
+}
+
 table a {
   font-weight: 600;
   color: rgb(71, 90, 136);
@@ -1525,6 +1530,26 @@ table a {
 }
 
 /*WYSIWYG end*/
+
+/*animate show/hide*/
+
+.animate-show {
+  -webkit-transition: 0.5s ease-in all;
+  transition:  0.5s ease-in all;
+  max-height: 100vh;
+  overflow: hidden;
+}
+
+.animate-show.ng-hide-remove,
+.animate-show.ng-hide-add,.animate-show.ng-hide {
+  display: block!important;
+}
+
+.animate-show.ng-hide {
+  max-height: 0px;
+  -webkit-transition: 0.5s ease-out all;
+  transition:  0.5s ease-out all;
+}
 
 /*people page*/
 

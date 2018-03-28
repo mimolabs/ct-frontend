@@ -18,29 +18,29 @@
     </div>
     <analytics ng-if="!loading">
       <client-chart>
-        <radius-stats render="emails" fake="{{!location.paid}}"></radius-stats>
+        <radius-stats render="emails" fake="{{location.demo}}"></radius-stats>
 
         <div layout="" layout-wrap>
           <div flex="100" flex-gt-sm="100" ng-hide="fs && fs.panel != 'usage'">
-            <dash-clients-chart name="New People" type="people.new" bar="true" render="new-people" fake="{{!location.paid}}" show-gt-sm></dash-clients-chart>
+            <dash-clients-chart name="New People" type="people.new" bar="true" render="new-people" fake="{{location.demo}}" show-gt-sm></dash-clients-chart>
           </div>
           <div flex="100" flex-gt-sm="{{fs.panel ? 100 : 50}}" ng-hide="fs && fs.panel != 'usage'">
-            <dash-clients-chart name="Unique Daily Devices" type="radius.users" render="total-users" fake="{{!location.paid}}" show-gt-sm></dash-clients-chart>
+            <dash-clients-chart name="Unique Daily Devices" type="radius.users" render="total-users" fake="{{location.demo}}" show-gt-sm></dash-clients-chart>
           </div>
           <div flex="100" flex-gt-sm="{{fs.panel ? 100 : 50}}" ng-hide="fs && fs.panel != 'usage'">
-            <dash-clients-chart name="New Devices" type="radius.new" render="new-users" fake="{{!location.paid}}" show-gt-sm></dash-clients-chart>
+            <dash-clients-chart name="New Devices" type="radius.new" render="new-users" fake="{{location.demo}}" show-gt-sm></dash-clients-chart>
           </div>
           <div flex="100" flex-gt-sm="{{fs.panel ? 100 : 50}}" ng-hide="fs && fs.panel != 'usage'">
-            <dash-clients-chart name="Visits" type="radius.sessions" render="radius-sessions" fake="{{!location.paid}}" show-gt-sm></dash-clients-chart>
+            <dash-clients-chart name="Visits" type="radius.sessions" render="radius-sessions" fake="{{location.demo}}" show-gt-sm></dash-clients-chart>
           </div>
           <div flex="100" flex-gt-sm="{{fs.panel ? 100 : 50}}" ng-hide="fs && fs.panel != 'usage'">
-            <dash-clients-chart name="Splash Views" type="splash.views" render="splash-views" fake="{{!location.paid}}" show-gt-sm></dash-clients-chart>
+            <dash-clients-chart name="Splash Views" type="splash.views" render="splash-views" fake="{{location.demo}}" show-gt-sm></dash-clients-chart>
           </div>
           <div flex="100" flex-gt-sm="{{fs.panel ? 100 : 50}}" ng-hide="fs && fs.panel != 'usage'">
-            <dash-clients-chart name="Popular Hours" type="radius.popular" popular="true" render="popular-hours" bar="true" fake="{{!location.paid}}" show-gt-sm></dash-clients-chart>
+            <dash-clients-chart name="Popular Hours" type="radius.popular" popular="true" render="popular-hours" bar="true" fake="{{location.demo}}" show-gt-sm></dash-clients-chart>
           </div>
           <div flex="100" flex-gt-sm="{{fs.panel ? 100 : 50}}" ng-hide="fs && fs.panel != 'usage'">
-            <dash-clients-chart name="Social Gender Demographics" type="social.genders" pie="true" render="social-genders" fake="{{!location.paid}}" show-gt-sm></dash-clients-chart>
+            <dash-clients-chart name="Social Gender Demographics" type="social.genders" pie="true" render="social-genders" fake="{{location.demo}}" show-gt-sm></dash-clients-chart>
           </div>
         </div>
       </client-chart>

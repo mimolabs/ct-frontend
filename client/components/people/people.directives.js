@@ -85,13 +85,16 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
     var getAudiences = function() {
       var deferred = $q.defer();
       Audience.query({location_id: scope.location.slug}, function(data) {
-        scope.audiences = data.audiences;
-        setAudiencePredicate();
-        deferred.resolve();
+        if (data.audiences) {
+          scope.audiences = data.audiences;
+          setAudiencePredicate();
+          deferred.resolve();
+        } else {
+          scope.predicates = decodeBlob();
+          deferred.resolve();
+        }
       }, function(err) {
         // In case there is no audience
-        scope.predicates = decodeBlob();
-        deferred.resolve();
       });
       return deferred.promise;
     };
@@ -437,9 +440,9 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
     var checkForGuide = function() {
       buildLocation();
       var falses = [false, 'false'];
-      if ($location.path().split('/')[2] !== 'people' && 
-        (falses.includes(scope.location.setup.splash) || 
-          falses.includes(scope.location.setup.integrations) || 
+      if ($location.path().split('/')[2] !== 'people' &&
+        (falses.includes(scope.location.setup.splash) ||
+          falses.includes(scope.location.setup.integrations) ||
           falses.includes(scope.location.paid)
         )) {
         $location.path('/' + scope.location.slug + '/guide');

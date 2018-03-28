@@ -236,7 +236,7 @@
               <tbody md-body>
                 <tr md-row ng-repeat="person in people">
                   <td md-cell>
-                    <a href="/#/{{ location.slug }}/people/{{ person.id }}">{{ person.first_name }} {{ person.last_name }}</a>
+                    <img class="people-icon" src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}"/></img><a href="/#/{{ location.slug }}/people/{{ person.id }}">{{ person.first_name }} {{ person.last_name }}</a>
                   </td>
                   <td md-cell>
                     {{ person.email || 'NA' }}

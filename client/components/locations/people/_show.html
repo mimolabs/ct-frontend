@@ -8,30 +8,39 @@
         <md-icon>keyboard_return</md-icon>
       </md-button>
 
-      <md-menu>
-        <md-button aria-label="{{ 'Open sessions menu' | translate }}" class="md-fab md-raised md-primary md-mini" ng-click="$mdOpenMenu($event)">
-          <md-icon md-menu-origin md-font-icon="more_black" class="s48">more_vert</md-icon>
-        </md-button>
-        <md-menu-content width="3">
-          <send-bulk-message type="Email" ng-show="person.emails.length > 0"></send-bulk-message>
-          <send-bulk-message type="SMS" ng-show="person.sms.length > 0"></send-bulk-message>
-          <md-menu-item>
-            <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/messages">
-              <p flex translate>Messages</p>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/message_activity">
-              <p flex translate>Email Activity</p>
-            </md-button>
-          </md-menu-item>
-          <md-menu-item>
-            <md-button ng-click="">
-              <p flex translate>Delete</p>
-            </md-button>
-          </md-menu-item>
-        </md-menu-content>
-      </md-menu>
+      <div>
+        <md-menu>
+          <md-button aria-label="{{ 'Open sessions menu' | translate }}" class="md-fab md-raised md-primary md-mini" ng-click="$mdOpenMenu($event)" ng-disabled="(!person.emails || person.emails.length < 1) && (!person.sms || person.sms.length < 1)">
+            <md-icon md-menu-origin md-font-icon="send" class="s48">send</md-icon>
+          </md-button>
+          <md-menu-content width="3">
+            <send-bulk-message type="Email" ng-show="person.emails.length > 0"></send-bulk-message>
+            <send-bulk-message type="SMS" ng-show="person.sms.length > 0"></send-bulk-message>
+          </md-menu-content>
+        </md-menu>
+        <md-menu>
+          <md-button aria-label="{{ 'Open sessions menu' | translate }}" class="md-fab md-raised md-mini" ng-click="$mdOpenMenu($event)">
+            <md-icon md-menu-origin md-font-icon="more_black" class="s48">more_vert</md-icon>
+          </md-button>
+          <md-menu-content width="3">
+            <md-menu-item>
+              <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/messages">
+                <p flex translate>Messages</p>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/message_activity">
+                <p flex translate>Email Activity</p>
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button ng-click="">
+                <p flex translate>Delete</p>
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
     </div>
   </div>
 
@@ -44,11 +53,8 @@
           <div flex="100">
             <md-card class="people-prof b-bl">
               <md-card-title>
-                <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/IpVwFwAATiuUMn1dkSeu'}}" style="max-height:120px;border-radius:60px;"></img>
+                <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}" class="people-avatar"></img>
                 <span flex></span>
-                <md-button ng-if="edit_username !== true" ng-click="editName(edit_username)" aria-controls="{{'splash' | translate }}" class="md-secondary md-icon-button" aria-label="{{ 'call' | translate }}">
-                  <md-icon md-font-icon="mode_edit">mode_edit</md-icon>
-                </md-button>
               </md-card-title>
               <md-card-content>
                 <md-list flex layout="column" layout-gt-xs="row" layout-gt-sm="column">
@@ -58,9 +64,14 @@
                       <p ng-if="edit_username !== true">{{ person.username ? person.username : 'Splash Guest'}}</p>
                       <div layout="row">
                         <form ng-submit="saveUsername()">
-                          <input type="text" ng-model="person.username" ng-if="edit_username === true"></input>
+                          <md-input-container style="margin:0px;" class="md-block">
+                            <input type="text" ng-model="person.username" ng-if="edit_username === true"></input>
+                          </md-input-container>
                           <md-button ng-if="edit_username === true" ng-click="saveUsername()" aria-controls="{{'splash' | translate }}" class="md-secondary md-icon-button" aria-label="{{ 'call' | translate }}">
                             <md-icon md-font-icon="mode_edit">save</md-icon>
+                          </md-button>
+                          <md-button ng-if="edit_username !== true" ng-click="editName(edit_username)" aria-controls="{{'splash' | translate }}" class="md-secondary md-icon-button" aria-label="{{ 'call' | translate }}">
+                            <md-icon md-font-icon="mode_edit">mode_edit</md-icon>
                           </md-button>
                         </form>
                       </div>
@@ -146,58 +157,56 @@
                   <span class="md-headline" translate>Socials</span>
                 </md-card-title-text>
               </md-card-title>
-              <md-card-content>
-                <md-list flex>
-                  <md-list-item class="md-2-line">
-                    <img src="https://d247kqobagyqjh.cloudfront.net/api/file/WUhzu2zRTremUtlXxALC" style="border-radius:0px;" class="person-social"/>
-                    <div class="md-list-item-text">
-                      <h3>Facebook</h3>
-                      <p ng-show="!person.social[0].fb_link">No Profile</p>
-                      <p><a href="{{person.social[0].fb_link}}" ng-show="person.social[0].fb_link && location.demo !== true" target="_blank">View Profile</a></p>
-                      <p><a href="" ng-show="person.social[0].fb_link && location.demo === true" target="_blank">
-                        <span>
-                          View Profile
-                          <md-tooltip>
-                            You are currently viewing demo data
-                          </md-tooltip>
-                        </span>
-                      </a></p>
-                    </div>
-                  </md-list-item>
-                  <md-list-item class="md-2-line">
-                    <img src="https://d247kqobagyqjh.cloudfront.net/api/file/K3YDlqzUQzIavvIEkesC" style="border-radius:0px;" class="person-social"/>
-                    <div class="md-list-item-text" layout="column">
-                      <h3 translate>Google+</h3>
-                      <p ng-show="!person.social[0].g_link">No Profile</p>
-                      <p><a href="{{person.social[0].g_link}}" ng-show="person.social[0].g_link && location.demo !== true" target="_blank">View Profile</a></p>
-                      <p><a href="" ng-show="person.social[0].g_link && location.demo === true" target="_blank">
-                        <span>
-                          View Profile
-                          <md-tooltip>
-                            You are currently viewing demo data
-                          </md-tooltip>
-                        </span>
-                      </a></p>
-                    </div>
-                  </md-list-item>
-                  <md-list-item class="md-2-line">
-                    <img src="https://d247kqobagyqjh.cloudfront.net/api/file/PdwjF22TTiqOHvzQcksA" style="border-radius:0px;" class="person-social"/>
-                    <div class="md-list-item-text" layout="column">
-                      <h3 translate>Twitter</h3>
-                      <p ng-show="!person.social[0].tw_url">No Profile</p>
-                      <p><a href="{{person.social[0].tw_url}}" ng-show="person.social[0].tw_url && location.demo !== true" target="_blank">View Profile</a></p>
-                      <p><a href="" ng-show="person.social[0].tw_url && location.demo === true" target="_blank">
-                        <span>
-                          View Profile
-                          <md-tooltip>
-                            You are currently viewing demo data
-                          </md-tooltip>
-                        </span>
-                      </a></p>
-                    </div>
-                  </md-list-item>
-                </md-list>
-              </md-card-content>
+              <md-list flex>
+                <md-list-item class="md-2-line">
+                  <img src="https://d247kqobagyqjh.cloudfront.net/api/file/WUhzu2zRTremUtlXxALC" style="border-radius:0px;" class="person-social"/>
+                  <div class="md-list-item-text">
+                    <h3>Facebook</h3>
+                    <p ng-show="!person.social[0].fb_link">No Profile</p>
+                    <p><a href="{{person.social[0].fb_link}}" ng-show="person.social[0].fb_link && location.demo !== true" target="_blank">View Profile</a></p>
+                    <p><a href="" ng-show="person.social[0].fb_link && location.demo === true" target="_blank">
+                      <span>
+                        View Profile
+                        <md-tooltip>
+                          You are currently viewing demo data
+                        </md-tooltip>
+                      </span>
+                    </a></p>
+                  </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                  <img src="https://d247kqobagyqjh.cloudfront.net/api/file/K3YDlqzUQzIavvIEkesC" style="border-radius:0px;" class="person-social"/>
+                  <div class="md-list-item-text" layout="column">
+                    <h3 translate>Google+</h3>
+                    <p ng-show="!person.social[0].g_link">No Profile</p>
+                    <p><a href="{{person.social[0].g_link}}" ng-show="person.social[0].g_link && location.demo !== true" target="_blank">View Profile</a></p>
+                    <p><a href="" ng-show="person.social[0].g_link && location.demo === true" target="_blank">
+                      <span>
+                        View Profile
+                        <md-tooltip>
+                          You are currently viewing demo data
+                        </md-tooltip>
+                      </span>
+                    </a></p>
+                  </div>
+                </md-list-item>
+                <md-list-item class="md-2-line">
+                  <img src="https://d247kqobagyqjh.cloudfront.net/api/file/PdwjF22TTiqOHvzQcksA" style="border-radius:0px;" class="person-social"/>
+                  <div class="md-list-item-text" layout="column">
+                    <h3 translate>Twitter</h3>
+                    <p ng-show="!person.social[0].tw_url">No Profile</p>
+                    <p><a href="{{person.social[0].tw_url}}" ng-show="person.social[0].tw_url && location.demo !== true" target="_blank">View Profile</a></p>
+                    <p><a href="" ng-show="person.social[0].tw_url && location.demo === true" target="_blank">
+                      <span>
+                        View Profile
+                        <md-tooltip>
+                          You are currently viewing demo data
+                        </md-tooltip>
+                      </span>
+                    </a></p>
+                  </div>
+                </md-list-item>
+              </md-list>
             </md-card>
           </div>
 

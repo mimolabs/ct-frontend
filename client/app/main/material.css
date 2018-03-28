@@ -1261,6 +1261,11 @@ md-bottom-sheet .md-subheader {
 
 /*general changes*/
 
+td.md-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .muted.label {
   font-size: 12px;
   padding-left: 2px;
@@ -1433,6 +1438,12 @@ table a {
   }
 }
 
+.login-type-icon {
+  max-height: 30px;
+  max-width: 30px;
+  margin-right: 5px;
+}
+
 /*WYSIWYG start*/
 
 .mce-container * {
@@ -1552,6 +1563,19 @@ table a {
 }
 
 /*people page*/
+
+.people-icon {
+  border-radius: 30px;
+  max-height: 30px;
+  max-width: 30px;
+  margin-right: 20px;
+}
+
+.people-avatar {
+  border-radius: 120px;
+  max-height: 120px;
+  max-width: 120px;
+}
 
 .people-filter md-card-content {
   padding-top: 0px;

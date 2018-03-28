@@ -11,9 +11,9 @@ var app = angular.module('myApp.controllers', [
   'myApp.users.controller',
 ]);
 
-app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage', '$window', '$location', '$routeParams', 'AccessToken', 'RefreshToken', 'Auth', 'API_END_POINT', '$pusher', '$route', 'onlineStatus', '$cookies', 'locationHelper', 'CTLogin', 'User', 'Me', 'AUTH_URL', 'menu', 'designer', '$mdSidenav', '$mdMedia', '$q', 'INTERCOM', 'PUSHER', 'gettextCatalog', 'Translate', 'COMMITHASH', '$mdDialog',
+app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage', '$window', '$location', '$routeParams', 'AccessToken', 'RefreshToken', 'Auth', 'API_END_POINT', '$pusher', '$route', 'onlineStatus', '$cookies', 'locationHelper', 'CTLogin', 'User', 'Me', 'AUTH_URL', 'menu', 'designer', '$mdSidenav', '$mdMedia', '$q', 'INTERCOM', 'PUSHER', 'AMPLITUDE', 'gettextCatalog', 'Translate', 'COMMITHASH', '$mdDialog',
 
-  function ($rootScope, Location, $scope, $localStorage, $window, $location, $routeParams, AccessToken, RefreshToken, Auth, API, $pusher, $route, onlineStatus, $cookies, locationHelper, CTLogin, User, Me, AUTH_URL, menu, designer, $mdSidenav, $mdMedia, $q, INTERCOM, PUSHER, gettextCatalog, Translate, COMMITHASH, $mdDialog) {
+  function ($rootScope, Location, $scope, $localStorage, $window, $location, $routeParams, AccessToken, RefreshToken, Auth, API, $pusher, $route, onlineStatus, $cookies, locationHelper, CTLogin, User, Me, AUTH_URL, menu, designer, $mdSidenav, $mdMedia, $q, INTERCOM, PUSHER, AMPLITUDE, gettextCatalog, Translate, COMMITHASH, $mdDialog) {
 
     var domain = 'oh-mimo.com';
 
@@ -21,6 +21,8 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
     $scope.ct_login = CTLogin;
 
     $scope.home = function() {
+      var msg = 'Clicked Home';
+      window.amplitude.getInstance().logEvent(msg);
       if ($routeParams.id && $location.path().split('/')[1] !== 'users') {
         $location.path('/' + $routeParams.id);
       } else {
@@ -149,25 +151,26 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
     }
 
     $scope.$on('intercom', function(args,event) {
-      if (Auth.currentUser() && INTERCOM && INTERCOM !== '' && INTERCOM !== undefined) {
+      if (Auth.currentUser()) {
         var user = Auth.currentUser();
-        window.analytics.identify(user.accountId, {
-          name:  user.username,
-          email: user.email,
-          plan:  user.plan_name,
-          createdAt: user.created_at
-        });
-
-        window.intercomSettings = {
-          app_id: INTERCOM,
-          user_id: user.accountId,
+        var params = {
           email: user.email,
           name: user.username,
-          locked: user.locked,
-          created_at: user.created_at,
-          user_hash: user.user_hash,
+          created_at: user.created_at / 1000,
+          plan_name: user.plan_name,
+          paid_plan: user.paid_plan
         };
-
+        if (AMPLITUDE && AMPLITUDE !== '' && AMPLITUDE !== undefined) {
+          window.amplitude.getInstance().init(AMPLITUDE);
+          window.amplitude.getInstance().setUserId(user.accountId);
+          window.amplitude.getInstance().setUserProperties(params);
+        }
+        if (INTERCOM && INTERCOM !== '' && INTERCOM !== undefined) {
+          params.app_id = INTERCOM;
+          params.user_hash = user.user_hash;
+          params.user_id = user.accountId;
+          window.intercomSettings = params;
+        }
       }
     });
 

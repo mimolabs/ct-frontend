@@ -6,7 +6,6 @@ app.directive('locationShow', ['Location', '$routeParams', '$location', '$localS
 
   var link = function(scope,element,attrs,controller) {
 
-    scope.currentNavItem = 'devices';
     var channel;
 
     scope.favourite = function() {
@@ -756,6 +755,9 @@ app.directive('integrationSelect', ['Location', '$routeParams', '$location', '$h
 
     scope.save = function(type) {
       if (scope.location.paid) {
+        var msg = 'Integration Selected'
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg, { type: type } );
         $location.path($routeParams.id + '/integration/' + type + '/auth');
       }
     };
@@ -913,6 +915,9 @@ app.directive('cloudtraxAuth', ['Location', '$routeParams', '$location', '$http'
 
     var create = function() {
       controller.save(scope.integration).then(function() {
+        var msg = 'Integration Validated';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg, { type: 'OpenMesh' });
         scope.validated = true;
       });
     };
@@ -1000,8 +1005,6 @@ app.directive('cloudtraxSetup', ['Location', '$routeParams', '$location', '$http
         location_id: $routeParams.id,
         splash_integration: {
           metadata: {
-            // unifi_site_name:  site.name,
-            // unifi_site_id:    site.id,
             ssid: scope.ct.ssid
           },
           action: 'create_setup'
@@ -1093,6 +1096,9 @@ app.directive('cloudtraxSetup', ['Location', '$routeParams', '$location', '$http
       } else if (integration.active) {
         $location.path('/' + $routeParams.id + '/settings/integrations');
       } else {
+        var msg = 'Integration Settings';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg, { type: 'OpenMesh' } );
         scope.integration = integration;
         fetchSites();
       }
@@ -1126,6 +1132,9 @@ app.directive('unifiAuth', ['Location', '$routeParams', '$location', '$http', '$
 
     var create = function() {
       controller.save(scope.integration).then(function() {
+        var msg = 'Integration Validated';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg, { type: 'UniFi' });
         scope.validated = true;
       });
     };
@@ -1225,6 +1234,9 @@ app.directive('unifiSetup', ['Location', '$routeParams', '$location', '$http', '
       } else if (integration.active) {
         $location.path('/' + $routeParams.id + '/settings/integrations');
       } else {
+        var msg = 'Integration Settings';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg, {type: 'UniFi'});
         scope.integration = integration;
         fetchSites();
       }
@@ -1259,6 +1271,9 @@ app.directive('vszAuth', ['Location', '$routeParams', '$location', '$http', '$md
 
     var create = function() {
       controller.save(scope.integration).then(function() {
+        var msg = 'Integration Validated';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg, { type: 'VSZ' });
         scope.validated = true;
       });
     };
@@ -1359,6 +1374,9 @@ app.directive('vszSetup', ['Location', '$routeParams', '$location', '$http', '$m
       } else if (integration.active) {
         $location.path('/' + $routeParams.id + '/settings/integrations');
       } else {
+        var msg = 'Integration Settings';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg, { type: 'VSZ' });
         scope.integration = integration;
         fetchSites();
       }
@@ -1394,6 +1412,9 @@ app.directive('merakiAuth', ['Location', '$routeParams', '$location', '$http', '
 
     var create = function() {
       controller.save(scope.integration).then(function() {
+        var msg = 'Integration Validated';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg, { type: 'Meraki' });
         scope.validated = true;
       });
     };
@@ -1548,6 +1569,9 @@ app.directive('merakiSetup', ['Location', '$routeParams', '$location', '$http', 
       } else if (integration.active) {
         $location.path('/' + $routeParams.id + '/settings/integrations');
       } else {
+        var msg = 'Integration Settings';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg, { type: 'Meraki' });
         scope.integration = integration;
         fetchSites();
       }
@@ -1562,7 +1586,7 @@ app.directive('merakiSetup', ['Location', '$routeParams', '$location', '$http', 
     link: link,
     scope: {
     },
-    templateUrl: 'components/locations/new/_meraki_setup.html'
+    templateUrl: 'components/locations/integrations/_meraki_setup.html'
   };
 
 }]);
@@ -1577,6 +1601,12 @@ app.directive('gettingStarted', ['Location', '$routeParams', '$location', '$http
       $location.path('/' + scope.location.slug + '/splash_pages' + (paid ? '' : '/guide'));
     };
     scope.currentNavItem = 'guide';
+
+    scope.integrationClick = function(type) {
+      var msg = 'Wizard Clicked';
+      console.log(msg);
+      window.amplitude.getInstance().logEvent(msg, {type: type});
+    };
 
     scope.$watch('location',function(nv){
       if (nv !== undefined && scope.location.setup) {
@@ -1724,6 +1754,9 @@ app.directive('getWithThePlan', ['Location', '$routeParams', '$location', 'Subsc
       };
 
       $scope.cancel = function() {
+        var msg = 'Plan Dialog Cancel';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg);
         $mdDialog.cancel();
       };
 
@@ -1774,6 +1807,9 @@ app.directive('getWithThePlan', ['Location', '$routeParams', '$location', 'Subsc
       var upgrade = function(card) {
         subscribe();
         Subscription.create({plan_id: $scope.plan_id, card: card}).$promise.then(function(data) {
+          var msg = 'Started Trial';
+          console.log(msg);
+          window.amplitude.getInstance().logEvent(msg, { plan_id: $scope.plan_id });
           $scope.selectedIndex = 3;
         }, function(err) {
           $scope.subscribing = undefined;
@@ -1789,6 +1825,9 @@ app.directive('getWithThePlan', ['Location', '$routeParams', '$location', 'Subsc
         $scope.errors = undefined;
         $scope.next();
         if (result.error) {
+          var msg = 'Card Declined';
+          console.log(msg);
+          window.amplitude.getInstance().logEvent(msg, { error: result.error });
           $scope.errors = result.error.message;
         } else {
           createSubscription(result.id);
@@ -1810,6 +1849,10 @@ app.directive('getWithThePlan', ['Location', '$routeParams', '$location', 'Subsc
         console.log('Could not set stripe token');
         return;
       }
+
+      var msg = 'Clicked Sign-Up';
+      console.log(msg);
+      window.amplitude.getInstance().logEvent(msg, { mgs: scope.label });
 
       var loadPlans = function() {
         Plan.query({
@@ -1862,6 +1905,9 @@ app.directive('integrationComplete', ['Location', '$routeParams', '$location', '
 
     controller.fetch().then(function(integration) {
       scope.integration = integration;
+      var msg = 'Integration Complete';
+      console.log(msg);
+      window.amplitude.getInstance().logEvent(msg, { type: scope.integration.type });
       scope.loading = undefined;
     }, function(err) { console.log(err); });
   };
@@ -1909,6 +1955,9 @@ app.directive('integrationSettings', ['Location', '$routeParams', '$location', '
 
     scope.destroy = function() {
       if (confirm("Are you sure you want to delete this integration?")) {
+        var msg = 'Integration Deleted';
+        console.log(msg);
+        window.amplitude.getInstance().logEvent(msg);
         controller.destroy(scope.integration).then(function() {
           scope.integration = {};
         });

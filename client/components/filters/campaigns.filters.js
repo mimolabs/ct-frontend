@@ -18,7 +18,7 @@ app.filter('humanPredicate', [ 'gettextCatalog', function(gettextCatalog) {
 
     switch(predicate.attribute) {
       case 'created_at':
-        attr = 'Signed up';
+        attr = 'Signed-up';
         break;
       case 'last_seen':
         attr = 'Last seen';

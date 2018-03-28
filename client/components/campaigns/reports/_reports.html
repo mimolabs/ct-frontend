@@ -21,13 +21,13 @@
       <client-chart>
         <div layout="" layout-wrap>
           <div flex="100" flex-gt-sm="30">
-            <email-stats fake="{{!location.paid}}"></email-stats>
+            <email-stats fake="{{location.demo}}"></email-stats>
           </div>
           <div flex="100" flex-gt-sm="70" ng-hide="fs && fs.panel != 'usage'">
-            <dash-clients-chart name="Emails Breakdown" type="emails.breakdown" render="emails-breakdown" fake="{{!location.paid}}" show-gt-sm class="campaign-chart"></dash-clients-chart>
+            <dash-clients-chart name="Emails Breakdown" type="emails.breakdown" render="emails-breakdown" fake="{{location.demo}}" show-gt-sm class="campaign-chart"></dash-clients-chart>
           </div>
           <div flex="100" flex-gt-sm="100" ng-hide="fs && fs.panel != 'usage'">
-            <dash-clients-chart name="Emails Captured" type="emails.new" bar="true" render="new-emails" fake="{{!location.paid}}" show-gt-sm class="campaign-chart"></dash-clients-chart>
+            <dash-clients-chart name="Emails Captured" type="emails.new" bar="true" render="new-emails" fake="{{location.demo}}" show-gt-sm class="campaign-chart"></dash-clients-chart>
           </div>
         </div>
       </client-chart>

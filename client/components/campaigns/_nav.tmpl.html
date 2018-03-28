@@ -9,16 +9,16 @@
     <md-nav-item md-nav-href="/#/{{ location.slug }}/campaigns/messages" name="messages">
       Messages
     </md-nav-item>
-    <md-nav-item md-nav-href="/#/{{ location.slug }}/campaigns/message_activity" name="activity">
-      Message Activity
+    <md-nav-item md-nav-href="/#/{{ location.slug }}/campaigns/senders" name="senders">
+      Senders
     </md-nav-item>
     <md-nav-item md-nav-href="/#/{{ location.slug }}/campaigns/reports" name="reports">
       Reports
     </md-nav-item>
-    <md-nav-item md-nav-href="/#/{{ location.slug }}/campaigns/guide" name="guide" ng-show="location.setup.campaigns == false">
+    <md-nav-item md-nav-href="/#/{{ location.slug }}/campaigns/guide" name="guide" ng-show="location.setup.campaigns == 'false' || location.setup.campaigns == false">
       Getting Started
     </md-nav-item>
     <span flex></span>
-    <get-with-the-plan hide show-gt-sm ng-show="location.paid == false" location="location" label="Free Trial"></get-with-the-plan>
+    <get-with-the-plan hide show-gt-sm ng-show="location.paid == 'false' || location.paid == false" location="location" label="Free Trial"></get-with-the-plan>
   </md-nav-bar>
 </div>

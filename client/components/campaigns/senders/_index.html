@@ -1,0 +1,98 @@
+<camp-nav></camp-nav>
+
+<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" style="padding-bottom: 0px;margin-bottom:0px;">
+
+  <div flex="100" flex-gt-md="60" flex-gt-lg="50" ng-if="!senders">
+    <md-card flex="100" class="b-pr">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">
+            <translate>Get Started with Senders</translate>
+          </span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <p translate>Set up your senders so you can start engaging with your customers.</p>
+      </md-card-content>
+      <md-card-actions layout="row" layout-align="end center">
+        <md-button class="md-raised md-primary" ng-href="/#/{{location.slug}}/campaigns/senders/new">Create</md-button>
+      </md-card-actions>
+    </md-card>
+  </div>
+
+  <div flex="100" flex-gt-md="90" flex-gt-lg="80" ng-if="senders">
+    <md-card class="b-pr fixed-table">
+      <md-table-container>
+        <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise" class="senders-table">
+          <thead md-head md-order="query.order" md-on-reorder="logOrder">
+            <tr md-row>
+              <th md-column md-order-by="active"><span translate>Validated</span></th>
+              <th md-column><span translate>Name</span></th>
+              <th md-column><span translate>Type</span></th>
+              <th md-column><span translate>Sent From</span></th>
+              <th md-column><span translate>Options</span></th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row ng-repeat="sender in senders">
+              <td md-cell>
+                <md-icon md-menu-origin md-font-icon="">{{ sender.is_validated ? "check_circle" : "cancel" }}
+                </md-icon>
+              </td>
+              <td md-cell>
+                {{sender.sender_name}}
+              </td>
+              <td md-cell>
+                {{sender.sender_type | titleCase}}
+              </td>
+              <td md-cell ng-show="sender.from_email">
+                <span>
+                  {{sender.from_email}}
+                  <md-tooltip>
+                    From Name: {{sender.sender_name}} | Reply To: {{sender.reply_email}}
+                  </md-tooltip>
+                </span>
+              </td>
+              <td md-cell ng-show="sender.from_sms">
+                <span>
+                  {{sender.from_sms}}
+                </span>
+              </td>
+              <td md-cell>
+                <md-menu md-position-mode="target target">
+                  <md-button aria-label="{{ 'Open Clients Menu' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                    <md-icon md-menu-origin md-font-icon="more_black" class="s24">more_vert</md-icon>
+                  </md-button>
+                  <md-menu-content width="3">
+                    <md-menu-item>
+                      <md-button ng-href="/#/{{ location.slug }}/campaigns/{{ campaign.slug}}">
+                        <md-icon md-menu-align-target style="margin: auto 3px auto 0;">mail</md-icon>
+                        <span translate>Resend Verification</span>
+                      </md-button>
+                    </md-menu-item>
+                    <!-- <md-menu-item>
+                      <md-button ng-click="editSender()">
+                        <md-icon md-menu-align-target style="margin: auto 3px auto 0;">settings</md-icon>
+                        <span translate>Edit</span>
+                      </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                      <md-button ng-click="delete(sender)">
+                        <md-icon md-menu-align-target style="margin: auto 3px auto 0;">delete_forever</md-icon>
+                        <span translate>Delete</span>
+                      </md-button>
+                    </md-menu-item> -->
+                  </md-menu-content>
+                </md-menu>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+      <md-card-actions>
+        <md-table-pagination md-limit="query.limit" md-page="query.page" md-limit-options="query.options" md-total="{{::_links.total_entries}}" md-label="{{pagination_labels}}" md-on-paginate="onPaginate" md-page-select></md-table-pagination>
+      </md-card-actions>
+    </md-card>
+    <md-button class="md-raised md-primary" ng-href="/#/{{location.slug}}/campaigns/senders/new">NEW</md-button>
+  </div>
+</md-content>

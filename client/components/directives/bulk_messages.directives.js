@@ -2,7 +2,7 @@
 
 var app = angular.module('myApp.bulk_messages.directives', []);
 
-app.directive('sendBulkMessage', ['$routeParams', 'BulkMessage', '$mdDialog', 'showToast', 'showErrors', 'Campaign', function($routeParams,BulkMessage,$mdDialog, showToast, showErrors, Campaign) {
+app.directive('sendBulkMessage', ['$routeParams', 'BulkMessage', 'Sender', '$mdDialog', '$q', 'showToast', 'showErrors', 'Campaign', function($routeParams,BulkMessage, Sender, $mdDialog, $q, showToast, showErrors, Campaign) {
 
   var link = function( scope, element, attrs ) {
 
@@ -18,9 +18,22 @@ app.directive('sendBulkMessage', ['$routeParams', 'BulkMessage', '$mdDialog', 's
       });
     };
 
-    function DialogController($scope, valid) {
+    var getSenders = function() {
+      var deferred = $q.defer();
+      Sender.query({location_id: $routeParams.id, type: attrs.type}, function(data) {
+        scope.senders = data.senders;
+        deferred.resolve();
+      }, function(err) {
+        deferred.resolve();
+      });
+      return deferred.promise;
+    };
 
-      scope.message = {};
+    function DialogController($scope, valid, senders) {
+
+      $scope.valid = valid;
+      $scope.senders = senders;
+      $scope.message = {type: attrs.type};
 
       $scope.selectedIndex = 0;
 
@@ -60,48 +73,54 @@ app.directive('sendBulkMessage', ['$routeParams', 'BulkMessage', '$mdDialog', 's
             console.log(err);
             $scope.error = err.data.message[0];
             return;
-          } 
+          }
           $scope.valid = false;
         });
       };
     }
-    DialogController.$inject = ['$scope', 'valid'];
+    DialogController.$inject = ['$scope', 'valid', 'senders'];
 
     scope.compose = function(ev) {
-      $mdDialog.show({
-        controller: DialogController,
-        templateUrl: 'components/views/bulk_messages/_compose.tmpl.html',
-        parent: angular.element(document.body),
-        targetEvent: ev,
-        clickOutsideToClose:true,
-        locals: {
-          valid: false
-        }
-      }).then(function(answer) {
-      }, function() {
+      getSenders().then(function() {
+        $mdDialog.show({
+          controller: DialogController,
+          templateUrl: 'components/views/bulk_messages/_compose.tmpl.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          locals: {
+            valid: false,
+            senders: scope.senders
+          }
+        }).then(function(answer) {
+        }, function() {
+        });
       });
     };
 
   };
 
-  var template =
-
-    '<md-menu-item><md-button ng-click="compose()">Send Message</md-button></md-menu-item>';
+  var template = '<md-menu-item><md-button ng-click="compose()">Send {{type}}</md-button></md-menu-item>';
 
   return {
     link: link,
+    scope: {
+      type: '@'
+    },
     template: template
   };
 
 }]);
 
-app.directive('bulkMessages', ['$routeParams', 'BulkMessage', 'People', 'Location', '$mdDialog', '$location', function($routeParams,BulkMessage,People,Location,$mdDialog,$location) {
+app.directive('bulkMessages', ['$routeParams', 'BulkMessage', 'BulkMessageActivity', 'People', 'Location', '$mdDialog', '$location', function($routeParams,BulkMessage,BulkMessageActivity,People,Location,$mdDialog,$location) {
 
   var link = function( scope, element, attrs ) {
 
     scope.person = {};
     scope.location = {slug: $routeParams.id};
     scope.currentNavItem = 'messages';
+    scope.message_types = ['Emails', 'Email Activity', 'SMS', 'Tweets'];
+    scope.selected_type = 'Emails';
 
     var fetchMessages = function() {
       BulkMessage.index({}, {
@@ -110,9 +129,36 @@ app.directive('bulkMessages', ['$routeParams', 'BulkMessage', 'People', 'Locatio
         start:        $routeParams.start,
         end:          $routeParams.end
       }).$promise.then(function(results) {
-        scope.loading = undefined;
+        scope.location.demo = attrs.demo;
         scope.messages = results.messages;
+        scope.loading = undefined;
       });
+    };
+
+    var fetchMessageActivity = function() {
+      BulkMessageActivity.index({}, {
+        location_id:  scope.location.slug,
+        start:        $routeParams.start,
+        end:          $routeParams.end,
+        message_id:   $routeParams.message_id,
+        person_id:    scope.person.id
+      }).$promise.then(function(results) {
+        scope.location.demo = attrs.demo;
+        scope.activity = results.activity;
+        scope.loading = undefined;
+      });
+    };
+
+    scope.updateMessages = function() {
+      scope.loading = true;
+      switch(scope.selected_type) {
+        case 'Emails':
+          fetchMessages();
+          break;
+        case 'Email Activity':
+          fetchMessageActivity();
+          break;
+      }
     };
 
     var fetchPerson = function() {
@@ -146,21 +192,13 @@ app.directive('bulkMessages', ['$routeParams', 'BulkMessage', 'People', 'Locatio
       fetchMessages();
     }
 
-    // BulkMessageActivity.index({}, {
-    //   location_id:  $routeParams.id,
-    //   start:        $routeParams.start,
-    //   end:          $routeParams.end
-    // }).$promise.then(function(results) {
-    //   scope.loading = undefined;
-    //   console.log(results)
-    // });
-
   };
 
   return {
     link: link,
     scope: {
-      loading: '='
+      loading: '=',
+      demo: '@'
     },
     templateUrl: 'components/views/bulk_messages/_index.html'
   };

@@ -11,9 +11,9 @@
         </div>
         <div flex="100">
           <md-radio-group ng-model="sender.sender_type" layout="row" style="margin-bottom:10px;">
-            <md-radio-button ng-repeat="type in sender_types" aria-label="{{type.value}}" ng-value="type.value" ng-disabled="type.value == 'twitter' || type.value == 'sms'">{{type.name}}</md-radio-button>
+            <md-radio-button ng-repeat="type in sender_types" aria-label="{{type.value}}" ng-value="type.value" ng-disabled="type.value == 'twitter'">{{type.name}}</md-radio-button>
           </md-radio-group>
-          <small class="muted">Twitter & SMS coming soon</small>
+          <small class="muted">Twitter coming soon</small>
         </div>
       </md-card-content>
     </md-card>
@@ -127,7 +127,7 @@
           <label>
             <translate>Sender Name</translate>
           </label>
-          <input ng-model="sender.sender_name" placeholder="Bob's Burgers" type='text' name="sender_name" md-maxlength='255'></input>
+          <input ng-model="sender.sender_name" placeholder="Bob's Burgers" type='text' name="sender_name" md-maxlength='255' required></input>
           <div ng-messages="myForm.sender_name.$error">
             <div ng-message="required" translate>You must set a sender name</div>
             <div ng-message="md-maxlength" translate>Must be less than 255 characters.</div>

@@ -1806,7 +1806,7 @@ app.directive('getWithThePlan', ['Location', '$routeParams', '$location', 'Subsc
 
       var upgrade = function(card) {
         subscribe();
-        Subscription.create({plan_id: $scope.plan_id, card: card}).$promise.then(function(data) {
+        Subscription.create({plan_id: $scope.plan_id, card: card, trial: true}).$promise.then(function(data) {
           var msg = 'Started Trial';
           console.log(msg);
           window.amplitude.getInstance().logEvent(msg, { plan_id: $scope.plan_id });

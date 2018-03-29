@@ -119,6 +119,10 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
     when('/campaign-validate', {
       templateUrl: 'components/campaigns/validate.html',
     }).
+    when('/upgrade_trial', {
+      templateUrl: 'components/users/trial/upgrade_trial.html',
+      resolve: { loginRequired: loginRequired }
+    }).
     when('/me', {
       templateUrl: 'components/users/show/index.html',
       controller: 'UsersShowController',

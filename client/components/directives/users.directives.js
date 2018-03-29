@@ -1042,3 +1042,36 @@ app.directive('userNav', ['Location', function(Location) {
     templateUrl: 'components/users/_nav.html'
   };
 }]);
+
+app.directive('userUpgradeTrial', ['Auth', 'User', '$routeParams', '$timeout', '$location', function (Auth, User, $routeParams, $timeout, $location) {
+
+  var link = function(scope) {
+    var timeout;
+    var upgradeTrial = function() {
+      User.upgrade_trial({
+        secret: $routeParams.secret,
+        id: Auth.currentUser().slug
+      }).$promise.then(function(results) {
+        scope.message = 'Cool, your email was validated. Remember to party hard.';
+      }, function(err) {
+        scope.message = 'Could not validate the token, please try again later.';
+      });
+    };
+
+    scope.message = '...';
+    if ($routeParams.secret && Auth.currentUser()) {
+      upgradeTrial();
+    } else {
+      $location.path('/');
+      $location.search({});
+    }
+  };
+
+  return {
+    link: link,
+    scope: {
+      loading: '='
+    },
+    templateUrl: 'components/users/trial/_upgrade_trial.html'
+  };
+}]);

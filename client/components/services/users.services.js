@@ -153,6 +153,16 @@ app.factory('User', ['$resource', 'API_END_POINT',
           id: '@id',
           email: '@email'
         }
+      },
+      upgrade_trial: {
+        method: 'PATCH',
+        isArray: false,
+        dataType: 'json',
+        params: {
+          id: '@id',
+          action: 'upgrade_trial',
+          secret: '@secret'
+        }
       }
     }
   );

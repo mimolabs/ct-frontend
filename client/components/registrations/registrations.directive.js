@@ -131,6 +131,9 @@ app.directive('buildFlow', ['Holding', '$routeParams', '$location', '$rootScope'
     };
 
     var save = function() {
+      if (!scope.holding.username) {
+        scope.holding.username = scope.holding.email;
+      }
       Holding.update({}, {
         id: $routeParams.id,
         holding_account: scope.holding

@@ -123,6 +123,8 @@ app.directive('listSplash', ['Location', 'SplashPage', '$routeParams', '$locatio
     };
 
     init();
+    window.amplitude.getInstance().identify(identify);
+    window.amplitude.getInstance().logEvent('Viewed Splash Pages');
   };
 
   return {
@@ -137,7 +139,7 @@ app.directive('splashNew', ['SplashPage', 'Auth', '$location', '$routeParams', '
   var link = function(scope, element, attrs) {
     scope.open = function(network) {
       $location.path('/' + $routeParams.id + '/splash_pages/new');
-    }
+    };
   };
 
   return {
@@ -242,6 +244,8 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       }).$promise.then(function(results) {
         $location.path('/' + $routeParams.id + '/splash_pages/' + results.splash_page.id);
         showToast(gettextCatalog.getString('Splash created successfully'));
+        window.amplitude.getInstance().identify(identify);
+        window.amplitude.getInstance().logEvent('Created New Splash Page');
       }, function(err) {
         showErrors(err);
       });

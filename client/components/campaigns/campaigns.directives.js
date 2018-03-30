@@ -95,7 +95,8 @@ app.directive('listCampaigns', ['Campaign', 'Location', '$routeParams', '$rootSc
     };
 
     init();
-
+    var msg = 'Visited Campaigns';
+    window.amplitude.getInstance().logEvent(msg);
   };
 
   return {
@@ -241,7 +242,6 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
         campaign: campaign
       }).$promise.then(function(results) {
         var msg = 'Campaign Created';
-        console.log(msg);
         window.amplitude.getInstance().logEvent(msg);
         scope.campaign.id = results.id;
         showToast(gettextCatalog.getString('Campaign successfully created.'));

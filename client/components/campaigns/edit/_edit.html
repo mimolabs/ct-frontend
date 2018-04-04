@@ -48,6 +48,7 @@
               </md-select>
               <p style="margin-top:0px;" ng-show="!campaign.campaign_type"><small class="muted">Please select a Campaign Type first.</small></p>
               <p ng-show="!senders || senders.length < 1"><b>No senders found, please create one <a href="/#/{{location.slug}}/campaigns/senders/new">here</a>.</b></p>
+              <p ng-show="campaign.campaign_type == 'sms'">Please be aware that SMS usage is charged seperately to your subscribed plan. <a href="https://docs.oh-mimo.com/splash-pages/sms-messages-otp" target="_blank">See here for more information.</a></p>
             </md-input-container>
           </div>
         </md-card-content>

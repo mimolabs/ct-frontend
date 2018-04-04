@@ -31,7 +31,7 @@
             <span flex="100" flex-gt-sm="45">
               <small class="muted label">Campaign Type</small>
               <md-radio-group class="label" ng-model="campaign.campaign_type" layout="row" style="margin-bottom:10px;">
-                <md-radio-button ng-repeat="type in campaign_types" aria-label="{{type.value}}" ng-value="type.value" ng-disabled="type.value == 'twitter'">{{type.name}}</md-radio-button>
+                <md-radio-button ng-repeat="type in campaign_types" aria-label="{{type.value}}" ng-value="type.value">{{type.name}}</md-radio-button>
               </md-radio-group>
               <small class="muted">Twitter coming soon</small>
             </span>
@@ -42,7 +42,7 @@
               <md-select ng-model="campaign.sender" placeholder="{{ 'Select sender' | translate }}" required>
                 <span ng-repeat='sender in senders'>
                   <md-option ng-disabled="sender.sender_type != campaign.campaign_type" ng-value="sender.id">
-                    {{sender.sender_name}} ({{sender.from_email || sender.from_sms}})
+                    {{sender.sender_name}} ({{sender.from_email || sender.from_sms || sender.from_twitter}})
                   </md-option>
                 </span>
               </md-select>

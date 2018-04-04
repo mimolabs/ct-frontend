@@ -556,16 +556,30 @@ app.directive('newSenders', ['Sender', 'Location', 'showErrors', 'showToast', 'g
         location_id: $routeParams.id,
         sender: scope.sender
       }, function(data) {
-        $location.path($routeParams.id + '/campaigns/senders');
+        window.location.href = '/#/' + $routeParams.id + '/campaigns/senders';
       }, function(err) {
         showErrors(err);
       });
     };
+
+    if ($routeParams.sender_name && $routeParams.oauth_access_token && $routeParams.oauth_access_secret && $routeParams.twitter_name) {
+      scope.sender = {
+        sender_type: 'twitter',
+        sender_name: $routeParams.sender_name,
+        from_twitter: $routeParams.twitter_name,
+        twitter_token: $routeParams.oauth_access_token,
+        twitter_secret: $routeParams.oauth_access_secret
+      };
+      scope.save();
+    } else {
+      scope.loading = undefined;
+    }
   };
 
   return {
     link: link,
     scope: {
+      loading: '='
     },
     templateUrl: 'components/campaigns/senders/_new.html'
   };

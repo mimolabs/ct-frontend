@@ -16,6 +16,7 @@
           <md-menu-content width="3">
             <send-bulk-message type="Email" ng-show="person.emails.length > 0"></send-bulk-message>
             <send-bulk-message type="SMS" ng-show="person.sms.length > 0"></send-bulk-message>
+            <send-bulk-message type="Twitter" ng-show="person.social[0].tw_url"></send-bulk-message>
           </md-menu-content>
         </md-menu>
         <md-menu>

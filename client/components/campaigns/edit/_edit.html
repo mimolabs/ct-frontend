@@ -203,9 +203,9 @@
               <label>
                 <translate>Tweet</translate>
               </label>
-              <input ng-focus="hideOthers()" ng-model="campaign.content" name="campaign_title" type="text" md-maxlength='100'>
+              <input ng-focus="hideOthers()" ng-model="campaign.content" name="campaign_title" type="text" md-maxlength='350'>
               <div ng-messages="myForm.campaign_title.$error" md-auto-hide="false">
-                <div ng-message="max" translate>Must be less than 100 characters</div>
+                <div ng-message="max" translate>Must be less than 350 characters</div>
               </div>
             </md-input-container>
             <p>Dynamic variables must be wrapped in {{}} brackets. Find more in the <a href="http://docs.oh-mimo.com/campaigns/dynamic-campaign-fields-and-html" target='_blank'>docs</a>.</p>

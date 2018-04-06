@@ -230,6 +230,43 @@
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline" translate>
+              Active Hours
+            </span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <div layout="row" layout-wrap flex="100" flex-gt-sm="50">
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>
+                <translate>Start Hour</translate>
+              </label>
+              <md-select ng-model="campaign.start_hour">
+                <md-option ng-repeat="hour in hours" value="{{ hour.value }}">
+                  {{ hour.key }}
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <span flex-gt-sm="10"></span>
+            <md-input-container class="md-block" flex-gt-sm>
+              <label>
+                <translate>End Hour</translate>
+              </label>
+              <md-select ng-model="campaign.end_hour">
+                <md-option ng-repeat="hour in hours" value="{{ hour.value }}">
+                  {{ hour.key }}
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+          <p>Select the hours that you would like your campaign to be active during. Set both to 12AM to have campaign constantly running.</p>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div flex="100" flex-gt-md="70" flex-gt-lg="60" ng-show="campaign.sender">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline" translate>
               Set Campaign Live
             </span>
           </md-card-title-text>

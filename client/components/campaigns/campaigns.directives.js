@@ -222,6 +222,13 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
       }
     };
 
+    scope.updateContent = function() {
+      scope.campaign.content = 'Hey, thanks for joining us!';
+      if (scope.campaign.campaign_type === 'email') {
+        scope.campaign.content = 'Hey {{ Username }}, thanks for joining us!';
+      }
+    };
+
     scope.showCard = function(index) {
       scope.focusedCard = index;
     };

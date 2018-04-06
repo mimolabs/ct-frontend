@@ -30,7 +30,7 @@
             <span flex-gt-sm="10"></span>
             <span flex="100" flex-gt-sm="45">
               <small class="muted label">Campaign Type</small>
-              <md-radio-group class="label" ng-model="campaign.campaign_type" layout="row" style="margin-bottom:10px;">
+              <md-radio-group class="label" ng-model="campaign.campaign_type" ng-change="updateContent()" layout="row" style="margin-bottom:10px;">
                 <md-radio-button ng-repeat="type in campaign_types" aria-label="{{type.value}}" ng-value="type.value">{{type.name}}</md-radio-button>
               </md-radio-group>
               <small class="muted">Twitter coming soon</small>

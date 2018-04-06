@@ -214,9 +214,9 @@
               <label>
                 <translate>Message</translate>
               </label>
-              <input ng-focus="hideOthers()" ng-model="campaign.content" name="campaign_title" type="text" md-maxlength='500'>
+              <input ng-focus="hideOthers()" ng-model="campaign.content" name="campaign_title" type="text" md-maxlength='160'>
               <div ng-messages="myForm.campaign_title.$error" md-auto-hide="false">
-                <div ng-message="max" translate>Must be less than 500 characters</div>
+                <div ng-message="max" translate>Must be less than 160 characters</div>
               </div>
             </md-input-container>
           </div>

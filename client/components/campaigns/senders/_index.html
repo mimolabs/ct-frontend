@@ -53,9 +53,9 @@
                   </md-tooltip>
                 </span>
               </td>
-              <td md-cell ng-show="sender.from_sms">
+              <td md-cell ng-show="sender.from_sms || sender.from_twitter">
                 <span>
-                  {{sender.from_sms}}
+                  {{sender.from_sms || sender.from_twitter}}
                 </span>
               </td>
               <td md-cell>

@@ -99,6 +99,18 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
       return deferred.promise;
     };
 
+    var setProfilePhotos = function() {
+      for (var i = 0; i < scope.people.length; i++) {
+        if (scope.people[i].social && scope.people[i].social.length > 0) {
+          if (scope.people[i].social[0].facebook_id) {
+            scope.people[i].profile_photo = 'https://graph.facebook.com/' + scope.people[i].social[0].facebook_id + '/picture?type=large';
+            return;
+          }
+          scope.people[i].profile_photo = scope.people[i].social[0].tw_profile_image;
+        }
+      }
+    };
+
     var getPeople = function() {
       var params = {
         page: scope.query.page,
@@ -114,6 +126,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
       People.get(params, function(data) {
         scope.people = data.people;
         scope._links = data._links;
+        // setProfilePhotos();
         scope.loading  = undefined;
       }, function(err){
         scope.loading  = undefined;

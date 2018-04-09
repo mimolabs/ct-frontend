@@ -1,5 +1,6 @@
 <div flex="" layout="column" class="layout-column flex">
-  <div>
-    <new-senders ng-cloak></new-senders>
+  <loader></loader>
+  <div ng-hide="loading">
+    <new-senders loading="loading" ng-cloak></new-senders>
   </div>
 </div>

@@ -11,9 +11,8 @@
         </div>
         <div flex="100">
           <md-radio-group ng-model="sender.sender_type" layout="row" style="margin-bottom:10px;">
-            <md-radio-button ng-repeat="type in sender_types" aria-label="{{type.value}}" ng-value="type.value" ng-disabled="type.value == 'twitter'">{{type.name}}</md-radio-button>
+            <md-radio-button ng-repeat="type in sender_types" aria-label="{{type.value}}" ng-value="type.value">{{type.name}}</md-radio-button>
           </md-radio-group>
-          <small class="muted">Twitter coming soon</small>
         </div>
       </md-card-content>
     </md-card>
@@ -118,10 +117,10 @@
       </md-card-content>
     </md-card>
 
-    <md-card ng-if="sender.sender_type == 'sms'" flex="100" flex-gt-md="90" flex-gt-lg="80" class="b-pr">
+    <md-card ng-if="sender.sender_type == 'sms' || sender.sender_type == 'twitter'" flex="100" flex-gt-md="90" flex-gt-lg="80" class="b-pr">
       <md-card-content layout="row" layout-wrap>
         <div flex="100">
-          <p>Configure your SMS settings below.</p>
+          <p>Configure your settings below.</p>
         </div>
         <md-input-container flex="100" flex-gt-xs="100">
           <label>
@@ -134,15 +133,18 @@
           </div>
           <small class="muted">This is for your reference only - the recipient will not see this.</small>
         </md-input-container>
-        <div flex="100">
+        <div flex="100" ng-if="sender.sender_type == 'sms'">
           <p>A phone number will be generated for you.</p>
         </div>
       </md-card-content>
     </md-card>
 
     <div flex="100" flex-gt-md="90" flex-gt-lg="80" class="b-pr">
-      <md-button type="submit" class="md-raised" ng-disabled="myForm.$pristine || myForm.$invalid">
+      <md-button ng-show="sender.sender_type == 'sms' || sender.sender_type == 'email'" type="submit" class="md-raised" ng-disabled="myForm.$pristine || myForm.$invalid">
         Save
+      </md-button>
+      <md-button ng-show="sender.sender_type == 'twitter'" href="/auth/twitter?location={{location.slug}}&sender_name={{sender.sender_name}}" class="md-raised" ng-disabled="myForm.$pristine || myForm.$invalid">
+        Next
       </md-button>
     </div>
   </md-content>

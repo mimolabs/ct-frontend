@@ -147,6 +147,33 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
       content_css: []
     };
 
+    scope.hours = [
+      { key: gettextCatalog.getString('12AM'), value: 0 },
+      { key: gettextCatalog.getString('01AM'), value: 1 },
+      { key: gettextCatalog.getString('02AM'), value: 2 },
+      { key: gettextCatalog.getString('03AM'), value: 3 },
+      { key: gettextCatalog.getString('04AM'), value: 4 },
+      { key: gettextCatalog.getString('05AM'), value: 5 },
+      { key: gettextCatalog.getString('06AM'), value: 6 },
+      { key: gettextCatalog.getString('07AM'), value: 7 },
+      { key: gettextCatalog.getString('08AM'), value: 8 },
+      { key: gettextCatalog.getString('09AM'), value: 9 },
+      { key: gettextCatalog.getString('10AM'), value: 10 },
+      { key: gettextCatalog.getString('11AM'), value: 11 },
+      { key: gettextCatalog.getString('12PM'), value: 12 },
+      { key: gettextCatalog.getString('1PM'), value: 13 },
+      { key: gettextCatalog.getString('2PM'), value: 14 },
+      { key: gettextCatalog.getString('3PM'), value: 15 },
+      { key: gettextCatalog.getString('4PM'), value: 16 },
+      { key: gettextCatalog.getString('5PM'), value: 17 },
+      { key: gettextCatalog.getString('6PM'), value: 18 },
+      { key: gettextCatalog.getString('7PM'), value: 19 },
+      { key: gettextCatalog.getString('8PM'), value: 20 },
+      { key: gettextCatalog.getString('9PM'), value: 21 },
+      { key: gettextCatalog.getString('10PM'), value: 22 },
+      { key: gettextCatalog.getString('11PM'), value: 23 },
+    ];
+
     scope.addRule = function() {
       if (!scope.campaign.holding_predicates) {
         scope.campaign.holding_predicates = [];
@@ -192,6 +219,13 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
             return;
           }
         }
+      }
+    };
+
+    scope.updateContent = function() {
+      scope.campaign.content = 'Hey, thanks for joining us!';
+      if (scope.campaign.campaign_type === 'email') {
+        scope.campaign.content = 'Hey {{ Username }}, thanks for joining us!';
       }
     };
 
@@ -328,7 +362,7 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
       });
       scope.campaign.predicate_type = 'and';
       scope.campaign.title = 'Thanks for being awesome';
-      scope.campaign.content = 'Hey {{ Username }}, thanks for joining us!';
+      scope.campaign.content = 'Hey #{{ Username }}, thanks for joining us!';
       scope.campaign.state = 'draft';
       scope.loading = undefined;
     };
@@ -556,16 +590,30 @@ app.directive('newSenders', ['Sender', 'Location', 'showErrors', 'showToast', 'g
         location_id: $routeParams.id,
         sender: scope.sender
       }, function(data) {
-        $location.path($routeParams.id + '/campaigns/senders');
+        window.location.href = '/#/' + $routeParams.id + '/campaigns/senders';
       }, function(err) {
         showErrors(err);
       });
     };
+
+    if ($routeParams.sender_name && $routeParams.oauth_access_token && $routeParams.oauth_access_secret && $routeParams.twitter_name) {
+      scope.sender = {
+        sender_type: 'twitter',
+        sender_name: $routeParams.sender_name,
+        from_twitter: $routeParams.twitter_name,
+        twitter_token: $routeParams.oauth_access_token,
+        twitter_secret: $routeParams.oauth_access_secret
+      };
+      scope.save();
+    } else {
+      scope.loading = undefined;
+    }
   };
 
   return {
     link: link,
     scope: {
+      loading: '='
     },
     templateUrl: 'components/campaigns/senders/_new.html'
   };

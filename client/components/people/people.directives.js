@@ -126,7 +126,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
       People.get(params, function(data) {
         scope.people = data.people;
         scope._links = data._links;
-        setProfilePhotos();
+        // setProfilePhotos();
         scope.loading  = undefined;
       }, function(err){
         scope.loading  = undefined;

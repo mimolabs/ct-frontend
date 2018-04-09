@@ -15,8 +15,6 @@ var config = require('./config/environment');
 // Setup server
 var app = express();
 const callback_url = "http://app.mimo.test:9090/auth/twitter/callback";
-const TWITTER_CONSUMER_KEY = 'wBAOinMVjBtnxizBgQbBy1YFp';
-const TWITTER_CONSUMER_SECRET = 'CORqWenWflNzb7WBoT12Tq5oV6ovHxuV1IrOKXam2wLRMUzXl5'
 
 app.use(helmet());
 app.use(helmet.xframe('deny'));
@@ -29,7 +27,7 @@ require('./config/express')(app);
 
 var consumer = new oauth.OAuth(
   "https://twitter.com/oauth/request_token", "https://twitter.com/oauth/access_token",
-  (TWITTER_CONSUMER_KEY || '123'), (TWITTER_CONSUMER_SECRET || '123'), "1.0A", callback_url, "HMAC-SHA1");
+  (process.env.TWITTER_CONSUMER_KEY || '123'), (process.env.TWITTER_CONSUMER_SECRET || '123'), "1.0A", callback_url, "HMAC-SHA1");
 
 app.get('/auth/twitter', function(req, res) {
   req.session.location = req.query.location;

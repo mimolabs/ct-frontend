@@ -362,7 +362,7 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
       });
       scope.campaign.predicate_type = 'and';
       scope.campaign.title = 'Thanks for being awesome';
-      scope.campaign.content = 'Hey {{ Username }}, thanks for joining us!';
+      scope.campaign.content = 'Hey #{{ Username }}, thanks for joining us!';
       scope.campaign.state = 'draft';
       scope.loading = undefined;
     };

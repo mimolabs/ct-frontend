@@ -33,7 +33,6 @@
               <md-radio-group class="label" ng-model="campaign.campaign_type" ng-change="updateContent()" layout="row" style="margin-bottom:10px;">
                 <md-radio-button ng-repeat="type in campaign_types" aria-label="{{type.value}}" ng-value="type.value">{{type.name}}</md-radio-button>
               </md-radio-group>
-              <small class="muted">Twitter coming soon</small>
             </span>
             <md-input-container flex="100" flex-gt-sm="45">
               <label>
@@ -203,9 +202,9 @@
               <label>
                 <translate>Tweet</translate>
               </label>
-              <input ng-focus="hideOthers()" ng-model="campaign.content" name="campaign_title" type="text" md-maxlength='350'>
+              <input ng-focus="hideOthers()" ng-model="campaign.content" name="campaign_title" type="text" md-maxlength='263'>
               <div ng-messages="myForm.campaign_title.$error" md-auto-hide="false">
-                <div ng-message="max" translate>Must be less than 350 characters</div>
+                <div ng-message="max" translate>Must be less than 263 characters</div>
               </div>
             </md-input-container>
           </div>

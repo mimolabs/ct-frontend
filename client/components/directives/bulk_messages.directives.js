@@ -62,6 +62,19 @@ app.directive('sendBulkMessage', ['$routeParams', 'BulkMessage', 'Sender', '$mdD
         send(message);
       };
 
+      $scope.tinymceOptions = {
+        selector: 'textarea',
+        height: 300,
+        menubar: false,
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor textcolor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table contextmenu paste code wordcount'
+        ],
+        toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | code',
+        content_css: []
+      };
+
       $scope.validateEmail = function(email) {
         Campaign.validate({}, {
           location_id: $routeParams.id,
@@ -100,7 +113,7 @@ app.directive('sendBulkMessage', ['$routeParams', 'BulkMessage', 'Sender', '$mdD
 
   };
 
-  var template = '<md-menu-item><md-button ng-click="compose()">Send {{type}}</md-button></md-menu-item>';
+  var template = '<md-menu-item><md-button ng-click="compose()">Send {{type == "Twitter" ? "Tweet" : type}}</md-button></md-menu-item>';
 
   return {
     link: link,

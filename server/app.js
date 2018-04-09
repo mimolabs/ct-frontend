@@ -14,7 +14,7 @@ var oauth = require('oauth');
 var config = require('./config/environment');
 // Setup server
 var app = express();
-const callback_url = "http://app.mimo.test:9090/auth/twitter/callback";
+const callback_url = process.env.TWITTER_CALLBACK_URL || "http://app.mimo.test:9090/auth/twitter/callback";
 
 app.use(helmet());
 app.use(helmet.xframe('deny'));

@@ -962,6 +962,28 @@
             </md-card>
           </div>
 
+          <md-button class="md-no-style" ng-click="toggle('terms')" aria-controls="theme">
+            <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('terms') ? "up" : "down" }}</md-icon>
+            <translate>Terms</translate>
+          </md-button>
+
+          <div ng-show="isOpen('terms')" id="terms" class="menu-toggle-list" layout="column">
+            <md-card>
+              <md-card-content>
+                <md-input-container class="md-block">
+                  <label>
+                    <translate>Terms URL</translate>
+                  </label>
+                  <input ng-model="splash.terms_url" placeholder="{{ 'Terms URL' | translate }}" type='url' name="terms_url" ng-maxlength='255' required></input>
+                  <div ng-messages="myForm.terms_url.$error">
+                    <div ng-message="md-maxlength" translate>Must be less than 250 characters.</div>
+                    <div ng-message="url" translate>Must be a valid URL including http(s).</div>
+                  </div>
+                </md-input-container>
+              </md-card-content>
+            </md-card>
+          </div>
+
         </md-content>
       </md-tab-body>
     </md-tab>

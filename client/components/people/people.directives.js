@@ -684,3 +684,53 @@ app.directive('peopleReports', ['People', 'Location', '$routeParams', '$location
   };
 
 }]);
+
+app.directive('personTimeline', ['People', '$routeParams', '$timeout', function(People, $routeParams, $timeout) {
+
+  var link = function(scope, element, attrs) {
+
+    scope.currentNavItem = 'people';
+
+    scope.person = {slug: $routeParams.person_id};
+
+    var buildLocation = function() {
+      scope.location = {
+        slug: $routeParams.id,
+        setup: {
+          splash: attrs.splashSetup,
+          integrations: attrs.integrationsSetup
+        },
+        paid: attrs.locationPaid,
+        demo: attrs.demoData
+      };
+    };
+
+    var getTimelines = function() {
+      scope.loading = undefined;
+    };
+
+
+    var init = function() {
+      var t = $timeout(function() {
+        buildLocation();
+        getTimelines();
+        $timeout.cancel(t);
+      }, 250);
+    };
+
+    init();
+  };
+
+  return {
+    link: link,
+    scope: {
+      loading: '=',
+      paid: '@',
+      splashSetup: '@',
+      integrationsSetup: '@',
+      locationPaid: '@'
+    },
+    templateUrl: 'components/locations/people/_timeline.html'
+  };
+
+}]);

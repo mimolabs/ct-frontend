@@ -814,7 +814,7 @@
                     <label>
                       <translate>Newsletter Consent Text</translate>
                     </label>
-                    <textarea ng-model="splash.gdpr_contact_message" placeholder="{{ 'Contact Message'  | translate }}" type='text' rows=2 md-maxlength='250' name="contact"></textarea>
+                    <textarea ng-model="splash.gdpr_contact_message" placeholder="{{ 'Contact Message'  | translate }}" type='text' rows=2 md-maxlength='250' name="contact" required></textarea>
                     <div ng-messages="myForm.contact.$error">
                       <div ng-message="md-maxlength" translate>Must be less than 250 characters.</div>
                     </div>
@@ -823,7 +823,7 @@
                     <label>
                       <translate>Email Consent Text</translate>
                     </label>
-                    <input type='text' ng-model="splash.gdpr_email_field" placeholder="{{'Email Consent'|translate}}" name="email_consent" md-maxlength='150'></input>
+                    <input type='text' ng-model="splash.gdpr_email_field" placeholder="{{'Email Consent'|translate}}" name="email_consent" md-maxlength='150' required></input>
                     <div ng-messages="myForm.email_consent.$error">
                       <div ng-message="md-maxlength" translate>Must be less than 250 characters.</div>
                     </div>
@@ -832,7 +832,7 @@
                     <label>
                       <translate>SMS Consent Text</translate>
                     </label>
-                    <input type='text' ng-model="splash.gdpr_sms_field" placeholder="{{'SMS Consent'|translate}}" name="sms_consent" md-maxlength='150'></input>
+                    <input type='text' ng-model="splash.gdpr_sms_field" placeholder="{{'SMS Consent'|translate}}" name="sms_consent" md-maxlength='150' required></input>
                     <div ng-messages="myForm.sms_consent.$error">
                       <div ng-message="md-maxlength" translate>Must be less than 250 characters.</div>
                     </div>

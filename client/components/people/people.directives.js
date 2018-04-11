@@ -685,7 +685,7 @@ app.directive('peopleReports', ['People', 'Location', '$routeParams', '$location
 
 }]);
 
-app.directive('personTimeline', ['People', '$routeParams', '$timeout', function(People, $routeParams, $timeout) {
+app.directive('personTimeline', ['PersonTimeline', '$routeParams', '$timeout', function(PersonTimeline, $routeParams, $timeout) {
 
   var link = function(scope, element, attrs) {
 
@@ -706,7 +706,13 @@ app.directive('personTimeline', ['People', '$routeParams', '$timeout', function(
     };
 
     var getTimelines = function() {
-      scope.loading = undefined;
+      PersonTimeline.query({location_id: scope.location.slug, person_id: $routeParams.person_id}).$promise.then(function(res) {
+        scope.timelines = res.timelines;
+        scope.loading = undefined;
+      }, function(err) {
+        console.log(err);
+        scope.loading = undefined;
+      });
     };
 
 

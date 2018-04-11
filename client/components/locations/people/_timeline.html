@@ -3,7 +3,7 @@
 <md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" style="margin-bottom:0px;">
   <div flex="100" flex-gt-md="90" flex-gt-lg="80">
     <div layout="row" layout-align="space-between center" layout-wrap>
-      <md-button id="main" class="md-fab md-mini md-raised" href="/#/{{location.slug}}/people/{{person.slug}}" aria-label="{{ 'Back to People' | translate }}">
+      <md-button id="main" class="md-fab md-mini md-raised" href="/#/{{location.slug}}/people/{{person.slug}}" aria-label="{{ 'Back to Person' | translate }}">
         <md-tooltip md-direction="bottom">Back to Person</md-tooltip>
         <md-icon>keyboard_return</md-icon>
       </md-button>
@@ -14,7 +14,10 @@
     <div layout="column" layout-wrap ng-repeat="timeline in timelines">
       <md-card class="b-bl">
         <md-card-content>
-          hello
+          <p>basic data:
+          <br><small>{{timeline}}</small></p>
+          <p>example:
+          <br>signed in {{timeline.type == 'sign_in_email' ? ' by email' : ''}} on {{timeline.created_at | humanTimeShortest}}<span ng-show="timeline.email">&nbsp;using <b>{{ timeline.email }}</b></span>&nbsp;from device {{timeline.client_mac}}</p>
         </md-card-content>
       </md-card>
     </div>

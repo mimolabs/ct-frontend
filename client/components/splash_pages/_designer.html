@@ -394,11 +394,81 @@
     margin-top: 20px;
   }
 
+  .gdpr-slider {
+    position: absolute;
+    z-index: 42;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    transition: all 400ms ease-in-out;
+    bottom: 0px;
+    left: 0px;
+  }
+
+  .gdpr-slider.close {
+    bottom: 0px;
+    height: 29px;
+  }
+
+  .gdpr-tab {
+    height: 29px;
+  }
+
+  .gdpr-tab img {
+    max-height: 30px;
+    margin-bottom: -1px;
+  }
+
+  .gdpr-body {
+    background: white;
+    height: 100%;
+    padding: 20px 20px 40px 20px;
+    border-top: 20px solid white;
+    text-align: center;
+    overflow: scroll;
+  }
+
+  .gdpr-body a {
+    color: #008CBA!important;
+  }
+
+  .gdpr-body p {
+    color: rgba(0,0,0,0.8)!important;
+    font-size: 16px!important;
+  }
+
+   .gdpr-body label {
+    color: rgba(0,0,0,0.8)!important;
+   }
+
+  fieldset.gdpr-fields {
+    border: 1px solid #DDDDDD;
+    padding: 10px 10px 20px 10px;
+    margin-top: 1.125rem;
+    margin-bottom: 10px;
+  }
+
+  .gdpr-fields p {
+    margin-bottom: 0px;
+    margin-top: 10px;
+    font-size: 14px!important;
+  }
+
+  img.powered-by {
+    position: absolute;
+    bottom: 0px;
+    height: 30px;
+    width: auto;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
 </style>
 
 <div layout="row">
   <div flex="75" hide show-gt-xs >
     <div class="designer" ng-hide="loading">
+      <img class="powered-by" src="https://d247kqobagyqjh.cloudfront.net/api/file/8Zw1a8xJQbCqGIjVOJF6"></img>
       <div id="popup_container" ng-show="splash.popup_demo">
         <div id="popup_ad">
           <div layout="row" layout-align="center center">
@@ -411,6 +481,63 @@
             </div>
             <a class="btn button" id="popupBoxClose">Close</a>
             <div flex class="text-align-center">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="gdpr-slider" ng-show="splash.gdpr_demo">
+        <div class="gdpr-tab">
+          <img src="https://d247kqobagyqjh.cloudfront.net/api/file/8Zw1a8xJQbCqGIjVOJF6"></img>
+        </div>
+        <div class="gdpr-body">
+          <div class="row align-center">
+            <div class="small-12">
+              <form id="gdpr-form">
+                <fieldset class="gdpr-fields">
+                  <legend>You must accept the terms of service</legend>
+                  <div>
+                    <p>Read MIMO's full terms of service <a href="https://www.oh-mimo.com/terms" target="_blank">here.</a></p>
+                    <input id="mimo_terms" type="checkbox" required><label for="mimo_terms">I agree to the terms of service</label><br>
+                  </div>
+                </fieldset>
+                <div ng-if="!splash.newsletter_consent">
+                  <fieldset class="gdpr-fields">
+                    <legend>How would you like to hear from us?</legend>
+                    <p>{{splash.gdpr_contact_message}}</p>
+                    <div ng-if="splash.backup_email">
+                      <input id="email_consent" type="checkbox">
+                      <label for="email_consent">{{splash.gdpr_email_field}}</label>
+                      <br>
+                    </div>
+                    <div ng-if="splash.backup_sms">
+                      <input id="sms_consent" type="checkbox">
+                      <label for="sms_consent">{{splash.gdpr_sms_field}}</label>
+                      <br>
+                    </div>
+                  </fieldset>
+                </div>
+                <div ng-if="splash.newsletter_consent">
+                  <fieldset class="gdpr-fields">
+                    <legend>Confirm that you agree to be contacted via the below methods</legend>
+                    <p>{{splash.gdpr_contact_message}}</p>
+                    <div ng-if="splash.backup_email">
+                      <input id="email_consent" type="checkbox" required>
+                      <label for="email_consent">{{splash.gdpr_email_field}}</label>
+                      <br>
+                    </div>
+                    <div ng-if="splash.backup_sms">
+                      <input id="sms_consent" type="checkbox" required>
+                      <label for="sms_consent">{{splash.gdpr_sms_field}}</label>
+                      <br>
+                    </div>
+                  </fieldset>
+                </div>
+                <!-- <p>You can change your preferences at a later date <a href="https://oh-mimo.com/self-service" target="_blank">here.</a></p> -->
+                <div>
+                  <button class="button btn gdpr-submit">Submit</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -439,7 +566,8 @@
               <h2><div ng-bind-html="splash.info | sanitize"></div></h2>
               <p ng-bind-html="splash.info_two | sanitize"></p>
               <splash-designer-form access="{{splash.primary_access_id}}" btntext="{{ splash.btn_text }}"></splash-designer-form>
-              <p class="small" ng-hide="splash.hide_terms" translate>By logging in, you agree to our <a href="{{ splash.terms_url }}">terms of use</a></p>
+              <p class="small" ng-hide="splash.hide_terms || splash.gdpr_form" translate>By logging in, you agree to our <a href="https://www.oh-mimo.com/terms" target="_blank">terms of service</a></p>
+              <!-- <p class="small" ng-show="splash.gdpr_form" translate>You can change your contact preferences <a href="https://oh-mimo.com/self-service" target="_blank">here</a></p> -->
               <div class="location_address">
                 <p>{{splash.address}}</p>
               </div>

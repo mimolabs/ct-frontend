@@ -25,6 +25,7 @@ var app = angular.module('myApp.services', [
   'myApp.metrics.services',
   'myApp.pagination_labels.services',
   'myApp.people.services',
+  'myApp.person_timelines.services',
   'myApp.plans.services',
   'myApp.quotas.services',
   'myApp.reports.services',

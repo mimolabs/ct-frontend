@@ -685,7 +685,7 @@ app.directive('peopleReports', ['People', 'Location', '$routeParams', '$location
 
 }]);
 
-app.directive('personTimeline', ['PersonTimeline', '$routeParams', '$timeout', function(PersonTimeline, $routeParams, $timeout) {
+app.directive('personTimeline', ['PersonTimeline', 'PersonTimelinePortal', '$routeParams', '$timeout', function(PersonTimeline, PersonTimelinePortal, $routeParams, $timeout) {
 
   var link = function(scope, element, attrs) {
 
@@ -705,7 +705,7 @@ app.directive('personTimeline', ['PersonTimeline', '$routeParams', '$timeout', f
       };
     };
 
-    var getTimelines = function() {
+    var getTimeline = function() {
       PersonTimeline.query({location_id: scope.location.slug, person_id: $routeParams.person_id}).$promise.then(function(res) {
         scope.timelines = res.timelines;
         scope.loading = undefined;
@@ -715,11 +715,28 @@ app.directive('personTimeline', ['PersonTimeline', '$routeParams', '$timeout', f
       });
     };
 
+    var portalTimelineRequest = function() {
+      if ($routeParams.code) {
+        PersonTimelinePortal.query({person_id: $routeParams.person_id, code: $routeParams.code}).$promise.then(function(res) {
+          scope.timelines = res.timelines;
+          scope.loading = undefined;
+        }, function(err) {
+          scope.error_message = err.data.message[0];
+          scope.loading = undefined;
+        });
+      } else {
+        scope.error_message = 'Unable to authenticate timeline request';
+      }
+    };
 
     var init = function() {
       var t = $timeout(function() {
-        buildLocation();
-        getTimelines();
+        if ($routeParams.id) {
+          buildLocation();
+          getTimeline();
+        } else {
+          portalTimelineRequest();
+        }
         $timeout.cancel(t);
       }, 250);
     };

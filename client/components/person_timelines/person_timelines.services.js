@@ -30,6 +30,14 @@ app.factory('PersonTimelinePortal', ['$resource', '$localStorage', 'API_END_POIN
         method: 'GET',
         isArray: false,
         dataType: 'json'
+      },
+      download: {
+        method: 'PATCH',
+        isArray: false,
+        params: {
+          email: '@email',
+          action: 'download'
+        }
       }
     });
   }]);

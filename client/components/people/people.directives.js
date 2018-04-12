@@ -685,13 +685,48 @@ app.directive('peopleReports', ['People', 'Location', '$routeParams', '$location
 
 }]);
 
-app.directive('personTimeline', ['PersonTimeline', 'PersonTimelinePortal', '$routeParams', '$timeout', function(PersonTimeline, PersonTimelinePortal, $routeParams, $timeout) {
+app.directive('personTimeline', ['PersonTimeline', 'PersonTimelinePortal', '$routeParams', '$timeout', '$mdDialog', 'showToast', 'gettextCatalog', 'showErrors', function(PersonTimeline, PersonTimelinePortal, $routeParams, $timeout, $mdDialog, showToast, gettextCatalog, showErrors) {
 
   var link = function(scope, element, attrs) {
 
     scope.currentNavItem = 'people';
 
     scope.person = {slug: $routeParams.person_id};
+
+    var downloadTimeline = function(email) {
+      PersonTimelinePortal.download({person_id: $routeParams.person_id, code: $routeParams.code, email: email}).$promise.then(function(res) {
+        showToast(gettextCatalog.getString('Data timeline report on the way to you shortly.'));
+      }, function(err) {
+        showErrors(err);
+      });
+    };
+
+    function DialogController($scope) {
+      $scope.close = function() {
+        $mdDialog.cancel();
+      };
+      $scope.confirm = function(email) {
+        downloadTimeline($scope.email);
+        $mdDialog.cancel();
+      };
+    }
+
+    DialogController.$inject = ['$scope'];
+
+    scope.confirmDownload = function() {
+      $mdDialog.show({
+        templateUrl: 'components/locations/people/_timeline_download.html',
+        parent: angular.element(document.body),
+        clickOutsideToClose: true,
+        controller: DialogController,
+        locals: {
+        }
+      });
+    };
+
+    scope.destroyPerson = function() {
+      console.log($routeParams);
+    };
 
     var buildLocation = function() {
       scope.location = {
@@ -719,6 +754,7 @@ app.directive('personTimeline', ['PersonTimeline', 'PersonTimelinePortal', '$rou
       if ($routeParams.code) {
         PersonTimelinePortal.query({person_id: $routeParams.person_id, code: $routeParams.code}).$promise.then(function(res) {
           scope.timelines = res.timelines;
+          scope.portal_request = true;
           scope.loading = undefined;
         }, function(err) {
           scope.error_message = err.data.message[0];

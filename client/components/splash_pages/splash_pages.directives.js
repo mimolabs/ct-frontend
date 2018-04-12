@@ -262,7 +262,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
         splash_page: splash
       }).$promise.then(function(res) {
         scope.splash.updating = undefined;
-        showToast(gettextCatalog.getString('Layout successfully updated.'));
+        showToast(gettextCatalog.getString('Splash page successfully updated.'));
       }, function(err) {
         showErrors(err);
         scope.splash.updating = undefined;

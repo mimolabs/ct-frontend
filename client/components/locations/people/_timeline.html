@@ -18,18 +18,11 @@
     <div layout="column" layout-wrap ng-repeat="timeline in timelines">
       <md-card class="b-bl">
         <md-card-content>
-          <p>basic data:
-          <br><small>{{timeline}}</small></p>
-          <p>example:
-          <br>signed in<span ng-show="timeline.type == 'sign_in_email'">&nbsp;by email</span>
-          <span ng-show="timeline.type == 'sign_in_voucher'">&nbsp;with a voucher</span>
-          <span ng-show="timeline.type == 'sign_in_sms'">&nbsp;by SMS</span>
-          <span ng-show="timeline.type == 'sign_in_tw'">&nbsp;with Twitter</span>
-          <span ng-show="timeline.type == 'sign_in_fb'">&nbsp;with Facebook</span>
-          <span ng-show="timeline.type == 'sign_in_google'">&nbsp;with Google</span>
-          on {{timeline.created_at | humanTimeShortest}}
-          <span ng-show="timeline.email">&nbsp;using <b>{{ timeline.email }}</b></span>
-          &nbsp;from {{timeline.client_mac}}</p>
+          <small>{{timeline}}</small>
+          <p>date: {{timeline.created_at | humanTime}}</p>
+          <p>event: {{timeline.event}}</p>
+          <p>mac: {{timeline.client_mac}}</p>
+          <p>email: {{timeline.email}}</p>
         </md-card-content>
       </md-card>
     </div>

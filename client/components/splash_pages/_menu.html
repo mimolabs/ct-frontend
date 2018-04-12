@@ -613,6 +613,41 @@
               </md-card-title>
               <md-card-content>
                 <div layout="row" layout-wrap>
+                  <span ng-show="splash.backup_sms">
+                    <div flex="100" flex-gt-sm="100">
+                      <md-input-container class="md-block">
+                        <label>
+                          <translate>SMS Button Colour</translate>
+                        </label>
+                        <color-picker ng-model="splash.sms_button_colour"></color-picker>
+                      </md-input-container>
+                    </div>
+                    <div flex="100" flex-gt-sm="100">
+                      <md-input-container class="md-block">
+                        <label>
+                          <translate>SMS Border Colour</translate>
+                        </label>
+                        <color-picker ng-model="splash.sms_button_border_colour"></color-picker>
+                      </md-input-container>
+                    </div>
+                    <div flex="100" flex-gt-sm="100">
+                      <md-input-container class="md-block">
+                        <label>
+                          <translate>SMS Text Colour</translate>
+                        </label>
+                        <color-picker ng-model="splash.sms_btn_font_colour"></color-picker>
+                      </md-input-container>
+                    </div>
+                    <div flex="100" flex-gt-xs="100">
+                      <md-input-container class="md-block" style="margin-top:0px;">
+                        <small class="muted label">SMS Icon</small>
+                        <md-switch ng-model="splash.sms_button_icon" aria-label="button_shadow" style="margin: 0px 0 20px 0">
+                          <span ng-show="splash.sms_button_icon == true" translate>Dark</span>
+                          <span ng-show="splash.sms_button_icon == false" translate>Light</span>
+                        </md-switch>
+                      </md-input-container>
+                    </div>
+                  </span>
                   <span ng-show="splash.backup_email">
                     <div flex="100" flex-gt-sm="100">
                       <md-input-container class="md-block">
@@ -648,42 +683,6 @@
                       </md-input-container>
                     </div>
                   </span>
-                  <span ng-show="splash.backup_sms">
-                    <div flex="100" flex-gt-sm="100">
-                      <md-input-container class="md-block">
-                        <label>
-                          <translate>SMS Button Colour</translate>
-                        </label>
-                        <color-picker ng-model="splash.sms_button_colour"></color-picker>
-                      </md-input-container>
-                    </div>
-                    <div flex="100" flex-gt-sm="100">
-                      <md-input-container class="md-block">
-                        <label>
-                          <translate>SMS Border Colour</translate>
-                        </label>
-                        <color-picker ng-model="splash.sms_button_border_colour"></color-picker>
-                      </md-input-container>
-                    </div>
-                    <div flex="100" flex-gt-sm="100">
-                      <md-input-container class="md-block">
-                        <label>
-                          <translate>SMS Text Colour</translate>
-                        </label>
-                        <color-picker ng-model="splash.sms_btn_font_colour"></color-picker>
-                      </md-input-container>
-                    </div>
-                    <div flex="100" flex-gt-xs="100">
-                      <md-input-container class="md-block" style="margin-top:0px;">
-                        <small class="muted label">SMS Icon</small>
-                        <md-switch ng-model="splash.sms_button_icon" aria-label="button_shadow" style="margin: 0px 0 20px 0">
-                          <span ng-show="splash.sms_button_icon == true" translate>Dark</span>
-                          <span ng-show="splash.sms_button_icon == false" translate>Light</span>
-                        </md-switch>
-                      </md-input-container>
-                    </div>
-                  </div>
-                  
                 </div>
               </md-card-content>
             </md-card>

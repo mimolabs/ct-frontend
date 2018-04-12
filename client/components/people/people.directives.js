@@ -701,6 +701,16 @@ app.directive('personTimeline', ['PersonTimeline', 'PersonTimelinePortal', '$rou
       });
     };
 
+    var destroyPerson = function() {
+      PersonTimelinePortal.destroy({person_id: $routeParams.person_id, code: $routeParams.code}).$promise.then(function(res) {
+        scope.timelines = undefined;
+        scope.portal_request = undefined;
+        scope.error_message = 'Data successfully deleted';
+      }, function(err) {
+        showErrors(err);
+      });
+    };
+
     function DialogController($scope) {
       $scope.close = function() {
         $mdDialog.cancel();
@@ -724,8 +734,16 @@ app.directive('personTimeline', ['PersonTimeline', 'PersonTimelinePortal', '$rou
       });
     };
 
-    scope.destroyPerson = function() {
-      console.log($routeParams);
+    scope.confirmDestroy = function() {
+      var confirm = $mdDialog.confirm()
+      .title(gettextCatalog.getString('Delete all data'))
+      .textContent(gettextCatalog.getString('All your login data here will be destroyed.'))
+      .ariaLabel(gettextCatalog.getString('Delete Data'))
+      .ok(gettextCatalog.getString('Confirm'))
+      .cancel(gettextCatalog.getString('Cancel'));
+      $mdDialog.show(confirm).then(function() {
+        destroyPerson();
+      });
     };
 
     var buildLocation = function() {

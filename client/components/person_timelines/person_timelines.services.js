@@ -38,6 +38,11 @@ app.factory('PersonTimelinePortal', ['$resource', '$localStorage', 'API_END_POIN
           email: '@email',
           action: 'download'
         }
+      },
+      destroy: {
+        method: 'DELETE',
+        isArray: false,
+        dataType: 'json'
       }
     });
   }]);

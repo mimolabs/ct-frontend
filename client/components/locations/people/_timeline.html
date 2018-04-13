@@ -1,26 +1,35 @@
-<people-nav ng-show="location" location="location"></people-nav>
-
-<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" style="margin-bottom:0px;">
-  <div flex="100" flex-gt-md="90" flex-gt-lg="80" ng-show="location">
-    <div layout="row" layout-align="space-between center" layout-wrap>
-      <md-button id="main" class="md-fab md-mini md-raised" href="/#/{{location.slug}}/people/{{person.slug}}" aria-label="{{ 'Back to Person' | translate }}">
-        <md-tooltip md-direction="bottom">Back to Person</md-tooltip>
-        <md-icon>keyboard_return</md-icon>
-      </md-button>
-    </div>
-  </div>
+<md-content layout="row" layout-wrap layout-align="center center">
 
   <div ng-show="error_message">
     {{error_message}}
   </div>
 
-  <div flex="100" flex-gt-md="90" flex-gt-lg="80">
-    <div layout="column" layout-wrap ng-repeat="timeline in timelines">
+  <div flex="100">
+    <div layout="column" class="timeline-post" layout-wrap ng-repeat="timeline in timelines">
       <md-card class="b-bl">
         <md-card-content>
-          <small>{{timeline}}</small>
-          <p>date: {{timeline.created_at | humanTime}}</p>
-          <p>event: {{timeline.event}}</p>
+          <div class="timeline-icon">
+            <img ng-if="timeline.event == 'sign_in_sms'" src="https://d247kqobagyqjh.cloudfront.net/api/file/dQGVIHdTyGo8kiBLjYQB"></img>
+            <img ng-if="timeline.event == 'sign_in_fb'" src="https://d247kqobagyqjh.cloudfront.net/api/file/WUhzu2zRTremUtlXxALC"></img>
+            <img ng-if="timeline.event == 'sign_in_tw'" src="https://d247kqobagyqjh.cloudfront.net/api/file/PdwjF22TTiqOHvzQcksA"></img>
+            <img ng-if="timeline.event == 'sign_in_g'" src="https://d247kqobagyqjh.cloudfront.net/api/file/K3YDlqzUQzIavvIEkesC"></img>
+            <img ng-if="timeline.event == 'sign_in_email'" src="https://d247kqobagyqjh.cloudfront.net/api/file/nt0LfEXlTpWhoKVSW706"></img>
+          </div>
+          <md-list flex>
+            <md-list-item class="md-2-line">
+              <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}" class="timeline-avatar"/>
+              <div class="md-list-item-text">
+                <h3>
+                  <span ng-if="timeline.event == 'sign_in_sms'">Signed in with <b>SMS</b></span>
+                  <span ng-if="timeline.event == 'sign_in_fb'">Signed in with <b>Facebook</b></span>
+                  <span ng-if="timeline.event == 'sign_in_tw'">Signed in with <b>Twitter</b></span>
+                  <span ng-if="timeline.event == 'sign_in_g'">Signed in with <b>Google</b></span>
+                  <span ng-if="timeline.event == 'sign_in_email'">Signed in with <b>Email</b></span>
+                </h3>
+                <p>{{timeline.created_at | humanTime}}</p>
+              </div>
+            </md-list-item>
+          </md-list>
           <p>mac: {{timeline.client_mac}}</p>
           <p>email: {{timeline.email}}</p>
         </md-card-content>

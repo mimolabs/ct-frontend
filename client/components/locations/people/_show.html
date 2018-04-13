@@ -269,9 +269,14 @@
 
 
       <div flex="100" flex-gt-sm="70">
-
-          <person-timeline></person-timeline>
-
+        <div layout="column" layout-wrap class="timeline-column">
+          <div flex="100" class="timeline-top">
+            <h1>Activity</h1>
+          </div>
+          <div flex="100">
+            <person-timeline></person-timeline>
+          </div>
+        </div>
       </div>
 
     </div>

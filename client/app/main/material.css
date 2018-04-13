@@ -1716,6 +1716,25 @@ email-stats .email-stats-bottom md-list-item p {
 
 /* timeline */
 
+.timeline-column {
+  margin-left: 16px;
+}
+
+.timeline-top {
+  position: relative;
+  height: 60px;
+}
+
+.timeline-top:before {
+  content:"";
+  position: absolute;
+  background: rgba(0, 136, 187,0.8);
+  width:100%;
+  height:2px;
+  bottom: 0px;
+  border-radius: 10px;
+}
+
 .timeline-post {
   position: relative;
   margin-left: 80px;
@@ -1724,19 +1743,17 @@ email-stats .email-stats-bottom md-list-item p {
 .timeline-post md-card {
   margin-bottom: 40px;
 }
+.timeline-post:first-of-type md-card {
+  margin-top: 40px;
+}
 
 .timeline-post:before {
   content:"";
   position: absolute;
   left: -40px;
-  background:#0088bb;
+  background: rgba(0, 136, 187,0.3);;
   width:2px;
   height:100%;
-}
-
-.timeline-post:first-of-type:before {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
 }
 
 .timeline-post:last-of-type:before {

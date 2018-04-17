@@ -13,37 +13,6 @@
 
           <div class="timeline-top"></div>
 
-          <div layout="column" class="timeline-post" layout-wrap >
-            <div class="timeline-icon">
-              <img src="https://d247kqobagyqjh.cloudfront.net/api/file/nt0LfEXlTpWhoKVSW706"></img>
-            </div>
-            <md-card class="b-bl">
-              <md-card-content>
-                <md-list flex>
-                  <md-list-item class="md-2-line">
-                    <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}" class="timeline-avatar"/>
-                    <div class="md-list-item-text">
-                      <h3>
-                        <span >You sent an <b>Email</b> to bob@bob.bob</span>
-                      </h3>
-                      <p>April 13th 2018, 11:52:49 am</p>
-                    </div>
-                  </md-list-item>
-                </md-list>
-                <hr>
-                <div layout="row" layout-align="space-between center" layout-wrap>
-                  <p>State: Delivered</p>
-                  <p>Opens: 1</p>
-                  <p>Clicks: 1</p>
-                </div>
-                <hr>
-                <p><b>Hi This Is A Subject Line</b></p>
-                <p>Ea deserunt reprehenderit ex anim nulla in ipsum est eu id et duis amet. Non amet eu irure nostrud Lorem eiusmod dolore in. Nostrud adipisicing eiusmod aute ea ad sunt id cupidatat ea laboris. Pariatur eu consectetur irure id voluptate Lorem eiusmod aute non ipsum deserunt consequat. Exercitation exercitation deserunt irure consequat eiusmod cupidatat veniam fugiat. Do elit consequat eiusmod ex consequat sint voluptate dolor aliquip culpa cillum. Cillum ipsum officia eiusmod irure officia fugiat deserunt esse veniam laboris Lorem dolor ut enim irure ipsum ea.</p>
-              </md-card-content>
-            </md-card>
-          </div>
-
-
           <div layout="column" class="timeline-post" layout-wrap ng-repeat="timeline in timelines">
             <div class="timeline-icon">
               <img ng-show="timeline.event == 'sign_in_sms'" src="https://d247kqobagyqjh.cloudfront.net/api/file/dQGVIHdTyGo8kiBLjYQB"></img>

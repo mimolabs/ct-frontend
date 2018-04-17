@@ -1627,13 +1627,13 @@ md-card.md-default-theme, md-card {
 }
 
 @media (min-width: 960px) {
-  md-card.people-prof {
+  /* md-card.people-prof {
     height: calc(100vh - 203px);
     min-height: 496px;
-  }
-  md-card.people-prof md-card-title {
+  } */
+  /* md-card.people-prof md-card-title {
     min-height: 120px;
-  }
+  } */
   md-card.people-prof md-card-content {
     padding: 0px;
     overflow: auto;
@@ -1712,4 +1712,79 @@ email-stats .email-stats-bottom md-list-item p {
   .email-stats-bottom {
     padding-top: 10px;
   }
+}
+
+/* timeline */
+
+.timeline-column {
+  margin-left: 16px;
+}
+
+.timeline-top {
+  position: relative;
+  height: 60px;
+}
+
+.timeline-top:before {
+  content:"";
+  position: absolute;
+  background: rgba(0, 136, 187,0.8);
+  width:100%;
+  height:2px;
+  bottom: 0px;
+  border-radius: 10px;
+}
+
+.timeline-post {
+  position: relative;
+  margin-left: 80px;
+}
+
+.timeline-post md-card {
+  margin-bottom: 40px;
+}
+.timeline-post:first-of-type md-card {
+  margin-top: 40px;
+}
+
+.timeline-post:before {
+  content:"";
+  position: absolute;
+  left: -40px;
+  background: rgba(0, 136, 187,0.3);;
+  width:2px;
+  height:100%;
+}
+
+.timeline-post:last-of-type:before {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.timeline-icon img {
+  position: absolute;
+  max-width: 40px;
+  top: 0px;
+  left: -68px;
+  border-top: 5px solid #fafafa;
+  border-bottom: 5px solid #fafafa;
+}
+
+.timeline-post md-list {
+  padding: 0px;
+}
+
+.timeline-post md-list-item {
+  padding: 0px;
+  height: 40px;
+  min-height: 40px;
+  margin-bottom: 16px;
+}
+
+img.timeline-avatar {
+  margin: auto 0px;
+  margin-right: 20px;
+  height: 40px;
+  width: 40px;
+  border-radius: 420px;
 }

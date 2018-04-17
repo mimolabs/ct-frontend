@@ -1725,7 +1725,7 @@ email-stats .email-stats-bottom md-list-item p {
 }
 
 .timeline-top, .timeline-bottom {
-  height: 60px;
+  height: 30px;
   margin-left: 39px;
   padding-left: 39px;
   border-left: 2px dashed rgba(0, 136, 187,0.5);

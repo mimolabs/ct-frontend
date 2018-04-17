@@ -1749,6 +1749,7 @@ email-stats .email-stats-bottom md-list-item p {
 .timeline-post md-card {
   margin-bottom: 40px;
 }
+
 .timeline-post:first-of-type md-card {
   margin-top: 40px;
 }
@@ -1756,8 +1757,8 @@ email-stats .email-stats-bottom md-list-item p {
 .timeline-icon img {
   position: absolute;
   max-width: 40px;
-  top: 0px;
-  left: -68px;
+  top: 3px;
+  left: -21px;
   border-top: 5px solid #fafafa;
   border-bottom: 5px solid #fafafa;
 }

@@ -769,10 +769,10 @@ app.directive('personTimeline', ['PersonTimeline', 'PersonTimelinePortal', '$rou
     };
 
     var portalTimelineRequest = function() {
+      scope.portal_request = true;
       if ($routeParams.code) {
         PersonTimelinePortal.query({person_id: $routeParams.person_id, code: $routeParams.code}).$promise.then(function(res) {
           scope.timelines = res.timelines;
-          scope.portal_request = true;
           scope.loading = undefined;
         }, function(err) {
           scope.error_message = err.data.message[0];

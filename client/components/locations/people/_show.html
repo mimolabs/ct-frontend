@@ -53,7 +53,7 @@
   <div flex="100" flex-gt-md="90" flex-gt-lg="80">
     <div layout="row" layout-wrap>
 
-      <div flex="100" flex-gt-sm="30">
+      <div flex="100" flex-gt-sm="30" flex-gt-md="20" flex-gt-lg="20">
         <div layout-gt-sm="row" layout-sm="row" layout-xs="column" layout-wrap>
 
           <div flex="100">
@@ -268,9 +268,16 @@
       </div>
 
 
-      <div flex="100" flex-gt-sm="70">
-        <div layout="column" layout-wrap class="timeline-column">
-          <person-timeline></person-timeline>
+      <div flex="100" flex-gt-sm="70" flex-gt-md="80" flex-gt-lg="80">
+        <div layout="column" layout-wrap>
+
+          <div flex="100">
+            <send-direct-message></send-direct-message>
+          </div>
+
+          <div flex="100" class="timeline-column">
+            <person-timeline></person-timeline>
+          </div>
         </div>
       </div>
 

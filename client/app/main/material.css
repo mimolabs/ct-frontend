@@ -1572,9 +1572,9 @@ table a {
 }
 
 .people-avatar {
-  border-radius: 120px;
-  max-height: 120px;
-  max-width: 120px;
+  border-radius: 100px;
+  max-height: 100px;
+  max-width: 100px;
 }
 
 .people-filter md-card-content {
@@ -1717,55 +1717,48 @@ email-stats .email-stats-bottom md-list-item p {
 /* timeline */
 
 .timeline-column {
-  margin-left: 16px;
+  margin-left: 8px;
 }
 
-.timeline-top {
-  position: relative;
-  height: 60px;
+.timeline-column md-tab-content {
+  margin-top: 20px;
 }
 
-.timeline-top:before {
-  content:"";
-  position: absolute;
-  background: rgba(0, 136, 187,0.8);
-  width:100%;
-  height:2px;
-  bottom: 0px;
-  border-radius: 10px;
+.timeline-top, .timeline-bottom {
+  height: 30px;
+  margin-left: 39px;
+  padding-left: 39px;
+  border-left: 2px dashed rgba(0, 136, 187,0.5);
 }
 
 .timeline-post {
   position: relative;
-  margin-left: 80px;
+  margin-left: 39px;
+  padding-left: 39px;
+  border-left: 2px solid rgba(0, 136, 187,0.5);
+}
+
+.timeline-post hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #dcdcdc;
+  margin: 0px;
 }
 
 .timeline-post md-card {
   margin-bottom: 40px;
 }
+
 .timeline-post:first-of-type md-card {
   margin-top: 40px;
-}
-
-.timeline-post:before {
-  content:"";
-  position: absolute;
-  left: -40px;
-  background: rgba(0, 136, 187,0.3);;
-  width:2px;
-  height:100%;
-}
-
-.timeline-post:last-of-type:before {
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
 }
 
 .timeline-icon img {
   position: absolute;
   max-width: 40px;
-  top: 0px;
-  left: -68px;
+  top: 3px;
+  left: -21px;
   border-top: 5px solid #fafafa;
   border-bottom: 5px solid #fafafa;
 }

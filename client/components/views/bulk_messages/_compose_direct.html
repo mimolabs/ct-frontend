@@ -5,7 +5,7 @@
     <md-tab id="tab1">
       <md-tab-label>Email</md-tab-label>
       <md-tab-body>
-        <form layout-padding name="myForm" ng-submit="send(message)">
+        <form layout-padding name="myEmailForm" ng-submit="send(message, 'email')">
           <div layout="row" layout-wrap>
             <div flex="100">
               <small>Send a manual message to this customer. If they have multiple email addresses, your message will be sent to all the active ones.</small>
@@ -13,7 +13,7 @@
           </div>
           <md-select ng-model="message.sender" placeholder="{{ 'Select sender' | translate }}" required>
             <span ng-repeat='sender in senders'>
-              <md-option ng-value="sender.id">
+              <md-option ng-value="sender.id" ng-disabled="sender.sender_type != 'email'">
                 {{sender.sender_name}} ({{sender.from_email || sender.from_sms || sender.from_twitter}})
               </md-option>
             </span>
@@ -23,8 +23,8 @@
               <label>
                 <translate>Message Subject</translate>
               </label>
-              <input ng-focus="hideOthers()" ng-model="message.subject" name="message_subject" placeholder="{{ 'Enter a subject' | translate }}" type="text" md-maxlength='100'>
-              <div ng-messages="myForm.message_subject.$error" md-auto-hide="false">
+              <input ng-focus="hideOthers()" ng-model="message.subject" name="message_subject" placeholder="{{ 'Enter a subject' | translate }}" type="text" required md-maxlength='100'>
+              <div ng-messages="myEmailForm.message_subject.$error" md-auto-hide="false">
                 <div ng-message="max" translate>Must be less than 100 characters</div>
               </div>
             </md-input-container>
@@ -34,7 +34,7 @@
           </div>
           <div layout="row" ng-show="message.sender">
             <span flex></span>
-            <md-button class="md-primary" type="submit" ng-disabled="myForm.$invalid || myForm.$pristine">
+            <md-button class="md-primary" type="submit" ng-disabled="myEmailForm.$invalid || myEmailForm.$pristine">
               Send
             </md-button>
           </div>
@@ -45,7 +45,7 @@
     <md-tab id="tab2">
       <md-tab-label>SMS</md-tab-label>
       <md-tab-body>
-        <form layout-padding name="myForm" ng-submit="send(message)">
+        <form layout-padding name="mySmsForm" ng-submit="send(message, 'sms')">
 
           <div layout="row" layout-wrap>
             <div flex="100">
@@ -54,7 +54,7 @@
           </div>
           <md-select ng-model="message.sender" placeholder="{{ 'Select sender' | translate }}" required>
             <span ng-repeat='sender in senders'>
-              <md-option ng-value="sender.id">
+              <md-option ng-value="sender.id" ng-disabled="sender.sender_type != 'sms'">
                 {{sender.sender_name}} ({{sender.from_email || sender.from_sms || sender.from_twitter}})
               </md-option>
             </span>
@@ -64,11 +64,17 @@
               <label>
                 <translate>Message</translate>
               </label>
-              <input ng-focus="hideOthers()" ng-model="message.content" name="sms_message" type="text" md-maxlength='160'>
-              <div ng-messages="myForm.sms_message.$error" md-auto-hide="false">
+              <input ng-focus="hideOthers()" ng-model="message.content" name="sms_message" type="text" md-maxlength='160' required>
+              <div ng-messages="mySmsForm.sms_message.$error" md-auto-hide="false">
                 <div ng-message="max" translate>Must be less than 160 characters</div>
               </div>
             </md-input-container>
+          </div>
+          <div layout="row" ng-show="message.sender">
+            <span flex></span>
+            <md-button class="md-primary" type="submit" ng-disabled="mySmsForm.$invalid || mySmsForm.$pristine">
+              Send
+            </md-button>
           </div>
         </form>
       </md-tab-body>
@@ -77,7 +83,7 @@
     <md-tab id="tab3">
       <md-tab-label>Twitter</md-tab-label>
       <md-tab-body>
-        <form layout-padding name="myForm" ng-submit="send(message)">
+        <form layout-padding name="myTwitterForm" ng-submit="send(message, 'twitter')">
           <div layout="row" layout-wrap>
             <div flex="100">
               <small>Send a manual message to this customer. If they have multiple email addresses, your message will be sent to all the active ones.</small>
@@ -85,7 +91,7 @@
           </div>
           <md-select ng-model="message.sender" placeholder="{{ 'Select sender' | translate }}" required>
             <span ng-repeat='sender in senders'>
-              <md-option ng-value="sender.id">
+              <md-option ng-value="sender.id" ng-disabled="sender.sender_type != 'twitter'">
                 {{sender.sender_name}} ({{sender.from_email || sender.from_sms || sender.from_twitter}})
               </md-option>
             </span>
@@ -95,11 +101,17 @@
               <label>
                 <translate>Tweet</translate>
               </label>
-              <input ng-focus="hideOthers()" ng-model="message.content" name="tweet_message" type="text" md-maxlength='263'>
-              <div ng-messages="myForm.tweet_message.$error" md-auto-hide="false">
+              <input ng-focus="hideOthers()" ng-model="message.content" name="tweet_message" type="text" required md-maxlength='263'>
+              <div ng-messages="myTwitterForm.tweet_message.$error" md-auto-hide="false">
                 <div ng-message="max" translate>Must be less than 263 characters</div>
               </div>
             </md-input-container>
+          </div>
+          <div layout="row" ng-show="message.sender">
+            <span flex></span>
+            <md-button class="md-primary" type="submit" ng-disabled="myTwitterForm.$invalid || myTwitterForm.$pristine">
+              Send
+            </md-button>
           </div>
         </form>
       </md-tab-body>

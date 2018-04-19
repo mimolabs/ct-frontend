@@ -35,11 +35,11 @@
 
           <div layout="column" class="timeline-post" layout-wrap ng-repeat="timeline in timelines">
             <div class="timeline-icon">
-              <img ng-show="timeline.event == 'sign_in_sms'" src="https://d247kqobagyqjh.cloudfront.net/api/file/dQGVIHdTyGo8kiBLjYQB"></img>
+              <img ng-show="timeline.event == 'sign_in_sms' || timeline.event == 'contact_sms'" src="https://d247kqobagyqjh.cloudfront.net/api/file/dQGVIHdTyGo8kiBLjYQB"></img>
               <img ng-show="timeline.event == 'sign_in_fb'" src="https://d247kqobagyqjh.cloudfront.net/api/file/WUhzu2zRTremUtlXxALC"></img>
-              <img ng-show="timeline.event == 'sign_in_tw'" src="https://d247kqobagyqjh.cloudfront.net/api/file/PdwjF22TTiqOHvzQcksA"></img>
+              <img ng-show="timeline.event == 'sign_in_tw' || timeline.event == 'contact_twitter'" src="https://d247kqobagyqjh.cloudfront.net/api/file/PdwjF22TTiqOHvzQcksA"></img>
               <img ng-show="timeline.event == 'sign_in_g'" src="https://d247kqobagyqjh.cloudfront.net/api/file/K3YDlqzUQzIavvIEkesC"></img>
-              <img ng-show="timeline.event == 'sign_in_email'" src="https://d247kqobagyqjh.cloudfront.net/api/file/nt0LfEXlTpWhoKVSW706"></img>
+              <img ng-show="timeline.event == 'sign_in_email' || timeline.event == 'contact_email'" src="https://d247kqobagyqjh.cloudfront.net/api/file/nt0LfEXlTpWhoKVSW706"></img>
             </div>
             <md-card class="b-bl" ng-if="timeline.event == 'sign_in_sms' || timeline.event == 'sign_in_fb' || timeline.event == 'sign_in_tw' || timeline.event == 'sign_in_g' || timeline.event == 'sign_in_email'">
               <md-card-content>
@@ -65,19 +65,14 @@
 
             <md-card class="b-bl" ng-if="timeline.event == 'contact_email' || timeline.event == 'contact_sms' || timeline.event == 'contact_twitter'">
               <md-card-content>
-                <div class="timeline-icon">
-                  <img ng-show="timeline.event == 'contact_sms'" src="https://d247kqobagyqjh.cloudfront.net/api/file/dQGVIHdTyGo8kiBLjYQB"></img>
-                  <img ng-show="timeline.event == 'contact_twitter'" src="https://d247kqobagyqjh.cloudfront.net/api/file/PdwjF22TTiqOHvzQcksA"></img>
-                  <img ng-show="timeline.event == 'contact_email'" src="https://d247kqobagyqjh.cloudfront.net/api/file/nt0LfEXlTpWhoKVSW706"></img>
-                </div>
                 <md-list flex>
                   <md-list-item class="md-2-line">
                     <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}" class="timeline-avatar"/>
                     <div class="md-list-item-text">
                       <h3>
-                        <span ng-show="timeline.event == 'contact_sms'">You sent an <b>SMS</b> to x</span>
-                        <span ng-show="timeline.event == 'contact_twitter'">You sent a <b>Tweet</b> to x</span>
-                        <span ng-show="timeline.event == 'contact_email'">You sent an <b>Email</b> to x</span>
+                        <span ng-show="timeline.event == 'contact_sms'">You sent an <b>SMS</b> to {{timeline.to}}</span>
+                        <span ng-show="timeline.event == 'contact_twitter'">You sent a <b>Tweet</b> to {{timeline.to}}</span>
+                        <span ng-show="timeline.event == 'contact_email'">You sent an <b>Email</b> to <b>{{timeline.to}}</b></span>
                       </h3>
                       <p>{{timeline.created_at | humanTime}}</p>
                     </div>
@@ -85,12 +80,12 @@
                 </md-list>
                 <hr>
                 <div layout="row" layout-align="space-between center" layout-wrap>
-                  <p>State: {{timeline.status}}</p>
-                  <p>Opens: {{timeline.opens}}</p>
-                  <p>Clicks: {{timeline.clicks}}</p>
+                  <p>State: {{timeline.state}}</p>
+                  <p ng-show="timeline.event == 'contact_email'">Opens: {{timeline.opens}}</p>
+                  <p ng-show="timeline.event == 'contact_email'">Clicks: {{timeline.clicks}}</p>
                 </div>
                 <hr>
-                <p><b>{{timeline.subject}}</b></p>
+                <p ng-show="timeline.event == 'contact_email'"><b>{{timeline.subject}}</b></p>
                 <p>{{timeline.content}}</p>
               </md-card-content>
             </md-card>

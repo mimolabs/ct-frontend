@@ -1,55 +1,7 @@
 <people-nav location="location"></people-nav>
 
 <md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" style="margin-bottom:0px;">
-  <div flex="100" flex-gt-md="90" flex-gt-lg="80">
-    <div layout="row" layout-align="space-between center" layout-wrap>
-      <md-button id="main" class="md-fab md-mini md-raised" ng-click="back()" aria-label="{{ 'Back to People' | translate }}">
-        <md-tooltip md-direction="bottom">Back to People</md-tooltip>
-        <md-icon>keyboard_return</md-icon>
-      </md-button>
-
-      <div>
-        <md-menu>
-          <md-button aria-label="{{ 'Open sessions menu' | translate }}" class="md-fab md-raised md-primary md-mini" ng-click="$mdOpenMenu($event)" ng-disabled="(!person.emails || person.emails.length < 1) && (!person.sms || person.sms.length < 1) && (!person.social || person.social.length < 1 || !person.social[0].tw_url)">
-            <md-icon md-menu-origin md-font-icon="send" class="s48">send</md-icon>
-          </md-button>
-          <md-menu-content width="3">
-            <send-bulk-message type="Email" ng-show="person.emails.length > 0"></send-bulk-message>
-            <send-bulk-message type="SMS" ng-show="person.sms.length > 0"></send-bulk-message>
-            <send-bulk-message type="Twitter" ng-show="person.social[0].tw_url"></send-bulk-message>
-          </md-menu-content>
-        </md-menu>
-        <md-menu>
-          <md-button aria-label="{{ 'Open sessions menu' | translate }}" class="md-fab md-raised md-mini" ng-click="$mdOpenMenu($event)">
-            <md-icon md-menu-origin md-font-icon="more_black" class="s48">more_vert</md-icon>
-          </md-button>
-          <md-menu-content width="3">
-            <md-menu-item>
-              <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/timeline">
-                <p flex translate>Timeline</p>
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/messages">
-                <p flex translate>Messages</p>
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/message_activity">
-                <p flex translate>Email Activity</p>
-              </md-button>
-            </md-menu-item>
-            <md-menu-item>
-              <md-button ng-click="">
-                <p flex translate>Delete</p>
-              </md-button>
-            </md-menu-item>
-          </md-menu-content>
-        </md-menu>
-      </div>
-    </div>
-  </div>
-
+  
   <div flex="100" flex-gt-md="90" flex-gt-lg="80">
     <div layout="row" layout-wrap>
 
@@ -58,9 +10,34 @@
 
           <div flex="100">
             <md-card class="people-prof b-bl">
-              <md-card-title>
+              <md-card-title layout="row" layout-align="space-between top">
                 <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}" class="people-avatar"></img>
-                <span flex></span>
+
+                <div>
+                  <md-menu>
+                    <md-button aria-label="{{ 'Open sessions menu' | translate }}" class="md-icon-button md-button md-ink-ripple" ng-click="$mdOpenMenu($event)">
+                      <md-icon md-menu-origin md-font-icon="more_black" class="s48">more_vert</md-icon>
+                    </md-button>
+                    <md-menu-content width="3">
+                      <md-menu-item>
+                        <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/messages">
+                          <p flex translate>Messages</p>
+                        </md-button>
+                      </md-menu-item>
+                      <md-menu-item>
+                        <md-button ng-href="/#/{{location.slug}}/people/{{person.id}}/message_activity">
+                          <p flex translate>Email Activity</p>
+                        </md-button>
+                      </md-menu-item>
+                      <md-menu-item>
+                        <md-button ng-click="">
+                          <p flex translate>Delete</p>
+                        </md-button>
+                      </md-menu-item>
+                    </md-menu-content>
+                  </md-menu>
+                </div>
+
               </md-card-title>
               <md-card-content>
                 <md-list flex layout="column" layout-gt-xs="row" layout-gt-sm="column">

@@ -3,7 +3,30 @@
   <div ng-show="error_message">
     {{error_message}}
   </div>
+  <div flex="100" layout="row" ng-show="portal_request">
+    <div flex></div>
+    <md-menu>
+      <md-button aria-label="{{ 'Open sessions menu' | translate }}" class="md-fab md-raised md-mini" ng-click="$mdOpenMenu($event)">
+        <md-icon md-menu-origin md-font-icon="more_black" class="s48">more_vert</md-icon>
+      </md-button>
+      <md-menu-content width="3">
+        <md-menu-item>
+          <md-button ng-click="confirmDownload()">
+            <md-icon>file_download</md-icon><p flex translate>Download</p>
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button ng-click="confirmDestroy()">
+            <md-icon>delete</md-icon><p flex translate>Delete all data</p>
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+  </div>
 
+  <div flex="100" class="timeline-top">
+    <h1>Activity</h1>
+  </div>
   <div flex="100">
     <md-tabs md-dynamic-height md-border-bottom>
 

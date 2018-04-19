@@ -275,12 +275,41 @@
                   </div>
                 </md-input-container>
                 <div flex-gt-sm="100">
+                  <md-input-container class="md-block">
+                    <label for="splash_id"><translate>Splash ID</translate></label>
+                    <input ng-value="splash.unique_id" placeholder="{{ 'Splash ID' | translate }}" type='text' name="splash_id" disabled></input>
+                  </md-input-container>
+                </div>
+                <div flex-gt-sm="100">
                   <md-switch class="md-accent" ng-model="splash.active" aria-label="active">
                     <span ng-show="splash.active" translate>Splash Enabled</span>
                     <span ng-show="!splash.active" translate>Splash Disabled</span>
                   </md-switch>
                   <small ng-show="splash.active">Guests will be able to sign-in.</small>
                   <small ng-show="!splash.active">Guests will not be able to sign-in.</small>
+                </div>
+                <div flex-gt-sm="100" style="padding-bottom:1px;">
+                  <p>Note: The below timeouts do not work with all integration types.</p>
+                </div>
+                <div flex-gt-sm="100">
+                  <md-input-container class="md-block">
+                    <label for="available_start"><translate>Show After (mins)</translate></label>
+                    <input ng-model="splash.session_timeout" placeholder="{{ 'Session Timeout' | translate }}" type='number' name="session_timeout" ng-max='43200' ng-min='10'></input>
+                    <div ng-messages="myForm.session_timeout.$error">
+                      <div ng-message="min" translate>Must be greater than 10 minutes.</div>
+                      <div ng-message="max" translate>Must be less than 43200 minutes.</div>
+                    </div>
+                  </md-input-container>
+                </div>
+                <div flex-gt-sm="100">
+                  <md-input-container class="md-block">
+                    <label for="available_start"><translate>Idle Timeout (mins)</translate></label>
+                    <input ng-model="splash.idle_timeout" placeholder="{{ 'Idle Timeout' | translate }}" type='number' name="idle_timeout" ng-max='43200' ng-min='10'></input>
+                    <div ng-messages="myForm.idle_timeout.$error">
+                      <div ng-message="min" translate>Must be greater than 10 minutes.</div>
+                      <div ng-message="max" translate>Must be less than 43200 minutes.</div>
+                    </div>
+                  </md-input-container>
                 </div>
               </md-card-content>
             </md-card>

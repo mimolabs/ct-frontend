@@ -380,11 +380,6 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
       controller: 'LocationsCtrl as lc',
       resolve: { loginRequired: loginRequired }
     }).
-    when('/:id/people/:person_id/timeline', {
-      templateUrl: 'components/locations/people/timeline.html',
-      controller: 'LocationsCtrl as lc',
-      resolve: { loginRequired: loginRequired }
-    }).
     when('/users/:id', {
       templateUrl: 'components/users/show/index.html',
       controller: 'UsersShowController',

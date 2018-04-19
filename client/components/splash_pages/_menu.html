@@ -280,6 +280,12 @@
                   </div>
                 </md-input-container>
                 <div flex-gt-sm="100">
+                  <md-input-container class="md-block">
+                    <label for="splash_id"><translate>Splash ID</translate></label>
+                    <input ng-value="splash.unique_id" placeholder="{{ 'Splash ID' | translate }}" type='text' name="splash_id" disabled></input>
+                  </md-input-container>
+                </div>
+                <div flex-gt-sm="100">
                   <md-switch class="md-accent" ng-model="splash.active" aria-label="active">
                     <span ng-show="splash.active" translate>Splash Enabled</span>
                     <span ng-show="!splash.active" translate>Splash Disabled</span>

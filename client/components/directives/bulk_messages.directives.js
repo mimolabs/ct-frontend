@@ -129,7 +129,8 @@ app.directive('sendDirectMessage', ['$routeParams', 'BulkMessage', 'Sender', '$m
 
   var link = function( scope, element, attrs ) {
 
-    var send = function(message) {
+    scope.send = function(message, type) {
+      message.type = type;
       BulkMessage.create({}, {
         location_id: $routeParams.id,
         person_id: $routeParams.person_id,
@@ -143,7 +144,7 @@ app.directive('sendDirectMessage', ['$routeParams', 'BulkMessage', 'Sender', '$m
 
     var getSenders = function() {
       var deferred = $q.defer();
-      Sender.query({location_id: $routeParams.id, type: attrs.type}, function(data) {
+      Sender.query({location_id: $routeParams.id}, function(data) {
         scope.senders = data.senders;
         deferred.resolve();
       }, function(err) {
@@ -179,10 +180,9 @@ app.directive('sendDirectMessage', ['$routeParams', 'BulkMessage', 'Sender', '$m
       };
     }
 
-    var send = function(message) {
-      $scope.cancel();
-      send(message);
-    };
+    // scope.send = function(message) {
+    //   send(message);
+    // };
 
     scope.tinymceOptions = {
       selector: 'textarea',

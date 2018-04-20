@@ -125,6 +125,94 @@ app.directive('sendBulkMessage', ['$routeParams', 'BulkMessage', 'Sender', '$mdD
 
 }]);
 
+app.directive('sendDirectMessage', ['$routeParams', 'BulkMessage', 'Sender', '$mdDialog', '$q', 'showToast', 'showErrors', 'Campaign', function($routeParams,BulkMessage, Sender, $mdDialog, $q, showToast, showErrors, Campaign) {
+
+  var link = function( scope, element, attrs ) {
+
+    scope.send = function(message, type) {
+      message.type = type;
+      BulkMessage.create({}, {
+        location_id: $routeParams.id,
+        person_id: $routeParams.person_id,
+        bulk_message: message
+      }).$promise.then(function(msg) {
+        showToast('Message queued, please wait.');
+      }, function(err) {
+        showErrors(err);
+      });
+    };
+
+    var getSenders = function() {
+      var deferred = $q.defer();
+      Sender.query({location_id: $routeParams.id}, function(data) {
+        scope.senders = data.senders;
+        deferred.resolve();
+      }, function(err) {
+        deferred.resolve();
+      });
+      return deferred.promise;
+    };
+
+    function DialogController($scope, valid, senders) {
+
+      $scope.valid = valid;
+      $scope.senders = senders;
+      $scope.message = {type: attrs.type};
+
+      $scope.selectedIndex = 0;
+
+
+
+      $scope.validateEmail = function(email) {
+        Campaign.validate({}, {
+          location_id: $routeParams.id,
+          email: email
+        }).$promise.then(function(msg) {
+          $scope.valid = true;
+        }, function(err) {
+          if (err && err.data && err.data.message) {
+            console.log(err);
+            $scope.error = err.data.message[0];
+            return;
+          }
+          $scope.valid = false;
+        });
+      };
+    }
+
+    // scope.send = function(message) {
+    //   send(message);
+    // };
+
+    scope.tinymceOptions = {
+      selector: 'textarea',
+      height: 150,
+      menubar: false,
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor textcolor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table contextmenu paste code wordcount'
+      ],
+      toolbar: 'insert | undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | code',
+      content_css: []
+    };
+
+    getSenders()
+
+  };
+
+
+  return {
+    link: link,
+    scope: {
+      type: '@'
+    },
+    templateUrl: 'components/views/bulk_messages/_compose_direct.html'
+  };
+
+}]);
+
+
 app.directive('bulkMessages', ['$routeParams', 'BulkMessage', 'BulkMessageActivity', 'People', 'Location', '$mdDialog', '$location', function($routeParams,BulkMessage,BulkMessageActivity,People,Location,$mdDialog,$location) {
 
   var link = function( scope, element, attrs ) {

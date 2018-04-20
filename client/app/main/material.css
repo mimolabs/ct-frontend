@@ -1572,9 +1572,9 @@ table a {
 }
 
 .people-avatar {
-  border-radius: 120px;
-  max-height: 120px;
-  max-width: 120px;
+  border-radius: 100px;
+  max-height: 100px;
+  max-width: 100px;
 }
 
 .people-filter md-card-content {
@@ -1627,13 +1627,13 @@ md-card.md-default-theme, md-card {
 }
 
 @media (min-width: 960px) {
-  md-card.people-prof {
+  /* md-card.people-prof {
     height: calc(100vh - 203px);
     min-height: 496px;
-  }
-  md-card.people-prof md-card-title {
+  } */
+  /* md-card.people-prof md-card-title {
     min-height: 120px;
-  }
+  } */
   md-card.people-prof md-card-content {
     padding: 0px;
     overflow: auto;
@@ -1712,4 +1712,72 @@ email-stats .email-stats-bottom md-list-item p {
   .email-stats-bottom {
     padding-top: 10px;
   }
+}
+
+/* timeline */
+
+.timeline-column {
+  margin-left: 8px;
+}
+
+.timeline-column md-tab-content {
+  margin-top: 20px;
+}
+
+.timeline-top, .timeline-bottom {
+  height: 30px;
+  margin-left: 39px;
+  padding-left: 39px;
+  border-left: 2px dashed rgba(0, 136, 187,0.5);
+}
+
+.timeline-post {
+  position: relative;
+  margin-left: 39px;
+  padding-left: 39px;
+  border-left: 2px solid rgba(0, 136, 187,0.5);
+}
+
+.timeline-post hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #dcdcdc;
+  margin: 0px;
+}
+
+.timeline-post md-card {
+  margin-bottom: 40px;
+}
+
+.timeline-post:first-of-type md-card {
+  margin-top: 40px;
+}
+
+.timeline-icon img {
+  position: absolute;
+  max-width: 40px;
+  top: 3px;
+  left: -21px;
+  border-top: 5px solid #fafafa;
+  border-bottom: 5px solid #fafafa;
+}
+
+.timeline-post md-list {
+  padding: 0px;
+}
+
+.timeline-post md-list-item {
+  padding: 0px;
+  height: 40px;
+  min-height: 40px;
+  margin-bottom: 16px;
+}
+
+img.timeline-avatar {
+  margin: auto 0px;
+  margin-right: 20px;
+  height: 40px;
+  width: 40px;
+  border-radius: 420px;
 }

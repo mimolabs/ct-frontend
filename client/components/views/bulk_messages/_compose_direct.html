@@ -49,7 +49,7 @@
 
           <div layout="row" layout-wrap>
             <div flex="100">
-              <small>Send a manual message to this customer. If they have multiple email addresses, your message will be sent to all the active ones.</small>
+              <small>Send a manual message to this customer. If they have multiple phone numbers, your message will be sent to all the active ones.</small>
             </div>
           </div>
           <md-select ng-model="message.sender" placeholder="{{ 'Select sender' | translate }}" required>
@@ -86,7 +86,7 @@
         <form layout-padding name="myTwitterForm" ng-submit="send(message, 'twitter')">
           <div layout="row" layout-wrap>
             <div flex="100">
-              <small>Send a manual message to this customer. If they have multiple email addresses, your message will be sent to all the active ones.</small>
+              <small>Send a manual message to this customer. If they have multiple Twitter accounts, your message will be sent to all the active ones.</small>
             </div>
           </div>
           <md-select ng-model="message.sender" placeholder="{{ 'Select sender' | translate }}" required>

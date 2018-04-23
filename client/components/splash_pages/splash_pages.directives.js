@@ -65,10 +65,6 @@ app.directive('listSplash', ['Location', 'SplashPage', '$routeParams', '$locatio
       }
     };
 
-    var preview = function() {
-      window.open('http://app.my-wifi.co/'+scope.splash.unique_id+'?cmd=login&mac=FF-FF-FF-FF-FF-FF&apname='+scope.splash.preview_mac+'&vcname=instant-C6:3C:E8','winname','directories=no,titlebar=no,toolbar=no,location=no,status=no,menubar=no,scrollbars=no,resizable=no,width=1000,height=800');
-    };
-
     var destroy = function(id) {
       var confirm = $mdDialog.confirm()
       .title(gettextCatalog.getString('Delete Splash'))

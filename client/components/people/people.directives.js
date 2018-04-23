@@ -495,7 +495,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
 
 }]);
 
-app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email', 'Sms', 'Client', '$q', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', '$pusher', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, Social, Guest, Email, Sms, Client, $q, $routeParams, $location, $http, $compile, $rootScope, $timeout, $pusher, showToast, showErrors, menu, $mdDialog, gettextCatalog) {
+app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email', 'Sms', 'Client', 'PersonPortal', '$q', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', '$pusher', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, Social, Guest, Email, Sms, Client, PersonPortal, $q, $routeParams, $location, $http, $compile, $rootScope, $timeout, $pusher, showToast, showErrors, menu, $mdDialog, gettextCatalog) {
 
   var link = function(scope, element, attrs) {
 
@@ -607,13 +607,31 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
       });
     };
 
+    var portalPersonRequest = function() {
+      scope.portal_request = true;
+      if ($routeParams.code) {
+        PersonPortal.query({id: $routeParams.person_id, code: $routeParams.code}).$promise.then(function(res) {
+          scope.person = res;
+        }, function(err) {
+          scope.error_message = err.data.message[0];
+        });
+      } else {
+        scope.error_message = 'Code required to authenticate data request';
+      }
+      scope.loading  = undefined;
+    };
+
     var init = function() {
-      Location.get({id: $routeParams.id}, function(data) {
-        scope.location = data;
-        getPerson();
-      }, function(err){
-        console.log(err);
-      });
+      if ($routeParams.id) {
+        Location.get({id: $routeParams.id}, function(data) {
+          scope.location = data;
+          getPerson();
+        }, function(err){
+          console.log(err);
+        });
+      } else {
+        portalPersonRequest();
+      }
     };
 
     scope.back = function() {

@@ -1,8 +1,5 @@
 <md-content layout="row" layout-wrap layout-align="center center">
-
-  <div ng-show="error_message">
-    {{error_message}}
-  </div>
+  
   <div flex="100" layout="row" ng-show="portal_request">
     <div flex></div>
     <md-menu>
@@ -59,7 +56,7 @@
                   </md-list-item>
                 </md-list>
                 <p>mac: {{timeline.client_mac}}</p>
-                <p>email: {{timeline.email}}</p>
+                <p>email: {{timeline.login_email}}</p>
               </md-card-content>
             </md-card>
 

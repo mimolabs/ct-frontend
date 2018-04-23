@@ -50,3 +50,21 @@ app.factory('People', ['$resource', '$localStorage', 'API_END_POINT',
       }
     });
   }]);
+
+app.factory('PersonPortal', ['$resource', '$localStorage', 'API_END_POINT',
+  function($resource, $localStorage, API_END_POINT){
+    return $resource(API_END_POINT + '/people/:id',
+      {
+        id: '@id'
+      },
+      {
+      query: {
+        method: 'GET',
+        isArray: false,
+        dataType: 'json',
+        params: {
+          q: '@q',
+        }
+      },
+    });
+  }]);

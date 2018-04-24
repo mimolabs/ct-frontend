@@ -1,7 +1,11 @@
-<people-nav location="location"></people-nav>
+<people-nav ng-if="!portal_request" location="location"></people-nav>
 
-<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" style="margin-bottom:0px;">
-  
+<div ng-show="portal_request && error_message" layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" style="margin-bottom:0px;">
+  {{error_message}}
+</div>
+
+<md-content ng-hide="portal_request && error_message" layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" style="margin-bottom:0px;">
+
   <div flex="100" flex-gt-md="90" flex-gt-lg="80">
     <div layout="row" layout-wrap>
 
@@ -14,7 +18,7 @@
                 <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}" class="people-avatar"></img>
 
                 <div>
-                  <md-menu>
+                  <md-menu ng-show="!portal_request">
                     <md-button aria-label="{{ 'Open sessions menu' | translate }}" class="md-icon-button md-button md-ink-ripple" ng-click="$mdOpenMenu($event)">
                       <md-icon md-menu-origin md-font-icon="more_black" class="s48">more_vert</md-icon>
                     </md-button>
@@ -53,7 +57,7 @@
                           <md-button ng-if="edit_username === true" ng-click="saveUsername()" aria-controls="{{'splash' | translate }}" class="md-secondary md-icon-button" aria-label="{{ 'call' | translate }}">
                             <md-icon md-font-icon="mode_edit">save</md-icon>
                           </md-button>
-                          <md-button ng-if="edit_username !== true" ng-click="editName(edit_username)" aria-controls="{{'splash' | translate }}" class="md-secondary md-icon-button" aria-label="{{ 'call' | translate }}">
+                          <md-button ng-if="edit_username !== true && !portal_request" ng-click="editName(edit_username)" aria-controls="{{'splash' | translate }}" class="md-secondary md-icon-button" aria-label="{{ 'call' | translate }}">
                             <md-icon md-font-icon="mode_edit">mode_edit</md-icon>
                           </md-button>
                         </form>
@@ -248,7 +252,7 @@
       <div flex="100" flex-gt-sm="70" flex-gt-md="80" flex-gt-lg="80">
         <div layout="column" layout-wrap>
 
-          <div flex="100">
+          <div flex="100" ng-if="!portal_request">
             <send-direct-message></send-direct-message>
           </div>
 

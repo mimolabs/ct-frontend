@@ -49,6 +49,11 @@
                   </label>
                   <input type="number" placeholder="In case you lose your details" name="phone" ng-minlength="5" ng-model="holding.phone" md-minlength=8>
                 </md-input-container>
+                <md-input-container layout="row" flex class="md-block">
+                  <md-checkbox ng-model="holding.gdpr_consent" aria-label="gdpr" required>
+                    I confirm that I have read and agree to the <a href="https://www.oh-mimo.com/terms" target="_blank">terms of service</a>.
+                  </md-checkbox>
+                </md-input-container>
               </div>
             </md-card-content>
             <md-divider ng-show="!finalised"></md-divider>

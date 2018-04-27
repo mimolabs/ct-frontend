@@ -86,6 +86,10 @@
                   <md-switch class="md-accent" ng-model="location.demo" aria-label="{{ 'Location Demo Data' | translate }}">
                     <span translate>Display demo data<a>&nbsp;(?)<md-tooltip>Displays demo people data instead of real data for the location, to give you an idea of what can be captured</md-tooltip></a></span>
                   </md-switch>
+                  <md-switch ng-model="location.eu" aria-label="{{ 'Public Location' | translate }}">
+                    <span translate>GDPR/Canadian Reg Restrictions</span>
+                  </md-switch>
+                  <small ng-show="location.eu == false">Switching this off will allow you to make changes to your splash pages that aren't compliant with certain regional regulations. It is a legal requirement for users within the EU and Canada.</small>
                 </div>
               </div>
             </md-card-content>

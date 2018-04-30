@@ -1081,15 +1081,46 @@ app.directive('userUpgradeTrial', ['Auth', 'User', '$routeParams', '$timeout', '
   };
 }]);
 
-app.directive('gdprConsent', ['User', 'Auth', '$route', '$routeParams', '$location', '$rootScope', '$timeout', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', function(User, Auth, $route, $routeParams, $location, $rootScope, $timeout, $mdDialog, showToast, showErrors, gettextCatalog) {
+app.directive('gdprConsent', ['User', 'Auth', '$route', '$routeParams', '$location', '$rootScope', '$timeout', '$mdDialog', '$localStorage', 'showToast', 'showErrors', 'gettextCatalog', function(User, Auth, $route, $routeParams, $location, $rootScope, $timeout, $mdDialog, $localStorage, showToast, showErrors, gettextCatalog) {
 
   var link = function(scope, element, attrs) {
+
+    scope.confirmDelete = function(email, user) {
+      User.destroy({id: user.slug, email: email}).$promise.then(function() {
+        Auth.logout();
+      }, function(err) {
+        showErrors(err);
+      });
+    };
+
+    function DeleteController($scope, user) {
+      $scope.delete = function(email) {
+        scope.confirmDelete(email, user);
+        $mdDialog.cancel();
+      };
+      $scope.close = function() {
+        $mdDialog.cancel();
+      };
+    }
+    DeleteController.$inject = ['$scope', 'user'];
+
+    var deleteAccount = function(user) {
+      $mdDialog.show({
+        templateUrl: 'components/users/show/_delete_account.html',
+        parent: angular.element(document.body),
+        controller: DeleteController,
+        locals: {
+          user: user
+        }
+      });
+    };
 
     var save = function(user) {
       User.update({}, {
         id: user.slug,
         user: user
       }, function(data) {
+        $localStorage.user.consented_at = true;
       }, function(err) {
         showErrors(err);
       });
@@ -1097,9 +1128,15 @@ app.directive('gdprConsent', ['User', 'Auth', '$route', '$routeParams', '$locati
 
     function DialogController($scope,loading) {
       $scope.user = Auth.currentUser();
+      $scope.user.gdpr_consent = undefined;
       $scope.loading = loading;
       $scope.save = function() {
         save($scope.user);
+        $mdDialog.cancel();
+      };
+
+      $scope.delete_account = function() {
+        deleteAccount($scope.user);
         $mdDialog.cancel();
       };
     }

@@ -238,8 +238,11 @@
                   <td md-cell>
                     <img class="people-icon" src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}"/></img><a href="/#/{{ location.slug }}/people/{{ person.id }}">{{ person.first_name }} {{ person.last_name }}</a>
                   </td>
-                  <td md-cell>
+                  <td md-cell ng-if="person.email != 'unconfirmed'">
                     {{ person.email || 'NA' }}
+                  </td>
+                  <td md-cell ng-if="person.email == 'unconfirmed'">
+                    <p>unconfirmed<md-tooltip>User has not yet confirmed email address</md-tooltip></p>
                   </td>
                   <td md-cell>
                     {{ person.last_seen | humanTimeShortest }}

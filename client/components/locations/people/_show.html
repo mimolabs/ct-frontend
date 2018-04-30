@@ -164,8 +164,11 @@
                   </thead>
                   <tbody md-body>
                     <tr md-row ng-repeat="email in person.emails">
-                      <td md-cell>
+                      <td md-cell ng-if="email.email">
                         {{email.email}}
+                      </td>
+                      <td md-cell ng-if="!email.email">
+                        <p>unconfirmed<md-tooltip>User has not yet confirmed email address</md-tooltip></p>
                       </td>
                       <td md-cell>
                         <md-icon>{{ email.active == true ? 'check' : 'close' }}<md-tooltip ng-if="email.active == false && email.comments">{{ email.comments }}</md-tooltip></md-icon>

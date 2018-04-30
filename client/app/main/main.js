@@ -138,6 +138,9 @@ app.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($r
     when('/locations/:id', {
       redirectTo: '/:id'
     }).
+    when('/doi/:email_id', {
+      templateUrl: 'components/emails/confirm.html',
+    }).
     when('/:id', {
       templateUrl: 'components/locations/people/index.html',
       resolve: { loginRequired: loginRequired },

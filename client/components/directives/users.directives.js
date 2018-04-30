@@ -1120,7 +1120,7 @@ app.directive('gdprConsent', ['User', 'Auth', '$route', '$routeParams', '$locati
         id: user.slug,
         user: user
       }, function(data) {
-        $localStorage.user.consented_at = true;
+        $localStorage.mimo_user.consented_at = true;
       }, function(err) {
         showErrors(err);
       });

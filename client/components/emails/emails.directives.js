@@ -15,13 +15,16 @@ app.directive('emailOptInConfirm', ['Email', '$routeParams', function(Email, $ro
           action: 'confirm',
           code: $routeParams.code
         }).$promise.then(function(data) {
-          scope.message = 'Thanks!';
+          scope.message = 'Thanks! You can always update your preferences below.';
+          scope.success = true;
         }, function(err) {
           scope.message = 'Unable to confirm email address';
+          scope.success = undefined;
         });
       } else {
         scope.message = 'Code required to confirm email address.';
         scope.loading = undefined;
+        scope.success = undefined;
       }
     };
 

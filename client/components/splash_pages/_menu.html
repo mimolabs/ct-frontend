@@ -77,6 +77,50 @@
                 </div>
               </md-card-content>
             </md-card>
+
+            <md-card ng-if="splash.backup_password">
+              <md-card-title>
+                <md-card-title-text>
+                  <span class="md-headline" translate>
+                    Password Settings
+                  </span>
+                </md-card-title-text>
+              </md-card-title>
+              <md-card-content>
+                <div layout="row">
+                  <div flex flex-gt-sm="100">
+                    <input style="display:none" type="password" name="password"/>
+                    <md-input-container class="md-block">
+                      <label>
+                        <translate>Splash Password</translate>
+                      </label>
+                      <input ng-model="splash.password" placeholder="{{'Splash Password' | translate}}" type="{{ show || showPass ? 'text' : 'password' }}" ng-focus="showPass = !showPass" ng-blur="showPass = !showPass" name="password" md-maxlength='25' ng-minlength="4" ng-pattern="/^[a-zA-Z0-9_-]+$/" required>
+                      <div ng-messages="myForm.password.$error">
+                        <div ng-message="md-maxlength" translate>Must be less than 25 characters</div>
+                        <div ng-message="minlength" translate>Must be more than 4 characters</div>
+                        <div ng-message="required" translate>A valid password is required</div>
+                      </div>
+                    </md-input-container>
+                    <md-switch class="md-accent" ng-model="splash.passwd_auto_gen" aria-label="{{ 'Password Auto Gen' | translate }}" style="margin: 0 0 30px 0;">
+                      <span translate>Auto Password Change</span>
+                    </md-switch>
+                    <md-input-container class="md-block" ng-show="splash.passwd_auto_gen">
+                      <label>
+                        <translate>Password Changed Email Recipient</translate>
+                      </label>
+                      <input ng-disabled="!splash.passwd_auto_gen" ng-model="splash.passwd_change_email" placeholder="{{ 'Send password to this email' | translate }}" type="email" name="email" ng-required="splash.passwd_auto_gen == true">
+                      <div ng-messages="myForm.email.$error" md-auto-hide="false">
+                        <div ng-message="required" translate>Recipient email required when using auto change.</div>
+                        <div ng-message="email" translate>Must be a valid email address</div>
+                      </div>
+                    </md-input-container>
+                    <div flex ng-show="splash.passwd_auto_gen">
+                      <day-selector active="splash.passwd_auto_gen" days="splash.passwd_change_day" array="splash.userdays"></day-selector>
+                    </div>
+                  </div>
+                </div>
+              </md-card-content>
+            </md-card>
           </div>
 
           <md-button class="md-no-style" ng-click="toggle('redirectUrl')" aria-controls="theme">
@@ -613,7 +657,7 @@
               </md-card-content>
             </md-card>
 
-            <md-card ng-show="splash.backup_sms || splash.backup_email">
+            <md-card ng-show="splash.backup_sms || splash.backup_email || splash.backup_password">
               <md-card-title>
                 <md-card-title-text layout="row" layout-align="space-between center">
                   <span class="md-headline" translate>Login Button Styles</span>
@@ -687,6 +731,41 @@
                         <md-switch ng-model="splash.email_button_icon" aria-label="button_shadow" style="margin: 0px 0 20px 0">
                           <span ng-show="splash.email_button_icon == true" translate>Dark</span>
                           <span ng-show="splash.email_button_icon == false" translate>Light</span>
+                        </md-switch>
+                      </md-input-container>
+                    </div>
+                  </span>
+                  <span ng-show="splash.backup_password">
+                    <div flex="100" flex-gt-sm="100">
+                      <md-input-container class="md-block">
+                        <label>
+                          <translate>Password Button Colour</translate>
+                        </label>
+                        <color-picker ng-model="splash.password_button_colour"></color-picker>
+                      </md-input-container>
+                    </div>
+                    <div flex="100" flex-gt-sm="100">
+                      <md-input-container class="md-block">
+                        <label>
+                          <translate>Password Border Colour</translate>
+                        </label>
+                        <color-picker ng-model="splash.password_button_border_colour"></color-picker>
+                      </md-input-container>
+                    </div>
+                    <div flex="100" flex-gt-sm="100">
+                      <md-input-container class="md-block">
+                        <label>
+                          <translate>Password Text Colour</translate>
+                        </label>
+                        <color-picker ng-model="splash.password_btn_font_colour"></color-picker>
+                      </md-input-container>
+                    </div>
+                    <div flex="100" flex-gt-xs="100">
+                      <md-input-container class="md-block" style="margin-top:0px;">
+                        <small class="muted label">Password Icon</small>
+                        <md-switch ng-model="splash.password_button_icon" aria-label="button_icon" style="margin: 0px 0 20px 0">
+                          <span ng-show="splash.password_button_icon == true" translate>Dark</span>
+                          <span ng-show="splash.password_button_icon == false" translate>Light</span>
                         </md-switch>
                       </md-input-container>
                     </div>

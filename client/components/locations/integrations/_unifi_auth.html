@@ -52,12 +52,11 @@
             <label>
               <translate>Password</translate>
             </label>
-            <input ng-model="integration.password" type="password" name="password" ng-minlength="8" md-maxlength='32' ng-pattern="/^[^[\]\'\\]+$/" required></input>
+            <input ng-model="integration.password" type="password" name="password" ng-minlength="4" md-maxlength='32' required></input>
             <div ng-messages="myForm.password.$error">
               <div ng-message="md-maxlength">Max 32 characters</div>
-              <div ng-message="minlength">Min 8 characters</div>
+              <div ng-message="minlength">Min 4 characters</div>
               <div ng-message="required">You must set a password</div>
-              <div ng-message="pattern">Invalid characters in password</div>
             </div>
           </md-input-container>
         </div>

@@ -1781,3 +1781,13 @@ img.timeline-avatar {
   width: 40px;
   border-radius: 420px;
 }
+
+/*  */
+
+div.warning {
+  background-color: #ffe9b4;
+  padding: 5px;
+  text-align: center;
+  border: solid 1px #ffd165;
+  border-radius: 4px;
+}

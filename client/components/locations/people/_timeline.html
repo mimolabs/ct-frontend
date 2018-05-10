@@ -57,7 +57,7 @@
                 </md-list>
                 <p>Mac: {{timeline.client_mac}}</p>
                 <p ng-if="timeline.event != 'sign_in_email' || timeline.login_email">Email: {{timeline.login_email}}</p>
-                <p ng-if="timeline.event == 'sign_in_email' && !timeline.login_email">Email: <b>unconfirmed<md-tooltip>User has not yet confirmed email address</md-tooltip></b></p>
+                <p ng-if="timeline.event == 'sign_in_email' && !timeline.login_email && timeline.doi_confirmed == false">Email: <b>unconfirmed<md-tooltip>User has not yet confirmed email address</md-tooltip></b></p>
               </md-card-content>
             </md-card>
 
@@ -119,7 +119,27 @@
                     </div>
                   </md-list-item>
                 </md-list>
-                <p>Email: {{timeline.login_email}}</p>
+                <p ng-if="timeline.login_email">Email: {{timeline.login_email}}</p>
+                <p ng-if="!timeline.login_email && timeline.doi_confirmed == false">Email: <b>unconfirmed<md-tooltip>User has not yet confirmed email address</md-tooltip></b></p>
+              </md-card-content>
+            </md-card>
+
+            <md-card class="b-bl" ng-if="timeline.event == 'mailchimp_subscribe' || timeline.event == 'campaign_monitor_subscribe' || timeline.event == 'sendgrid_subscribe'">
+              <md-card-content>
+                <md-list flex>
+                  <md-list-item class="md-2-line">
+                    <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}" class="timeline-avatar"/>
+                    <div class="md-list-item-text">
+                      <h3>
+                        <span>User added to <b>{{timeline.event == 'mailchimp_subscribe' ? 'MailChimp' : timeline.event == 'campaign_monitor_subscribe' ? 'Campaign Monitor' : 'SendGrid'}}</b> list</span>
+                      </h3>
+                      <p>{{timeline.created_at | humanTime}}</p>
+                    </div>
+                  </md-list-item>
+                </md-list>
+                <p>List ID: {{timeline.meta.list}}</p>
+                <p ng-if="timeline.login_email">Email: {{timeline.login_email}}</p>
+                <p ng-if="!timeline.login_email && timeline.doi_confirmed == false">Email: <b>unconfirmed<md-tooltip>User has not yet confirmed email address</md-tooltip></b></p>
               </md-card-content>
             </md-card>
 

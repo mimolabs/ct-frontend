@@ -789,6 +789,7 @@
                   <span class="md-headline" translate>Form Style</span>
                   <md-button ng-click="splash.form_demo = !splash.form_demo" class="md-icon-button {{ splash.form_demo ? 'md-accent' : '' }}">
                     <md-icon md-font-icon="visibility">{{ splash.form_demo ? 'visibility' : 'visibility_off' }}</md-icon>
+                    <md-tooltip md-direction="bottom">Preview</md-tooltip>
                   </md-button>
                 </md-card-title-text>
               </md-card-title>
@@ -999,7 +1000,7 @@
 
           <md-button class="md-no-style" ng-click="toggle('consent')" aria-controls="theme">
             <md-icon md-font-icon="keyboard_down">keyboard_arrow_{{ isOpen('consent') ? "up" : "down" }}</md-icon>
-            <translate>Consent Form</translate>
+            <translate>Consent</translate>
           </md-button>
 
           <div ng-if="isOpen('consent')" id="consent" class="menu-toggle-list" layout="column">
@@ -1007,35 +1008,34 @@
             <md-card>
               <md-card-title>
                 <md-card-title-text layout="row" layout-align="space-between center">
-                  <span class="md-headline" translate>GDPR Form</span>
+                  <span class="md-headline" translate>Consent Form</span>
                   <md-button ng-click="splash.gdpr_demo = !splash.gdpr_demo" class="md-icon-button {{ splash.gdpr_demo ? 'md-accent' : '' }}">
                     <md-icon md-font-icon="visibility">{{ splash.gdpr_demo ? 'visibility' : 'visibility_off' }}</md-icon>
+                    <md-tooltip md-direction="bottom">Preview</md-tooltip>
                   </md-button>
                 </md-card-title-text>
               </md-card-title>
               <md-card-content>
                 <p>It is a legal requirement to be GDPR compliant if you run a hotspot within the EU.</p>
-                <span ng-if="!splash.is_eu">
-                  <md-input-container class="md-block" style="margin-bottom:0px;">
-                    <small class="muted label">GDPR Form</small>
-                    <md-switch ng-model="splash.gdpr_form" style="margin: 0px">
-                      <span ng-show="splash.gdpr_form" translate>Enabled</span>
-                      <span ng-show="!splash.gdpr_form" translate>Disabled</span>
-                    </md-switch>
-                  </md-input-container>
-                  <small ng-show="splash.gdpr_form">You are GDPR compliant.</small>
-                  <small ng-show="!splash.gdpr_form">You are not GDPR compliant.</small>
-                </span>
+                <md-input-container class="md-block" style="margin-bottom:0px;">
+                  <small class="muted label">GDPR Form</small>
+                  <md-switch ng-model="splash.gdpr_form" style="margin: 0px">
+                    <span ng-show="splash.gdpr_form" translate>Enabled</span>
+                    <span ng-show="!splash.gdpr_form" translate>Disabled</span>
+                  </md-switch>
+                </md-input-container>
+                <small ng-show="splash.gdpr_form">You are on your way to GDPR compliance.</small>
+                <small ng-show="!splash.gdpr_form">You are not GDPR compliant.</small>
+                <md-input-container class="md-block" style="margin-bottom:0px;">
+                  <small class="muted label">Newsletter Consent</small>
+                  <md-switch ng-model="splash.newsletter_consent" style="margin:0px;">
+                    <span ng-show="splash.newsletter_consent" translate>Required</span>
+                    <span ng-show="!splash.newsletter_consent" translate>Optional</span>
+                  </md-switch>
+                </md-input-container>
+                <small ng-show="splash.newsletter_consent">Guests will have to agree to receive updates in order to access the guest WiFi.</small>
+                <small ng-show="!splash.newsletter_consent">Guests can choose not to agree to receive updates and still access the guest WiFi.</small>
                 <span ng-if="splash.gdpr_form">
-                  <md-input-container class="md-block" style="margin-bottom:0px;">
-                    <small class="muted label">Newsletter Consent</small>
-                    <md-switch ng-model="splash.newsletter_consent" style="margin:0px;">
-                      <span ng-show="splash.newsletter_consent" translate>Required</span>
-                      <span ng-show="!splash.newsletter_consent" translate>Optional</span>
-                    </md-switch>
-                  </md-input-container>
-                  <small ng-show="splash.newsletter_consent">Guests will have to agree to receive updates in order to access the guest WiFi.</small>
-                  <small ng-show="!splash.newsletter_consent">Guests can choose not to agree to receive updates and still access the guest WiFi.</small>
                   <md-input-container class="md-block">
                     <label>
                       <translate>Newsletter Consent Text</translate>
@@ -1081,6 +1081,7 @@
                   <span class="md-headline" translate>Popup Advert</span>
                   <md-button ng-click="splash.popup_demo = !splash.popup_demo" aria-controls="adverts" class="md-icon-button {{ splash.popup_demo ? 'md-accent' : '' }}">
                     <md-icon md-font-icon="visibility">{{ splash.popup_demo ? 'visibility' : 'visibility_off' }}</md-icon>
+                    <md-tooltip md-direction="bottom">Preview</md-tooltip>
                   </md-button>
                 </md-card-title-text>
               </md-card-title>
@@ -1122,6 +1123,7 @@
                   <span class="md-headline" translate>Welcome Page</span>
                   <md-button ng-click="splash.welcome_demo = !splash.welcome_demo" class="md-icon-button {{ splash.welcome_demo ? 'md-accent' : '' }}">
                     <md-icon md-font-icon="visibility">{{ splash.welcome_demo ? 'visibility' : 'visibility_off' }}</md-icon>
+                    <md-tooltip md-direction="bottom">Preview</md-tooltip>
                   </md-button>
                 </md-card-title-text>
               </md-card-title>

@@ -33,13 +33,13 @@ module.exports = function(app) {
   app.use(methodOverride());
   app.use(cookieParser());
 
-  process.env.APP_ID = process.env.APP_ID || secrets.APP_ID;
-  process.env.APP_SECRET = process.env.APP_SECRET || secrets.APP_SECRET;
-  process.env.callbackURL = process.env.callbackURL || secrets.callbackURL;
-  process.env.authorizationURL = process.env.authorizationURL || secrets.authorizationURL;
-  process.env.tokenURL = process.env.tokenURL || secrets.tokenURL;
-  process.env.profileURL = process.env.profileURL || secrets.profileURL;
-  process.env.baseURL = secrets.baseURL;
+  // process.env.APP_ID = process.env.APP_ID || secrets.APP_ID;
+  // process.env.APP_SECRET = process.env.APP_SECRET || secrets.APP_SECRET;
+  // process.env.CALLBACK_URL = process.env.MIMO_DASHBOARD_URL + '/auth/login/callback';
+  // process.env.authorizationURL = process.env.authorizationURL || secrets.authorizationURL;
+  // process.env.tokenURL = process.env.tokenURL || secrets.tokenURL;
+  // process.env.profileURL = process.env.profileURL || secrets.profileURL;
+  // process.env.baseURL = secrets.baseURL;
 
   passport.serializeUser(function(options, done) {
     done(null, options);
@@ -57,12 +57,18 @@ module.exports = function(app) {
   app.use(passport.initialize());
 
   passport.use(new PolkaSpotsStrategy({
-    clientID: process.env.APP_ID,
-    clientSecret: process.env.APP_SECRET,
-    callbackURL: process.env.callbackURL,
-    authorizationURL: process.env.authorizationURL,
-    profileURL: process.env.profileURL,
-    tokenURL: process.env.tokenURL,
+    clientID:           secrets.appID,
+    clientSecret:       secrets.appSecret,
+    callbackURL:        secrets.callbackURL,
+    authorizationURL:   secrets.authorizationURL,
+    profileURL:         secrets.profileURL,
+    tokenURL:           secrets.tokenURL,
+    // clientID:           process.env.APP_ID,
+    // clientSecret:       process.env.APP_SECRET,
+    // callbackURL:        process.env.MIMO_DASHBOARD_URL + '/auth/login/callback',
+    // authorizationURL:   process.env.MIMO_API_URL + '/oauth/authorize',
+    // profileURL:         process.env.MIMO_API_URL + '/api/v1/me.json',
+    // tokenURL:           process.env.MIMO_API_URL + '/oauth/token',
     enableProof: false,
     passReqToCallback: true
   },
@@ -94,20 +100,21 @@ module.exports = function(app) {
       raw = JSON.parse(req.session.passport.user._raw)
     }
     catch(e) {}
-    res.redirect(process.env.baseURL + '/#/login?token=' + req.session.accessToken);
+    res.redirect(process.env.MIMO_DASHBOARD_URL + '/#/login?token=' + req.session.accessToken);
 
   }, function() {
   });
 
   var forceSsl = function (req, res, next) {
-    var nossl = true;
-    if (process.env.NO_SSL === undefined || process.env.NO_SSL === null || process.env.NO_SSL === '') {
-      nossl = false;
-    }
+    // PUT BACK //
+    // var nossl = true;
+    // if (process.env.NO_SSL === undefined || process.env.NO_SSL === null || process.env.NO_SSL === '') {
+    //   nossl = false;
+    // }
 
-    if (nossl && req.headers['x-forwarded-proto'] !== 'https') {
-      return res.redirect(['https://', req.get('Host'), req.url].join(''));
-    }
+    // if (nossl && req.headers['x-forwarded-proto'] !== 'https') {
+    //   return res.redirect(['https://', req.get('Host'), req.url].join(''));
+    // }
     return next();
   };
 

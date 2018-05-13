@@ -68,72 +68,15 @@ module.exports = function (grunt) {
         name: 'config',
         dest: '<%= yeoman.client %>/scripts/config.js',
       },
-      test: {
-        constants: {
-          API_END_POINT: 'http://api.ctapp.test:8080/api/v1',
-          API_END_POINT_V2: 'https://api.ctapp.io/api/v2',
-          API_URL: 'http://api.ctapp.test:8080',
-          STRIPE_KEY: 'pk_test_E3rGjKckx4EUL65pXgv6zUed',
-          AUTH_URL: 'http://dashboard.ctapp.test:8080',
-          SLACK_TOKEN: '3540010629.12007999527',
-          CHIMP_TOKEN: '531543883634',
-          INTERCOM: 'xxx',
-          PUSHER: 'xxx',
-          DEBUG: true,
-          COLOURS: '#009688 #FF5722 #03A9F4 #607D8B #F44336 #00BCD4',
-          COMMITHASH: commitHash.stdout,
-          THEMES: []
-        }
-      },
       development: {
         constants: config.frontend.constants
-      },
-      beta: {
-        constants: {
-          API_END_POINT: 'https://beta.ctapp.io/api/v1',
-          API_END_POINT_V2: 'https://ldn-01.ctapp.io/api/v1',
-          API_URL: 'https://beta.ctapp.io',
-          STRIPE_KEY: 'pk_live_Fe0qoaafcT68z8OjFYJwg1vC',
-          AUTH_URL: 'https://app.oh-mimo.com',
-          SLACK_TOKEN: '3540010629.11828901815',
-          CHIMP_TOKEN: '279197455989',
-          PUSHER: 'f5c774e098156e548079',
-          INTERCOM: 'xxx',
-          DEBUG: true,
-          COLOURS: '#009688 #FF5722 #03A9F4 #607D8B #F44336 #00BCD4',
-          COMMITHASH: commitHash.stdout,
-          THEMES: [
-            "pink",
-            "orange",
-            "deep-orange",
-            "blue",
-            "blue-grey",
-            "light-blue",
-            "red",
-            "green",
-            "light-green",
-            "lime",
-            "yellow",
-            "teal",
-            "brown",
-            "purple",
-            "deep-purple",
-            "cyan",
-            "yellow",
-            "amber",
-            "indigo",
-            "brown",
-            "grey",
-          ]
-        }
       },
       production: {
         constants: {
           API_END_POINT: 'https://api.ctapp.io/api/v1',
-          API_END_POINT_V2: 'https://ldn-01.ctapp.io/api/v1',
           API_URL: 'https://api.ctapp.io',
           STRIPE_KEY: 'pk_live_Fe0qoaafcT68z8OjFYJwg1vC',
-          AUTH_URL: 'https://id.oh-mimo.com',
+          AUTH_URL: process.env.AUTH_URL || 'https://id.oh-mimo.com',
           SLACK_TOKEN: '3540010629.11828901815',
           CHIMP_TOKEN: '279197455989',
           PUSHER: 'f5c774e098156e548079',

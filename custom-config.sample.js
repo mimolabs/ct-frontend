@@ -4,7 +4,7 @@
 'use strict';
 
 var api_url = 'https://api.ctapp.io';
-var auth_url = 'https://id.ctapp.io';
+var auth_url = 'https://iiii.ctapp.io';
 var base_url = 'https://your-base-url';
 
 module.exports = {

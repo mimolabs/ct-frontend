@@ -7,30 +7,15 @@ var exports;
 
 if (process.env.NODE_ENV === 'production') {
 
-  api_url   = 'https://api.ctapp.io/api/v1'
-  auth_url  = 'https://id.oh-mimo.com'
-  base_url  = 'app.oh-mimo.com'
+  api_url = process.env.MIMO_API_URL;
 
   exports = {
-    callbackURL: 'https://' + base_url + '/auth/login/callback',
-    authorizationURL: auth_url + "/oauth/authorize",
-    profileURL: api_url + "/me.json",
-    tokenURL: auth_url + "/oauth/token",
-    baseURL: "https://" + base_url
-  }
-
-} else if (process.env.NODE_ENV === 'beta') {
-
-  api_url   = 'https://beta.ctapp.io/api/v1'
-  auth_url  = 'https://id.oh-mimo.com'
-  base_url  = 'dashboard.ctapp.io'
-
-  exports = {
-    callbackURL: 'https://' + base_url + '/auth/login/callback',
-    authorizationURL: auth_url + "/oauth/authorize",
-    profileURL: api_url + "/me.json",
-    tokenURL: auth_url + "/oauth/token",
-    baseURL: "https://" + base_url
+    appID: process.env.APP_ID,
+    appSecret: process.env.APP_SECRET,
+    callbackURL: process.env.MIMO_DASHBOARD_URL + '/auth/login/callback',
+    authorizationURL: api_url + "/oauth/authorize",
+    profileURL: "http://api:3000/api/v1/me.json", // also?
+    tokenURL: "http://api:3000/oauth/token" // should change???
   }
 
 } else {

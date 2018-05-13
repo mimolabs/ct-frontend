@@ -100,7 +100,12 @@ module.exports = function(app) {
   });
 
   var forceSsl = function (req, res, next) {
-    if (req.headers['x-forwarded-proto'] !== 'https') {
+    var nossl = true;
+    if (process.env.NO_SSL === undefined || process.env.NO_SSL === null || process.env.NO_SSL === '') {
+      nossl = false;
+    }
+
+    if (nossl && req.headers['x-forwarded-proto'] !== 'https') {
       return res.redirect(['https://', req.get('Host'), req.url].join(''));
     }
     return next();

@@ -1,12 +1,13 @@
 'use strict';
 
-var base_url, api_url, auth_url;
+var base_url, api_url, auth_url, dashboard_url;
 
 var exports;
 
 if (process.env.NODE_ENV === 'production') {
 
   api_url = process.env.MIMO_API_URL;
+  dashboard_url = process.env.MIMO_DASHBOARD_URL;
 
   exports = {
     appID: process.env.APP_ID,
@@ -14,20 +15,23 @@ if (process.env.NODE_ENV === 'production') {
     callbackURL: process.env.MIMO_DASHBOARD_URL + '/auth/login/callback',
     authorizationURL: api_url + "/oauth/authorize",
     profileURL: "http://api:3000/api/v1/me.json", // also?
-    tokenURL: "http://api:3000/oauth/token" // should change???
+    tokenURL: "http://api:3000/oauth/token", // should change???
+    dashboardURL: dashboard_url
   }
 
 } else {
 
-  api_url   = 'http://mimo.test:3000'
+  api_url         = 'http://mimo.api:3000';
+  dashboard_url   = 'http://mimo.dashboard:9090'
 
   exports = {
-    appID: 'c10995e13ed31772362f0a6178ff3fe54272ff1a74c395ee0e886ede787fcd6e',
-    appSecret: '9e52bfd3f6a6ca9988d8070bd9c52cb752e6bc8daadda77817d2121df2906330',
-    callbackURL: 'http://app.oh-mimo.test:9090/auth/login/callback',
+    appID: 'dbbfa1a4291b7756c3edd2728ba92428df01ded6560c6e2c38fca5c821dac809',
+    appSecret: '49ae2624528914b6cc9f2528d5f0d903df1b641d2802358614c3d0e35e34dd68',
+    callbackURL: dashboard_url + '/auth/login/callback',
     authorizationURL: api_url + "/oauth/authorize",
     profileURL: api_url + "/api/v1/me.json",
-    tokenURL: api_url + "/oauth/token"
+    tokenURL: api_url + "/oauth/token",
+    dashboardURL: dashboard_url
   }
 
   var _ = require('../../node_modules/lodash');

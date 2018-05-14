@@ -63,12 +63,6 @@ module.exports = function(app) {
     authorizationURL:   secrets.authorizationURL,
     profileURL:         secrets.profileURL,
     tokenURL:           secrets.tokenURL,
-    // clientID:           process.env.APP_ID,
-    // clientSecret:       process.env.APP_SECRET,
-    // callbackURL:        process.env.MIMO_DASHBOARD_URL + '/auth/login/callback',
-    // authorizationURL:   process.env.MIMO_API_URL + '/oauth/authorize',
-    // profileURL:         process.env.MIMO_API_URL + '/api/v1/me.json',
-    // tokenURL:           process.env.MIMO_API_URL + '/oauth/token',
     enableProof: false,
     passReqToCallback: true
   },
@@ -100,7 +94,7 @@ module.exports = function(app) {
       raw = JSON.parse(req.session.passport.user._raw)
     }
     catch(e) {}
-    res.redirect(process.env.MIMO_DASHBOARD_URL + '/#/login?token=' + req.session.accessToken);
+    res.redirect(secrets.dashboardURL + '/#/login?token=' + req.session.accessToken);
 
   }, function() {
   });

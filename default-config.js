@@ -10,11 +10,10 @@ module.exports = {
                 // Everything here is injected as $rootScope.CONFIG into
                 // the application.
             },
-            API_END_POINT: 'http://mimo.test:8080/api/v1',
-            API_END_POINT_V2: 'http://dashboard.ctapp:3000/api/v1',
-            API_URL: 'http://mimo.test:8080',
+            API_END_POINT: 'http://mimo.api:3000/api/v1',
+            API_URL: 'http://mimo.api:3000',
             STRIPE_KEY: 'pk_test_E3rGjKckx4EUL65pXgv6zUed',
-            AUTH_URL: 'http://id.mimo.test:8080',
+            AUTH_URL: 'http://mimo.api:3000',
             SLACK_TOKEN: '3540010629.12007999527',
             CHIMP_TOKEN: '531543883634',
             INTERCOM: '',

@@ -1,7 +1,5 @@
 'use strict';
 
-// Important! This configuration file is currently only used in the
-// development.  It is ignored for test, beta, and production!
 var exec = require('sync-exec');
 var commitHash = exec('git log --pretty=format:"%h" -n 1');
 var commitDate = exec('git log --pretty=format:"%ci" -n 1');
@@ -12,8 +10,6 @@ module.exports = {
                 // Everything here is injected as $rootScope.CONFIG into
                 // the application.
             },
-            // FIXME! These constants are outside of 'CONFIG' for historical
-            // reasons.  They should be moved inside 'CONFIG' at some time.
             API_END_POINT: 'http://mimo.test:8080/api/v1',
             API_END_POINT_V2: 'http://dashboard.ctapp:3000/api/v1',
             API_URL: 'http://mimo.test:8080',

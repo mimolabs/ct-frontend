@@ -37,6 +37,9 @@ app.controller('AuthenticationsController', ['$scope', '$rootScope', '$cookies',
 
     if ($routeParams.token) {
       delete $localStorage.mimo_user;
+      console.log(11111111111111111111111)
+      console.log(domain);
+
       $cookies.put('_mta', $routeParams.token, { domain: domain });
       $timeout(function() {
         getMe();

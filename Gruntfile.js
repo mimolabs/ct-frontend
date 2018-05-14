@@ -72,6 +72,9 @@ module.exports = function (grunt) {
         constants: config.frontend.constants
       },
       production: {
+        constants: config.frontend.constants
+      },
+      productioniii: {
         constants: {
           API_END_POINT: 'https://api.ctapp.io/api/v1',
           API_URL: 'https://api.ctapp.io',

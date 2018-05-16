@@ -372,6 +372,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
 
     if (!$routeParams.splash_page_id) {
       scope.splash = {
+        'gdpr_form': true,
         'available_start': '00:00',
         'available_end': '00:00',
       	'primary_access_id': 20,

@@ -2037,7 +2037,7 @@ app.directive('locationAudit', ['Session', 'Email', 'Location', 'Report', 'Socia
 
     var getParams = function() {
       params = {
-        location_id: scope.location.id,
+        location_id: scope.location.slug,
         page: scope.query.page,
         per: scope.query.limit,
         start: scope.query.start,

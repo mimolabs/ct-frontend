@@ -524,7 +524,7 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
     var getSocials = function() {
       Social.get({
         person_id: scope.person.id,
-        location_id: scope.location.id
+        location_id: scope.location.slug
       }).$promise.then(function(results) {
         scope.person.social = results.social;
         setProfilePhoto();
@@ -533,20 +533,10 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
       });
     };
 
-    var getGuests = function() {
-      Guest.get({
-        person_id: scope.person.id,
-        location_id: scope.location.id
-      }).$promise.then(function(results) {
-        scope.person.guests = results.guests;
-      }, function(err) {
-      });
-    };
-
     var getEmails = function() {
       Email.get({
         person_id: scope.person.id,
-        location_id: scope.location.id
+        location_id: scope.location.slug
       }).$promise.then(function(results) {
         scope.person.emails = results.emails;
       }, function(err) {
@@ -566,7 +556,7 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
     var getClients = function() {
       Client.query({
         person_id: scope.person.id,
-        location_id: scope.location.id
+        location_id: scope.location.slug
       }).$promise.then(function(results) {
         scope.person.clients = results.clients;
       }, function(err) {
@@ -575,7 +565,6 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
 
     var getRelations = function() {
       getSocials();
-      getGuests();
       getEmails();
       getSms();
       getClients();

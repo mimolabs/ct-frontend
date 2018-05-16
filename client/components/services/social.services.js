@@ -4,10 +4,12 @@ var app = angular.module('myApp.social.services', ['ngResource',]);
 
 app.factory('Social', ['$resource', '$localStorage', 'API_END_POINT',
   function($resource, $localStorage, API_END_POINT){
-    return $resource(API_END_POINT + '/social/:id',
+    return $resource(API_END_POINT + '/locations/:location_id/people/:person_id/socials/:id',
       {
         q: '@q',
-        id: '@id'
+        id: '@id',
+        location_id: '@location_id',
+        person_id: '@person_id'
       },
       {
       get: {

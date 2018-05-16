@@ -5,7 +5,6 @@ var app = angular.module('myApp.directives', [
   'myApp.bulk_messages.directives',
   'myApp.bulk_message_activity.directives',
   'myApp.campaigns.directives',
-  'myApp.codes.directives',
   'myApp.charts.directives',
   'myApp.clients.directives',
   'myApp.emails.directives',

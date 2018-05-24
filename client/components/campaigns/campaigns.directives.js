@@ -407,7 +407,7 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
 
 }]);
 
-app.directive('campGuide', ['$routeParams', function($routeParams) {
+app.directive('campGuide', [ 'Location', '$routeParams', '$location', function(Location, $routeParams, $location) {
 
   var link = function(scope, element, attrs) {
 
@@ -417,6 +417,8 @@ app.directive('campGuide', ['$routeParams', function($routeParams) {
       slug: $routeParams.id,
       paid: attrs.paidLocation,
       setup: {
+        integrations: attrs.setupIntegrations,
+        splash: attrs.setupSplash,
         campaigns: attrs.setupCampaigns
       }
     };
@@ -427,6 +429,8 @@ app.directive('campGuide', ['$routeParams', function($routeParams) {
     scope: {
       loading: '=',
       paidLocation: '@',
+      setupSplash: '@',
+      setupIntegrations: '@',
       setupCampaigns: '@'
     },
     templateUrl: 'components/campaigns/_guide.html'

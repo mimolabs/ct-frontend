@@ -1224,6 +1224,19 @@ md-bottom-sheet .md-subheader {
   background-color: rgb(255,255,255);
 }
 
+img.dash-img {
+  border: solid 1px #ECEFF1;
+  border-radius: 4px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.10);
+  transition: 0.2s ease-in-out;
+  display: block;
+  margin: 0 auto;
+}
+
+img.dash-img:hover {
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+}
+
 /*location sidebar*/
 
 .location-sidebar-top {

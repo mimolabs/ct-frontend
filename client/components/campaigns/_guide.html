@@ -1,56 +1,68 @@
 <camp-nav></camp-nav>
 
 <md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta">
-  <div flex="100" flex-gt-md="90" flex-gt-lg="80" ng-show="location.paid == false">
+
+  <div flex="100" flex-gt-md="90">
     <div layout="row" layout-wrap>
-      <div flex="100" flex-gt-sm="40">
-        <h2>Getting Started with Campaigns</h2>
+      <div flex="100" flex-gt-sm="30">
+        <md-card class="guide-card b-pr">
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline" translate>
+                Getting Started With MIMO
+              </span>
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-content>
+            <md-content>
+              <p>Getting set up is quick and easy! Here's your checklist of things to do:</p>
+              <md-list flex>
+                <md-subheader class="md-no-sticky"><b>Customise your splash pages</b></md-subheader>
+                <md-list-item class="md-2-line" ng-click='integrationClick("splash")' ng-href="/#/{{location.slug}}/splash_pages/">
+                  <img class="check-mark" ng-src="{{setupSplash == 'true' ? 'https://d247kqobagyqjh.cloudfront.net/api/file/iFpTtabSPKhJ4oGKIh7p' : 'https://d247kqobagyqjh.cloudfront.net/api/file/6750gXV2RpilDseOWLpl' }}" />
+                  <div class="md-list-item-text">
+                    <p>Welcome your guests with a beautiful, branded splash page. Capture emails, social details and keep them engaged.</p>
+                  </div>
+                </md-list-item>
+                <md-divider style="margin: 20px 0;"></md-divider>
+                <md-subheader class="md-no-sticky"><b>Connect MIMO to your access points</b></md-subheader>
+                <md-list-item class="md-2-line" ng-click='integrationClick("integration")' href="/#/{{ location.slug }}/integration">
+                  <img class="check-mark" ng-src="{{setupIntegrations == 'true' ? 'https://d247kqobagyqjh.cloudfront.net/api/file/iFpTtabSPKhJ4oGKIh7p' : 'https://d247kqobagyqjh.cloudfront.net/api/file/6750gXV2RpilDseOWLpl' }}" />
+                  <div class="md-list-item-text">
+                    <p>Everything is automated - all you need to do is enter some credentials and you'll be up and running in a jiffy.</p>
+                  </div>
+                </md-list-item>
+              </md-list>
+              <p>You might also want to change your location name! (<md-icon>settings</md-icon> bottom left sidebar).</p>
+            </md-content></md-card-content>
+        </md-card>
       </div>
-      <div flex="100" flex-gt-xs="100" flex-gt-sm="60">
+
+      <div flex="100" flex-gt-sm="70">
         <md-card class="b-pr">
           <md-card-title>
             <md-card-title-text>
               <span class="md-headline" translate>
-                Start your free trial today.
+                What are Campaigns?
               </span>
-              <p>To use campaigns, you will need an active subscription. Start your 14 day trial now.</p>
             </md-card-title-text>
           </md-card-title>
-          <md-card-content>
+          <md-card-content layout="row" layout-wrap>
+            <div flex="100">
+              <p translate>Campaigns allow you to use your captured data to engage with customers and drive retention.</p>
+              <p translate>Encourage authentic data and loyal customers with the reward of discounts and deals.</p>
+            </div>
+            <div flex="100">
+              <img class="dash-img" style="max-width: 80%;" src="https://d247kqobagyqjh.cloudfront.net/api/file/0sjZy7tYS2KtUSlKcDrY"></img>
+            </div>
           </md-card-content>
           <md-card-actions layout="row" layout-align="end center">
-            <get-with-the-plan location="location" ng-show="location.paid == false"></get-with-the-plan>
+            <md-button class="md-raised md-primary" ng-href="/#/{{location.slug}}/campaigns/new">Create</md-button>
           </md-card-actions>
         </md-card>
+
       </div>
     </div>
-  </div>
-
-  <div flex="100" flex-gt-md="90">
-    <md-card class="b-pr">
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">
-            <translate>What are Campaigns?</translate>
-          </span>
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-content>
-        <div layout="row" layout-align="center center">
-          <div flex="100" flex-gt-sm="45" flex-gt-md="30">
-            <p translate>Campaigns allow you to use your captured data to engage with customers and drive retention.</p>
-            <p translate>Encourage authentic data and loyal customers with the reward of discounts and deals.</p>
-          </div>
-          <div flex></div>
-          <div flex="100" flex-gt-sm="45" flex-gt-md="60">
-            <img style="max-width: 90%;" src="https://s3-eu-west-1.amazonaws.com/mimo-labs/images/campaign-reports.jpg"></img>
-          </div>
-        </div>
-      </md-card-content>
-      <md-card-actions layout="row" layout-align="end center">
-        <md-button class="md-raised md-primary" ng-href="/#/{{location.slug}}/campaigns/new">Create</md-button>
-      </md-card-actions>
-    </md-card>
   </div>
 
 </md-content>

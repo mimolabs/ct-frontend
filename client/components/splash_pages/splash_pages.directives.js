@@ -1597,9 +1597,16 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
 app.directive('splashGuide', ['Location', '$routeParams', '$location', '$http', '$compile', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', 'SplashIntegration', function(Location, $routeParams, $location, $http, $compile, $mdDialog, showToast, showErrors, gettextCatalog, SplashIntegration) {
 
   var link = function(scope, element, attrs, controller) {
-    scope.location = { slug: $routeParams.id };
     scope.currentNavItem = 'guide';
     scope.loading = undefined
+    scope.location = {
+      slug: $routeParams.id,
+      setup: {
+        integrations: attrs.setupIntegrations,
+        splash: attrs.setupSplash
+      }
+    };
+
 
     scope.createSplash = function() {
     };
@@ -1608,6 +1615,11 @@ app.directive('splashGuide', ['Location', '$routeParams', '$location', '$http', 
 
   return {
     link: link,
+    scope: {
+      loading: '=',
+      setupSplash: '@',
+      setupIntegrations: '@'
+    },
     templateUrl: 'components/splash_pages/_guide.html'
   };
 }]);

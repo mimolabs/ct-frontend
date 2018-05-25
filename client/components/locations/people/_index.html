@@ -39,19 +39,20 @@
               <span hide show-gt-sm>
                 <span>
                   <span ng-repeat="predicate in predicates">
-                    <md-card flex="100" style="margin-left:0px;margin-right:0px;">
+                    <md-card class="filter-card" flex="100" style="margin-left:0px;margin-right:0px;">
                       <md-card-title>
                         <md-card-title-text>
                           <span translate>
                             {{ predicate | humanPredicate }}
                             <!-- {{predicate}} -->
                           </span>
-                          <md-switch ng-model="predicate.relative" aria-label="Switch 1" ng-show="focusedCard == $index && (predicate.attribute == 'created_at' || predicate.attribute == 'last_seen')">
-                            {{ predicate.relative ? 'Relative' : 'Absolute' }}
-                          </md-switch>
                         </md-card-title-text>
                       </md-card-title>
                       <md-card-content>
+                        <md-switch ng-model="predicate.relative" aria-label="Switch 1" ng-show="focusedCard == $index && (predicate.attribute == 'created_at' || predicate.attribute == 'last_seen')">
+                          {{ predicate.relative ? 'Relative' : 'Absolute' }}
+                        </md-switch>
+
                         <form name="myForm" ng-submit="saveUsername()">
 
                           <span ng-show="focusedCard == $index">
@@ -152,7 +153,7 @@
                     <md-subheader class="md-no-sticky">
                       <div flex layout="row">
                         <div flex>Person data</div>
-                        <div><a href="" ng-click="cancelRule()">Cancel</a></div>
+                        <div><a href="" ng-click="cancelRule()" style="text-decoration:none;">Cancel</a></div>
                       </div>
                     </md-subheader>
                     <md-list-item class="md-2-line" ng-repeat="item in available_options" ng-click="onSelect($index)">
@@ -163,7 +164,7 @@
                     </md-list-item>
                   </md-list>
                   <div style="padding-top:10px;">
-                    <a href="" ng-click="addRule()" ng-show="focusedCard == undefined" style="text-decoration:none;">+ Add Rule</a>
+                    <a href="" ng-click="addRule()" ng-show="focusedCard == undefined" style="text-decoration:none;"><p>+ Add Rule</p></a>
                   </div>
                 </span>
               </div>

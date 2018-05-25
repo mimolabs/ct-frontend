@@ -14,27 +14,27 @@
             </md-card-title-text>
           </md-card-title>
           <md-card-content>
-            <md-content>
+            <md-card-content>
               <p>Getting set up is quick and easy! Here's your checklist of things to do:</p>
               <md-list flex>
-                <md-subheader class="md-no-sticky"><b>Customise your splash pages</b></md-subheader>
+                <md-subheader class="md-no-sticky">Customise your splash pages</md-subheader>
                 <md-list-item class="md-2-line" ng-click='integrationClick("splash")' ng-href="/#/{{location.slug}}/splash_pages/">
-                  <img class="check-mark" ng-src="{{setupSplash == 'true' ? 'https://d247kqobagyqjh.cloudfront.net/api/file/iFpTtabSPKhJ4oGKIh7p' : 'https://d247kqobagyqjh.cloudfront.net/api/file/6750gXV2RpilDseOWLpl' }}" />
+                  <img class="check-mark" ng-src="{{location.setup.splash ? 'https://d247kqobagyqjh.cloudfront.net/api/file/iFpTtabSPKhJ4oGKIh7p' : 'https://d247kqobagyqjh.cloudfront.net/api/file/6750gXV2RpilDseOWLpl' }}" />
                   <div class="md-list-item-text">
-                    <p>Welcome your guests with a beautiful, branded splash page. Capture emails, social details and keep them engaged.</p>
+                    <p>Design and select what data you want to capture.</p>
                   </div>
                 </md-list-item>
                 <md-divider style="margin: 20px 0;"></md-divider>
-                <md-subheader class="md-no-sticky"><b>Connect MIMO to your access points</b></md-subheader>
+                <md-subheader class="md-no-sticky">Connect MIMO to your access points</md-subheader>
                 <md-list-item class="md-2-line" ng-click='integrationClick("integration")' href="/#/{{ location.slug }}/integration">
-                  <img class="check-mark" ng-src="{{setupIntegrations == 'true' ? 'https://d247kqobagyqjh.cloudfront.net/api/file/iFpTtabSPKhJ4oGKIh7p' : 'https://d247kqobagyqjh.cloudfront.net/api/file/6750gXV2RpilDseOWLpl' }}" />
+                  <img class="check-mark" ng-src="{{location.setup.integrations ? 'https://d247kqobagyqjh.cloudfront.net/api/file/iFpTtabSPKhJ4oGKIh7p' : 'https://d247kqobagyqjh.cloudfront.net/api/file/6750gXV2RpilDseOWLpl' }}" />
                   <div class="md-list-item-text">
-                    <p>Everything is automated - all you need to do is enter some credentials and you'll be up and running in a jiffy.</p>
+                    <p>Enter your credentials and we'll set it up automatically.</p>
                   </div>
                 </md-list-item>
               </md-list>
-              <p>You might also want to change your location name! (<md-icon>settings</md-icon> bottom left sidebar).</p>
-            </md-content></md-card-content>
+              <p>You can change your location name in your settings.</p>
+            </md-card-content>
         </md-card>
       </div>
 
@@ -48,15 +48,11 @@
             </md-card-title-text>
           </md-card-title>
           <md-card-content layout="row" layout-wrap>
-            <div flex="100">
-              <p translate>Splash pages are the gateway to your guest WiFi, allowing you to control your guest's access</p>
-              <p translate>Welcome your customers when they arrive with a variety of login types.</p>
-              <o translate>Capture their email addresses & social details to engage with them and display special offers.</p>
-              <p translate>With unlimited sessions, you don't need to worry about additional monthly costs.</p>
-            </div>
-            <div flex="100">
-              <img class="dash-img" style="max-width: 80%;" src="https://d247kqobagyqjh.cloudfront.net/api/file/JV6wPcYaTrGPKjVwN3ww"></img>
-            </div>
+            <p translate>Splash pages are the gateway to your guest WiFi, allowing you to control your guest's access</p>
+            <p translate>Welcome your customers when they arrive with a variety of login types.</p>
+            <o translate>Capture their email addresses & social details to engage with them and display special offers.</p>
+            <p translate>With unlimited sessions, you don't need to worry about additional monthly costs.</p>
+            <p><img class="dash-img" style="max-width: 80%;" src="https://d247kqobagyqjh.cloudfront.net/api/file/JV6wPcYaTrGPKjVwN3ww"></img></p>
           </md-card-content>
           <md-card-actions layout="row" layout-align="end center">
             <splash-new style="md-raised" pages="splash_pages"></splash-new>

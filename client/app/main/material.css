@@ -908,7 +908,7 @@ location-boxes table {
 }
 
 [heartbeat-chart]> div > div:nth-child(1) > div > svg > g:nth-child(3) > text {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: normal;
 }
 
@@ -1167,7 +1167,7 @@ md-bottom-sheet .md-subheader {
 
 .page-meta {
   margin-top: 48px;
-  margin-bottom: 48px;
+  /* margin-bottom: 48px; */
   padding-bottom: 0px;
 }
 
@@ -1290,6 +1290,11 @@ img.dash-img:hover {
 
 /*general changes*/
 
+.md-text, .md-label, input {
+  font-size: 15px;
+  line-height: 20px;
+}
+
 md-dialog md-content {
   background-color: white;
 }
@@ -1370,7 +1375,7 @@ md-card md-card-title {
 
 .md-subhead {
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 20px;
   color: rgba(0, 0, 0, 0.87);
 }
@@ -1419,6 +1424,7 @@ md-toolbar:not(.md-menu-toolbar) {
 
 md-card {
   border-radius: 4px;
+  margin: 16px 8px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.10);
 }
 
@@ -1523,11 +1529,6 @@ table#plans td.md-cell {
   text-align: center;
 }
 
-table a {
-  font-weight: 600;
-  color: rgb(71, 90, 136);
-}
-
 @media (min-width: 960px) {
   md-card.fixed-table {
     height: calc(100vh - 150px);
@@ -1549,7 +1550,7 @@ table a {
 
 .mce-container * {
   color: rgba(0,0,0,0.9)!important;
-  font-family: 'Source Sans Pro', sans-serif!important;
+  font-family: 'Roboto', sans-serif!important;
 }
 
 .mce-container.mce-toolbar-grp {

@@ -21,9 +21,17 @@ module.exports = function (grunt) {
       }
   }
 
+  var buildConfig;
+  try {
+    // buildConfig = require('/etc/mimo/build.config.js');
+    buildConfig = require('./build.config.js');
+  } catch(e) {
+    console.log('No build config, continuing.....');
+  }
+
   var exec = require('sync-exec');
   var commitHash = exec('git log --pretty=format:"%h" -n 1');
-  var config = _.merge(defaultConfig, localConfig);
+  var config = _.merge(defaultConfig, localConfig, buildConfig);
 
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ng-constant');
@@ -72,15 +80,18 @@ module.exports = function (grunt) {
         constants: config.frontend.constants
       },
       production: {
-        constants: {
-          API_END_POINT: 'https://api.ctapp.io/api/v1',
-          API_URL: 'https://api.ctapp.io',
-          AUTH_URL: process.env.AUTH_URL || 'https://id.oh-mimo.com',
-          DEBUG: true,
-          COLOURS: '#009688 #FF5722 #03A9F4 #607D8B #F44336 #00BCD4',
-          COMMITHASH: commitHash.stdout
-        }
-      }
+        constants: config.frontend.constants
+      },
+      // production: {
+      //   constants: {
+      //     API_END_POINT: 'https://api.ctapp.io/api/v1',
+      //     API_URL: 'https://api.ctapp.io',
+      //     AUTH_URL: process.env.AUTH_URL || 'https://id.oh-mimo.com',
+      //     DEBUG: true,
+      //     COLOURS: '#009688 #FF5722 #03A9F4 #607D8B #F44336 #00BCD4',
+      //     COMMITHASH: commitHash.stdout
+      //   }
+      // }
     },
     // Project settings
     pkg: grunt.file.readJSON('package.json'),

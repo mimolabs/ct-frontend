@@ -2,7 +2,7 @@
 
 var app = angular.module('myApp.locations.directives', []);
 
-app.directive('locationShow', ['Location', '$routeParams', '$location', '$localStorage', 'showToast', 'menu', '$timeout', '$pusher', '$route', '$rootScope', 'gettextCatalog', function(Location, $routeParams, $location, $localStorage, showToast, menu, $timeout, $pusher, $route, $rootScope, gettextCatalog) {
+app.directive('locationShow', ['Location', '$routeParams', '$location', '$localStorage', 'showToast', 'menu', '$timeout', '$route', '$rootScope', 'gettextCatalog', function(Location, $routeParams, $location, $localStorage, showToast, menu, $timeout, $route, $rootScope, gettextCatalog) {
 
   var link = function(scope,element,attrs,controller) {
 
@@ -63,11 +63,9 @@ app.directive('newLocationForm', ['Location', '$location', 'menu', 'showErrors',
 
   var link = function( scope, element, attrs ) {
 
-    menu.isOpen = false;
+    menu.isOpen     = false;
     menu.hideBurger = true;
-    scope.location  = {
-      add_to_global_map: false,
-    };
+    scope.location  = {};
 
     scope.save = function(form, location) {
       form.$setPristine();
@@ -132,7 +130,7 @@ app.directive('newLocationCreating', ['Location', '$location', function(Location
 
 }]);
 
-app.directive('locationBoxes', ['Location', '$location', 'Box', '$routeParams', '$mdDialog', '$mdMedia', 'showToast', 'showErrors', '$q', '$mdEditDialog', '$pusher', '$rootScope', 'gettextCatalog', 'pagination_labels', '$timeout', function(Location, $location, Box, $routeParams, $mdDialog, $mdMedia, showToast, showErrors, $q, $mdEditDialog, $pusher, $rootScope, gettextCatalog, pagination_labels, $timeout) {
+app.directive('locationBoxes', ['Location', '$location', 'Box', '$routeParams', '$mdDialog', '$mdMedia', 'showToast', 'showErrors', '$q', '$mdEditDialog', '$rootScope', 'gettextCatalog', 'pagination_labels', '$timeout', function(Location, $location, Box, $routeParams, $mdDialog, $mdMedia, showToast, showErrors, $q, $mdEditDialog, $rootScope, gettextCatalog, pagination_labels, $timeout) {
 
   var link = function( scope, element, attrs, controller ) {
     scope.selected = [];
@@ -342,7 +340,7 @@ app.directive('locationSettingsMain', ['Location', '$location', '$routeParams', 
     scope.destroy = function(ev) {
       var confirm = $mdDialog.confirm()
         .title(gettextCatalog.getString('Are you sure you want to delete this location?'))
-        .textContent(gettextCatalog.getString('You cannot delete a location with session data.'))
+        .textContent(gettextCatalog.getString('This action cannot be reversed!'))
         .ariaLabel(gettextCatalog.getString('Archive'))
         .targetEvent(ev)
         .ok(gettextCatalog.getString('delete'))
@@ -366,86 +364,6 @@ app.directive('locationSettingsMain', ['Location', '$location', '$routeParams', 
   return {
     link: link,
     templateUrl: 'components/locations/settings/_main.html',
-    require: '^locationSettings'
-  };
-
-}]);
-
-app.directive('locationSettingsNotifications', ['$timeout', function($timeout) {
-
-  var link = function( scope, element, attrs, controller ) {
-
-    function validateEmail(email) {
-      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(email);
-    }
-
-    scope.update = function (form) {
-      var emails = [];
-      for (var i = 0, len = scope.ctrl.emails.length; i < len; i++) {
-        if (validateEmail(scope.ctrl.emails[i])) {
-          emails.push(scope.ctrl.emails[i]);
-        }
-      }
-      scope.location.reports_emails = emails.join(',');
-      controller.update(form);
-    };
-
-    scope.ctrl = {};
-    scope.ctrl.emails = [];
-
-    var populateEmails = function() {
-      if (scope.location.reports_emails) {
-        var emails = scope.location.reports_emails.split(',');
-        for (var i = 0, len = emails.length; i < len; i++) {
-          scope.ctrl.emails.push(emails[i]);
-        }
-      }
-    };
-
-    // Prefer to watch atm //
-    var timer = $timeout(function() {
-      populateEmails();
-      $timeout.cancel(timer);
-    }, 250);
-
-    scope.back = function() {
-      controller.back();
-    };
-
-  };
-
-  return {
-    link: link,
-    templateUrl: 'components/locations/settings/_notifications.html',
-    require: '^locationSettings'
-  };
-
-}]);
-
-app.directive('locationSettingsSecurity', ['$timeout', '$localStorage', function($timeout, $localStorage) {
-
-  var link = function( scope, element, attrs, controller ) {
-
-    scope.update = function (form) {
-      controller.update(form);
-    };
-
-    scope.ctrl = {};
-    scope.ctrl.levels = [1,2,3];
-    if ($localStorage.mimo_user) {
-      scope.white_label = $localStorage.mimo_user.custom;
-    }
-
-    scope.back = function() {
-      controller.back();
-    };
-
-  };
-
-  return {
-    link: link,
-    templateUrl: 'components/locations/settings/_security.html',
     require: '^locationSettings'
   };
 
@@ -497,256 +415,6 @@ app.directive('locationSettingsDevices', ['menu', '$timeout', function(menu, $ti
 
 }]);
 
-app.directive('locationSettingsAnalytics', [function() {
-
-  var link = function( scope, element, attrs, controller ) {
-
-    scope.update = function (form) {
-      controller.update(form);
-    };
-
-    scope.back = function() {
-      controller.back();
-    };
-
-  };
-
-  return {
-    link: link,
-    templateUrl: 'components/locations/settings/_analytics.html',
-    require: '^locationSettings'
-  };
-
-}]);
-
-app.directive('locationSettingsSplash', [function() {
-
-  var link = function( scope, element, attrs, controller ) {
-
-    scope.update = function (form) {
-      controller.update(form,scope.location);
-    };
-
-    scope.back = function() {
-      controller.back();
-    };
-
-  };
-
-  return {
-    link: link,
-    templateUrl: 'components/locations/settings/_splash.html',
-    require: '^locationSettings'
-  };
-
-}]);
-
-app.directive('locationSettingsMenu', ['Location', '$location', '$routeParams', '$mdDialog', 'showToast', 'showErrors', 'moment', '$pusher', '$rootScope', 'gettextCatalog', 'menu', function(Location, $location, $routeParams, $mdDialog, showToast, showErrors, moment, $pusher, $rootScope, gettextCatalog, menu) {
-
-  var link = function( scope, element, attrs ) {
-
-    // scope.location = { slug: $routeParams.id };
-
-    // User Permissions //
-    var createMenu = function() {
-
-      scope.menu = [];
-
-      scope.menu.push({
-        name: gettextCatalog.getString('Notifications'),
-        type: 'notifications',
-        icon: 'add_alert'
-      });
-
-      scope.menu.push({
-        name: gettextCatalog.getString('Devices'),
-        type: 'devices',
-        icon: 'router'
-      });
-
-      scope.menu.push({
-        name: gettextCatalog.getString('Security'),
-        type: 'security',
-        icon: 'security'
-      });
-
-      scope.menu.push({
-        name: gettextCatalog.getString('Splash'),
-        type: 'splash',
-        icon: 'web'
-      });
-
-      scope.menu.push({
-        name: gettextCatalog.getString('Analytics'),
-        type: 'analytics',
-        icon: 'trending_up'
-      });
-
-      scope.menu.push({
-        name: gettextCatalog.getString('Transfer'),
-        type: 'transfer',
-        icon: 'transform'
-      });
-
-      scope.menu.push({
-        name: scope.location.archived ? gettextCatalog.getString('Unarchive') : gettextCatalog.getString('Archive'),
-        type: 'archive',
-        icon: 'archive'
-      });
-
-      scope.menu.push({
-        name: gettextCatalog.getString('Delete'),
-        type: 'delete',
-        icon: 'delete_forever'
-      });
-    };
-
-    scope.action = function(type) {
-      switch(type) {
-        case 'delete':
-          scope.destroy();
-          break;
-        case 'transfer':
-          transfer();
-          break;
-        case 'archive':
-          archive();
-          break;
-        case 'security':
-          security();
-          break;
-        case 'notifications':
-          notifications();
-          break;
-        case 'devices':
-          devices();
-          break;
-        case 'splash':
-          splash();
-          break;
-        case 'analytics':
-          analytics();
-          break;
-      }
-    };
-
-    var archive = function(ev) {
-      var msg, msg2;
-      if (scope.location.archived) {
-        msg = gettextCatalog.getString('Are you sure you want to restore this location');
-        msg2 = gettextCatalog.getString('Your splash pages and networks will be activated.');
-      } else {
-        msg = gettextCatalog.getString('Are you sure you want to archive this location');
-        msg2 = gettextCatalog.getString('This will prevent users from logging in.');
-      }
-      var confirm = $mdDialog.confirm()
-        .title(msg)
-        .textContent(msg2)
-        .ariaLabel(gettextCatalog.getString('Archive'))
-        .targetEvent(ev)
-        .ok(gettextCatalog.getString('CONFIRM'))
-        .cancel(gettextCatalog.getString('Cancel'));
-      $mdDialog.show(confirm).then(function() {
-        updateLocation(scope.location.archived);
-      });
-    };
-
-    var updateLocation = function(state) {
-      var s = 'active';
-      if (state === false) {
-        s = 'archived';
-      }
-      Location.update({}, {
-        id: scope.location.slug,
-        location: {
-          state: s
-        }
-      }).$promise.then(function(results) {
-        scope.location.archived = true;
-        var msg;
-        if (s === 'active') {
-          menu.archived = false;
-          msg = gettextCatalog.getString('Location successfully restored.');
-          menu.locationStateIcon = undefined;
-        } else {
-          menu.archived = true;
-          msg = gettextCatalog.getString('Location successfully archived.');
-          menu.locationStateIcon = 'archived';
-        }
-        showToast(msg);
-      }, function(err) {
-        showErrors(err);
-      });
-    };
-
-    var transfer = function() {
-      $mdDialog.show({
-        templateUrl: 'components/locations/settings/_transfer.html',
-        clickOutsideToClose: true,
-        parent: angular.element(document.body),
-        controller: TransferController,
-      });
-    };
-
-    var TransferController = function($scope){
-      $scope.transfer = function(account_id) {
-        $mdDialog.cancel();
-        transferLocation(account_id);
-      };
-      $scope.close = function() {
-        $mdDialog.cancel();
-      };
-    };
-    TransferController.$inject = ['$scope'];
-
-    var transferLocation = function(accountId) {
-      Location.transfer({accountId: accountId, id: scope.location.slug}).$promise.then(function(results) {
-        $location.path('/').search('tfer=true');
-        showToast(gettextCatalog.getString('Location successfully transferred.'));
-      }, function(err) {
-        showErrors(err);
-      });
-    };
-
-    var security = function() {
-      window.location.href = '/#/' + scope.location.slug + '/settings/security';
-    };
-
-    var notifications = function() {
-      window.location.href = '/#/' + scope.location.slug + '/settings/notifications';
-    };
-
-    var devices = function() {
-      window.location.href = '/#/' + scope.location.slug + '/settings/devices';
-    };
-
-    var splash = function() {
-      window.location.href = '/#/' + scope.location.slug + '/settings/splash';
-    };
-
-    var analytics = function() {
-      window.location.href = '/#/' + scope.location.slug + '/settings/analytics';
-    };
-
-    // user permissions //
-    scope.$watch('location',function(nv){
-      if (nv !== undefined) {
-        createMenu();
-      }
-    });
-
-  };
-
-  return {
-    link: link,
-    scope: {
-      location: '='
-    },
-    templateUrl: 'components/locations/settings/_settings_menu.html',
-  };
-
-}]);
-
 app.directive('integrationSelect', ['Location', '$routeParams', '$location', '$http', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', function(Location, $routeParams, $location, $http, $mdDialog, showToast, showErrors, gettextCatalog) {
 
   var link = function(scope, element, attrs, controller) {
@@ -757,7 +425,6 @@ app.directive('integrationSelect', ['Location', '$routeParams', '$location', '$h
       if (scope.location.paid) {
         var msg = 'Integration Selected'
         console.log(msg);
-        window.amplitude.getInstance().logEvent(msg, { type: type } );
         $location.path($routeParams.id + '/integration/' + type + '/auth');
       }
     };
@@ -786,13 +453,11 @@ app.directive('integrationSelect', ['Location', '$routeParams', '$location', '$h
 app.directive('integrations', ['Location', '$routeParams', '$location', '$http', '$mdDialog', 'showToast', 'showErrors', 'SplashIntegration', '$q', function(Location, $routeParams, $location, $http, $mdDialog, showToast, showErrors, SplashIntegration, $q) {
 
   var link = function(scope, element, attrs) {
-
     scope.integSelected = function() {
       scope.integration.host = undefined;
       scope.integration.username = undefined;
       scope.integration.password = undefined;
     };
-
   };
 
   var controller = function($scope) {
@@ -917,7 +582,6 @@ app.directive('cloudtraxAuth', ['Location', '$routeParams', '$location', '$http'
       controller.save(scope.integration).then(function() {
         var msg = 'Integration Validated';
         console.log(msg);
-        window.amplitude.getInstance().logEvent(msg, { type: 'OpenMesh' });
         scope.validated = true;
       });
     };
@@ -1098,7 +762,6 @@ app.directive('cloudtraxSetup', ['Location', '$routeParams', '$location', '$http
       } else {
         var msg = 'Integration Settings';
         console.log(msg);
-        window.amplitude.getInstance().logEvent(msg, { type: 'OpenMesh' } );
         scope.integration = integration;
         fetchSites();
       }
@@ -1134,7 +797,6 @@ app.directive('unifiAuth', ['Location', '$routeParams', '$location', '$http', '$
       controller.save(scope.integration).then(function() {
         var msg = 'Integration Validated';
         console.log(msg);
-        window.amplitude.getInstance().logEvent(msg, { type: 'UniFi' });
         scope.validated = true;
       });
     };
@@ -1169,7 +831,7 @@ app.directive('unifiAuth', ['Location', '$routeParams', '$location', '$http', '$
         $location.path('/' + $routeParams.id + '/settings/integrations');
         return;
       }
-      scope.integration.type = 'unifi';
+      scope.integration.integration_type = 'unifi';
     }, function(err) { console.log(err); });
 
     locationName();
@@ -1236,7 +898,6 @@ app.directive('unifiSetup', ['Location', '$routeParams', '$location', '$http', '
       } else {
         var msg = 'Integration Settings';
         console.log(msg);
-        window.amplitude.getInstance().logEvent(msg, {type: 'UniFi'});
         scope.integration = integration;
         fetchSites();
       }
@@ -1273,7 +934,6 @@ app.directive('vszAuth', ['Location', '$routeParams', '$location', '$http', '$md
       controller.save(scope.integration).then(function() {
         var msg = 'Integration Validated';
         console.log(msg);
-        window.amplitude.getInstance().logEvent(msg, { type: 'VSZ' });
         scope.validated = true;
       });
     };
@@ -1307,7 +967,7 @@ app.directive('vszAuth', ['Location', '$routeParams', '$location', '$http', '$md
         $location.path('/' + $routeParams.id + '/settings/integrations');
       }
       scope.integration = integration;
-      scope.integration.type = 'vsz';
+      scope.integration.integration_type = 'vsz';
     }, function(err) { console.log(err); });
 
     locationName();
@@ -1376,7 +1036,6 @@ app.directive('vszSetup', ['Location', '$routeParams', '$location', '$http', '$m
       } else {
         var msg = 'Integration Settings';
         console.log(msg);
-        window.amplitude.getInstance().logEvent(msg, { type: 'VSZ' });
         scope.integration = integration;
         fetchSites();
       }
@@ -1414,7 +1073,6 @@ app.directive('merakiAuth', ['Location', '$routeParams', '$location', '$http', '
       controller.save(scope.integration).then(function() {
         var msg = 'Integration Validated';
         console.log(msg);
-        window.amplitude.getInstance().logEvent(msg, { type: 'Meraki' });
         scope.validated = true;
       });
     };
@@ -1445,7 +1103,7 @@ app.directive('merakiAuth', ['Location', '$routeParams', '$location', '$http', '
 
     controller.fetch().then(function(integration) {
       scope.integration = integration;
-      scope.integration.type = 'meraki';
+      scope.integration.integration_type = 'meraki';
     }, function(err) { console.log(err); });
 
     locationName();
@@ -1571,7 +1229,6 @@ app.directive('merakiSetup', ['Location', '$routeParams', '$location', '$http', 
       } else {
         var msg = 'Integration Settings';
         console.log(msg);
-        window.amplitude.getInstance().logEvent(msg, { type: 'Meraki' });
         scope.integration = integration;
         fetchSites();
       }
@@ -1605,7 +1262,6 @@ app.directive('gettingStarted', ['Location', '$routeParams', '$location', '$http
     scope.integrationClick = function(type) {
       var msg = 'Wizard Clicked';
       console.log(msg);
-      window.amplitude.getInstance().logEvent(msg, {type: type});
     };
 
     scope.$watch('location',function(nv){
@@ -1629,272 +1285,6 @@ app.directive('gettingStarted', ['Location', '$routeParams', '$location', '$http
 
 }]);
 
-app.directive('getWithThePlan', ['Location', '$routeParams', '$location', 'Subscription', '$mdDialog', '$timeout', '$pusher', 'gettextCatalog', 'STRIPE_KEY', 'Auth', 'showErrors', '$route', 'Plan', function(Location, $routeParams, $location, Subscription, $mdDialog, $timeout, $pusher, gettextCatalog, STRIPE_KEY, Auth, showErrors, $route, Plan) {
-
-  var link = function(scope, element, attrs, controller) {
-
-    if (Auth.currentUser()) {
-      var key = Auth.currentUser().key;
-    }
-
-    scope.label = attrs.label || 'Free Trial';
-
-    var convertToPaid = function() {
-      if (scope.location) {
-        scope.location.paid = true;
-      } else {
-        $route.reload();
-      }
-    };
-
-    var channel;
-
-    var calculate = function(people,plan) {
-      var val;
-      var base_1 = 4;
-      var base_2 = 10;
-      var plan_price = parseInt(plan.plan_price);
-      var currency = plan.currency;
-
-      if (plan.currency === 'GBP') {
-        base_1 = 3;
-        base_2 = 8;
-      }
-
-      if (people <= 250) {
-        return plan_price;
-      }
-
-      function thousand(num) {
-        val = ((num - 250) / 50) * base_1;
-        return val + plan_price;
-      }
-
-      if (people <= 1000) {
-        return thousand(people);
-      }
-
-      if (people <= 5000) {
-        var max = thousand(1000);
-        // val = ((people - 1000) / 500);
-        // val = max + (val * 10);
-        // return val + plan_price;
-        if (people <= 1500) {
-          return max + base_2;
-        }
-
-        if (people <= 2000) {
-          return max + 2*base_2;
-        }
-
-        if (people <= 2500) {
-          return max + 3*base_2;
-        }
-
-        if (people <= 3000) {
-          return max + 4*base_2;
-        }
-
-        if (people <= 3500) {
-          return max + 5*base_2;
-        }
-
-        if (people <= 4000) {
-          return max + 6*base_2;
-        }
-
-        if (people <= 4500) {
-          return max + 7*base_2;
-        }
-
-        if (people < 5000) {
-          return max + 80;
-        }
-
-      }
-
-      return 0;
-    };
-
-    function DoucheController($scope, plans) {
-      if (!plans) {
-        alert('No plans, contact the MIMO team!');
-        return;
-      }
-
-      $scope.selectedIndex = 0;
-      $scope.plans = plans;
-      $scope.plan  = plans[1];
-      $scope.plan_id = $scope.plan.slug;
-      $scope.people = 250;
-
-      var currency = function(curr) {
-        if (curr === 'GBP') {
-          $scope.curr = '£';
-        } else if (curr === 'EUR' ) {
-          $scope.curr = '€';
-        } else {
-          $scope.curr = '$';
-        }
-      };
-
-      $scope.setPlan = function(plan_id) {
-        for (var i=0; i < plans.length; i++) {
-          if (plan_id === plans[i].slug) {
-            $scope.plan = plans[i];
-            break;
-          }
-        }
-      };
-
-      currency($scope.plan.currency);
-
-      $scope.hide = function() {
-        $mdDialog.hide();
-      };
-
-      $scope.cancel = function() {
-        var msg = 'Plan Dialog Cancel';
-        console.log(msg);
-        window.amplitude.getInstance().logEvent(msg);
-        $mdDialog.cancel();
-      };
-
-      $scope.back = function() {
-        $scope.errors = undefined;
-        if ($scope.selectedIndex > 0) {
-          $scope.selectedIndex--;
-        }
-      };
-
-      $scope.next = function() {
-        if ($scope.selectedIndex < 4) {
-          $scope.selectedIndex++;
-        }
-      };
-
-      $scope.price = function() {
-        return calculate($scope.people, $scope.plan);
-      };
-
-      var subscribe = function() {
-        if (typeof client === 'undefined') {
-          return;
-        }
-
-        var pusher = $pusher(client);
-        if (!key) {
-          console.log('No key!!');
-          return;
-        }
-
-        channel = pusher.subscribe(key);
-        channel.bind('sub_completed', function(data) {
-          if (data.message.success === true) {
-            convertToPaid();
-            $scope.success = true;
-            $scope.selectedIndex = 4;
-            var timer = $timeout(function() {
-              $mdDialog.cancel();
-              $timeout.cancel(timer);
-            },2500);
-          } else {
-            $scope.errors = data.message.message;
-          }
-        });
-      };
-
-      var upgrade = function(card) {
-        subscribe();
-        Subscription.create({plan_id: $scope.plan_id, card: card, trial: true}).$promise.then(function(data) {
-          var msg = 'Started Trial';
-          console.log(msg);
-          window.amplitude.getInstance().logEvent(msg, { plan_id: $scope.plan_id });
-          $scope.selectedIndex = 3;
-        }, function(err) {
-          $scope.subscribing = undefined;
-          $scope.errors = err.data.message;
-        });
-      };
-
-      var createSubscription = function(card) {
-        upgrade(card);
-      };
-
-      $scope.stripeCallback = function (code, result) {
-        $scope.errors = undefined;
-        $scope.next();
-        if (result.error) {
-          var msg = 'Card Declined';
-          console.log(msg);
-          window.amplitude.getInstance().logEvent(msg, { error: result.error });
-          $scope.errors = result.error.message;
-        } else {
-          createSubscription(result.id);
-        }
-      };
-    }
-    DoucheController.$inject = ['$scope', 'plans'];
-
-    scope.signUp = function(ev) {
-
-      if (!scope.location) {
-        console.log('Kindly send a location in unless you\'re in the user section, in which case you don\'t care.');
-      }
-
-      if (STRIPE_KEY && window.Stripe) {
-        console.log('Setting Stripe Token');
-        window.Stripe.setPublishableKey(STRIPE_KEY);
-      } else {
-        console.log('Could not set stripe token');
-        return;
-      }
-
-      var msg = 'Clicked Sign-Up';
-      console.log(msg);
-      window.amplitude.getInstance().logEvent(msg, { mgs: scope.label });
-
-      var loadPlans = function() {
-        Plan.query({
-          period: 'monthly',
-          user_id: $routeParams.id,
-        }).$promise.then(function(data) {
-          $mdDialog.show({
-            controller: DoucheController,
-            templateUrl: 'components/locations/_signup.tmpl.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: false,
-            locals: {
-              plans: data.plans
-            }
-          }, function() {
-            alert('Problem loading the plans, try again.');
-          });
-        });
-      };
-
-      loadPlans();
-    };
-
-  };
-
-  var template =
-    '<md-button type="submit" class="md-raised md-primary" ng-click="signUp()">' +
-    '{{ label }}' +
-    '</md-button>';
-
-
-  return {
-    link: link,
-    scope: {
-      message: '@',
-      location: '='
-    },
-    template: template
-  };
-}]);
-
 app.directive('integrationComplete', ['Location', '$routeParams', '$location', '$http', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', function(Location, $routeParams, $location, $http, $mdDialog, showToast, showErrors, gettextCatalog) {
 
   var link = function(scope, element, attrs, controller) {
@@ -1907,7 +1297,6 @@ app.directive('integrationComplete', ['Location', '$routeParams', '$location', '
       scope.integration = integration;
       var msg = 'Integration Complete';
       console.log(msg);
-      window.amplitude.getInstance().logEvent(msg, { type: scope.integration.type });
       scope.loading = undefined;
     }, function(err) { console.log(err); });
   };
@@ -1957,7 +1346,6 @@ app.directive('integrationSettings', ['Location', '$routeParams', '$location', '
       if (confirm("Are you sure you want to delete this integration?")) {
         var msg = 'Integration Deleted';
         console.log(msg);
-        window.amplitude.getInstance().logEvent(msg);
         controller.destroy(scope.integration).then(function() {
           scope.integration = {};
         });

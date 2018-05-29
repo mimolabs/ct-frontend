@@ -8,7 +8,13 @@ var express = require('express');
 var passport = require('passport');
 var PolkaSpotsStrategy = require('passport-polkaspots').Strategy
 var session = require('express-session');
-var secrets = require('./local.env.sample');
+var secrets;
+
+try {
+  secrets = require('/etc/mimo/build.config.js');
+} catch(e) {
+  secrets = require('./local.env.sample');
+}
 
 var favicon = require('serve-favicon');
 var URI = require('urijs');
@@ -32,14 +38,6 @@ module.exports = function(app) {
   app.use(bodyParser.json());
   app.use(methodOverride());
   app.use(cookieParser());
-
-  // process.env.APP_ID = process.env.APP_ID || secrets.APP_ID;
-  // process.env.APP_SECRET = process.env.APP_SECRET || secrets.APP_SECRET;
-  // process.env.CALLBACK_URL = process.env.MIMO_DASHBOARD_URL + '/auth/login/callback';
-  // process.env.authorizationURL = process.env.authorizationURL || secrets.authorizationURL;
-  // process.env.tokenURL = process.env.tokenURL || secrets.tokenURL;
-  // process.env.profileURL = process.env.profileURL || secrets.profileURL;
-  // process.env.baseURL = secrets.baseURL;
 
   passport.serializeUser(function(options, done) {
     done(null, options);

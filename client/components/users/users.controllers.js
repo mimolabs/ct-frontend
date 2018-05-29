@@ -2,8 +2,8 @@
 
 var app = angular.module('myApp.users.controller', []);
 
-app.controller('UsersShowController', ['$rootScope', '$window', '$scope', '$routeParams', 'User', '$location', 'Auth', 'STRIPE_KEY', '$route', 'locationHelper', 'AUTH_URL', 'menu', '$cookies', 'gettextCatalog',
-  function($rootScope, $window, $scope, $routeParams, User, $location, Auth, STRIPE_KEY, $route, locationHelper, AUTH_URL, menu, $cookies, gettextCatalog) {
+app.controller('UsersShowController', ['$rootScope', '$window', '$scope', '$routeParams', 'User', '$location', 'Auth', '$route', 'locationHelper', 'AUTH_URL', 'menu', '$cookies', 'gettextCatalog',
+  function($rootScope, $window, $scope, $routeParams, User, $location, Auth, $route, locationHelper, AUTH_URL, menu, $cookies, gettextCatalog) {
 
     $scope.loading = true;
     $scope.location = { slug: $routeParams.id };
@@ -32,8 +32,8 @@ app.controller('UsersShowController', ['$rootScope', '$window', '$scope', '$rout
   }
 ]);
 
-app.controller('UsersIntegrationsController', ['Integration', '$scope', '$routeParams', 'User', '$location', 'Auth', '$pusher',
-  function(Integration, $scope, $routeParams, User, $location, Auth, $pusher) {
+app.controller('UsersIntegrationsController', ['Integration', '$scope', '$routeParams', 'User', '$location', 'Auth', 
+  function(Integration, $scope, $routeParams, User, $location, Auth) {
 
     function parse(val) {
       var result, tmp = [];

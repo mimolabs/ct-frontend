@@ -26,7 +26,7 @@
               <th md-column><span>Status</spam></th>
               <th md-column md-order-by="last_heartbeat" md-desc><span translate>Last Seen</span></th>
               <th md-column md-order-by="description" md-desc><span translate>Name</span></th>
-              <th md-column md-order-by="calledstationid"><span translate>Mac</span></th>
+              <th md-column md-order-by="mac_address"><span translate>Mac</span></th>
               <th md-column><span translate>Options</span></th>
             </tr>
           </thead>
@@ -47,7 +47,7 @@
                 <span hide show-gt-xs>{{ box.description | emptyFilter | truncate:20 }}</span>
               </td>
               <td md-cell>
-                {{ box.calledstationid }}
+                {{ box.mac_address }}
               </td>
               <td md-cell>
                 <md-menu>

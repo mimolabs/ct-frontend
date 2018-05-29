@@ -96,7 +96,6 @@ app.directive('listCampaigns', ['Campaign', 'Location', '$routeParams', '$rootSc
 
     init();
     var msg = 'Visited Campaigns';
-    window.amplitude.getInstance().logEvent(msg);
   };
 
   return {
@@ -276,7 +275,6 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
         campaign: campaign
       }).$promise.then(function(results) {
         var msg = 'Campaign Created';
-        window.amplitude.getInstance().logEvent(msg);
         scope.campaign.id = results.id;
         showToast(gettextCatalog.getString('Campaign successfully created.'));
         $location.path($routeParams.id + '/campaigns/' + results.id);
@@ -293,7 +291,6 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
       }).$promise.then(function(results) {
         var msg = 'Campaign Updated';
         console.log(msg);
-        window.amplitude.getInstance().logEvent(msg, { active: results.active, state: results.state });
         scope.campaign.id = results.id;
         scope.campaign.hard_state = results.state;
         showToast(gettextCatalog.getString('Campaign successfully updated.'));

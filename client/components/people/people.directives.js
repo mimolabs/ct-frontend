@@ -459,14 +459,10 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
           falses.includes(scope.location.paid)
         )) {
         $location.path('/' + scope.location.slug + '/guide');
-        window.amplitude.getInstance().logEvent('Viewed Getting Started');
       } else {
         setParams();
         getAudiences().then(function() {
         getPeople();
-        var identify = new window.amplitude.Identify().add('karma', 1);
-        window.amplitude.getInstance().identify(identify);
-        window.amplitude.getInstance().logEvent('Viewed People Dashboard');
       });
       }
     };
@@ -495,7 +491,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
 
 }]);
 
-app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email', 'Sms', 'Client', 'PersonPortal', '$q', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', '$pusher', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, Social, Guest, Email, Sms, Client, PersonPortal, $q, $routeParams, $location, $http, $compile, $rootScope, $timeout, $pusher, showToast, showErrors, menu, $mdDialog, gettextCatalog) {
+app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email', 'Sms', 'Client', 'PersonPortal', '$q', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, Social, Guest, Email, Sms, Client, PersonPortal, $q, $routeParams, $location, $http, $compile, $rootScope, $timeout, $showToast, showErrors, menu, $mdDialog, gettextCatalog) {
 
   var link = function(scope, element, attrs) {
 
@@ -653,7 +649,7 @@ app.directive('peopleNav', [function() {
 
 }]);
 
-app.directive('peopleReports', ['People', 'Location', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', '$pusher', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, $routeParams, $location, $http, $compile, $rootScope, $timeout, $pusher, showToast, showErrors, menu, $mdDialog, gettextCatalog) {
+app.directive('peopleReports', ['People', 'Location', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, $routeParams, $location, $http, $compile, $rootScope, $timeout, showToast, showErrors, menu, $mdDialog, gettextCatalog) {
 
   var link = function(scope, element, attrs) {
 

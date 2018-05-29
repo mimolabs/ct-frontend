@@ -4,11 +4,12 @@ var app = angular.module('myApp.boxes.services', ['ngResource',]);
 
 app.factory('Box', ['$resource', 'API_END_POINT',
   function($resource, API_END_POINT){
-    return $resource(API_END_POINT + '/boxes/:id/:action',
+    return $resource(API_END_POINT + '/locations/:location_id/boxes/:id/:action',
       {
         q: '@q',
         id: '@id',
-        action: '@action'
+        action: '@action',
+        location_id: '@location_id'
       },
       {
       geodata: {

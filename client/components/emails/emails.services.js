@@ -4,9 +4,11 @@ var app = angular.module('myApp.emails.services', ['ngResource']);
 
 app.factory('Email', ['$resource', 'API_END_POINT',
   function($resource, API_END_POINT){
-    return $resource(API_END_POINT + '/emails/:id',
+    return $resource(API_END_POINT + '/locations/:location_id/people/:person_id/emails',
       {
         q: '@q',
+        location_id: '@location_id',
+        person_id: '@person_id',
         id: '@id'
       },
       {

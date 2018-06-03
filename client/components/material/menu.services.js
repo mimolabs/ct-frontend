@@ -40,52 +40,16 @@ app.factory('showToast', ['$mdToast', 'gettextCatalog', function ($mdToast, gett
 
 app.factory('showErrors', ['$mdBottomSheet', 'gettextCatalog', function ($mdBottomSheet, gettextCatalog) {
 
-  // Serious tidy in order //
-  // Should handle all the errors gracefully. It doesn't //
-
   var formatErrors = function(errors) {
     var e = [];
-    var err, res;
-    var errorMsgs = [
-          gettextCatalog.getString("Splash codes can't be created on the free plans"),
-          gettextCatalog.getString("Captive portal enabled on multiple SSIDs. This is not possible without using a zone."),
-          gettextCatalog.getString("Channel can't be blank"),
-          gettextCatalog.getString("Channel is invalid")
-        ];
-    if (errors.data && errors.data.errors) {
-      res = errors.data.errors;
+
+    if (errors.data && errors.data.message && Array.isArray(errors.data.message)) {
+      console.log(errors.data.message)
+      return errors.data.message;
     }
-    if (res) {
-      var keys = Object.keys(res);
-      if (keys && keys[0] === '0') {
-        for (var i = 0; i < res.length; i++) {
-          e.push(res[i]);
-        }
-      } else if (keys) {
-        angular.forEach(keys, function(v,k) {
-          e.push(v.split('_').join(' ')  + ' ' + res[v]);
-        });
-      }
-    } else if (errors.data && errors.data.message) {
-      // This should loop through the array and remove the 'keys'
-      // The keys don't actually work though since Rails sends full messages
-      e.push(errors.data.message);
-    } else if (errors && errors.data) {
-      console.log(errors);
-      err = errors.data || gettextCatalog.getString('An unknown error occurred, try again.');
-      e.push(err);
-    } else if (errors && errors.message) {
-      err = errors.message;
-      e.push(err);
-    } else {
-      console.log(errors);
-      e.push(gettextCatalog.getString('An unknown error occurred, please try again.'));
-    }
-    if (e.length > 0) {
-      return e[0];
-    } else {
-      return e;
-    }
+
+    console.log(errors);
+    return ['Unknown error!'];
   };
 
   function MenuCtrl($scope, errors) {

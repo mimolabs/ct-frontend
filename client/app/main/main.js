@@ -10,12 +10,10 @@ var app = angular.module('myApp', [
   'myApp.services',
   'myApp.directives',
   'ngAnimate',
-  'angularPayments',
   'angularMoment',
   'ngMaterial',
   'md.data.table',
   'minicolors',
-  'pusher-angular',
   'config',
   'gettext',
   'moment-picker',
@@ -41,11 +39,11 @@ app.config(['$locationProvider', function($locationProvider) {
   $locationProvider.hashPrefix('');
 }]);
 
-app.config(['$mdThemingProvider', 'THEMES', function($mdThemingProvider, THEMES) {
-  $mdThemingProvider.theme('default')
-    .primaryPalette('pink')
-    .accentPalette('pink');
-}]);
+// app.config(['$mdThemingProvider', 'THEMES', function($mdThemingProvider, THEMES) {
+//   $mdThemingProvider.theme('default')
+//     .primaryPalette('pink')
+//     .accentPalette('pink');
+// }]);
 
 app.config([function() {
   tinyMCE.baseURL = '/bower_components/tinymce';

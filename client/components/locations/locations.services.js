@@ -263,3 +263,24 @@ app.factory('LocationSessions', ['$resource', '$localStorage', 'API_END_POINT',
   });
 
 }]);
+
+app.factory('Session', ['$resource', 'API_END_POINT',
+  function($resource, API_END_POINT){
+    return $resource(API_END_POINT + '/locations/:location_id/sessions',
+      {
+        id: '@id',
+        location_id: '@location_id'
+      },
+      {
+      query: {
+        method:'GET',
+        isArray: false,
+        params: {
+          box_id: '@box_id',
+          location_id: '@location_id',
+          id: '@id',
+          client_mac: '@client_mac'
+        }
+      }
+    });
+  }]);

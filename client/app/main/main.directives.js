@@ -5,7 +5,6 @@ var app = angular.module('myApp.directives', [
   'myApp.bulk_messages.directives',
   'myApp.bulk_message_activity.directives',
   'myApp.campaigns.directives',
-  'myApp.codes.directives',
   'myApp.charts.directives',
   'myApp.clients.directives',
   'myApp.emails.directives',
@@ -212,46 +211,4 @@ app.directive('confirmOnExit', ['$mdDialog', '$location','gettextCatalog', funct
       });
     }
   };
-}]);
-
-app.directive('cardForm', [function() {
-
-  function link(scope,element,attrs) {
-
-  }
-
-  return {
-    link: link,
-    scope: {
-      form: '=',
-      card: '='
-    },
-    template:
-      '<div>'+
-      // '<form stripe-form="stripeCallback" name=\'myForm\'>'+
-      '<div layout="row" layout-wrap>'+
-      '<md-input-container class="md-block" flex="100">'+
-      '<label>Card Number</label>'+
-      '<input md-autofocus type=\'text\' ng-model=\'number\' placeholder=\'Card Number\' payments-format=\'card\' payments-validate=\'card\' name=\'card\' value=\'\'/>'+
-      '<div ng-messages="form.card.$error">'+
-      '<div ng-message="card">Card number invalid</div>'+
-      '</div>'+
-      '</md-input-container>'+
-      '<md-input-container class="md-block" flex="100" flex-gt-sm="50">'+
-      '<label for=\'expiry\'>Expiry Date</label>'+
-      '<input type=\'text\' ng-model=\'expiry\' placeholder=\'Expiration\' payments-format=\'expiry\' payments-validate=\'expiry\' name=\'expiry\'/>'+
-      '<div ng-messages="form.expiry.$error">'+
-      '<div ng-message="expiry">Invalid expiry date</div>'+
-      '</div>'+
-      '</md-input-container>'+
-      '<md-input-container class="md-block" flex="100" flex-gt-sm="50">'+
-      '<label for=\'cvc\'>Security Code (CVC)</label>'+
-      '<input type=\'text\' ng-model=\'cvc\' placeholder=\'CVC\' payments-validate=\'cvc\' payments-format=\'cvc\' name=\'cvc\'/>'+
-      '<div ng-messages="form.cvc.$error">'+
-      '<div ng-message="expiry">Invalid CVC</div>'+
-      '</div>'+
-      '</md-input-container>'+
-      '</div>'
-  };
-
 }]);

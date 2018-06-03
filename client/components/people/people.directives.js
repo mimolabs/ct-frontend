@@ -459,14 +459,10 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
           falses.includes(scope.location.paid)
         )) {
         $location.path('/' + scope.location.slug + '/guide');
-        window.amplitude.getInstance().logEvent('Viewed Getting Started');
       } else {
         setParams();
         getAudiences().then(function() {
         getPeople();
-        var identify = new window.amplitude.Identify().add('karma', 1);
-        window.amplitude.getInstance().identify(identify);
-        window.amplitude.getInstance().logEvent('Viewed People Dashboard');
       });
       }
     };
@@ -495,7 +491,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
 
 }]);
 
-app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email', 'Sms', 'Client', 'PersonPortal', '$q', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', '$pusher', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, Social, Guest, Email, Sms, Client, PersonPortal, $q, $routeParams, $location, $http, $compile, $rootScope, $timeout, $pusher, showToast, showErrors, menu, $mdDialog, gettextCatalog) {
+app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email', 'Sms', 'Client', 'PersonPortal', '$q', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, Social, Guest, Email, Sms, Client, PersonPortal, $q, $routeParams, $location, $http, $compile, $rootScope, $timeout, $showToast, showErrors, menu, $mdDialog, gettextCatalog) {
 
   var link = function(scope, element, attrs) {
 
@@ -524,7 +520,7 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
     var getSocials = function() {
       Social.get({
         person_id: scope.person.id,
-        location_id: scope.location.id
+        location_id: scope.location.slug
       }).$promise.then(function(results) {
         scope.person.social = results.social;
         setProfilePhoto();
@@ -533,20 +529,10 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
       });
     };
 
-    var getGuests = function() {
-      Guest.get({
-        person_id: scope.person.id,
-        location_id: scope.location.id
-      }).$promise.then(function(results) {
-        scope.person.guests = results.guests;
-      }, function(err) {
-      });
-    };
-
     var getEmails = function() {
       Email.get({
         person_id: scope.person.id,
-        location_id: scope.location.id
+        location_id: scope.location.slug
       }).$promise.then(function(results) {
         scope.person.emails = results.emails;
       }, function(err) {
@@ -566,7 +552,7 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
     var getClients = function() {
       Client.query({
         person_id: scope.person.id,
-        location_id: scope.location.id
+        location_id: scope.location.slug
       }).$promise.then(function(results) {
         scope.person.clients = results.clients;
       }, function(err) {
@@ -575,7 +561,6 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
 
     var getRelations = function() {
       getSocials();
-      getGuests();
       getEmails();
       getSms();
       getClients();
@@ -664,7 +649,7 @@ app.directive('peopleNav', [function() {
 
 }]);
 
-app.directive('peopleReports', ['People', 'Location', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', '$pusher', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, $routeParams, $location, $http, $compile, $rootScope, $timeout, $pusher, showToast, showErrors, menu, $mdDialog, gettextCatalog) {
+app.directive('peopleReports', ['People', 'Location', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, $routeParams, $location, $http, $compile, $rootScope, $timeout, showToast, showErrors, menu, $mdDialog, gettextCatalog) {
 
   var link = function(scope, element, attrs) {
 

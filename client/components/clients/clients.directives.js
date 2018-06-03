@@ -2,7 +2,7 @@
 
 var app = angular.module('myApp.clients.directives', []);
 
-app.directive('clients', ['Client', 'ClientV2', 'Location', 'Report', 'GroupPolicy', 'Box', '$location', '$routeParams', '$cookies', '$pusher', '$route', '$mdDialog', '$mdBottomSheet', '$q', 'showErrors', 'showToast', '$rootScope', 'gettextCatalog', 'pagination_labels', '$filter', 'Auth', function(Client, ClientV2, Location, Report, GroupPolicy, Box, $location, $routeParams, $cookies, $pusher, $route, $mdDialog, $mdBottomSheet, $q, showErrors, showToast, $rootScope, gettextCatalog, pagination_labels, $filter, Auth) {
+app.directive('clients', ['Client', 'ClientV2', 'Location', 'Report', 'GroupPolicy', 'Box', '$location', '$routeParams', '$cookies', '$route', '$mdDialog', '$mdBottomSheet', '$q', 'showErrors', 'showToast', '$rootScope', 'gettextCatalog', 'pagination_labels', '$filter', 'Auth', function(Client, ClientV2, Location, Report, GroupPolicy, Box, $location, $routeParams, $cookies, $route, $mdDialog, $mdBottomSheet, $q, showErrors, showToast, $rootScope, gettextCatalog, pagination_labels, $filter, Auth) {
 
   var link = function( scope, element, attrs, controller ) {
 
@@ -921,7 +921,7 @@ app.directive('clientsRangeButtons', ['$routeParams', '$location', '$route', 'Au
 
 }]);
 
-app.directive('clientDetail', ['Client', 'ClientV2', 'ClientDetails', 'Report', '$routeParams', 'menu', '$pusher', '$rootScope','showToast', 'showErrors', '$mdDialog', '$timeout', '$location', 'gettextCatalog', '$q', 'GroupPolicy', '$filter', function(Client, ClientV2, ClientDetails, Report, $routeParams, menu, $pusher, $rootScope, showToast, showErrors, $mdDialog, $timeout, $location, gettextCatalog, $q, GroupPolicy, $filter) {
+app.directive('clientDetail', ['Client', 'ClientV2', 'ClientDetails', 'Report', '$routeParams', 'menu', '$rootScope','showToast', 'showErrors', '$mdDialog', '$timeout', '$location', 'gettextCatalog', '$q', 'GroupPolicy', '$filter', function(Client, ClientV2, ClientDetails, Report, $routeParams, menu, $rootScope, showToast, showErrors, $mdDialog, $timeout, $location, gettextCatalog, $q, GroupPolicy, $filter) {
 
   var link = function( scope, element, attrs, controller ) {
 
@@ -1087,18 +1087,6 @@ app.directive('clientDetail', ['Client', 'ClientV2', 'ClientDetails', 'Report', 
         };
         console.log('Refreshing client data at', new Date().getTime() );
         scope.client = client;
-      }
-    };
-
-    var channel, pusherLoaded;
-    var loadPusher = function(key) {
-      if (pusherLoaded === undefined && typeof client !== 'undefined') {
-        pusherLoaded = true;
-        var pusher = $pusher(client);
-        channel = pusher.subscribe('private-'+key);
-        channel.bind('clients_update', function(data) {
-          updateClient(data.client);
-        });
       }
     };
 
@@ -1319,7 +1307,6 @@ app.directive('clientDetail', ['Client', 'ClientV2', 'ClientDetails', 'Report', 
         ClientDetails.client.location_id = results.location_id;
         scope.client    = results;
         scope.loading   = undefined;
-        loadPusher(results.location_token);
       });
     };
 

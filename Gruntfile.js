@@ -21,9 +21,17 @@ module.exports = function (grunt) {
       }
   }
 
+  var buildConfig;
+  try {
+    // buildConfig = require('/etc/mimo/build.config.js');
+    buildConfig = require('./build.config.js');
+  } catch(e) {
+    console.log('No build config, continuing.....');
+  }
+
   var exec = require('sync-exec');
   var commitHash = exec('git log --pretty=format:"%h" -n 1');
-  var config = _.merge(defaultConfig, localConfig);
+  var config = _.merge(defaultConfig, localConfig, buildConfig);
 
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ng-constant');

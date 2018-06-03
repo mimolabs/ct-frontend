@@ -1,6 +1,6 @@
 <location-settings-nav></location-settings-nav>
 
-<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" ng-show="!integration || !integration.type" ng-cloak>
+<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" ng-show="!integration || !integration.integration_type" ng-cloak>
   <div flex="100" flex-gt-md="60" flex-gt-lg="50">
     <md-card class="b-or">
       <md-card-title>
@@ -25,7 +25,7 @@
   </div>
 </md-content>
 
-<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" ng-show="integration && integration.type && integration.active != true" ng-cloak>
+<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" ng-show="integration && integration.integration_type && integration.active != true" ng-cloak>
   <div flex="100" flex-gt-md="60" flex-gt-lg="50">
     <md-card class="b-or">
       <md-card-title>
@@ -38,13 +38,13 @@
         </md-card-title-text>
       </md-card-title>
       <md-card-content>
-        <p>You haven't finished the setup of your {{ integration.type | integrationType }} integration.</p>
+        <p>You haven't finished the setup of your {{ integration.integration_type | integrationType }} integration.</p>
       </md-card-content>
       <md-card-actions layout="row" layout-align="end center">
         <md-button ng-click="destroy()" class="md-raised">
           Delete Integration
         </md-button>
-        <md-button ng-href="/#/{{ location.slug }}/integration/{{ integration.type}}/auth" class="md-primary md-raised">
+        <md-button ng-href="/#/{{ location.slug }}/integration/{{ integration.integration_type}}/auth" class="md-primary md-raised">
           Complete Setup
         </md-button>
       </md-card-actions>
@@ -52,7 +52,7 @@
   </div>
 </md-content>
 
-<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" ng-show="integration.type && integration.active">
+<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta" ng-show="integration.integration_type && integration.active">
   <div flex="100" flex-gt-md="90" flex-gt-lg="80">
     <div layout="row" layout-align="center center">
       <div flex="100" flex-gt-sm="40">
@@ -64,15 +64,15 @@
                 <span class="md-headline" translate>
                   Integration Details
                 </span>
-                <p>You cannot change the integration type once it's been created. To add a new integration, delete the current one first.</p>
+                <p>You cannot change the integration.integration_type once it's been created. To add a new integration, delete the current one first.</p>
               </md-card-title-text>
             </md-card-title>
 
-            <md-card-content ng-if="integration.type == 'unifi'">
+            <md-card-content ng-if="integration.integration_type == 'unifi'">
               <div layout="row" layout-wrap>
                 <md-input-container flex="100" flex-gt-sm="100">
                   <label>
-                    <translate>Integration Type</translate>
+                    <translate>integration.integration_type</translate>
                   </label>
                   <input value="UniFi" disabled></input>
                 </md-input-container>
@@ -113,11 +113,11 @@
               </div>
             </md-card-content>
 
-            <md-card-content ng-if="integration.type == 'vsz'">
+            <md-card-content ng-if="integration.integration_type == 'vsz'">
               <div layout="row" layout-wrap>
                 <md-input-container flex="100" flex-gt-sm="100">
                   <label>
-                    <translate>Integration Type</translate>
+                    <translate>integration.integration_type</translate>
                   </label>
                   <input value="Ruckus VSZ" disabled></input>
                 </md-input-container>
@@ -157,11 +157,11 @@
               </div>
             </md-card-content>
 
-            <md-card-content ng-if="integration.type == 'cloudtrax'">
+            <md-card-content ng-if="integration.integration_type == 'cloudtrax'">
               <div layout="row" layout-wrap>
                 <md-input-container flex="100" flex-gt-sm="100">
                   <label>
-                    <translate>Integration Type</translate>
+                    <translate>integration.integration_type</translate>
                   </label>
                   <input value="CloudTrax / OpenMesh" disabled></input>
                 </md-input-container>
@@ -190,11 +190,11 @@
               </div>
             </md-card-content>
 
-            <md-card-content ng-if="integration.type == 'meraki'">
+            <md-card-content ng-if="integration.integration_type == 'meraki'">
               <div layout="row" layout-wrap>
                 <md-input-container flex="100" flex-gt-sm="100">
                   <label>
-                    <translate>Integration Type</translate>
+                    <translate>integration.integration_type</translate>
                   </label>
                   <input value="Cisco Meraki" disabled></input>
                 </md-input-container>

@@ -19,4 +19,6 @@ ADD . /opt/app
 
 RUN grunt build
 
+EXPOSE 8080
+
 CMD ["node", "server/app.js"]

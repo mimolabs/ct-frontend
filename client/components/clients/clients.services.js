@@ -9,9 +9,10 @@ app.factory('ClientDetails', [function() {
 
 app.factory('Client', ['$resource', 'API_END_POINT',
   function($resource, API_END_POINT){
-    return $resource(API_END_POINT + '/locations/:location_id/clients/:id/:action/:action_id',
+    return $resource(API_END_POINT + '/locations/:location_id/people/:person_id/stations/:id/:action/:action_id',
       {
-        location_id: '@location_id'
+        location_id: '@location_id',
+        person_id: '@person_id'
       },
       {
       query: {
@@ -88,7 +89,7 @@ app.factory('Client', ['$resource', 'API_END_POINT',
 
 app.factory('ClientV2', ['$resource', 'API_END_POINT',
   function($resource, API_END_POINT){
-    return $resource(API_END_POINT + '/locations/:location_id/clients/:id/:action/:action_id',
+    return $resource(API_END_POINT + '/locations/:location_id/stations/:id/:action/:action_id',
       {
       },
       {

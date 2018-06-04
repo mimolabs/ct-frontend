@@ -19,7 +19,7 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
 
     $scope.commit = COMMITHASH;
     $scope.ct_login = CTLogin;
-    $scope.squarelogo = API_URL + '/square-logo.png';
+    $scope.squarelogo = API_URL + '/uploads/square-logo.png';
     if (!API_URL || API_URL === '') {
       $scope.squarelogo  = 'https://d247kqobagyqjh.cloudfront.net/api/file/cx7ecphTbq4GrzkMwiLr'
     }

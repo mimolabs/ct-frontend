@@ -974,14 +974,13 @@ location-boxes table {
   color: #EEEEEE;
 }
 
-.sidenav .mimo-logo {
+.sidenav .dash-logo {
   margin: auto;
   cursor: pointer;
 }
 
-.sidenav .mimo-logo img {
+.sidenav .dash-logo img {
   width: 40px;
-  margin-top: 5px;
 }
 
 @media (min-width: 960px) {

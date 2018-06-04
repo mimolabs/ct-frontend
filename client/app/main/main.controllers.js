@@ -16,6 +16,7 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
   function ($rootScope, Location, $scope, $localStorage, $window, $location, $routeParams, AccessToken, RefreshToken, Auth, API, $route, onlineStatus, $cookies, locationHelper, CTLogin, User, Me, AUTH_URL, menu, designer, $mdSidenav, $mdMedia, $q, INTERCOM, gettextCatalog, Translate, COMMITHASH, $mdDialog) {
 
     var domain = 'oh-mimo.com';
+    console.log('apples')
 
     $scope.commit = COMMITHASH;
     $scope.ct_login = CTLogin;

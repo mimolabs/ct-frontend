@@ -1,0 +1,68 @@
+<user-nav user="user"></user-nav>
+
+<md-content layout="row" layout-wrap layout-align="center center" style="margin-top:48px;padding:14px;">
+
+  <div flex="100" flex-gt-md="90" flex-gt-lg="80">
+    <md-card>
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline" translate>
+            Overview
+          </span>
+        </md-card-title-text>
+      </md-card-title>
+      <md-card-content>
+        <div layout="row" layout-wrap>
+          <md-list-item class="md-3-line" flex="100" flex-gt-sm="50">
+            <div class="md-list-item-text">
+              <h3 translate>Card Details</h3>
+              <p>
+                <span ng-if="!user.credit_card_last4" translate>
+                  No card available
+                </span>
+                <span ng-if="user.credit_card_last4" translate>
+                  {{ user.credit_card_type }} ending {{ user.credit_card_last4 }}. Expires {{ user.credit_card_expiry }}
+                </span>
+              </p>
+            </div>
+          </md-list-item>
+          <md-list-item class="md-2-line" flex="100" flex-gt-sm="50">
+            <div class="md-list-item-text">
+              <h3 translate>Plan</h3>
+              <p>{{ ::user.plan.plan_name }}&nbsp;<translate>Plan.</translate> <span ng-show="user.plan.plan_price > 0">{{ ::user.plan.plan_price | number:2 | currency:user.plan.currency_symbol }} {{ ::user.plan.billing_period }}</span></p>
+              <p>Tax Rate: {{ ::user.tax_rate | number :1 }}%</span></p>
+            </div>
+          </md-list-item>
+          <md-list-item class="md-2-line" flex="100" flex-gt-sm="50">
+            <div class="md-list-item-text">
+              <h3 translate>Account Created</h3>
+              <p>
+                {{ user.created_at | humanTime }}
+              </p>
+            </div>
+          </md-list-item>
+          <md-list-item class="md-2-line" flex="100" flex-gt-sm="50">
+            <div class="md-list-item-text">
+              <h3 translate>
+                Billing Currency
+              </h3>
+              <p>
+                <b>
+                  {{ user.currency }} ({{ user.currency === 'EUR' ? '€' : user.currency === 'USD' ? '$' : '£' }})
+                  Please contact support to change this</b>.
+              </p>
+            </div>
+          </md-list-item>
+        </div>
+
+      </md-card-content>
+    </md-card>
+  </div>
+  <div flex="100" flex-gt-md="90" flex-gt-lg="80">
+    <user-plans user="user"></user-plans>
+  </div>
+  <div flex="100" flex-gt-md="90" flex-gt-lg="80">
+    <user-billing-settings user="user"></user-billing-settings>
+  </div>
+
+</md-content>

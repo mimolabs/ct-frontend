@@ -25,8 +25,13 @@ if (process.env.NODE_ENV === 'production') {
   dashboard_url   = 'http://mimo.dashboard:9090'
 
   exports = {
+<<<<<<< HEAD
     appID: 'f547e59f95a868b9f264a4b6c571b0c4355362e59cb2d9279b1d7df7cfc4756a',
     appSecret: '91d0d9b0810dfe3637360d7b0bafbcdc15dd6906a015b913f367ff876414b0d8',
+=======
+    appID: 'be8fa02d10985ac05cb7e6637d20744690da0ad161bce7374c01d4c44bc757e0',
+    appSecret: '1cf1103a13800c59f683c23795627e56961b3f3fd8b87937afd202310684a395',
+>>>>>>> fa42051f47285bf51e46b09c742278af89404527
     callbackURL: dashboard_url + '/auth/login/callback',
     authorizationURL: api_url + "/oauth/authorize",
     profileURL: api_url + "/api/v1/me.json",

@@ -11,14 +11,18 @@ var app = angular.module('myApp.controllers', [
   'myApp.users.controller',
 ]);
 
-app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage', '$window', '$location', '$routeParams', 'AccessToken', 'RefreshToken', 'Auth', 'API_END_POINT', '$route', 'onlineStatus', '$cookies', 'locationHelper', 'CTLogin', 'User', 'Me', 'AUTH_URL', 'menu', 'designer', '$mdSidenav', '$mdMedia', '$q', 'INTERCOM', 'gettextCatalog', 'Translate', 'COMMITHASH', '$mdDialog',
+app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage', '$window', '$location', '$routeParams', 'AccessToken', 'RefreshToken', 'Auth', 'API_END_POINT', '$route', 'onlineStatus', '$cookies', 'locationHelper', 'CTLogin', 'User', 'Me', 'AUTH_URL', 'API_URL', 'menu', 'designer', '$mdSidenav', '$mdMedia', '$q', 'INTERCOM', 'gettextCatalog', 'Translate', 'COMMITHASH', '$mdDialog',
 
-  function ($rootScope, Location, $scope, $localStorage, $window, $location, $routeParams, AccessToken, RefreshToken, Auth, API, $route, onlineStatus, $cookies, locationHelper, CTLogin, User, Me, AUTH_URL, menu, designer, $mdSidenav, $mdMedia, $q, INTERCOM, gettextCatalog, Translate, COMMITHASH, $mdDialog) {
+  function ($rootScope, Location, $scope, $localStorage, $window, $location, $routeParams, AccessToken, RefreshToken, Auth, API, $route, onlineStatus, $cookies, locationHelper, CTLogin, User, Me, AUTH_URL, API_URL, menu, designer, $mdSidenav, $mdMedia, $q, INTERCOM, gettextCatalog, Translate, COMMITHASH, $mdDialog) {
 
     var domain = 'oh-mimo.com';
 
     $scope.commit = COMMITHASH;
     $scope.ct_login = CTLogin;
+    $scope.squarelogo = API_URL + '/square-logo.png';
+    if (!API_URL || API_URL === '') {
+      $scope.squarelogo  = 'https://d247kqobagyqjh.cloudfront.net/api/file/cx7ecphTbq4GrzkMwiLr'
+    }
 
     $scope.home = function() {
       var msg = 'Clicked Home';

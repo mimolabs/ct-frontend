@@ -13,8 +13,8 @@ var opts = {
   callbackURL:        'MIMO_DASHBOARD_URL' + '/auth/login/callback',
   authorizationURL:   'MIMO_API_URL' + "/oauth/authorize",
   dashboardURL:       'MIMO_DASHBOARD_URL',
-  profileURL:         "http://api:3000/api/v1/me.json", 
-  tokenURL:           "http://api:3000/oauth/token", 
+  profileURL:         "http://mimo.api:3000/api/v1/me.json", 
+  tokenURL:           "http://mimo.api:3000/oauth/token", 
 };
 
 

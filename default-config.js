@@ -8,9 +8,9 @@ module.exports = {
     frontend: {
         constants: {
             CONFIG: {},
-            API_END_POINT: 'http://mimo.api:3030/api/v1',
-            API_URL: 'http://mimo.api:3030',
-            AUTH_URL: 'http://mimo.api:3030',
+            API_END_POINT: 'http://mimo.api:3000/api/v1',
+            API_URL: 'http://mimo.api:3000',
+            AUTH_URL: 'http://mimo.api:3000',
             INTERCOM: 'x',
             DRIFT: '',
             DEBUG: true,

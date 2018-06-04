@@ -23,8 +23,8 @@ module.exports = function (grunt) {
 
   var buildConfig;
   try {
-    // buildConfig = require('/etc/mimo/build.config.js');
-    buildConfig = require('./build.config.js');
+    buildConfig = require('/etc/mimo/build.config.js');
+    // buildConfig = require('./build.config.js');
   } catch(e) {
     console.log('No build config, continuing.....');
   }

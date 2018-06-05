@@ -156,21 +156,22 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
       });
     }
 
-    $scope.$on('intercom', function(args,event) {
-      if (Auth.currentUser()) {
-        var user = Auth.currentUser();
-        var params = {
-          email: user.email,
-          name: user.username,
-          created_at: user.created_at / 1000,
-          plan_name: user.plan_name,
-          paid_plan: user.paid_plan
-        };
-        if (INTERCOM && INTERCOM !== '' && INTERCOM !== undefined) {
-          params.app_id = INTERCOM;
-          params.user_hash = user.user_hash;
-          params.user_id = user.accountId;
+    $scope.$on('supportWidget', function(args,event) {
+      var user = Auth.currentUser();
+      var params = {
+        email: user.email,
+        name: 'user.username',
+        created_at: user.created_at,
+      };
+
+      if (user && user.settings) {
+        if (user.settings.intercom_id) {
+          params.app_id = user.settings.intercom_id;
+          params.user_id = user.account_id;
           window.intercomSettings = params;
+        } else if (user.settings.drift_id) {
+          window.drift.SNIPPET_VERSION = '0.3.1';
+          window.drift.load(user.settings.drift_id);
         }
       }
     });
@@ -208,8 +209,9 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
 
     function routeChangeStart() {
       var a = AccessToken.get();
-      if ( (!Auth.currentUser() && a ) || Auth.currentUser() && (Auth.currentUser().url !== 'default' )) {
+      if ( (!Auth.currentUser() && a ) || Auth.currentUser() ) {
         getMe();
+        $scope.$broadcast('supportWidget', {hi: 'user'});
       }
     }
 

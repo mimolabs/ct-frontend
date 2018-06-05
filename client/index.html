@@ -1,8 +1,4 @@
-<!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html ng-app="myApp" ng-controller="MainCtrl as vm">
 <head>
 
   <!--
@@ -46,7 +42,7 @@
       display: none !important;
     }
   </style>
-
+  <link rel="icon" ng-href="{{ favicon }}" type="image/gif" sizes="16x16">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -56,7 +52,7 @@
 
 </head>
 
-<body ng-class="{ 'login': ct_login.active  }" ng-app="myApp" layout="row" ng-controller="MainCtrl as vm" ng-cloak xx-ng-strict-di>
+<body ng-class="{ 'login': ct_login.active  }" layout="row" ng-cloak xx-ng-strict-di>
 
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W6CQJJK" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 

@@ -16,7 +16,6 @@ try {
   secrets = require('./local.env.sample');
 }
 
-var favicon = require('serve-favicon');
 var URI = require('urijs');
 var morgan = require('morgan');
 var compression = require('compression');
@@ -112,7 +111,6 @@ module.exports = function(app) {
 
   if (env === 'production' || env === 'beta') {
     app.use(forceSsl);
-    app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
     app.use(express.static(path.join(config.root, 'public')));
     app.set('appPath', config.root + '/public');
     app.use(morgan('dev'));

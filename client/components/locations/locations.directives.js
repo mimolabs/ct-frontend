@@ -415,11 +415,19 @@ app.directive('locationSettingsDevices', ['menu', '$timeout', function(menu, $ti
 
 }]);
 
-app.directive('integrationSelect', ['Location', '$routeParams', '$location', '$http', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', function(Location, $routeParams, $location, $http, $mdDialog, showToast, showErrors, gettextCatalog) {
+app.directive('integrationSelect', ['Location', '$routeParams', '$location', '$http', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', 'API_URL', function(Location, $routeParams, $location, $http, $mdDialog, showToast, showErrors, gettextCatalog, API_URL) {
 
   var link = function(scope, element, attrs, controller) {
 
     scope.loading = true;
+
+    scope.integrations = [ 'unifi' ];
+    scope.integrationDetails = { 
+      unifi: { 
+        image: API_URL + '/manufacturers/ubiquiti-logo.png', 
+        name: 'UniFi Controller' 
+      } 
+    };
 
     scope.save = function(type) {
       if (scope.location.paid) {

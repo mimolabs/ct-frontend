@@ -24,6 +24,9 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
       $scope.squarelogo  = 'https://d247kqobagyqjh.cloudfront.net/api/file/cx7ecphTbq4GrzkMwiLr'
     }
 
+    var ts = Math.floor(Date.now() / 1000);
+    $scope.favicon = API_URL + '/uploads/favicon.ico?ts=' + ts;
+
     $scope.home = function() {
       var msg = 'Clicked Home';
       if ($routeParams.id && $location.path().split('/')[1] !== 'users') {

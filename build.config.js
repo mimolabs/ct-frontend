@@ -8,13 +8,14 @@ var opts = {
       AUTH_URL: '',
     }
   },
-  appID: process.env.APP_ID,
-  appSecret: process.env.APP_SECRET,
-  callbackURL: process.env.MIMO_DASHBOARD_URL + '/auth/login/callback',
-  authorizationURL: api_url + "/oauth/authorize",
-  profileURL: "http://api:3000/api/v1/me.json", // also?
-  tokenURL: "http://api:3000/oauth/token", // should change???
-  dashboardURL: dashboard_url
+  appID:              'APP_ID',
+  appSecret:          'APP_SECRET',
+  callbackURL:        'MIMO_DASHBOARD_URL' + '/auth/login/callback',
+  authorizationURL:   'MIMO_API_URL' + "/oauth/authorize",
+  dashboardURL:       'MIMO_DASHBOARD_URL',
+  profileURL:         "http://mimo.api:3000/api/v1/me.json", 
+  tokenURL:           "http://mimo.api:3000/oauth/token", 
 };
+
 
 module.exports = opts

@@ -25,7 +25,7 @@
         <p>Select an integration below to get started with MIMO.</p>
         <div layout="row" layout-align="space-around center" class="integration-cards" layout-wrap>
           <md-card class="int-select" flex="100" flex-gt-xs="30" ng-repeat="integration in integrations">
-            <md-card-content flex layout-align="left center" ng-click="save('unifi')">
+            <md-card-content flex layout-align="left center" ng-click="save(integration)">
               <div flex layout="row" layout-align="center center" class="int-pic">
                 <img src="{{ integrationDetails[integration].image }}">
               </div>

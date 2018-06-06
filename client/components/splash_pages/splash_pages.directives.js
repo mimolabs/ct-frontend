@@ -369,8 +369,8 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
     if (!$routeParams.splash_page_id) {
       scope.splash = {
         'gdpr_form': true,
-        'available_start': '00:00',
-        'available_end': '00:00',
+        'available_start': '00',
+        'available_end': '00',
       	'primary_access_id': 20,
       	'splash_name': 'Splash Page',
       	'active': true,
@@ -379,7 +379,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
         'fb_login_on': false,
         'info': 'Welcome, please login below.',
       	'backup_sms': false,
-      	'backup_email': true,
+      	'backup_email': false,
       	'access_restrict': 'none',
       	'powered_by': true,
       	'newsletter_active': false,
@@ -399,7 +399,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       	'border_colour': 'rgba(255, 255, 255, 0)',
       	'link_colour': 'rgb(66, 103, 178)',
       	'container_colour': 'rgba(255, 255, 255, 0)',
-      	'button_colour': 'rgb(50, 50, 73)',
+        'button_colour': 'rgb(50, 50, 73)',
       	'button_radius': '8px',
       	'button_border_colour': 'rgb(50, 50, 73)',
       	'button_padding': '0px 16px',

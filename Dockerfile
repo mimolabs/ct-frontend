@@ -2,7 +2,7 @@ FROM node:6
 
 MAINTAINER MIMO!
 
-WORKDIR /opt/app/dist
+# WORKDIR /opt/app/dist
 
 ADD package.json /tmp/package.json
 ADD bower.json /tmp/bower.json
@@ -15,7 +15,7 @@ RUN \
 
 ADD . /opt/app
 
-RUN bower install --config.interactive=false --allow-root && grunt build
+RUN ls && pwd && bower install --config.interactive=false --allow-root && grunt build
 
 EXPOSE 8080
 

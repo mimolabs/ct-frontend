@@ -989,6 +989,10 @@ location-boxes table {
   }
 }
 
+.powered-by {
+  margin: 10px 5px 5px 5px;
+}
+
 /*top nav styles*/
 
 .top-nav {
@@ -1194,13 +1198,12 @@ md-bottom-sheet .md-subheader {
 /*integration*/
 
 .integration-cards {
-  align-items:stretch;
+  align-items: stretch;
 }
 
 .int-pic {
-  position:relative;
-  min-height:80px;
-  height:100%;
+  position: relative;
+  min-height: 80px;
 }
 
 .int-pic img {

@@ -57,7 +57,7 @@
         <div layout="row" layout-wrap>
           <md-input-container flex="100" flex-gt-sm="100" ng-if="cloudtrax_ssids.length">
             <label>
-              <translate>Enable MIMO on CloudTrax SSID</translate>
+              <translate>Choose your CloudTrax SSID</translate>
             </label>
             <md-select ng-change="setSsid()" ng-model="ct.ct_ssid">
               <md-option ng-repeat="ssid in cloudtrax_ssids" value="{{ssid}}">

@@ -372,7 +372,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
         'available_start': '00:00',
         'available_end': '00:00',
       	'primary_access_id': 20,
-      	'splash_name': 'MIMO Splash',
+      	'splash_name': 'Splash Page',
       	'active': true,
       	'passwd_change_day': [],
         'passwd_auto_gen': false,

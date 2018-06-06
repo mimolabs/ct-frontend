@@ -16,7 +16,6 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
   function ($rootScope, Location, $scope, $localStorage, $window, $location, $routeParams, AccessToken, RefreshToken, Auth, API, $route, onlineStatus, $cookies, locationHelper, CTLogin, User, Me, AUTH_URL, API_URL, menu, designer, $mdSidenav, $mdMedia, $q, INTERCOM, gettextCatalog, Translate, COMMITHASH, $mdDialog) {
 
     var domain = 'oh-mimo.com';
-    console.log('apples')
 
     $scope.commit = COMMITHASH;
     $scope.ct_login = CTLogin;
@@ -24,6 +23,7 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
     if (!API_URL || API_URL === '') {
       $scope.squarelogo  = 'https://d247kqobagyqjh.cloudfront.net/api/file/cx7ecphTbq4GrzkMwiLr'
     }
+    $scope.mimopowered = API_URL + '/mimo-powered.svg';
 
     var ts = Math.floor(Date.now() / 1000);
     $scope.favicon = API_URL + '/uploads/favicon.ico?ts=' + ts;

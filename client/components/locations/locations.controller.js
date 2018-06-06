@@ -70,13 +70,13 @@ app.controller('LocationsCtrl', ['$scope', '$routeParams', 'Location', '$locatio
         active: isActive('splash_pages')
       });
 
-      menu.sections.push({
-        name: gettextCatalog.getString('Campaigns'),
-        type: 'link',
-        link: '/#/' + $scope.location.slug + '/campaigns' + campaigns_guide,
-        icon: 'email',
-        active: isActive('campaigns')
-      });
+      // menu.sections.push({
+      //   name: gettextCatalog.getString('Campaigns'),
+      //   type: 'link',
+      //   link: '/#/' + $scope.location.slug + '/campaigns' + campaigns_guide,
+      //   icon: 'email',
+      //   active: isActive('campaigns')
+      // });
     };
 
     var setLocationStateIcon = function(location) {

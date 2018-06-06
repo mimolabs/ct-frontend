@@ -2,6 +2,8 @@ FROM node:6
 
 MAINTAINER MIMO!
 
+WORKDIR /opt/app/dist
+
 ADD package.json /tmp/package.json
 ADD bower.json /tmp/bower.json
 
@@ -9,14 +11,11 @@ RUN \
   cd /tmp && \
   npm install -g bower grunt-cli && \
   npm install --production && \
-  bower install --config.interactive=false --allow-root\
-  && mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app
-
-WORKDIR /opt/app/dist
+  mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app
 
 ADD . /opt/app
 
-RUN grunt build
+RUN bower install --config.interactive=false --allow-root && grunt build
 
 EXPOSE 8080
 

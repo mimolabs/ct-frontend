@@ -14,7 +14,7 @@
     </md-card-title>
     <md-card-content>
       <div>
-        <p>Congrats, you've successfully integrated your {{ integration.integration_type | integrationType }} with MIMO!</p>
+        <p>Congrats, you've successfully integrated your {{ integration.integration_type | integrationType }}!</p>
         <span ng-show="integration.integration_type === 'unifi'">
           <p>Here's what we've done for you:</p>
           <ul>
@@ -24,37 +24,37 @@
           </ul>
         </span>
         <span ng-show="integration.integration_type === 'meraki'">
-          <p>We've updated the settings for you chosen SSID so it will work with the MIMO splash pages.</p>
+          <p>We've updated the settings for you chosen SSID so it will work with the splash pages.</p>
           <p><b>It's really important you complete the setup guide and enable the splash page</b>. If you don't do this, the splash pages won't work.</p>
         </span>
         <div ng-show="integration.integration_type === 'vsz'">
           <p>Here's what we've done:</p>
           <ul>
             <li>Created a new wireless network called '{{ integration.ssid }}'</li>
-            <li>Added the MIMO radius servers</li>
+            <li>Added the radius servers</li>
             <li>Enabled the captive portal</li>
             <li>Imported your devices</li>
           </ul>
         </div>
         <span ng-show="integration.integration_type === 'cloudtrax'">
-          <p>We've updated the settings for you chosen SSID so it will work with the MIMO splash pages.</p>
+          <p>We've updated the settings for you chosen SSID so it will work with the splash pages.</p>
         </span>
         <div ng-show="integration.integration_type === 'vsz'">
           <p>Here's what we've done:</p>
           <ul>
-            <li>Enabled the MIMO guest settings on '{{ integration.ssid || "your SSID" }}'</li>
+            <li>Enabled the guest settings on '{{ integration.ssid || "your SSID" }}'</li>
             <li>Imported your devices!</li>
           </ul>
         </div>
         <h3>What's next?</h3>
         <div ng-show="integration.integration_type == 'unifi' || integration.integration_type == 'vsz' || integration.integration_type == 'cloudtrax'">
           <p>It can take a few minutes for your {{ integration.integration_type | integrationType }} to sync all the settings. Once you see '{{integration.ssid}}' in your list of available networks, connect to it. You should be redirected to a splash page immediately.</p>
-          <p>You'll find your splash password in your splash page settings within MIMO.</p>
+          <p>You'll find your splash password in your splash page settings within the dashboard.</p>
           <p>If you can't see the network, please check your {{ integration.integration_type | integrationType }}'s settings (and be patient)!</p>
         </div>
         <div ng-show="integration.integration_type == 'meraki'">
           <p>Once you've completed the setup, connect to your guest SSID. You should be automatically directed.</p>
-          <p>You'll find your splash password in your splash page settings within MIMO.</p>
+          <p>You'll find your splash password in your splash page settings within the dashboard.</p>
         </div>
         <p>While you're waiting, why not customise your splash page?</p>
       </div>

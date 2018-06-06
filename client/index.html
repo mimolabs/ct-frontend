@@ -1,3 +1,4 @@
+<!doctype html>
 <html ng-app="myApp" ng-controller="MainCtrl as vm">
 <head>
 
@@ -14,7 +15,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <base href="/">
-  <title translate>Engage with your Customers | MIMO</title>
+  <title translate>Engage with your Customers</title>
   <meta name="description" content="">
   <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0' >
   <meta name="mobile-web-app-capable" content="yes">
@@ -74,8 +75,8 @@
 
       <md-toolbar class="md-table-toolbar md-default">
         <div class="sidenav md-toolbar-tools">
-          <a class="mimo-logo" ng-click="home()">
-            <img class="mimo-logo" src="{{ squarelogo }}">
+          <a class="dash-logo" ng-click="home()">
+            <img class="dash-logo" src="{{ squarelogo }}">
           </a>
         </div>
       </md-toolbar>
@@ -126,6 +127,9 @@
           </md-menu-item>
         </md-menu-content>
       </md-menu>
+    </div>
+    <div class="powered-by">
+      <img src="{{ mimopowered }}"></img>
     </div>
   </md-sidenav>
 
@@ -189,12 +193,12 @@
         </md-button>
         <span show-sm ng-if="!user">
           <div class="sidenav md-toolbar-tools">
-            <a class="mimo-logo">
-              <img class="mimo-logo" src="https://d247kqobagyqjh.cloudfront.net/api/file/cx7ecphTbq4GrzkMwiLr">
+            <a class="dash-logo">
+              <img class="dash-logo" src="{{ squarelogo }}">
             </a>
           </div>
         </span>
-        <get-with-the-plan ng-show="location.paid == false" label="Free Trial"></get-with-the-plan>
+        <!-- <get-with-the-plan ng-show="location.paid == false" label="Free Trial"></get-with-the-plan> -->
         <span flex></span>
         <md-button ng-click="toggleLocations()" class="md-icon-button" aria-label="'Locations' | translate" ng-if="user">
           <md-tooltip md-direction="bottom">Locations</md-tooltip>
@@ -229,7 +233,9 @@
             </md-menu-content>
           </md-menu>
         </span>
-
+        <div class="powered-by">
+          <img src="{{ mimopowered }}"></img>
+        </div>
       </div>
     </md-toolbar>
     <md-content layout="row" flex id="content">
@@ -237,7 +243,7 @@
         <md-content flex>
           <div ng-view autoscroll="true" ng-class="{'hidden': notFound}"></div>
           <div style="margin: 30px 40px;" ng-class="{'hidden': !notFound}">
-            <h3>Oh MIMO, that's a 404 then.</h3>
+            <h3>Oh my, that's a 404 then.</h3>
           </div>
         </md-content>
       </section>
@@ -383,7 +389,7 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
 
   <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/xxx';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
-  
+
   <script>
     "use strict";!function(){var t=window.driftt=window.drift=window.driftt||[];if(!t.init){if(t.invoked)return void(window.console&&console.error&&console.error("Drift snippet included twice."));t.invoked=!0,t.methods=["identify","config","track","reset","debug","show","ping","page","hide","off","on"],t.factory=function(e){return function(){var n=Array.prototype.slice.call(arguments);return n.unshift(e),t.push(n),t}},t.methods.forEach(function(e){t[e]=t.factory(e)}),t.load=function(t){var e=3e5*Math.ceil(new Date/3e5),n=document.createElement("script");n.type="text/javascript",n.async=!0,n.crossorigin="anonymous",n.src="https://js.driftt.com/include/"+e+"/"+t+".js";var o=document.getElementsByTagName("script")[0];o.parentNode.insertBefore(n,o)}}}();
   </script>

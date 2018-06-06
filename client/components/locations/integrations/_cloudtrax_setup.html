@@ -23,7 +23,7 @@
           <span class="md-headline" translate>
             Step 2: Setup CloudTrax Integration
           </span>
-          <p>Now that MIMO can access your controller, choose which network you want the guest network to be added to.</p>
+          <p>Now that we can access your controller, choose which network you want the guest network to be added to.</p>
           <p ng-show="loading"><b>Oh my, we're loading your CloudTrax networks, one second homie</b></p>
 
         </md-card-title-text>
@@ -57,7 +57,7 @@
         <div layout="row" layout-wrap>
           <md-input-container flex="100" flex-gt-sm="100" ng-if="cloudtrax_ssids.length">
             <label>
-              <translate>Enable MIMO on CloudTrax SSID</translate>
+              <translate>Choose your CloudTrax SSID</translate>
             </label>
             <md-select ng-change="setSsid()" ng-model="ct.ct_ssid">
               <md-option ng-repeat="ssid in cloudtrax_ssids" value="{{ssid}}">

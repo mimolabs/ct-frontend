@@ -2,11 +2,18 @@
 <form name="myForm" ng-submit="update(myForm)">
   <md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta">
     <md-card flex="100" flex-gt-md="90" flex-gt-lg="80">
-      <md-card-title>
+      <!-- <md-card-title>
         <md-card-title-text>
           <span class="md-headline">
             <md-icon md-font-icon="" ng-if="user.verified">verified_user</md-icon>
             {{ ::user.username }}
+          </span>
+        </md-card-title-text>
+      </md-card-title> -->
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline" translate>
+            Account Details
           </span>
         </md-card-title-text>
       </md-card-title>
@@ -27,21 +34,21 @@
               </p>
             </div>
           </md-list-item>
-          <md-list-item class="md-2-line" flex="100" flex-gt-sm="50" ng-if="user.plan">
+          <!-- <md-list-item class="md-2-line" flex="100" flex-gt-sm="50" ng-if="user.plan">
             <div class="md-list-item-text">
               <h3 translate>Plan</h3>
               <p>
                 <span ng-show="user.plan.plan_price < 1" translate>You're on the free plan. Things can only get better!</span>
                 <span ng-show="user.plan.plan_price > 0" translate>You're on the {{ ::user.plan.plan_name }} Plan which costs {{ ::user.currency == 'USD' ? '$' : '£'}}{{ ::user.plan.plan_price | number:2 }} and is billed {{ ::user.plan.billing_period }}.</span></p>
             </div>
-          </md-list-item>
+          </md-list-item> -->
           <md-list-item class="md-2-line" flex="100" flex-gt-sm="50">
             <div class="md-list-item-text">
               <h3 translate>Account Created</h3>
               <p>{{ user.created_at | humanTime }}</p>
             </div>
           </md-list-item>
-          <md-list-item class="md-2-line" flex="100" flex-gt-sm="50" ng-if="user.plan">
+          <!-- <md-list-item class="md-2-line" flex="100" flex-gt-sm="50" ng-if="user.plan">
             <div class="md-list-item-text">
               <h3 translate>Subscription Status</h3>
               <p ng-if="user.subscription_active == true" translate> Active </p>
@@ -53,7 +60,7 @@
               <h3 translate>Subscription Status</h3>
               <p>Guest Account</p>
             </div>
-          </md-list-item>
+          </md-list-item> -->
         </div>
       </md-card-content>
     </md-card>

@@ -19,4 +19,4 @@ RUN ls && pwd && bower install --config.interactive=false --allow-root && grunt 
 
 EXPOSE 8080
 
-CMD ["node", "server/app.js"]
+# CMD ["node", "server/app.js"]

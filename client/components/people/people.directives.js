@@ -491,7 +491,7 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
 
 }]);
 
-app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email', 'Sms', 'Client', 'PersonPortal', '$q', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, Social, Guest, Email, Sms, Client, PersonPortal, $q, $routeParams, $location, $http, $compile, $rootScope, $timeout, $showToast, showErrors, menu, $mdDialog, gettextCatalog) {
+app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email', 'Sms', 'Client', 'DataRequest', '$q', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, Social, Guest, Email, Sms, Client, DataRequest, $q, $routeParams, $location, $http, $compile, $rootScope, $timeout, $showToast, showErrors, menu, $mdDialog, gettextCatalog) {
 
   var link = function(scope, element, attrs) {
 
@@ -595,7 +595,7 @@ app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email'
     var portalPersonRequest = function() {
       scope.portal_request = true;
       if ($routeParams.code) {
-        PersonPortal.query({id: $routeParams.person_id, code: $routeParams.code}).$promise.then(function(res) {
+        DataRequest.query({person_id: $routeParams.person_id, code: $routeParams.code}).$promise.then(function(res) {
           scope.person = res;
         }, function(err) {
           scope.error_message = err.data.message[0];
@@ -688,7 +688,7 @@ app.directive('peopleReports', ['People', 'Location', '$routeParams', '$location
 
 }]);
 
-app.directive('personTimeline', ['PersonTimeline', 'PersonTimelinePortal', '$routeParams', '$timeout', '$mdDialog', 'showToast', 'gettextCatalog', 'showErrors', function(PersonTimeline, PersonTimelinePortal, $routeParams, $timeout, $mdDialog, showToast, gettextCatalog, showErrors) {
+app.directive('personTimeline', ['PersonTimeline', 'DataRequest', '$routeParams', '$timeout', '$mdDialog', 'showToast', 'gettextCatalog', 'showErrors', function(PersonTimeline, DataRequest, $routeParams, $timeout, $mdDialog, showToast, gettextCatalog, showErrors) {
 
   var link = function(scope, element, attrs) {
 
@@ -697,7 +697,7 @@ app.directive('personTimeline', ['PersonTimeline', 'PersonTimelinePortal', '$rou
     scope.person = {slug: $routeParams.person_id};
 
     var downloadTimeline = function(email) {
-      PersonTimelinePortal.download({person_id: $routeParams.person_id, code: $routeParams.code, email: email}).$promise.then(function(res) {
+      DataRequest.download({person_id: $routeParams.person_id, code: $routeParams.code, email: email}).$promise.then(function(res) {
         showToast(gettextCatalog.getString('Data timeline report on the way to you shortly.'));
       }, function(err) {
         showErrors(err);
@@ -705,7 +705,7 @@ app.directive('personTimeline', ['PersonTimeline', 'PersonTimelinePortal', '$rou
     };
 
     var destroyPerson = function() {
-      PersonTimelinePortal.destroy({person_id: $routeParams.person_id, code: $routeParams.code}).$promise.then(function(res) {
+      DataRequest.destroy({person_id: $routeParams.person_id, code: $routeParams.code}).$promise.then(function(res) {
         scope.timelines = undefined;
         scope.portal_request = undefined;
         scope.error_message = 'Data successfully deleted';
@@ -774,7 +774,7 @@ app.directive('personTimeline', ['PersonTimeline', 'PersonTimelinePortal', '$rou
     var portalTimelineRequest = function() {
       scope.portal_request = true;
       if ($routeParams.code) {
-        PersonTimelinePortal.query({person_id: $routeParams.person_id, code: $routeParams.code}).$promise.then(function(res) {
+        DataRequest.timeline_query({person_id: $routeParams.person_id, code: $routeParams.code}).$promise.then(function(res) {
           scope.timelines = res.timelines;
           scope.loading = undefined;
         }, function(err) {

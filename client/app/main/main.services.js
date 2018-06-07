@@ -10,6 +10,7 @@ var app = angular.module('myApp.services', [
   'myApp.campaigns.services',
   'myApp.clients.services',
   'myApp.commands.services',
+  'myApp.data_requests.services',
   'myApp.emails.services',
   'myApp.forms.services',
   'myApp.geocoder.services',

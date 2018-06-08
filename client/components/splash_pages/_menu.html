@@ -213,22 +213,21 @@
                     <div layout="column" layout-gt-sm="row" layout-wrap ng-if="splash.access_restrict === 'periodic'">
                       <div flex-gt-sm="50">
                         <md-input-container class="md-block">
-
                           <label for="available_start"><translate>Start Time</translate></label>
-                          <input ng-model="splash.available_start" placeholder="{{ 'Start' | translate }}"  type='text' name="available_start" ng-pattern="/^([0-9]{1,2})\:([0-9]{2})$/">
+                          <input ng-model="splash.available_start" placeholder="{{ 'Start' | translate }}"  type='text' name="available_start" ng-pattern="/^[0-9]{2}$/">
                         </md-input-container>
                       </div>
                       <div flex-gt-sm="50">
                         <md-input-container class="md-block">
-                          <label for="available_start"><translate>End Time</translate></label>
-                          <input ng-model="splash.available_end" placeholder="{{ 'End' | translate }}" type='text' name="available_end" ng-pattern="/^([0-9]{2})\:([0-9]{2})$/">
+                          <label for="available_end"><translate>End Time</translate></label>
+                          <input ng-model="splash.available_end" placeholder="{{ 'End' | translate }}" type='text' name="available_end" ng-pattern="/^[0-9]{2}$/">
                         </md-input-container>
                       </div>
                       <div style="margin-top: -30px;">
                         <p><small><translate>Allowed Days</translate></small></p>
                         <day-selector active="true" days="splash.available_days" array="splash.periodic_days" layout="row" layout-wrap layout-align="space-between center"></day-selector>
                       </div>
-                      <p translate>Set the start and end times to 00:00 to allow access all day</p>
+                      <p translate>Set the start and end times to 00 to allow access all day. Times are in 24hr format.</p>
                     </div>
                   </div>
                 </div>

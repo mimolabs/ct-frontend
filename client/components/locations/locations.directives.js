@@ -661,7 +661,6 @@ app.directive('cloudtraxSetup', ['Location', '$routeParams', '$location', '$http
 
     scope.back = function() {
       $location.path($routeParams.id + '/integration/cloudtrax/auth');
-      console.log('apples')
     };
 
     var fetchSites = function() {
@@ -898,7 +897,6 @@ app.directive('unifiSetup', ['Location', '$routeParams', '$location', '$http', '
 
     scope.back = function() {
       $location.path($routeParams.id + '/integration/unifi/auth');
-      console.log('apples')
     };
 
     var fetchSites = function() {
@@ -1041,7 +1039,6 @@ app.directive('vszSetup', ['Location', '$routeParams', '$location', '$http', '$m
 
     scope.back = function() {
       $location.path($routeParams.id + '/integration/vsz/auth');
-      console.log('apples')
     };
 
     var fetchSites = function() {

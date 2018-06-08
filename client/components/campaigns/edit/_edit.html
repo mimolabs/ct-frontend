@@ -47,7 +47,7 @@
               </md-select>
               <p style="margin-top:0px;" ng-show="!campaign.campaign_type"><small class="muted">Please select a Campaign Type first.</small></p>
               <p ng-show="!senders || senders.length < 1"><b>No senders found, please create one <a href="/#/{{location.slug}}/campaigns/senders/new">here</a>.</b></p>
-              <p ng-show="campaign.campaign_type == 'sms'">Please be aware that SMS usage is charged separately to your subscribed plan. <a href="https://docs.oh-mimo.com/splash-pages/sms-messages-otp" target="_blank">See here for more information.</a></p>
+              <p ng-show="campaign.campaign_type == 'sms'">Please be aware that SMS usage is charged separately to your subscribed plan. See our docs for more information</p>
             </md-input-container>
           </div>
         </md-card-content>
@@ -195,7 +195,7 @@
             <span ng-if="tinymceOptions">
               <textarea ui-tinymce="tinymceOptions" ng-model="campaign.content"></textarea>
             </span>
-            <p>You can insert any html in the content field. Dynamic variables must be wrapped in {{}} brackets. Find more in the <a href="http://docs.oh-mimo.com/campaigns/dynamic-campaign-fields-and-html" target='_blank'>docs</a>.</p>
+            <p>You can insert any html in the content field. Dynamic variables must be wrapped in {{}} brackets.</p>
           </div>
           <div layout="column" ng-show="campaign.campaign_type == 'twitter'">
             <md-input-container flex="100" flex-gt-sm="100" style="margin-bottom:-12px;">

@@ -422,11 +422,11 @@ app.directive('integrationSelect', ['Location', '$routeParams', '$location', '$h
     scope.loading = true;
 
     scope.integrations = [ 'unifi' ];
-    scope.integrationDetails = { 
-      unifi: { 
-        image: API_URL + '/manufacturers/ubiquiti-logo.png', 
-        name: 'UniFi Controller' 
-      } 
+    scope.integrationDetails = {
+      unifi: {
+        image: API_URL + '/manufacturers/ubiquiti-logo.png',
+        name: 'UniFi Controller'
+      }
     };
 
     scope.save = function(type) {
@@ -659,6 +659,10 @@ app.directive('cloudtraxSetup', ['Location', '$routeParams', '$location', '$http
       });
     };
 
+    scope.back = function() {
+      $location.path($routeParams.id + '/integration/cloudtrax/auth');
+    };
+
     var fetchSites = function() {
       controller.fetchSites(scope.integration).then(function(sites) {
         var timer = $timeout(function() {
@@ -885,11 +889,14 @@ app.directive('unifiSetup', ['Location', '$routeParams', '$location', '$http', '
         }
       }, function(results) {
         showToast('Successfully created UniFi setup');
-        // @zak create the landing page
         $location.path($routeParams.id + '/integration/completed');
       }, function(error) {
         showErrors(error);
       });
+    };
+
+    scope.back = function() {
+      $location.path($routeParams.id + '/integration/unifi/auth');
     };
 
     var fetchSites = function() {
@@ -1028,6 +1035,10 @@ app.directive('vszSetup', ['Location', '$routeParams', '$location', '$http', '$m
       }, function(error) {
         showErrors(error);
       });
+    };
+
+    scope.back = function() {
+      $location.path($routeParams.id + '/integration/vsz/auth');
     };
 
     var fetchSites = function() {
@@ -1173,6 +1184,10 @@ app.directive('merakiSetup', ['Location', '$routeParams', '$location', '$http', 
         console.log(error);
         return cb();
       });
+    };
+
+    scope.back = function() {
+      $location.path($routeParams.id + '/integration/meraki/auth');
     };
 
     var fetchSites = function() {

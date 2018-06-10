@@ -25,6 +25,15 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
     }
     $scope.mimopowered = API_URL + '/mimo-powered.svg';
 
+    $scope.docsUrl = function() {
+      var user = $localStorage.mimo_user
+      if (user.settings.intercom_id) {
+        window.open(user.settings.docs_url)
+      } else {
+        window.open('http://docs.oh-mimo.com')
+      }
+    }
+
     var ts = Math.floor(Date.now() / 1000);
     $scope.favicon = API_URL + '/uploads/favicon.ico?ts=' + ts;
 

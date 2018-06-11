@@ -2,14 +2,11 @@
 
 set -e
 
-hostname="$1"
-shift
-cmd="$@"
+cmd="$1"
 
-until $(curl --output /dev/null --silent --head --fail $hostname); do
-  printf '.'
-  sleep 5
+while [ ! -f '/etc/mimo/build.config.js' ] ; do
+  sleep 1
 done
 
->&2 echo "API is up - executing command"
+>&2 echo "Config found, running installation"
 exec $cmd

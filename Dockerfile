@@ -15,9 +15,10 @@ RUN \
 
 ADD . /opt/app
 
-WORKDIR /opt/app
+RUN cd /opt/app && bower install --config.interactive=false --allow-root 
+#&& grunt build
 
-RUN ls && pwd && bower install --config.interactive=false --allow-root && grunt build
+WORKDIR /opt/app/dist
 
 EXPOSE 8080
 

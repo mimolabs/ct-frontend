@@ -214,13 +214,13 @@
                       <div flex-gt-sm="50">
                         <md-input-container class="md-block">
                           <label for="available_start"><translate>Start Time</translate></label>
-                          <input ng-model="splash.available_start" placeholder="{{ 'Start' | translate }}"  type='text' name="available_start" ng-pattern="/^[0-9]{2}$/">
+                          <input ng-model="splash.available_start" placeholder="{{ 'Start' | translate }}"  type='text' name="available_start" ng-pattern="/^([0-2])([0-9])$/">
                         </md-input-container>
                       </div>
                       <div flex-gt-sm="50">
                         <md-input-container class="md-block">
                           <label for="available_end"><translate>End Time</translate></label>
-                          <input ng-model="splash.available_end" placeholder="{{ 'End' | translate }}" type='text' name="available_end" ng-pattern="/^[0-9]{2}$/">
+                          <input ng-model="splash.available_end" placeholder="{{ 'End' | translate }}" type='text' name="available_end" ng-pattern="/^([0-2])([0-9])$/">
                         </md-input-container>
                       </div>
                       <div style="margin-top: -30px;">

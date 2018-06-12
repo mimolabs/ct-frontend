@@ -18,7 +18,7 @@ ADD . /opt/app
 RUN cd /opt/app && bower install --config.interactive=false --allow-root 
 #&& grunt build
 
-WORKDIR /opt/app/dist
+WORKDIR /opt/app
 
 EXPOSE 8080
 

@@ -80,16 +80,6 @@ module.exports = function (grunt) {
       },
       production: {
         constants: config.frontend.constants
-      },
-      productioniii: {
-        constants: {
-          API_END_POINT: 'https://api.ctapp.io/api/v1',
-          API_URL: 'https://api.ctapp.io',
-          AUTH_URL: process.env.AUTH_URL || 'https://id.oh-mimo.com',
-          DEBUG: true,
-          COLOURS: '#009688 #FF5722 #03A9F4 #607D8B #F44336 #00BCD4',
-          COMMITHASH: commitHash.stdout
-        }
       }
     },
     // Project settings
@@ -717,27 +707,6 @@ module.exports = function (grunt) {
       'watch'
     ]);
   });
-
-  // grunt.registerTask('test', ['karma:travis']);
-
-  grunt.registerTask('build-beta', [
-    'clean:dist',
-    'ngconstant:beta',
-    'concurrent:dist',
-    'wiredep',
-    'useminPrepare',
-    'autoprefixer',
-    'ngtemplates',
-    'concat',
-    'ngAnnotate',
-    'copy:dist',
-    // 'all-po',
-    'cdnify',
-    'cssmin',
-    'uglify',
-    'rev',
-    'usemin'
-  ]);
 
   grunt.registerTask('build', [
     'clean:dist',

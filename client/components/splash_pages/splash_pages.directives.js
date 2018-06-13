@@ -327,18 +327,20 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       window.location = window.location.href.replace('/design','');
     };
 
-    scope.uploadFiles = function (file) {
+    scope.uploadFiles = function (file, field) {
+      var data = {splash_id: scope.splash.id, splash: {}};
+      data.splash[field] = file;
       if (file) {
         Upload.upload({
             url: 'http://mimo.api:3000/api/v1/file_uploads',
-            data: {file: file, splash: scope.splash.id}
+            data: data
         }).then(function (resp) {
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+            console.log('Success ' + resp.config.data[field].name + 'uploaded. Response: ' + resp.data);
         }, function (resp) {
             console.log('Error status: ' + resp.status);
         }, function (evt) {
             var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data[field].name);
         });
       }
     };

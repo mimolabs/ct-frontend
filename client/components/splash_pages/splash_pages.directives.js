@@ -184,7 +184,7 @@ app.directive('splashDesignerForm', ['SplashPage', 'Location', '$compile', funct
 
 }]);
 
-app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPageForm', '$route', '$routeParams', '$q', 'menu', '$location', 'showToast', 'showErrors', '$rootScope', 'gettextCatalog', 'Upload', function(API_URL, Location, SplashPage, SplashPageForm, $route, $routeParams, $q, menu , $location, showToast, showErrors, $rootScope, gettextCatalog, Upload) {
+app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPageForm', '$route', '$routeParams', '$q', 'menu', '$location', 'showToast', 'showErrors', '$rootScope', '$timeout', 'gettextCatalog', 'Upload', function(API_URL, Location, SplashPage, SplashPageForm, $route, $routeParams, $q, menu , $location, showToast, showErrors, $rootScope, $timeout, gettextCatalog, Upload) {
 
   var link = function(scope,element,attrs) {
 
@@ -333,15 +333,16 @@ app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPag
       data.splash[field] = file;
       if (file) {
         Upload.upload({
-            url: 'http://mimo.api:3000/api/v1/file_uploads',
-            data: data
+          url: 'http://mimo.api:3000/api/v1/file_uploads',
+          data: data
         }).then(function (resp) {
-            console.log('Success ' + resp.config.data[field].name + 'uploaded. Response: ' + resp.data);
+          console.log('Success ' + resp.config.data.splash[field].name + 'uploaded. Response: ' + resp.data);
+          showToast(gettextCatalog.getString('Image uploaded successfully.'));
         }, function (resp) {
-            console.log('Error status: ' + resp.status);
+          console.log('Error status: ' + resp.status);
         }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data[field].name);
+          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+          console.log('progress: ' + progressPercentage + '% ' + resp.config.data.splash[field].name);
         });
       }
     };

@@ -444,7 +444,7 @@
               </md-card-content>
               <md-card-actions layout="row" layout-align="end center">
                 <div ng-app="fileUpload">
-                  <input type="file" ng-model="file" ngf-select="uploadFiles($file, 'background_image_name')"></input>
+                  <input disabled="splash.id == undefined" type="file" ng-model="file" ngf-select="uploadFiles($file, 'background_image_name')"></input>
                 </div>
               </md-card-actions>
             </md-card>
@@ -499,10 +499,10 @@
               <md-card-actions layout="row" layout-align="end center">
                 <span ng-hide="edit_image_url">
                   <div ng-app="fileUpload" ng-if="splash.header_image_type == 1">
-                    <input type="file" ng-model="file" ngf-select="uploadFiles($file, 'logo_file_name')"></input>
+                    <input disabled="splash.id == undefined" type="file" ng-model="file" ngf-select="uploadFiles($file, 'logo_file_name')"></input>
                   </div>
                   <div ng-app="fileUpload" ng-if="splash.header_image_type == 2">
-                    <input type="file" ng-model="file" ngf-select="uploadFiles($file, 'header_image_name')"></input>
+                    <input disabled="splash.id == undefined" type="file" ng-model="file" ngf-select="uploadFiles($file, 'header_image_name')"></input>
                   </div>
                 </span>
               </md-card-actions>

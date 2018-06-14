@@ -189,13 +189,13 @@
                   </td>
                   <td md-cell ng-show="selected == 'Social'">
                     <span ng-if="result.facebook_id">
-                      <img src="https://d3e9l1phmgx8f2.cloudfront.net/images/social/facebook.png" width=24px>
+                      <img src="{{ facebookIcon }}" width=24px>
                     </span>
                     <span ng-if="result.google_id">
-                      <img src="https://d3e9l1phmgx8f2.cloudfront.net/images/social/google.png" width=24px>
+                      <img src="{{ googleIcon }}" width=24px>
                     </span>
                     <span ng-if="result.linkedin_id">
-                      <img src="https://d3e9l1phmgx8f2.cloudfront.net/images/social/linkedin.png" width=24px>
+                      <img src="{{ linkedinIcon }}" width=24px>
                     </span>
                   </td>
                   <td hide show-gt-xs md-cell ng-show="selected == 'SMS logs'">

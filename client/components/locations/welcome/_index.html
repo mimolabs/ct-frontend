@@ -18,7 +18,7 @@
               <md-list flex>
                 <md-subheader class="md-no-sticky">Customise your splash pages</md-subheader>
                 <md-list-item class="md-2-line" ng-click='integrationClick("splash")' ng-href="/#/{{location.slug}}/splash_pages/">
-                  <img class="check-mark" ng-src="{{location.setup.splash ? 'https://d247kqobagyqjh.cloudfront.net/api/file/iFpTtabSPKhJ4oGKIh7p' : 'https://d247kqobagyqjh.cloudfront.net/api/file/6750gXV2RpilDseOWLpl' }}" />
+                  <img class="check-mark" ng-src="{{location.setup.splash ? checked : unchecked}}" />
                   <div class="md-list-item-text">
                     <p>Design and select what data you want to capture.</p>
                   </div>
@@ -26,7 +26,7 @@
                 <md-divider style="margin: 20px 0;"></md-divider>
                 <md-subheader class="md-no-sticky">Connect with your access points</md-subheader>
                 <md-list-item class="md-2-line" ng-click='integrationClick("integration")' href="/#/{{ location.slug }}/integration">
-                  <img class="check-mark" ng-src="{{location.setup.integrations ? 'https://d247kqobagyqjh.cloudfront.net/api/file/iFpTtabSPKhJ4oGKIh7p' : 'https://d247kqobagyqjh.cloudfront.net/api/file/6750gXV2RpilDseOWLpl' }}" />
+                  <img class="check-mark" ng-src="{{location.setup.integrations ? checked : unchecked }}" />
                   <div class="md-list-item-text">
                     <p>Enter your credentials and we'll set it up automatically.</p>
                   </div>
@@ -37,25 +37,6 @@
           </md-card>
         </div>
 
-        <!-- <div flex="100" flex-gt-sm="70">
-          <md-card class="b-bl">
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-headline" translate>
-                  What is MIMO?
-                </span>
-              </md-card-title-text>
-            </md-card-title>
-            <md-card-content layout="row" layout-wrap>
-              <p>Engage with your customers, capture emails. Send campaigns and more.</p>
-              <p>Everyone needs more customers. MIMO helps you understand their behaviour better. Understand how often they visit you, send them an offer if they've not been back for while. It's pretty sweet.</p>
-              <p>If you want to learn more, we've created loads of helpful documents.</p>
-              <p><b>And don't forget to follow us on twitter <a href="https://twitter.com/ohmimo" target="_blank">@ohmimo</a></b>! We'll help you there too.</p>
-              <p><img class="dash-img" style="max-width: 80%;" src="https://d247kqobagyqjh.cloudfront.net/api/file/qp8SgHGRN2gfBWAXriZw"></img></p>
-            </md-card-content>
-          </md-card>
-
-        </div> -->
       </div>
     </div>
 

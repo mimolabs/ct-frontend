@@ -404,9 +404,12 @@ app.directive('editCampaign', ['Campaign', 'Location', 'Integration', 'Audience'
 
 }]);
 
-app.directive('campGuide', [ 'Location', '$routeParams', '$location', function(Location, $routeParams, $location) {
+app.directive('campGuide', [ 'Location', '$routeParams', '$location', 'API_URL', function(Location, $routeParams, $location, API_URL) {
 
   var link = function(scope, element, attrs) {
+
+    scope.unchecked = API_URL + '/dashboard/unchecked.svg';
+    scope.checked = API_URL + '/dashboard/checked.svg';
 
     scope.loading = undefined;
     scope.currentNavItem = 'guide';

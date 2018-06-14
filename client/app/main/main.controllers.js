@@ -30,11 +30,11 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
     $scope.squarelogo = $scope.squarelogo + '?ts=' + ts;
     $scope.mimopowered = API_URL + '/mimo-logo.svg';
 
-    if (!$localStorage.mimo_user.settings.docs_url || $localStorage.mimo_user.settings.docs_url === '') {
-      $scope.mimodocs = 'http://docs.oh-mimo.com'
-    } else {
-      $scope.mimodocs = $localStorage.mimo_user.settings.docs_url
-    }
+    // if (!$localStorage.mimo_user.settings.docs_url || $localStorage.mimo_user.settings.docs_url === '') {
+    //   $scope.mimodocs = 'http://docs.oh-mimo.com'
+    // } else {
+    //   $scope.mimodocs = $localStorage.mimo_user.settings.docs_url
+    // }
 
     $scope.favicon = API_URL + '/uploads/favicon.ico?ts=' + ts;
 

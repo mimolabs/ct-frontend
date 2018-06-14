@@ -31,7 +31,7 @@ module.exports = function (grunt) {
   var exec = require('sync-exec');
   var commitHash = exec('git log --pretty=format:"%h" -n 1');
   var config = _.merge(defaultConfig, localConfig, buildConfig);
-
+  
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-ng-constant');
 

@@ -1,2 +1,2 @@
 // Generated! Do not edit!
-'use strict';module.exports = {"DEBUG":false,"callbackURL":"undefined/auth/login/callback","authorizationURL":"undefined/oauth/authorize","profileURL":"http://api:3000/api/v1/me.json","tokenURL":"http://api:3000/oauth/token"};
+'use strict';module.exports = {"DEBUG":false};

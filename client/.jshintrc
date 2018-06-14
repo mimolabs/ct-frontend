@@ -33,7 +33,6 @@
     "client": false,
     "Pusher": false,
     "Masonry": false,
-    "filepicker": false,
     "jQuery": true,
     "angular": true,
     "console": true,

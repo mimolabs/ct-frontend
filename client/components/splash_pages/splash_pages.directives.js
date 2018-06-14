@@ -333,7 +333,7 @@ app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPag
       data.splash[field] = file;
       if (file) {
         Upload.upload({
-          url: 'http://mimo.api:3000/api/v1/file_uploads',
+          url: 'http://mimo.api:3000/api/v1/splash_file_uploads',
           data: data
         }).then(function (resp) {
           console.log('Success ' + resp.config.data.splash[field].name + 'uploaded. Response: ' + resp.data);

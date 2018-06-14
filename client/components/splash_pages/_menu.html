@@ -1266,7 +1266,7 @@
         <md-tooltip md-direction="bottom">Preview</md-tooltip>
         <md-icon md-font-icon="pageview">pageview</md-icon>
       </md-button>
-      <md-button ng-disabled="(myForm.$pristine || myForm.$invalid)" ng-click="save(splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
+      <md-button ng-disabled="((myForm.$pristine && new_splash != true) || myForm.$invalid)" ng-click="save(splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
         <md-tooltip md-direction="bottom">Save</md-tooltip>
         <md-icon md-font-icon="save">save</md-icon>
       </md-button>

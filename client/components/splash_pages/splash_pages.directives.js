@@ -463,6 +463,7 @@ app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPag
       	'userdays': []
       };
       setDefaults();
+      scope.new_splash = true;
       scope.loading = undefined;
     } else {
       init();

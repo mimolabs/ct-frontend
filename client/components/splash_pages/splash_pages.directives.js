@@ -2,9 +2,19 @@
 
 var app = angular.module('myApp.splash_pages.directives', []);
 
-app.directive('listSplash', ['Location', 'SplashPage', '$routeParams', '$location', 'showToast', 'showErrors', '$mdDialog', '$q', 'gettextCatalog', 'pagination_labels', function(Location,SplashPage,$routeParams,$location,showToast,showErrors,$mdDialog,$q, gettextCatalog, pagination_labels) {
+app.directive('listSplash', ['Location', 'SplashPage', '$routeParams', '$location', 'showToast', 'showErrors', '$mdDialog', '$q', 'gettextCatalog', 'pagination_labels', 'API_URL', function(Location,SplashPage,$routeParams,$location,showToast,showErrors,$mdDialog,$q, gettextCatalog, pagination_labels, API_URL) {
 
   var link = function(scope,element,attrs) {
+
+    scope.facebookIcon = 'facebook-icon.svg';
+    scope.googleIcon = 'google-icon.svg';
+    scope.twitterIcon = 'twitter-icon.svg';
+    scope.smsDark = 'sms-dark.svg';
+    scope.emailDark = 'email-dark.svg';
+    scope.passwordDark = 'password-dark.svg';
+    scope.codeDark = 'code-dark.svg';
+    scope.voucherDark = 'voucher-dark.svg';
+    scope.clickDark = 'click-dark.svg';
 
     Location.get({id: $routeParams.id}, function(data) {
       scope.location = data;
@@ -188,6 +198,30 @@ app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPag
 
   var link = function(scope,element,attrs) {
 
+    scope.transparent = '/splash/transparent.png';
+    scope.acmeDark = '/splash/acme-dark.png';
+    scope.cloudyKnoxville = '/splash/teen-party-thumb.png';
+    scope.facebookLogin = '/splash/facebook-login.png';
+    scope.googleLogin = '/splash/google-login.png';
+    scope.twitterLogin = '/splash/twitter-login.svg';
+    scope.emailDark = '/splash/email-dark.svg';
+    scope.emailLight = '/splash/email-light.svg';
+    scope.smsDark = '/splash/sms-dark.svg';
+    scope.smsLight = '/splash/sms-light.svg';
+    scope.voucherDark = '/splash/voucher-dark.svg';
+    scope.voucherLight = '/splash/voucher-light.svg';
+    scope.passwordDark = '/splash/password-dark.svg';
+    scope.passwordLight = '/splash/password-light.svg';
+    scope.codeDark = '/splash/code-dark.svg';
+    scope.codeLight = '/splash/code-light.svg';
+    scope.mimoPowered = '/splash/mimo-powered.svg';
+    scope.twitterIcon = '/splash/twitter-icon.svg';
+    scope.googleIcon = '/splash/google-icon.svg';
+    scope.facebookIcon = '/splash/facebook-icon.svg';
+    scope.pinterestIcon = '/splash/pinterest-icon.svg';
+    scope.instagramIcon = '/splash/instagram-icon.svg';
+    scope.linkedinIcon = '/splash/linkedin-icon.svg';
+
     scope.splash = { id: $routeParams.splash_page_id };
 
     scope.location = { slug: $routeParams.id };
@@ -275,7 +309,7 @@ app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPag
 
     scope.setTrans = function() {
       if (scope.nologo) {
-        scope.splash.header_image_name = 'https://d3e9l1phmgx8f2.cloudfront.net/images/login_screens/transparent.png';
+        scope.splash.header_image_name = transparent;
       } else {
         scope.splash.header_image_name = undefined;
       }
@@ -416,8 +450,8 @@ app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPag
       	'newsletter_type': 0,
       	'walled_gardens': '',
       	'design_id': 1,
-      	// 'logo_file_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/aZgRK0aqQ1a8o8c5mCjy',
-      	// 'background_image_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/DhOaaHbNQEu3WMnSzEIo',
+      	'logo_file_name': scope.acmeDark,
+      	'background_image_name': scope.cloudyKnoxville,
       	'header_image_type': 1,
       	'header_text': 'Sign In Below',
       	'container_width': '850px',
@@ -575,15 +609,32 @@ app.directive('splashGeneratePassy', ['Code', function(Code) {
   };
 }]);
 
-app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$location', '$rootScope', '$timeout', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', function(SplashPage, $route, $routeParams, $location, $rootScope, $timeout, $mdDialog, showToast, showErrors, gettextCatalog) {
+app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$location', '$rootScope', '$timeout', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', 'API_URL', function(SplashPage, $route, $routeParams, $location, $rootScope, $timeout, $mdDialog, showToast, showErrors, gettextCatalog, API_URL) {
 
   var link = function(scope, element, attrs) {
+
+    scope.acmeDark = 'acme-dark.png';
+    scope.acmeLight = 'acme-light.png';
+    scope.materialRed = 'material-red.jpg';
+    scope.materialBlue = 'material-blue.jpg';
+    scope.materialGreen = 'material-green.jpg';
+    scope.materialYellow = 'material-yellow.jpg';
+    scope.camp = 'camp.jpg';
+    scope.office = 'office.jpg';
+    scope.coffee = 'coffee.jpg';
+    scope.retail = 'retail.jpg';
+    scope.hotel = 'hotel.jpg';
+    scope.cloudyKnoxville = API_URL + '/uploads/splash/cloudy-knoxville.png';
+    scope.rainyAshville = 'rainy-ashville.png';
+    scope.teenParty = 'teen-party.png';
+    scope.seashore = 'seashore.png';
+
 
     var SplashTemplates = {
       'material_red': {
         'terms_url': null,
-        'logo_file_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/72JuQ4lfQECFPpK6xFWe',
-        'background_image_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/ri25tvzERHStdU8M7Xqf',
+        'logo_file_name': scope.acmeLight,
+        'background_image_name': scope.materialRed,
         'location_image_name': null,
         'location_image_name_svg': null,
         'header_image_name': null,
@@ -657,8 +708,8 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
       },
       "material_yellow": {
         "terms_url": null,
-        "logo_file_name": "https://d247kqobagyqjh.cloudfront.net/api/file/72JuQ4lfQECFPpK6xFWe",
-        "background_image_name": "https://d247kqobagyqjh.cloudfront.net/api/file/BN4oXIckRTO9gLkzHCtV",
+        "logo_file_name": scope.acmeLight,
+        "background_image_name": scope.materialYellow,
         "location_image_name": null,
         "location_image_name_svg": null,
         "header_image_name": null,
@@ -732,8 +783,8 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
       },
       "material_green": {
         "terms_url": null,
-        "logo_file_name": "https://d247kqobagyqjh.cloudfront.net/api/file/72JuQ4lfQECFPpK6xFWe",
-        "background_image_name": "https://d247kqobagyqjh.cloudfront.net/api/file/gw3sOHJaRsWmoh2xvEZH",
+        "logo_file_name": scope.acmeLight,
+        "background_image_name": scope.materialGreen,
         "location_image_name": null,
         "location_image_name_svg": null,
         "header_image_name": null,
@@ -807,8 +858,8 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
       },
       "material_blue": {
         "terms_url": null,
-        "logo_file_name": "https://d247kqobagyqjh.cloudfront.net/api/file/72JuQ4lfQECFPpK6xFWe",
-        "background_image_name": "https://d247kqobagyqjh.cloudfront.net/api/file/Vwz1OICvQPCCs65IfLn0",
+        "logo_file_name": scope.acmeLight,
+        "background_image_name": scope.materialBlue,
         "location_image_name": null,
         "location_image_name_svg": null,
         "header_image_name": null,
@@ -882,8 +933,8 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
       },
       "desk_template": {
         "terms_url": null,
-        "logo_file_name": "https://d247kqobagyqjh.cloudfront.net/api/file/72JuQ4lfQECFPpK6xFWe",
-        "background_image_name": "https://d247kqobagyqjh.cloudfront.net/api/file/eGRm1Cl5RbSL50CSZDhp",
+        "logo_file_name": scope.acmeLight,
+        "background_image_name": scope.office,
         "location_image_name": null,
         "location_image_name_svg": null,
         "header_image_name": null,
@@ -957,8 +1008,8 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
       },
       "camp_template": {
         "terms_url": null,
-        "logo_file_name": "https://d247kqobagyqjh.cloudfront.net/api/file/72JuQ4lfQECFPpK6xFWe",
-        "background_image_name": "https://d247kqobagyqjh.cloudfront.net/api/file/KJYufz8WQuGihmYykoL8",
+        "logo_file_name": scope.acmeLight,
+        "background_image_name": scope.camp,
         "location_image_name": null,
         "location_image_name_svg": null,
         "header_image_name": null,
@@ -1032,8 +1083,8 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
       },
       "coffee_template": {
         "terms_url": null,
-        "logo_file_name": "https://d247kqobagyqjh.cloudfront.net/api/file/72JuQ4lfQECFPpK6xFWe",
-        "background_image_name": "https://d247kqobagyqjh.cloudfront.net/api/file/elgpN7xBSeTwpWhgnmZ2",
+        "logo_file_name": scope.acmeLight,
+        "background_image_name": scope.coffee,
         "location_image_name": null,
         "location_image_name_svg": null,
         "header_image_name": null,
@@ -1107,8 +1158,8 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
       },
       "hotel_template": {
         "terms_url": null,
-        "logo_file_name": "https://d247kqobagyqjh.cloudfront.net/api/file/72JuQ4lfQECFPpK6xFWe",
-        "background_image_name": "https://d247kqobagyqjh.cloudfront.net/api/file/3MW4nWTSeGfCEBlkblOF",
+        "logo_file_name": scope.acmeLight,
+        "background_image_name": scope.hotel,
         "location_image_name": null,
         "location_image_name_svg": null,
         "header_image_name": null,
@@ -1182,8 +1233,8 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
       },
       "shop_template": {
         "terms_url": null,
-        "logo_file_name": "https://d247kqobagyqjh.cloudfront.net/api/file/aZgRK0aqQ1a8o8c5mCjy",
-        "background_image_name": "https://d247kqobagyqjh.cloudfront.net/api/file/n1UGUJ0SmyY7s4ZBNxbn",
+        "logo_file_name": scope.acmeDark,
+        "background_image_name": scope.retail,
         "location_image_name": null,
         "location_image_name_svg": null,
         "header_image_name": null,
@@ -1257,8 +1308,8 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
       },
       "gradient_1": {
       	"terms_url": null,
-      	"logo_file_name": "https://d247kqobagyqjh.cloudfront.net/api/file/72JuQ4lfQECFPpK6xFWe",
-      	"background_image_name": "https://d247kqobagyqjh.cloudfront.net/api/file/spuYqKw7RgGLL87YzpHA",
+      	"logo_file_name": scope.acmeLight,
+      	"background_image_name": scope.teenParty,
       	"location_image_name": null,
       	"location_image_name_svg": null,
       	"header_image_name": null,
@@ -1332,8 +1383,8 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
       },
       "gradient_2": {
       	"terms_url": null,
-        "logo_file_name": "https://d247kqobagyqjh.cloudfront.net/api/file/72JuQ4lfQECFPpK6xFWe",
-      	"background_image_name": "https://d247kqobagyqjh.cloudfront.net/api/file/NxeRGFfRT0KMtjw7TU6x",
+        "logo_file_name": scope.acmeLight,
+      	"background_image_name": scope.rainyAshville,
       	"location_image_name": null,
       	"location_image_name_svg": null,
       	"header_image_name": null,
@@ -1407,8 +1458,8 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
       },
       "gradient_3": {
       	"terms_url": null,
-      	"logo_file_name": "https://d247kqobagyqjh.cloudfront.net/api/file/72JuQ4lfQECFPpK6xFWe",
-      	"background_image_name": "https://d247kqobagyqjh.cloudfront.net/api/file/JEc5nOrkSpGBOgawwxLQ",
+      	"logo_file_name": scope.acmeLight,
+      	"background_image_name": scope.seashore,
       	"location_image_name": null,
       	"location_image_name_svg": null,
       	"header_image_name": null,
@@ -1482,8 +1533,8 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
       },
       "gradient_4": {
       	"terms_url": null,
-      	"logo_file_name": "https://d247kqobagyqjh.cloudfront.net/api/file/aZgRK0aqQ1a8o8c5mCjy",
-      	"background_image_name": "https://d247kqobagyqjh.cloudfront.net/api/file/DhOaaHbNQEu3WMnSzEIo",
+      	"logo_file_name": scope.acmeDark,
+      	"background_image_name": scope.cloudyKnoxville,
       	"location_image_name": null,
       	"location_image_name_svg": null,
       	"header_image_name": null,
@@ -1591,6 +1642,21 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
     };
 
     function DialogController($scope,loading) {
+      $scope.teenPartyThumb = 'teen-party-thumb.png';
+      $scope.rainyAshvilleThumb = 'rainy-ashville-thumb.png';
+      $scope.seashoreThumb = 'seashore-thumb.png';
+      $scope.cloudyKnoxvilleThumb = 'cloudy-knoxville-thumb.png';
+      $scope.coffeeThumb = 'coffee-thumb.jpg';
+      $scope.hotelThumb = 'hotel-thumb.jpg';
+      $scope.campThumb = 'camp-thumb.jpg';
+      $scope.officeThumb = 'office-thumb.jpg';
+      $scope.retailThumb = 'retail-thumb.jpg';
+      $scope.materialRedThumb = 'material-red-thumb.jpg';
+      $scope.materialYellowThumb = 'material-yellow-thumb.jpg';
+      $scope.materialGreenThumb = 'material-green-thumb.jpg';
+      $scope.materialBlueThumb = 'material-blue-thumb.jpg';
+      $scope.splashThumb = 'splash-thumb.jpg';
+
       $scope.loading = loading;
 
       $scope.close = function() {
@@ -1621,9 +1687,13 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
   };
 }]);
 
-app.directive('splashGuide', ['Location', '$routeParams', '$location', '$http', '$compile', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', 'SplashIntegration', function(Location, $routeParams, $location, $http, $compile, $mdDialog, showToast, showErrors, gettextCatalog, SplashIntegration) {
+app.directive('splashGuide', ['Location', '$routeParams', '$location', '$http', '$compile', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', 'SplashIntegration', 'API_URL', function(Location, $routeParams, $location, $http, $compile, $mdDialog, showToast, showErrors, gettextCatalog, SplashIntegration, API_URL) {
 
   var link = function(scope, element, attrs, controller) {
+
+    scope.checked = API_URL + '/dashboard/checked.svg';
+    scope.unhecked = API_URL + '/dashboard/unchecked.svg';
+
     scope.currentNavItem = 'guide';
     scope.loading = undefined
     scope.location = {

@@ -457,8 +457,8 @@
 
           <div ng-if="isOpen('logo')" id="images" class="menu-toggle-list">
             <md-card>
-              {{splash.logo_file_name}}
-              <img ng-show="splash.header_image_type == 1 && splash.logo_file_name" ng-src="{{api_url}}/uploads/splash-images/{{splash.id}}/logo-image.jpg" class="md-card-image" alt="Logo Image">
+              <img ng-show="splash.header_image_type == 1 && splash.logo_file_name && !new_splash" ng-src="{{api_url}}/uploads/splash-images/{{splash.id}}/logo-image.jpg" class="md-card-image" alt="Logo Image">
+              <img ng-show="splash.header_image_type == 1 && splash.logo_file_name && new_splash" ng-src="{{splash.logo_file_name}}" class="md-card-image" alt="Logo Image">
               <img ng-show="splash.header_image_type == 2 && splash.header_image_name" ng-src="{{api_url}}/uploads/splash-images/{{splash.id}}/header-image.jpg" class="md-card-image" alt="Banner Image">
               <md-card-content>
                 <p>

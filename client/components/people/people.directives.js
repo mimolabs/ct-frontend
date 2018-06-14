@@ -2,9 +2,14 @@
 
 var app = angular.module('myApp.people.directives', []);
 
-app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeout', '$location', '$routeParams', '$mdDialog', 'showToast', 'showErrors', '$q','pagination_labels', 'gettextCatalog', '$route', function(People,Location,Audience,Report,$timeout,$location,$routeParams,$mdDialog,showToast,showErrors,$q, pagination_labels, gettextCatalog, $route) {
+app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeout', '$location', '$routeParams', '$mdDialog', 'showToast', 'showErrors', '$q','pagination_labels', 'gettextCatalog', '$route', 'API_URL', function(People,Location,Audience,Report,$timeout,$location,$routeParams,$mdDialog,showToast,showErrors,$q, pagination_labels, gettextCatalog, $route, API_URL) {
 
   var link = function(scope, el, attrs, controller) {
+
+    scope.defaultAvatar = API_URL + '/dashboard/default-avatar.svg';
+    scope.facebookIcon = API_URL + '/splash/facebook-icon.svg';
+    scope.twitterIcon = API_URL + '/splash/twitter-icon.svg';
+    scope.googleIcon = API_URL + '/splash/google-icon.svg';
 
     scope.currentNavItem = 'people';
     scope.location = {slug: $routeParams.id};
@@ -491,9 +496,14 @@ app.directive('listPeople', ['People', 'Location', 'Audience', 'Report', '$timeo
 
 }]);
 
-app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email', 'Sms', 'Client', 'DataRequest', '$q', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', function(People, Location, Social, Guest, Email, Sms, Client, DataRequest, $q, $routeParams, $location, $http, $compile, $rootScope, $timeout, $showToast, showErrors, menu, $mdDialog, gettextCatalog) {
+app.directive('displayPerson', ['People', 'Location', 'Social', 'Guest', 'Email', 'Sms', 'Client', 'DataRequest', '$q', '$routeParams', '$location', '$http', '$compile', '$rootScope', '$timeout', 'showToast', 'showErrors', 'menu', '$mdDialog', 'gettextCatalog', 'API_URL', function(People, Location, Social, Guest, Email, Sms, Client, DataRequest, $q, $routeParams, $location, $http, $compile, $rootScope, $timeout, $showToast, showErrors, menu, $mdDialog, gettextCatalog, API_URL) {
 
   var link = function(scope, element, attrs) {
+
+    scope.defaultAvatar = API_URL + '/dashboard/default-avatar.svg';
+    scope.facebookIcon = API_URL + '/splash/facebook-icon.svg';
+    scope.twitterIcon = API_URL + '/splash/twitter-icon.svg';
+    scope.googleIcon = API_URL + '/splash/google-icon.svg';
 
     scope.currentNavItem = 'people';
 
@@ -688,11 +698,18 @@ app.directive('peopleReports', ['People', 'Location', '$routeParams', '$location
 
 }]);
 
-app.directive('personTimeline', ['PersonTimeline', 'DataRequest', '$routeParams', '$timeout', '$mdDialog', 'showToast', 'gettextCatalog', 'showErrors', function(PersonTimeline, DataRequest, $routeParams, $timeout, $mdDialog, showToast, gettextCatalog, showErrors) {
+app.directive('personTimeline', ['PersonTimeline', 'DataRequest', '$routeParams', '$timeout', '$mdDialog', 'showToast', 'gettextCatalog', 'showErrors', 'API_URL', function(PersonTimeline, DataRequest, $routeParams, $timeout, $mdDialog, showToast, gettextCatalog, showErrors, API_URL) {
 
   var link = function(scope, element, attrs) {
 
     scope.currentNavItem = 'people';
+
+    scope.defaultAvatar = API_URL + '/splash/default-avatar.svg';
+    scope.facebookIcon = API_URL + '/splash/facebook-icon.svg';
+    scope.twitterIcon = API_URL + '/splash/twitter-icon.svg';
+    scope.googleIcon = API_URL + '/splash/google-icon.svg';
+    scope.emailIcon = API_URL + '/splash/email-icon.svg';
+    scope.smsIcon = API_URL + '/splash/sms-icon.svg';
 
     scope.person = {slug: $routeParams.person_id};
 

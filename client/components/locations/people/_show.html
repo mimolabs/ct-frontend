@@ -15,7 +15,7 @@
           <div flex="100">
             <md-card class="people-prof b-bl">
               <md-card-title layout="row" layout-align="space-between top">
-                <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}" class="people-avatar"></img>
+                <img src="{{person.profile_photo || defaultAvatar}}" class="people-avatar"></img>
 
                 <div>
                   <md-menu ng-show="!portal_request">
@@ -96,7 +96,7 @@
               </md-card-title>
               <md-list flex>
                 <md-list-item class="md-2-line">
-                  <img src="https://d247kqobagyqjh.cloudfront.net/api/file/WUhzu2zRTremUtlXxALC" style="border-radius:0px;" class="person-social"/>
+                  <img src="{{ facebookIcon }}" style="border-radius:0px;" class="person-social"/>
                   <div class="md-list-item-text">
                     <h3>Facebook</h3>
                     <p ng-show="!person.social[0].fb_link">No Profile</p>
@@ -112,7 +112,7 @@
                   </div>
                 </md-list-item>
                 <md-list-item class="md-2-line">
-                  <img src="https://d247kqobagyqjh.cloudfront.net/api/file/K3YDlqzUQzIavvIEkesC" style="border-radius:0px;" class="person-social"/>
+                  <img src="{{ googleIcon }}" style="border-radius:0px;" class="person-social"/>
                   <div class="md-list-item-text" layout="column">
                     <h3 translate>Google+</h3>
                     <p ng-show="!person.social[0].g_link">No Profile</p>
@@ -128,7 +128,7 @@
                   </div>
                 </md-list-item>
                 <md-list-item class="md-2-line">
-                  <img src="https://d247kqobagyqjh.cloudfront.net/api/file/PdwjF22TTiqOHvzQcksA" style="border-radius:0px;" class="person-social"/>
+                  <img src="{{ twitterIcon }}" style="border-radius:0px;" class="person-social"/>
                   <div class="md-list-item-text" layout="column">
                     <h3 translate>Twitter</h3>
                     <p ng-show="!person.social[0].tw_url">No Profile</p>

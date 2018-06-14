@@ -32,17 +32,17 @@
 
           <div layout="column" class="timeline-post" layout-wrap ng-repeat="timeline in timelines">
             <div class="timeline-icon">
-              <img ng-show="timeline.event == 'sign_in_sms' || timeline.event == 'contact_sms'" src="https://d247kqobagyqjh.cloudfront.net/api/file/dQGVIHdTyGo8kiBLjYQB"></img>
-              <img ng-show="timeline.event == 'sign_in_fb'" src="https://d247kqobagyqjh.cloudfront.net/api/file/WUhzu2zRTremUtlXxALC"></img>
-              <img ng-show="timeline.event == 'sign_in_tw' || timeline.event == 'contact_twitter'" src="https://d247kqobagyqjh.cloudfront.net/api/file/PdwjF22TTiqOHvzQcksA"></img>
-              <img ng-show="timeline.event == 'sign_in_g'" src="https://d247kqobagyqjh.cloudfront.net/api/file/K3YDlqzUQzIavvIEkesC"></img>
-              <img ng-show="timeline.event == 'sign_in_email' || timeline.event == 'contact_email'" src="https://d247kqobagyqjh.cloudfront.net/api/file/nt0LfEXlTpWhoKVSW706"></img>
+              <img ng-show="timeline.event == 'sign_in_sms' || timeline.event == 'contact_sms'" src="{{ smsIcon }}"></img>
+              <img ng-show="timeline.event == 'sign_in_fb'" src="{{ facebookIcon }}"></img>
+              <img ng-show="timeline.event == 'sign_in_tw' || timeline.event == 'contact_twitter'" src="{{ twitterIcon }}"></img>
+              <img ng-show="timeline.event == 'sign_in_g'" src="{{ googleIcon }}"></img>
+              <img ng-show="timeline.event == 'sign_in_email' || timeline.event == 'contact_email'" src="{{ emailIcon }}"></img>
             </div>
             <md-card class="b-bl" ng-if="timeline.event == 'sign_in_sms' || timeline.event == 'sign_in_fb' || timeline.event == 'sign_in_tw' || timeline.event == 'sign_in_g' || timeline.event == 'sign_in_email' || timeline.event == 'sign_in_unknown'">
               <md-card-content>
                 <md-list flex>
                   <md-list-item class="md-2-line">
-                    <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}" class="timeline-avatar"/>
+                    <img src="{{person.profile_photo || '{{ defaultAvatar }}'}}" class="timeline-avatar"/>
                     <div class="md-list-item-text">
                       <h3>
                         <span ng-show="timeline.event == 'sign_in_sms'">Signed in with <b>SMS</b></span>
@@ -66,7 +66,7 @@
               <md-card-content>
                 <md-list flex>
                   <md-list-item class="md-2-line">
-                    <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}" class="timeline-avatar"/>
+                    <img src="{{person.profile_photo || '{{defaultAvatar}}'}}" class="timeline-avatar"/>
                     <div class="md-list-item-text">
                       <h3>
                         <span ng-show="timeline.event == 'contact_sms'">You sent an <b>SMS</b> to {{timeline.to}}</span>
@@ -93,7 +93,7 @@
               <md-card-content>
                 <md-list flex>
                   <md-list-item class="md-2-line">
-                    <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}" class="timeline-avatar"/>
+                    <img src="{{person.profile_photo || '{{defaultAvatar}}'}}" class="timeline-avatar"/>
                     <div class="md-list-item-text">
                       <h3>
                         <span>User <b>agreed to terms</b></span>
@@ -111,7 +111,7 @@
               <md-card-content>
                 <md-list flex>
                   <md-list-item class="md-2-line">
-                    <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}" class="timeline-avatar"/>
+                    <img src="{{person.profile_photo || '{{defaultAvatar}}'}}" class="timeline-avatar"/>
                     <div class="md-list-item-text">
                       <h3>
                         <span>User <b>confirmed email address</b></span>
@@ -129,7 +129,7 @@
               <md-card-content>
                 <md-list flex>
                   <md-list-item class="md-2-line">
-                    <img src="{{person.profile_photo || 'https://d247kqobagyqjh.cloudfront.net/api/file/Ny9J0MsTtus0xk3e43rh'}}" class="timeline-avatar"/>
+                    <img src="{{person.profile_photo || '{{defaultAvatar}}'}}" class="timeline-avatar"/>
                     <div class="md-list-item-text">
                       <h3>
                         <span>User added to <b>{{timeline.event == 'mailchimp_subscribe' ? 'MailChimp' : timeline.event == 'campaign_monitor_subscribe' ? 'Campaign Monitor' : 'SendGrid'}}</b> list</span>

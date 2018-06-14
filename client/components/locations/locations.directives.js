@@ -1271,11 +1271,14 @@ app.directive('merakiSetup', ['Location', '$routeParams', '$location', '$http', 
 
 }]);
 
-app.directive('gettingStarted', ['Location', '$routeParams', '$location', '$http', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', function(Location, $routeParams, $location, $http, $mdDialog, showToast, showErrors, gettextCatalog) {
+app.directive('gettingStarted', ['Location', '$routeParams', '$location', '$http', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', 'API_URL', function(Location, $routeParams, $location, $http, $mdDialog, showToast, showErrors, gettextCatalog, API_URL) {
 
   var link = function(scope, element, attrs, controller) {
 
     scope.loading = true;
+
+    scope.checked = API_URL + '/dashboard/checked.svg';
+    scope.unchecked = API_URL + '/dashboard/unchecked.svg';
 
     scope.visitSplash = function(paid) {
       $location.path('/' + scope.location.slug + '/splash_pages' + (paid ? '' : '/guide'));
@@ -1415,7 +1418,7 @@ app.directive('locationSettingsNav', ['Location', function(Location) {
   };
 }]);
 
-app.directive('locationAudit', ['Session', 'Email', 'Location', 'Report', 'Social', 'SMSLog', '$routeParams', '$rootScope', '$location', '$timeout', '$q', '$localStorage', 'Locations', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', function(Session, Email, Location, Report, Social, SMSLog, $routeParams, $rootScope, $location, $timeout, $q, $localStorage, Locations, $mdDialog, showToast, showErrors, gettextCatalog) {
+app.directive('locationAudit', ['Session', 'Email', 'Location', 'Report', 'Social', 'SMSLog', '$routeParams', '$rootScope', '$location', '$timeout', '$q', '$localStorage', 'Locations', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', 'API_URL', function(Session, Email, Location, Report, Social, SMSLog, $routeParams, $rootScope, $location, $timeout, $q, $localStorage, Locations, $mdDialog, showToast, showErrors, gettextCatalog, API_URL) {
 
   var link = function(scope,element,attrs,controller) {
 
@@ -1423,6 +1426,11 @@ app.directive('locationAudit', ['Session', 'Email', 'Location', 'Report', 'Socia
 
     scope.startDate = moment().utc().subtract(6, 'days').startOf('day').toDate();
     scope.endDate = moment().utc().toDate();
+
+    scope.facebookIcon = API_URL + '/splash/facebook-icon.svg';
+    scope.twitterIcon = API_URL + '/splash/twitter-icon.svg';
+    scope.googleIcon = API_URL + '/splash/google-icon.svg';
+    scope.linkedinIcon = API_URL + '/splash/linkedin-icon.svg';
 
     var weekAgoEpoch = Math.floor(scope.startDate.getTime() / 1000);
     var nowEpoch = Math.floor(scope.endDate.getTime() / 1000);

@@ -36,7 +36,6 @@ module.exports = function(config) {
       'client/bower_components/ngStorage/ngStorage.js',
       'client/bower_components/jquery-minicolors/jquery.minicolors.js',
       'client/bower_components/angular-touch/angular-touch.js',
-      'client/bower_components/filepicker-ct/filepicker.min.js',
       'client/bower_components/select2/select2.js',
       'client/bower_components/nouislider/jquery.nouislider.min.js',
       'client/bower_components/moment/moment.js',

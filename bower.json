@@ -20,7 +20,6 @@
     "angular-material": "1.1.1",
     "angular-material-data-table": "0.10.9",
     "angular-minicolors": "~0.0.7",
-    "filepicker-js-bower": "filepicker-js#~2.4.5",
     "google-chart": "~1.0.4",
     "moment-duration-format": "~1.3.0",
     "angular-gettext": "~2.2.1",
@@ -29,7 +28,8 @@
     "dragula.js": "3.7.2",
     "angular-moment-picker": "moment-picker#0.1.4",
     "angular-color-picker": "angularjs-color-picker#^3.4.8",
-    "angular-ui-tinymce": "latest"
+    "angular-ui-tinymce": "latest",
+    "ng-file-upload": "^12.2.13"
   },
   "overrides": {
     "urijs": {

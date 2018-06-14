@@ -436,26 +436,16 @@
 
           <div ng-if="isOpen('bg')" id="images" class="menu-toggle-list">
             <md-card>
-              <img ng-show="splash.background_image_name" src="{{splash.background_image_name}}" class="md-card-image" alt="Background">
+              <img ng-show="splash.background_image_name" src="{{api_url}}/uploads/splash-images/{{splash.id}}/bg-image.jpg" class="md-card-image" alt="Background">
               <md-card-content>
                 <p translate>
                   Upload a background image. Please note, large images will delay page load times.
                 </p>
-                <md-input-container class="md-block" ng-show="edit_bg_url">
-                  <label>
-                    <translate>Image URL</translate>
-                  </label>
-                  <input type="text" ng-model="splash.background_image_name"></input>
-                </md-input-container>
-                <md-switch aria-label="{{ 'Switch 2' | translate }}" ng-click="edit_bg_url = !edit_bg_url" style="margin-bottom: -20px">
-                  <span translate>Edit Background URL</span>
-                </md-switch>
               </md-card-content>
               <md-card-actions layout="row" layout-align="end center">
-                  <md-button ng-hide="edit_bg_url" class="md-warn" ng-disabled="!splash.background_image_name" aria-label="{{ 'delete' | translate }}" ng-click="deleteBg(splash,myForm)">
-                    <translate>Delete</translate>
-                  </md-button>
-                  <filepicker ng-hide="edit_bg_url" attribute="splash.background_image_name" type="10" uploading="splash.bg_uploading"></filepicker>
+                <div ng-app="fileUpload">
+                  <input ng-disabled="splash.id == undefined" type="file" ng-model="file" ngf-select="uploadFiles($file, 'background_image_name')"></input>
+                </div>
               </md-card-actions>
             </md-card>
           </div>
@@ -467,8 +457,8 @@
 
           <div ng-if="isOpen('logo')" id="images" class="menu-toggle-list">
             <md-card>
-              <img ng-show="splash.header_image_type == 1 && splash.logo_file_name" src="{{splash.logo_file_name}}" class="md-card-image" alt="Background">
-              <img ng-show="splash.header_image_type == 2 && splash.header_image_name" src="{{splash.header_image_name}}" class="md-card-image" alt="Background">
+              <img ng-show="splash.header_image_type == 1 && splash.logo_file_name" src="{{api_url}}/uploads/splash-images/{{splash.id}}/logo-image.jpg" class="md-card-image" alt="Background">
+              <img ng-show="splash.header_image_type == 2 && splash.header_image_name" src="{{api_url}}/uploads/splash-images/{{splash.id}}/header-image.jpg" class="md-card-image" alt="Background">
               <md-card-content>
                 <p>
                   <span ng-show="splash.header_image_type == 1" translate>
@@ -508,8 +498,12 @@
               </md-card-content>
               <md-card-actions layout="row" layout-align="end center">
                 <span ng-hide="edit_image_url">
-                  <filepicker attribute="splash.logo_file_name" type="{{ splash.header_image_type }}" uploading="splash.uploading" ng-if="splash.header_image_type == 1"></filepicker>
-                  <filepicker attribute="splash.header_image_name" type="{{ splash.header_image_type }}" uploading="splash.uploading" ng-if="splash.header_image_type == 2"></filepicker>
+                  <div ng-app="fileUpload" ng-if="splash.header_image_type == 1">
+                    <input ng-disabled="splash.id == undefined" type="file" ng-model="file" ngf-select="uploadFiles($file, 'logo_file_name')"></input>
+                  </div>
+                  <div ng-app="fileUpload" ng-if="splash.header_image_type == 2">
+                    <input ng-disabled="splash.id == undefined" type="file" ng-model="file" ngf-select="uploadFiles($file, 'header_image_name')"></input>
+                  </div>
                 </span>
               </md-card-actions>
             </md-card>
@@ -1134,9 +1128,6 @@
                 <md-button class="md-warn" ng-disabled="!splash.popup_image" aria-label="{{ 'delete' | translate }}" ng-click="deleteAd(splash,myForm)">
                   <translate>Delete</translate>
                 </md-button>
-                <span ng-hide="edit_image_url">
-                  <filepicker attribute="splash.popup_image" uploading="splash.uploading"></filepicker>
-                </span>
               </md-card-actions>
             </md-card>
             <md-card>
@@ -1272,7 +1263,7 @@
         <md-tooltip md-direction="bottom">Preview</md-tooltip>
         <md-icon md-font-icon="pageview">pageview</md-icon>
       </md-button>
-      <md-button ng-disabled="(myForm.$pristine || myForm.$invalid)" ng-click="save(splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
+      <md-button ng-disabled="((myForm.$pristine && new_splash != true) || myForm.$invalid)" ng-click="save(splash,myForm)" aria-label="{{'Save' | translate}}" class="md-fab md-raised md-primary md-mini">
         <md-tooltip md-direction="bottom">Save</md-tooltip>
         <md-icon md-font-icon="save">save</md-icon>
       </md-button>

@@ -19,10 +19,15 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
 
     $scope.commit = COMMITHASH;
     $scope.ct_login = CTLogin;
+
+    var ts = Math.floor(Date.now() / 1000);
+
     $scope.squarelogo = API_URL + '/uploads/square-logo.png';
     if (!API_URL || API_URL === '') {
       $scope.squarelogo  = API_URL + '/mimo-logo.svg'
     }
+
+    $scope.squarelogo = $scope.squarelogo + '?ts=' + ts;
     $scope.mimopowered = API_URL + '/mimo-logo.svg';
 
     if (!$localStorage.mimo_user.settings.docs_url || $localStorage.mimo_user.settings.docs_url === '') {
@@ -31,7 +36,6 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
       $scope.mimodocs = $localStorage.mimo_user.settings.docs_url
     }
 
-    var ts = Math.floor(Date.now() / 1000);
     $scope.favicon = API_URL + '/uploads/favicon.ico?ts=' + ts;
 
     $scope.home = function() {

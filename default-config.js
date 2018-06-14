@@ -3,6 +3,8 @@
 var exec = require('sync-exec');
 var commitHash = exec('git log --pretty=format:"%h" -n 1');
 var commitDate = exec('git log --pretty=format:"%ci" -n 1');
+var api_url = process.env.MIMO_API_URL;
+var dashboard_url = process.env.MIMO_DASHBOARD_URL;
 
 module.exports = {
     frontend: {
@@ -22,7 +24,14 @@ module.exports = {
     // Server configuration.
     server: {
         env: {
-            DEBUG: false,
+          DEBUG: false,
+          appID: process.env.APP_ID,
+          appSecret: process.env.APP_SECRET,
+          callbackURL: process.env.MIMO_DASHBOARD_URL + '/auth/login/callback',
+          authorizationURL: api_url + "/oauth/authorize",
+          profileURL: "http://api:3000/api/v1/me.json", // also?
+          tokenURL: "http://api:3000/oauth/token", // should change???
+          dashboardURL: dashboard_url
         }
     }
 };

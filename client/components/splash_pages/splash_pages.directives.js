@@ -184,7 +184,7 @@ app.directive('splashDesignerForm', ['SplashPage', 'Location', '$compile', funct
 
 }]);
 
-app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$route', '$routeParams', '$q', 'menu', '$location', 'showToast', 'showErrors', '$rootScope', 'gettextCatalog', 'Upload', function(Location, SplashPage, SplashPageForm, $route, $routeParams, $q, menu , $location, showToast, showErrors, $rootScope, gettextCatalog, Upload) {
+app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPageForm', '$route', '$routeParams', '$q', 'menu', '$location', 'showToast', 'showErrors', '$rootScope', 'gettextCatalog', 'Upload', function(API_URL, Location, SplashPage, SplashPageForm, $route, $routeParams, $q, menu , $location, showToast, showErrors, $rootScope, gettextCatalog, Upload) {
 
   var link = function(scope,element,attrs) {
 
@@ -224,6 +224,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
         id: $routeParams.splash_page_id,
       }).$promise.then(function(res) {
         scope.splash = res.splash_page;
+        scope.api_url = API_URL;
         setDefaults();
         scope.loading = undefined;
       }, function() {

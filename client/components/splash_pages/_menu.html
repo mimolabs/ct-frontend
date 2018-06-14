@@ -90,6 +90,22 @@
                       </div>
                     </md-input-container>
                   </div>
+                  <div flex="100" ng-show="splash.backup_sms">
+                    <md-input-container class="md-block">
+                      <label translate>Twilio Username</label>
+                      <input ng-model="splash.twilio_user" name="twilio_user" placeholder="{{'Enter your username' | translate }}" type="text" ng-required="splash.backup_sms">
+                      <div ng-messages="myForm.twilio_user.$error" md-auto-hide="false">
+                        <div ng-message="required" translate>Twilio username required</div>
+                      </div>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                      <label translate>Twilio Password</label>
+                      <input ng-model="splash.twilio_pass" name="twilio_pass" placeholder="{{'Enter your password' | translate }}" type="password" ng-required="splash.backup_sms">
+                      <div ng-messages="myForm.twilio_pass.$error" md-auto-hide="false">
+                        <div ng-message="required" translate>Twilio password required</div>
+                      </div>
+                    </md-input-container>
+                  </div>
                 </div>
               </md-card-content>
             </md-card>

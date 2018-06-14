@@ -21,17 +21,14 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
     $scope.ct_login = CTLogin;
     $scope.squarelogo = API_URL + '/uploads/square-logo.png';
     if (!API_URL || API_URL === '') {
-      $scope.squarelogo  = 'https://d247kqobagyqjh.cloudfront.net/api/file/cx7ecphTbq4GrzkMwiLr'
+      $scope.squarelogo  = API_URL + '/mimo-logo.svg'
     }
-    $scope.mimopowered = API_URL + '/mimo-powered.svg';
+    $scope.mimopowered = API_URL + '/mimo-logo.svg';
 
-    $scope.docsUrl = function() {
-      var user = $localStorage.mimo_user
-      if (user.settings.intercom_id) {
-        window.open(user.settings.docs_url)
-      } else {
-        window.open('http://docs.oh-mimo.com')
-      }
+    if (!$localStorage.mimo_user.settings.docs_url || $localStorage.mimo_user.settings.docs_url === '') {
+      $scope.mimodocs = 'http://docs.oh-mimo.com'
+    } else {
+      $scope.mimodocs = $localStorage.mimo_user.settings.docs_url
     }
 
     var ts = Math.floor(Date.now() / 1000);

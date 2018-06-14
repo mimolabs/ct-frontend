@@ -184,7 +184,7 @@ app.directive('splashDesignerForm', ['SplashPage', 'Location', '$compile', funct
 
 }]);
 
-app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$route', '$routeParams', '$q', 'menu', '$location', 'showToast', 'showErrors', '$rootScope', 'gettextCatalog', function(Location, SplashPage, SplashPageForm, $route, $routeParams, $q, menu , $location, showToast, showErrors, $rootScope, gettextCatalog) {
+app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPageForm', '$route', '$routeParams', '$q', 'menu', '$location', 'showToast', 'showErrors', '$rootScope', '$timeout', 'gettextCatalog', 'Upload', function(API_URL, Location, SplashPage, SplashPageForm, $route, $routeParams, $q, menu , $location, showToast, showErrors, $rootScope, $timeout, gettextCatalog, Upload) {
 
   var link = function(scope,element,attrs) {
 
@@ -224,6 +224,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
         id: $routeParams.splash_page_id,
       }).$promise.then(function(res) {
         scope.splash = res.splash_page;
+        scope.api_url = API_URL;
         setDefaults();
         scope.loading = undefined;
       }, function() {
@@ -325,6 +326,25 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
 
     scope.editSettings = function () {
       window.location = window.location.href.replace('/design','');
+    };
+
+    scope.uploadFiles = function (file, field) {
+      var data = {splash_id: scope.splash.id, splash: {}};
+      data.splash[field] = file;
+      if (file) {
+        Upload.upload({
+          url: 'http://mimo.api:3000/api/v1/splash_file_uploads',
+          data: data
+        }).then(function (resp) {
+          console.log('Success ' + resp.config.data.splash[field].name + 'uploaded. Response: ' + resp.data);
+          showToast(gettextCatalog.getString('Image uploaded successfully.'));
+        }, function (resp) {
+          console.log('Error status: ' + resp.status);
+        }, function (evt) {
+          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+          console.log('progress: ' + progressPercentage + '% ' + resp.config.data.splash[field].name);
+        });
+      }
     };
 
     scope.fonts = [
@@ -443,6 +463,7 @@ app.directive('splashDesigner', ['Location', 'SplashPage', 'SplashPageForm', '$r
       	'userdays': []
       };
       setDefaults();
+      scope.new_splash = true;
       scope.loading = undefined;
     } else {
       init();

@@ -18,7 +18,8 @@ var app = angular.module('myApp', [
   'gettext',
   'moment-picker',
   'color.picker',
-  'ui.tinymce'
+  'ui.tinymce',
+  'ngFileUpload'
 ]);
 
 app.config(function($provide) {

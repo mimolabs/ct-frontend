@@ -988,9 +988,17 @@ location-boxes table {
     margin-left: 60px;
   }
 }
+/*
+.mimo-powered {
+  margin: auto;
+} */
 
-.powered-by {
-  margin: 10px 5px 5px 5px;
+.mimo-powered img {
+  width: 20px;
+  height: auto;
+  padding: 10px;
+  margin: 10px;
+  /* margin: auto; */
 }
 
 /*top nav styles*/

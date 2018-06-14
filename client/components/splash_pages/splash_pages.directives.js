@@ -223,6 +223,7 @@ app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPag
         location_id: scope.location.slug,
         id: $routeParams.splash_page_id,
       }).$promise.then(function(res) {
+        scope.ts = Math.floor(Date.now() / 1000);
         scope.splash = res.splash_page;
         scope.api_url = API_URL;
         setDefaults();
@@ -328,21 +329,29 @@ app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPag
       window.location = window.location.href.replace('/design','');
     };
 
+    var delayedReload = function() {
+      var timer = setTimeout(function() {
+        $route.reload();
+      }, 5000);
+      $timeout.cancel(timer);
+    };
+
     scope.uploadFiles = function (file, field) {
       var data = {splash_id: scope.splash.id, splash: {}};
       data.splash[field] = file;
       if (file) {
         Upload.upload({
-          url: 'http://mimo.api:3000/api/v1/splash_file_uploads',
+          url: API_URL + '/api/v1/splash_file_uploads',
           data: data
         }).then(function (resp) {
           console.log('Success ' + resp.config.data.splash[field].name + 'uploaded. Response: ' + resp.data);
           showToast(gettextCatalog.getString('Image uploaded successfully.'));
+          scope.ts = Math.floor(Date.now() / 1000);
+          // delayedReload();
         }, function (resp) {
           console.log('Error status: ' + resp.status);
         }, function (evt) {
           var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-          console.log('progress: ' + progressPercentage + '% ' + resp.config.data.splash[field].name);
         });
       }
     };
@@ -407,8 +416,8 @@ app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPag
       	'newsletter_type': 0,
       	'walled_gardens': '',
       	'design_id': 1,
-      	'logo_file_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/aZgRK0aqQ1a8o8c5mCjy',
-      	'background_image_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/DhOaaHbNQEu3WMnSzEIo',
+      	// 'logo_file_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/aZgRK0aqQ1a8o8c5mCjy',
+      	// 'background_image_name': 'https://d247kqobagyqjh.cloudfront.net/api/file/DhOaaHbNQEu3WMnSzEIo',
       	'header_image_type': 1,
       	'header_text': 'Sign In Below',
       	'container_width': '850px',

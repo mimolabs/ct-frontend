@@ -190,8 +190,7 @@
     height: 100vh;
     padding: 0 10px 0 10px;
     margin: 0 auto;
-    background-image: url({{'http://mimo.api:3000' + splash.background_image_name}} );
-    /* background-image: url({{new_splash ? api_url + '/uploads/splash/' : api_url + '/uploads/splash/' + 'splash.background_image_name' + '?ts=' + ts}} ); */
+    background-image: url({{api_url + '/' + splash.background_image_name}} );
     background-color: {{splash.background_image_name ? 'transparent' : splash.body_background_colour}}!important;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -591,9 +590,7 @@
           <!-- <splash-design ver='{{ splash.design_id }}'></splash-design> -->
           <div style="height: 150px" ng-hide="splash.header_image_name || splash.logo_file_name">
           </div>
-          {{splash.background_image_name}}
-          <!-- <div ng-if="(splash.header_image_name != undefined || splash.logo_file_name != undefined) && !new_splash" class="" ng-class="splash.header_image_type == 1 ? 'logo location_logo' : 'banner'" ><a href="http://{{ splash.website }}"><img src="{{ splash.header_image_type == 1 ? api_url + '/uploads/splash-images/' + splash.id + '/logo-image.jpg' : api_url + '/uploads/splash-images/' +  splash.id + '/header-image.jpg' }}" alt="" class=""></a></div> -->
-          <div ng-if="(splash.header_image_name != undefined || splash.logo_file_name != undefined) && !new_splash" class="" ng-class="splash.header_image_type == 1 ? 'logo location_logo' : 'banner'" ><a href="http://{{ splash.website }}"><img src=""></a></div>
+          <div ng-show="splash.header_image_name != undefined || splash.logo_file_name != undefined" class="" ng-class="splash.header_image_type == 1 ? 'logo location_logo' : 'banner'" ><a href="http://{{ splash.website }}"><img src="{{api_url}}/{{ splash.header_image_type == 1 ? splash.logo_file_name : splash.header_image_name }}" alt="" class=""></a></div>
           <div class="ps_inner">
             <div ng-show="splash.form_demo == true">
               <h1>{{ splash.header_text }}</h1>

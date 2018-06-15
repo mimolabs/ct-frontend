@@ -200,7 +200,7 @@ app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPag
 
     scope.transparent = '/splash/transparent.png';
     scope.acmeDark = '/splash/acme-dark.png';
-    scope.cloudyKnoxville = '/splash/teen-party-thumb.png';
+    scope.cloudyKnoxville = '/splash/cloudy-knoxville.png';
     scope.facebookLogin = '/splash/facebook-login.png';
     scope.googleLogin = '/splash/google-login.png';
     scope.twitterLogin = '/splash/twitter-login.svg';
@@ -370,6 +370,15 @@ app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPag
       $timeout.cancel(timer);
     };
 
+    var setFileName = function(field) {
+      var file_names = {
+        background_image: 'uploads/bg-image-' + scope.splash.id + '.jpg',
+        logo_file: 'uploads/logo-image-' + scope.splash.id + '.jpg',
+        header_image: 'uploads/header-image-' + scope.splash.id + '.jpg'
+      };
+      scope.splash[field + '_name'] = file_names[field];
+    };
+
     scope.uploadFiles = function (file, field) {
       var data = {splash_id: scope.splash.id, splash: {}};
       data.splash[field] = file;
@@ -378,10 +387,9 @@ app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPag
           url: API_URL + '/api/v1/splash_file_uploads',
           data: data
         }).then(function (resp) {
-          console.log('Success ' + resp.config.data.splash[field].name + 'uploaded. Response: ' + resp.data);
           showToast(gettextCatalog.getString('Image uploaded successfully.'));
           scope.ts = Math.floor(Date.now() / 1000);
-          // delayedReload();
+          setFileName(field);
         }, function (resp) {
           console.log('Error status: ' + resp.status);
         }, function (evt) {
@@ -613,21 +621,23 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
 
   var link = function(scope, element, attrs) {
 
-    scope.acmeDark = 'acme-dark.png';
-    scope.acmeLight = 'acme-light.png';
-    scope.materialRed = 'material-red.jpg';
-    scope.materialBlue = 'material-blue.jpg';
-    scope.materialGreen = 'material-green.jpg';
-    scope.materialYellow = 'material-yellow.jpg';
-    scope.camp = 'camp.jpg';
-    scope.office = 'office.jpg';
-    scope.coffee = 'coffee.jpg';
-    scope.retail = 'retail.jpg';
-    scope.hotel = 'hotel.jpg';
-    scope.cloudyKnoxville = API_URL + '/uploads/splash/cloudy-knoxville.png';
-    scope.rainyAshville = 'rainy-ashville.png';
-    scope.teenParty = 'teen-party.png';
-    scope.seashore = 'seashore.png';
+    scope.api_url = API_URL;
+
+    scope.acmeDark = 'splash/acme-dark.png';
+    scope.acmeLight = 'splash/acme-light.png';
+    scope.materialRed = 'splash/material-red.jpg';
+    scope.materialBlue = 'splash/material-blue.jpg';
+    scope.materialGreen = 'splash/material-green.jpg';
+    scope.materialYellow = 'splash/material-yellow.jpg';
+    scope.camp = 'splash/camp.jpg';
+    scope.office = 'splash/office.jpg';
+    scope.coffee = 'splash/coffee.jpg';
+    scope.retail = 'splash/retail.jpg';
+    scope.hotel = 'splash/hotel.jpg';
+    scope.cloudyKnoxville = 'splash/cloudy-knoxville.png';
+    scope.rainyAshville = 'splash/rainy-ashville.png';
+    scope.teenParty = 'splash/teen-party.png';
+    scope.seashore = 'splash/seashore.png';
 
 
     var SplashTemplates = {
@@ -1642,20 +1652,20 @@ app.directive('splashTemplates', ['SplashPage', '$route', '$routeParams', '$loca
     };
 
     function DialogController($scope,loading) {
-      $scope.teenPartyThumb = 'teen-party-thumb.png';
-      $scope.rainyAshvilleThumb = 'rainy-ashville-thumb.png';
-      $scope.seashoreThumb = 'seashore-thumb.png';
-      $scope.cloudyKnoxvilleThumb = 'cloudy-knoxville-thumb.png';
-      $scope.coffeeThumb = 'coffee-thumb.jpg';
-      $scope.hotelThumb = 'hotel-thumb.jpg';
-      $scope.campThumb = 'camp-thumb.jpg';
-      $scope.officeThumb = 'office-thumb.jpg';
-      $scope.retailThumb = 'retail-thumb.jpg';
-      $scope.materialRedThumb = 'material-red-thumb.jpg';
-      $scope.materialYellowThumb = 'material-yellow-thumb.jpg';
-      $scope.materialGreenThumb = 'material-green-thumb.jpg';
-      $scope.materialBlueThumb = 'material-blue-thumb.jpg';
-      $scope.splashThumb = 'splash-thumb.jpg';
+      $scope.teenPartyThumb = API_URL + '/splash/teen-party-thumb.png';
+      $scope.rainyAshvilleThumb = API_URL + '/splash/rainy-ashville-thumb.png';
+      $scope.seashoreThumb = API_URL + '/splash/seashore-thumb.png';
+      $scope.cloudyKnoxvilleThumb = API_URL + '/splash/cloudy-knoxville-thumb.png';
+      $scope.coffeeThumb = API_URL + '/splash/coffee-thumb.jpg';
+      $scope.hotelThumb = API_URL + '/splash/hotel-thumb.jpg';
+      $scope.campThumb = API_URL + '/splash/camp-thumb.jpg';
+      $scope.officeThumb = API_URL + '/splash/office-thumb.jpg';
+      $scope.retailThumb = API_URL + '/splash/retail-thumb.jpg';
+      $scope.materialRedThumb = API_URL + '/splash/material-red-thumb.jpg';
+      $scope.materialYellowThumb = API_URL + '/splash/material-yellow-thumb.jpg';
+      $scope.materialGreenThumb = API_URL + '/splash/material-green-thumb.jpg';
+      $scope.materialBlueThumb = API_URL + '/splash/material-blue-thumb.jpg';
+      $scope.splashThumb = API_URL + '/splash/splash-thumb.jpg';
 
       $scope.loading = loading;
 

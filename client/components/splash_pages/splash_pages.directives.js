@@ -6,15 +6,15 @@ app.directive('listSplash', ['Location', 'SplashPage', '$routeParams', '$locatio
 
   var link = function(scope,element,attrs) {
 
-    scope.facebookIcon = 'facebook-icon.svg';
-    scope.googleIcon = 'google-icon.svg';
-    scope.twitterIcon = 'twitter-icon.svg';
-    scope.smsDark = 'sms-dark.svg';
-    scope.emailDark = 'email-dark.svg';
-    scope.passwordDark = 'password-dark.svg';
-    scope.codeDark = 'code-dark.svg';
-    scope.voucherDark = 'voucher-dark.svg';
-    scope.clickDark = 'click-dark.svg';
+    scope.facebookIcon = API_URL + '/splash/facebook-icon.svg';
+    scope.googleIcon = API_URL + '/splash/google-icon.svg';
+    scope.twitterIcon = API_URL + '/splash/twitter-icon.svg';
+    scope.smsDark = API_URL + '/splash/sms-dark.svg';
+    scope.emailDark = API_URL + '/splash/email-dark.svg';
+    scope.passwordDark = API_URL + '/splash/password-dark.svg';
+    scope.codeDark = API_URL + '/splash/code-dark.svg';
+    scope.voucherDark = API_URL + '/splash/voucher-dark.svg';
+    scope.clickDark = API_URL + '/splash/click-dark.svg';
 
     Location.get({id: $routeParams.id}, function(data) {
       scope.location = data;

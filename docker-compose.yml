@@ -1,8 +1,18 @@
-version: '2'
+version: '3'
 services:
-  cucumber:
+  dashboard:
+    restart: always
     build: .
-    ports:
-     - "9090:9000"
-    env_file:
-      - cucumber.env
+    # image: "ohmimo/mimo-frontend"
+    # image: "ohmimo/mimo-dash"
+    # env_file:
+    #   - production.vars
+    #   - dashboard.vars
+    environment:
+      - NODE_ENV=production
+    volumes:
+        - shared-volume:/etc/mimo
+    command: bash -c "cd /opt/app && ./wait-for-it.sh && grunt build && cd dist && echo 123 && pwd && ls server && node server/app.js"]
+
+volumes:
+  shared-volume:

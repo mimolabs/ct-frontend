@@ -1,6 +1,8 @@
 # Welcome To MIMO!
 
-This image is used as part of the MIMO Community Edition. An open source version of (mimo)[https://oh-mimo.com]
+TBC
+
+[![CircleCI](https://circleci.com/gh/mimolabs/mimo-frontend.svg?style=svg)](https://circleci.com/gh/mimolabs/mimo-frontend)
 
 ## Contributing
 

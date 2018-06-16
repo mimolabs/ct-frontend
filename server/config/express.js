@@ -13,7 +13,7 @@ var secrets;
 try {
   secrets = require('/etc/mimo/build.config.js');
 } catch(e) {
-  secrets = require('./local.env.sample');
+  secrets = require('./local.env.sample.js');
 }
 
 var URI = require('urijs');

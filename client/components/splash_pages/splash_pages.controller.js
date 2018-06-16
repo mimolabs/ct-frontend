@@ -38,13 +38,13 @@ app.controller('SplashPagesDesignCtrl', ['$location', '$scope', '$routeParams', 
       active: isActive('splash_pages')
     });
 
-    menu.sections.push({
-      name: gettextCatalog.getString('Campaigns'),
-      type: 'link',
-      link: '/#/' + $scope.location.slug + '/campaigns',
-      icon: 'email',
-      active: isActive('campaigns')
-    });
+    // menu.sections.push({
+    //   name: gettextCatalog.getString('Campaigns'),
+    //   type: 'link',
+    //   link: '/#/' + $scope.location.slug + '/campaigns',
+    //   icon: 'email',
+    //   active: isActive('campaigns')
+    // });
 
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
       menu.hideMainNav = undefined;

@@ -51,5 +51,6 @@ module.exports = function(app) {
   app.route('/*')
     .get(function(req, res) {
       res.sendFile(app.get('appPath') + '/index.html');
+      // res.sendFile('/opt/app/dist/public/index.html');
     });
 };

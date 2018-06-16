@@ -422,11 +422,11 @@ app.directive('integrationSelect', ['Location', '$routeParams', '$location', '$h
     scope.loading = true;
 
     scope.integrations = [ 'unifi' ];
-    scope.integrationDetails = { 
-      unifi: { 
-        image: API_URL + '/manufacturers/ubiquiti-logo.png', 
-        name: 'UniFi Controller' 
-      } 
+    scope.integrationDetails = {
+      unifi: {
+        image: API_URL + '/manufacturers/ubiquiti-logo.png',
+        name: 'UniFi Controller'
+      }
     };
 
     scope.save = function(type) {
@@ -659,6 +659,10 @@ app.directive('cloudtraxSetup', ['Location', '$routeParams', '$location', '$http
       });
     };
 
+    scope.back = function() {
+      $location.path($routeParams.id + '/integration/cloudtrax/auth');
+    };
+
     var fetchSites = function() {
       controller.fetchSites(scope.integration).then(function(sites) {
         var timer = $timeout(function() {
@@ -885,11 +889,14 @@ app.directive('unifiSetup', ['Location', '$routeParams', '$location', '$http', '
         }
       }, function(results) {
         showToast('Successfully created UniFi setup');
-        // @zak create the landing page
         $location.path($routeParams.id + '/integration/completed');
       }, function(error) {
         showErrors(error);
       });
+    };
+
+    scope.back = function() {
+      $location.path($routeParams.id + '/integration/unifi/auth');
     };
 
     var fetchSites = function() {
@@ -1028,6 +1035,10 @@ app.directive('vszSetup', ['Location', '$routeParams', '$location', '$http', '$m
       }, function(error) {
         showErrors(error);
       });
+    };
+
+    scope.back = function() {
+      $location.path($routeParams.id + '/integration/vsz/auth');
     };
 
     var fetchSites = function() {
@@ -1175,6 +1186,10 @@ app.directive('merakiSetup', ['Location', '$routeParams', '$location', '$http', 
       });
     };
 
+    scope.back = function() {
+      $location.path($routeParams.id + '/integration/meraki/auth');
+    };
+
     var fetchSites = function() {
       controller.fetchSites(scope.integration).then(function(results) {
         scope.meraki = {};
@@ -1256,11 +1271,14 @@ app.directive('merakiSetup', ['Location', '$routeParams', '$location', '$http', 
 
 }]);
 
-app.directive('gettingStarted', ['Location', '$routeParams', '$location', '$http', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', function(Location, $routeParams, $location, $http, $mdDialog, showToast, showErrors, gettextCatalog) {
+app.directive('gettingStarted', ['Location', '$routeParams', '$location', '$http', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', 'API_URL', function(Location, $routeParams, $location, $http, $mdDialog, showToast, showErrors, gettextCatalog, API_URL) {
 
   var link = function(scope, element, attrs, controller) {
 
     scope.loading = true;
+
+    scope.checked = API_URL + '/dashboard/checked.svg';
+    scope.unchecked = API_URL + '/dashboard/unchecked.svg';
 
     scope.visitSplash = function(paid) {
       $location.path('/' + scope.location.slug + '/splash_pages' + (paid ? '' : '/guide'));
@@ -1400,7 +1418,7 @@ app.directive('locationSettingsNav', ['Location', function(Location) {
   };
 }]);
 
-app.directive('locationAudit', ['Session', 'Email', 'Location', 'Report', 'Social', 'SMSLog', '$routeParams', '$rootScope', '$location', '$timeout', '$q', '$localStorage', 'Locations', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', function(Session, Email, Location, Report, Social, SMSLog, $routeParams, $rootScope, $location, $timeout, $q, $localStorage, Locations, $mdDialog, showToast, showErrors, gettextCatalog) {
+app.directive('locationAudit', ['Session', 'Email', 'Location', 'Report', 'Social', 'SMSLog', '$routeParams', '$rootScope', '$location', '$timeout', '$q', '$localStorage', 'Locations', '$mdDialog', 'showToast', 'showErrors', 'gettextCatalog', 'API_URL', function(Session, Email, Location, Report, Social, SMSLog, $routeParams, $rootScope, $location, $timeout, $q, $localStorage, Locations, $mdDialog, showToast, showErrors, gettextCatalog, API_URL) {
 
   var link = function(scope,element,attrs,controller) {
 
@@ -1408,6 +1426,11 @@ app.directive('locationAudit', ['Session', 'Email', 'Location', 'Report', 'Socia
 
     scope.startDate = moment().utc().subtract(6, 'days').startOf('day').toDate();
     scope.endDate = moment().utc().toDate();
+
+    scope.facebookIcon = API_URL + '/splash/facebook-icon.svg';
+    scope.twitterIcon = API_URL + '/splash/twitter-icon.svg';
+    scope.googleIcon = API_URL + '/splash/google-icon.svg';
+    scope.linkedinIcon = API_URL + '/splash/linkedin-icon.svg';
 
     var weekAgoEpoch = Math.floor(scope.startDate.getTime() / 1000);
     var nowEpoch = Math.floor(scope.endDate.getTime() / 1000);

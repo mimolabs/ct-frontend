@@ -19,13 +19,23 @@ app.controller('MainCtrl', ['$rootScope', 'Location', '$scope', '$localStorage',
 
     $scope.commit = COMMITHASH;
     $scope.ct_login = CTLogin;
-    $scope.squarelogo = API_URL + '/uploads/square-logo.png';
-    if (!API_URL || API_URL === '') {
-      $scope.squarelogo  = 'https://d247kqobagyqjh.cloudfront.net/api/file/cx7ecphTbq4GrzkMwiLr'
-    }
-    $scope.mimopowered = API_URL + '/mimo-powered.svg';
 
     var ts = Math.floor(Date.now() / 1000);
+
+    $scope.squarelogo = API_URL + '/uploads/square-logo.png';
+    if (!API_URL || API_URL === '') {
+      $scope.squarelogo  = API_URL + '/mimo-logo.svg'
+    }
+
+    $scope.squarelogo = $scope.squarelogo + '?ts=' + ts;
+    $scope.mimopowered = API_URL + '/mimo-logo.svg';
+
+    // if (!$localStorage.mimo_user.settings.docs_url || $localStorage.mimo_user.settings.docs_url === '') {
+    //   $scope.mimodocs = 'http://docs.oh-mimo.com'
+    // } else {
+    //   $scope.mimodocs = $localStorage.mimo_user.settings.docs_url
+    // }
+
     $scope.favicon = API_URL + '/uploads/favicon.ico?ts=' + ts;
 
     $scope.home = function() {

@@ -10,8 +10,8 @@ if (process.env.NODE_ENV === 'production') {
   dashboard_url = process.env.MIMO_DASHBOARD_URL;
 
   exports = {
-    appID: process.env.APP_ID,
-    appSecret: process.env.APP_SECRET,
+    appID: 'dbbfa1a4291b7756c3edd2728ba92428df01ded6560c6e2c38fca5c821dac809',
+    appSecret: '49ae2624528914b6cc9f2528d5f0d903df1b641d2802358614c3d0e35e34dd68',
     callbackURL: process.env.MIMO_DASHBOARD_URL + '/auth/login/callback',
     authorizationURL: api_url + "/oauth/authorize",
     profileURL: "http://api:3000/api/v1/me.json", // also?
@@ -25,8 +25,8 @@ if (process.env.NODE_ENV === 'production') {
   dashboard_url   = 'http://mimo.dashboard:9090'
 
   exports = {
-    appID: 'f547e59f95a868b9f264a4b6c571b0c4355362e59cb2d9279b1d7df7cfc4756a',
-    appSecret: '91d0d9b0810dfe3637360d7b0bafbcdc15dd6906a015b913f367ff876414b0d8',
+    appID: 'dbbfa1a4291b7756c3edd2728ba92428df01ded6560c6e2c38fca5c821dac809',
+    appSecret: '49ae2624528914b6cc9f2528d5f0d903df1b641d2802358614c3d0e35e34dd68',
     callbackURL: dashboard_url + '/auth/login/callback',
     authorizationURL: api_url + "/oauth/authorize",
     profileURL: api_url + "/api/v1/me.json",

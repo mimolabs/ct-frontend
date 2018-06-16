@@ -108,7 +108,7 @@
         </md-button>
         <md-menu-content width="3">
           <md-menu-item>
-            <md-button href="http://docs.oh-mimo.com" target="_blank">
+            <md-button ng-href="{{mimodocs}}" target="_blank">
               <md-icon md-menu-align-target style="margin: auto 3px auto 0;">school</md-icon>
               <span translate>Help Centre</span>
             </md-button>
@@ -128,8 +128,11 @@
         </md-menu-content>
       </md-menu>
     </div>
-    <div class="powered-by">
-      <img src="{{ mimopowered }}"></img>
+    <div class="mimo-powered">
+      <a href="https://oh-mimo.com" target="_blank">
+        <img src="{{ mimopowered }}"></img>
+        <md-tooltip md-direction="right">Powered By MIMO</md-tooltip>
+      </a>
     </div>
   </md-sidenav>
 
@@ -233,8 +236,11 @@
             </md-menu-content>
           </md-menu>
         </span>
-        <div class="powered-by">
-          <img src="{{ mimopowered }}"></img>
+        <div class="mimo-powered">
+          <a href="https://oh-mimo.com" target="_blank">
+            <img src="{{ mimopowered }}"></img>
+            <md-tooltip md-direction="right">Powered By MIMO</md-tooltip>
+          </a>
         </div>
       </div>
     </md-toolbar>
@@ -282,7 +288,6 @@
   <script src="bower_components/angular-material-data-table/dist/md-data-table.js"></script>
   <script src="bower_components/jquery-minicolors/jquery.minicolors.js"></script>
   <script src="bower_components/angular-minicolors/angular-minicolors.js"></script>
-  <script src="bower_components/filepicker-js-bower/filepicker.min.js"></script>
   <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
   <script src="bower_components/promise-polyfill/Promise.js"></script>
   <script src="bower_components/moment-duration-format/lib/moment-duration-format.js"></script>
@@ -294,6 +299,7 @@
   <script src="bower_components/angular-color-picker/dist/angularjs-color-picker.js"></script>
   <script src="bower_components/tinymce/tinymce.js"></script>
   <script src="bower_components/angular-ui-tinymce/src/tinymce.js"></script>
+  <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
   <!-- endbower -->
   <!-- endbuild -->
 
@@ -366,6 +372,7 @@
   <script src="components/services/audiences.services.js"></script>
   <script src="components/services/bulk_message_activity.services.js"></script>
   <script src="components/services/bulk_messages.services.js"></script>
+  <script src="components/services/data_requests.services.js"></script>
   <script src="components/services/metrics.services.js"></script>
   <script src="components/services/pagination_labels.services.js"></script>
   <script src="components/services/social.services.js"></script>

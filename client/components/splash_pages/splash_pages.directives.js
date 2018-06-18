@@ -374,9 +374,13 @@ app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPag
       var file_names = {
         background_image: 'uploads/bg-image-' + scope.splash.id + '.jpg',
         logo_file: 'uploads/logo-image-' + scope.splash.id + '.jpg',
-        header_image: 'uploads/header-image-' + scope.splash.id + '.jpg'
+        header_image: 'uploads/header-image-' + scope.splash.id + '.jpg',
+        popup_file: 'uploads/popup-image-' + scope.splash.id + '.jpg'
       };
       scope.splash[field + '_name'] = file_names[field];
+      if (field === 'popup_file') {
+        scope.splash.popup_image = file_names[field];
+      };
     };
 
     scope.uploadFiles = function (file, field) {

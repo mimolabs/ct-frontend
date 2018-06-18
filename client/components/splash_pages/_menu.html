@@ -1104,7 +1104,7 @@
 
           <div ng-if="isOpen('adverts')" id="images" class="menu-toggle-list">
             <md-card>
-              <img ng-show="splash.popup_image" src="{{splash.popup_image}}" class="md-card-image" alt="Background">
+              <img ng-show="splash.popup_image" src="{{api_url}}/{{splash.popup_image}}" class="md-card-image" alt="Background">
               <md-card-title>
                 <md-card-title-text layout="row" layout-align="space-between center">
                   <span class="md-headline" translate>Popup Advert</span>
@@ -1134,6 +1134,9 @@
                       </label>
                       <color-picker ng-model="splash.popup_background_colour"></color-picker>
                     </md-input-container>
+                  </div>
+                  <div ng-app="fileUpload">
+                    <input ng-disabled="splash.id == undefined" type="file" ng-model="file" ngf-select="uploadFiles($file, 'popup_file')"></input>
                   </div>
                 </div>
               </md-card-content>

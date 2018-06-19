@@ -1135,15 +1135,12 @@
                       <color-picker ng-model="splash.popup_background_colour"></color-picker>
                     </md-input-container>
                   </div>
-                  <div ng-app="fileUpload">
-                    <input ng-disabled="splash.id == undefined" type="file" ng-model="file" ngf-select="uploadFiles($file, 'popup_file')"></input>
-                  </div>
                 </div>
               </md-card-content>
               <md-card-actions layout="row" layout-align="end center">
-                <md-button class="md-warn" ng-disabled="!splash.popup_image" aria-label="{{ 'delete' | translate }}" ng-click="deleteAd(splash,myForm)">
-                  <translate>Delete</translate>
-                </md-button>
+                <div ng-app="fileUpload">
+                  <input ng-disabled="splash.id == undefined" type="file" ng-model="file" ngf-select="uploadFiles($file, 'popup_file')"></input>
+                </div>
               </md-card-actions>
             </md-card>
             <md-card>

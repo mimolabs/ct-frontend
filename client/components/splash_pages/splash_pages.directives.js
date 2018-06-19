@@ -380,7 +380,7 @@ app.directive('splashDesigner', ['API_URL', 'Location', 'SplashPage', 'SplashPag
       scope.splash[field + '_name'] = file_names[field];
       if (field === 'popup_file') {
         scope.splash.popup_image = file_names[field];
-      };
+      }
     };
 
     scope.uploadFiles = function (file, field) {

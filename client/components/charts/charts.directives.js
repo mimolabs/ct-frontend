@@ -283,7 +283,7 @@ app.directive('clientsChart', ['$timeout', '$rootScope', 'gettextCatalog', '$fil
 
 }]);
 
-app.directive('clientChart', ['Report', 'MetricLambda', 'Metric', '$routeParams', '$q', 'ClientDetails', 'COLOURS', function(Report, MetricLambda, Metric, $routeParams, $q, ClientDetails, COLOURS) {
+app.directive('clientChart', ['Report', 'Metric', '$routeParams', '$q', 'ClientDetails', 'COLOURS', function(Report, Metric, $routeParams, $q, ClientDetails, COLOURS) {
 
   return {
     scope: {
@@ -403,24 +403,11 @@ app.directive('clientChart', ['Report', 'MetricLambda', 'Metric', '$routeParams'
 
         // Sort me
         var t = opts.type;
-        if (t === 'devices.meta' ||
-            t === 'devices.tx,devices.rx' ||
-            t === 'devices.rx,devices.tx' ||
-            t === 'devices.load5' ||
-            t === 'interfaces.snr' ||
-            t === 'device.heartbeats') {
-          MetricLambda.clientstats(opts).$promise.then(function(data) {
-            deferred.resolve(data);
-          }, function() {
-            deferred.reject();
-          });
-        } else {
-          Metric.clientstats(opts).$promise.then(function(data) {
-            deferred.resolve(data);
-          }, function(error) {
-            deferred.reject();
-          });
-        }
+        Metric.clientstats(opts).$promise.then(function(data) {
+          deferred.resolve(data);
+        }, function(error) {
+          deferred.reject();
+        });
       };
 
       this.getStats = function(params) {
@@ -1494,6 +1481,7 @@ app.directive('dashClientsChart', ['$timeout', 'Report', '$routeParams', 'COLOUR
     };
 
     function chart() {
+      console.log('hello')
 
       var params = {
         type: scope.type,

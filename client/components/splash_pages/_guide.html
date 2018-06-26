@@ -1,58 +1,66 @@
 <splash-nav location="location"></splash-nav>
 
 <md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta">
-  <div flex="100" flex-gt-md="90" ng-show="location.paid == false">
+
+  <div flex="100" flex-gt-md="90">
     <div layout="row" layout-wrap>
-      <div flex="100" flex-gt-sm="40">
-        <h2>Getting Started with Splash Pages</h2>
+      <div flex="100" flex-gt-sm="30">
+        <md-card class="guide-card b-gr">
+          <md-card-title>
+            <md-card-title-text>
+              <span class="md-headline" translate>
+                Getting Started With MIMO
+              </span>
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-content>
+            <md-card-content>
+              <p>Getting set up is quick and easy! Here's your checklist of things to do:</p>
+              <md-list flex>
+                <md-subheader class="md-no-sticky">Customise your splash pages</md-subheader>
+                <md-list-item class="md-2-line" ng-click='integrationClick("splash")' ng-href="/#/{{location.slug}}/splash_pages/">
+                  <img class="check-mark" ng-src="{{location.setup.splash ? 'https://d247kqobagyqjh.cloudfront.net/api/file/iFpTtabSPKhJ4oGKIh7p' : 'https://d247kqobagyqjh.cloudfront.net/api/file/6750gXV2RpilDseOWLpl' }}" />
+                  <div class="md-list-item-text">
+                    <p>Design and select what data you want to capture.</p>
+                  </div>
+                </md-list-item>
+                <md-divider style="margin: 20px 0;"></md-divider>
+                <md-subheader class="md-no-sticky">Connect MIMO to your access points</md-subheader>
+                <md-list-item class="md-2-line" ng-click='integrationClick("integration")' href="/#/{{ location.slug }}/integration">
+                  <img class="check-mark" ng-src="{{location.setup.integrations ? 'https://d247kqobagyqjh.cloudfront.net/api/file/iFpTtabSPKhJ4oGKIh7p' : 'https://d247kqobagyqjh.cloudfront.net/api/file/6750gXV2RpilDseOWLpl' }}" />
+                  <div class="md-list-item-text">
+                    <p>Enter your credentials and we'll set it up automatically.</p>
+                  </div>
+                </md-list-item>
+              </md-list>
+              <p>You can change your location name in your settings.</p>
+            </md-card-content>
+        </md-card>
       </div>
-      <div flex="100" flex-gt-xs="100" flex-gt-sm="60">
+
+      <div flex="100" flex-gt-sm="70">
         <md-card class="b-gr">
           <md-card-title>
             <md-card-title-text>
               <span class="md-headline" translate>
-                Start your free trial today!
+                What are Splash Pages?
               </span>
-              <p>To use splash pages, you will need an active subscription. Start your 14 day trial now.</p>
             </md-card-title-text>
           </md-card-title>
-          <md-card-content>
-          </md-card-content>
-          <md-card-actions layout="row" layout-align="end center">
-            <get-with-the-plan location="location" ng-show="location.paid == false"></get-with-the-plan>
-          </md-card-actions>
-        </md-card>
-      </div>
-    </div>
-  </div>
-
-  <div flex="100" flex-gt-md="90">
-    <md-card class="b-gr">
-      <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline">
-            <translate>What are splash pages?</translate>
-          </span>
-        </md-card-title-text>
-      </md-card-title>
-      <md-card-content>
-        <div layout="row" layout-align="center center">
-          <div flex="100" flex-gt-sm="45" flex-gt-md="30">
+          <md-card-content layout="row" layout-wrap>
             <p translate>Splash pages are the gateway to your guest WiFi, allowing you to control your guest's access</p>
             <p translate>Welcome your customers when they arrive with a variety of login types.</p>
             <o translate>Capture their email addresses & social details to engage with them and display special offers.</p>
             <p translate>With unlimited sessions, you don't need to worry about additional monthly costs.</p>
-          </div>
-          <div flex></div>
-          <div flex="100" flex-gt-sm="45" flex-gt-md="60">
-            <img style="max-width: 90%;" src="https://s3-eu-west-1.amazonaws.com/mimo-labs/images/designer.jpg"></img>
-          </div>
-        </div>
-      </md-card-content>
-      <md-card-actions layout="row" layout-align="end center">
-        <splash-new style="md-raised" pages="splash_pages"></splash-new>
-      </md-card-actions>
-    </md-card>
+            <p><img class="dash-img" style="max-width: 80%;" src="https://d247kqobagyqjh.cloudfront.net/api/file/JV6wPcYaTrGPKjVwN3ww"></img></p>
+          </md-card-content>
+          <md-card-actions layout="row" layout-align="end center">
+            <splash-new style="md-raised" pages="splash_pages"></splash-new>
+          </md-card-actions>
+        </md-card>
+
+      </div>
+    </div>
   </div>
 
 </md-content>

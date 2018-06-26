@@ -1,123 +1,62 @@
 <div ng-show="!loading">
   <people-nav location="location"></people-nav>
   <md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta">
-    <div flex="100" flex-gt-md="90">
-      <h2>Getting Started with MIMO</h2>
-    </div>
-
-    <div flex="100" flex-gt-md="90" ng-show="location.paid == false">
-      <div layout="row" layout-wrap>
-        <div flex="100" flex-gt-sm="40">
-          <h4>MIMO Products</h4>
-          <p>To use MIMO's full features, choose a suitable plan and add to your subscription.</p>
-        </div>
-        <div flex="100" flex-gt-xs="50" flex-gt-sm="30">
-          <md-card class="b-bl">
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-headline" translate>
-                  Splash Only
-                </span>
-                <p>The splash only plan lets you create beautiful and simple to use splash pages for your guests. Capture customer emails and social profiles.</p>
-                <p>Works with UniFi, Ruckus VSZ and Meraki. Setting up your networks takes less than 2 mins!</p>
-              </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-            </md-card-content>
-            <md-card-actions layout="row" layout-align="end center">
-              <get-with-the-plan location="location" label='Try Splash Now'></get-with-the-plan>
-            </md-card-actions>
-          </md-card>
-        </div>
-        <div flex="100" flex-gt-xs="50" flex-gt-sm="30">
-          <md-card class="b-bl">
-            <md-card-title>
-              <md-card-title-text>
-                <span class="md-headline" translate>
-                  Engage Plus
-                </span>
-                <!-- <p>Engage with your customers, capture emails. Send campaigns and more.</p> -->
-                <p>The engage plan includes splash pages and the MIMO engagement tools!</p>
-                <p>Automatically email your customers. Send a special offer when they sign-up or drop them a line if they've been gone too long.</p>
-              </md-card-title-text>
-            </md-card-title>
-            <md-card-content>
-            </md-card-content>
-            <md-card-actions layout="row" layout-align="end center">
-              <get-with-the-plan location="location" label='Try Engage Now'></get-with-the-plan>
-            </md-card-actions>
-          </md-card>
-        </div>
-      </div>
-    </div>
 
     <div flex="100" flex-gt-md="90">
       <div layout="row" layout-wrap>
-        <div flex="100" flex-gt-sm="40">
-          <h4>Setup the basics</h4>
-          <p>Connect your Wireless Access Points and customise your splash page.</p>
-        </div>
-        <div flex="100" flex-gt-sm="60">
+        <div flex="100" flex-gt-sm="30">
           <md-card class="guide-card b-bl">
             <md-card-title>
               <md-card-title-text>
                 <span class="md-headline" translate>
-                  Getting Your MIMO Set Up!
+                  Getting Started With MIMO
                 </span>
-                <p>There's two main things to do. First, you should customise your splash pages. Once you've done that, connect your access points to MIMO. Here's your checklist of things to do!</p>
-                <p><b>Don't forget to update your location name! Change this in your settings - just click the <md-icon>settings</md-icon> icon (bottom left, in left sidebar).</b></p>
               </md-card-title-text>
             </md-card-title>
             <md-card-content>
-              <md-content>
-                <md-list flex>
-                  <md-subheader class="md-no-sticky"><b>Customise your splash pages</b></md-subheader>
-                  <md-list-item class="md-2-line" ng-click='integrationClick("splash")' ng-href="/#/{{location.slug}}/splash_pages/">
-                    <img class="check-mark" ng-src="{{location.setup.splash ? 'https://s3-eu-west-1.amazonaws.com/mimo-labs/images/checked.svg' : 'https://s3-eu-west-1.amazonaws.com/mimo-labs/images/unchecked.svg' }}" />
-                    <div class="md-list-item-text">
-                      <p>Welcome your guests with a beautiful, branded splash page. Capture emails, social details and keep them engaged.
-                      </p>
-                    </div>
-                  </md-list-item>
-                  <md-divider style="margin: 20px 0;"></md-divider>
-                  <md-subheader class="md-no-sticky"><b>Connect MIMO to your access points</b></md-subheader>
-                  <md-list-item class="md-2-line" ng-click='integrationClick("integration")' href="/#/{{ location.slug }}/integration">
-                    <img class="check-mark" ng-src="{{location.setup.integrations ? 'https://s3-eu-west-1.amazonaws.com/mimo-labs/images/checked.svg' : 'https://s3-eu-west-1.amazonaws.com/mimo-labs/images/unchecked.svg' }}" />
-                    <div class="md-list-item-text">
-                      <p>
-                        The fun part - integrating your access points with MIMO. We've been kind enough to automate things, all you need to do is enter some credentials and you'll be up and running in a jiffy.
-                      </p>
-                    </div>
-                  </md-list-item>
-                </md-list>
-              </md-content></md-card-content>
+              <p>Getting set up is quick and easy! Here's your checklist of things to do:</p>
+              <md-list flex>
+                <md-subheader class="md-no-sticky">Customise your splash pages</md-subheader>
+                <md-list-item class="md-2-line" ng-click='integrationClick("splash")' ng-href="/#/{{location.slug}}/splash_pages/">
+                  <img class="check-mark" ng-src="{{location.setup.splash ? 'https://d247kqobagyqjh.cloudfront.net/api/file/iFpTtabSPKhJ4oGKIh7p' : 'https://d247kqobagyqjh.cloudfront.net/api/file/6750gXV2RpilDseOWLpl' }}" />
+                  <div class="md-list-item-text">
+                    <p>Design and select what data you want to capture.</p>
+                  </div>
+                </md-list-item>
+                <md-divider style="margin: 20px 0;"></md-divider>
+                <md-subheader class="md-no-sticky">Connect MIMO to your access points</md-subheader>
+                <md-list-item class="md-2-line" ng-click='integrationClick("integration")' href="/#/{{ location.slug }}/integration">
+                  <img class="check-mark" ng-src="{{location.setup.integrations ? 'https://d247kqobagyqjh.cloudfront.net/api/file/iFpTtabSPKhJ4oGKIh7p' : 'https://d247kqobagyqjh.cloudfront.net/api/file/6750gXV2RpilDseOWLpl' }}" />
+                  <div class="md-list-item-text">
+                    <p>Enter your credentials and we'll set it up automatically.</p>
+                  </div>
+                </md-list-item>
+              </md-list>
+              <p>You can change your location name in your settings.</p>
+            </md-card-content>
           </md-card>
         </div>
-      </div>
-    </div>
 
-    <div flex="100" flex-gt-md="90">
-      <md-card class="b-bl">
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline" translate>
-              What is MIMO?
-            </span>
-          </md-card-title-text>
-        </md-card-title>
-        <md-card-content layout="row" layout-wrap>
-          <div flex="100" flex-gt-xs="45" flex-gt-sm="35">
-            <p>Engage with your customers, capture emails. Send campaigns and more.</p>
-            <p>Everyone needs more customers. MIMO helps you understand their behaviour better. Understand how often they visit you, send them an offer if they've not been back for while. It's pretty sweet.</p>
-            <p>If you want to learn more, we've created loads of helpful documents. You'll <a href="http://docs.oh-mimo.com" target="_blank">find them over here</a>.</p>
-            <p><b>And don't forget to follow us on twitter <a href="https://twitter.com/ohmimo" target="_blank">@ohmimo</a></b>! We'll help you there too.</p>
-          </div>
-          <span flex="5"></span>
-          <div flex="100" flex-gt-xs="50" flex-gt-sm="60">
-            <img style="max-width: 90%;" src="https://s3-eu-west-1.amazonaws.com/mimo-labs/images/person.jpg"></img>
-          </div>
-        </md-card-content>
-      </md-card>
+        <div flex="100" flex-gt-sm="70">
+          <md-card class="b-bl">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline" translate>
+                  What is MIMO?
+                </span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content layout="row" layout-wrap>
+              <p>Engage with your customers, capture emails. Send campaigns and more.</p>
+              <p>Everyone needs more customers. MIMO helps you understand their behaviour better. Understand how often they visit you, send them an offer if they've not been back for while. It's pretty sweet.</p>
+              <p>If you want to learn more, we've created loads of helpful documents. You'll <a href="http://docs.oh-mimo.com" target="_blank">find them over here</a>.</p>
+              <p><b>And don't forget to follow us on twitter <a href="https://twitter.com/ohmimo" target="_blank">@ohmimo</a></b>! We'll help you there too.</p>
+              <p><img class="dash-img" style="max-width: 80%;" src="https://d247kqobagyqjh.cloudfront.net/api/file/qp8SgHGRN2gfBWAXriZw"></img></p>
+            </md-card-content>
+          </md-card>
+
+        </div>
+      </div>
     </div>
 
   </md-content>

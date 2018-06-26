@@ -54,7 +54,7 @@ app.directive('clientsChart', ['$timeout', '$rootScope', 'gettextCatalog', '$fil
               orientation: 'vertical'
             },
             focusTarget: 'category',
-            fontName: 'Source Sans Pro',
+            fontName: 'Roboto',
             explorer: {
               axis: 'horizontal',
               actions: [ 'dragToZoom', 'rightClickToReset'],
@@ -325,7 +325,7 @@ app.directive('clientChart', ['Report', 'MetricLambda', 'Metric', '$routeParams'
           width: '90%'
         },
         interpolateNulls: true,
-        fontName: 'Source Sans Pro',
+        fontName: 'Roboto',
         colors: colours
       };
 
@@ -582,7 +582,7 @@ app.directive('txChart', ['$timeout', 'Report', '$routeParams', 'gettextCatalog'
         }
       };
 
-      opts.fontName = 'Source Sans Pro';
+      opts.fontName = 'Roboto';
       opts.explorer = {
         maxZoomOut:2,
         keepInBounds: true,
@@ -708,7 +708,7 @@ app.directive('usageChart', ['$timeout', 'Report', '$routeParams', 'COLOURS', 'g
     function drawChart() {
       var opts = controller.options;
       opts.explorer = undefined;
-      opts.fontName = 'Source Sans Pro';
+      opts.fontName = 'Roboto';
       opts.pieHole = 0.8;
       opts.legend = { position: 'bottom' };
       opts.title = 'none';
@@ -818,7 +818,7 @@ app.directive('dashUsageChart', ['$timeout', 'Report', '$routeParams', 'COLOURS'
 
       var opts = controller.options;
       opts.explorer = undefined;
-      opts.fontName = 'Source Sans Pro';
+      opts.fontName = 'Roboto';
       opts.pieHole = 0.8;
       opts.legend = { position: attrs.legend || 'bottom' };
       opts.title = 'none';

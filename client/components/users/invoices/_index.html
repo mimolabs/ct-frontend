@@ -1,74 +1,66 @@
 <user-nav user="user"></user-nav>
 
-<md-content layout-padding layout="row" layout-wrap class="page-meta">
-</md-content>
-
-<md-content class="md-padding" layout="column" layout-gt-sm='column'>
-
-  <div layout="row" layout-align="center center">
-    <div flex="100" flex-gt-sm="100">
-      <md-card>
-        <md-card-content>
-          <md-toolbar class="md-table-toolbar md-default">
-            <div class="md-toolbar-tools">
-              <span translate>Invoices</span>
-              <div flex></div>
-              <span>
-              <md-button ng-if="selected.length > 0" class="md-fab md-primary" ng-click="emailInvoices()">
-                <md-icon>email</md-icon>
-              </md-button>
-              <md-tooltip md-direction="left"><translate>Send selected invoices to billing emails</translate></md-tooltip>
-              </span>
-            </div>
-          </md-toolbar>
-          <md-table-container>
-            <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise">
-              <thead md-head>
-                <tr md-row class="md-table-headers-row">
-                  <th md-column md-order-by="created_at"><span translate>Created</span></th>
-                  <th hide show-gt-xs md-column><span translate>Description</span></th>
-                  <th hide show-gt-xs md-column><span translate>Total</span></th>
-                  <th ng-if="menu.length" md-column><span translate>Options</span></th>
-                </tr>
-              </thead>
-              <tbody md-body>
-                <tr md-row md-select="invoice" md-auto-select="options.autoSelect" ng-repeat="invoice in filtered = (invoices | filter: query.filter | orderBy: query.direction)">
-                  <td md-cell>
-                    <span hide show-gt-xs>
-                      {{ invoice.created_at | humanTime }}
-                    </span>
-                    <span hide show-xs>
-                      {{ invoice.created_at | humanTimeShort }}
-                    </span>
-                  </td>
-                  <td hide show-gt-xs md-cell>
-                    {{ ::invoice.description }}
-                  </td>
-                  <td hide show-gt-xs md-cell>
-                    {{ ::invoice.total }}
-                  </td>
-                  <td md-cell ng-if="menu.length">
-                    <md-menu>
-                      <md-button aria-label="{{ 'Open Menu' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">
-                        <md-icon md-menu-origin md-font-icon="more_black" class="s24">more_vert</md-icon>
+<md-content layout-padding layout="row" layout-wrap layout-align="center center" class="page-meta">
+  <div flex="100" flex-gt-md="90" flex-gt-lg="80">
+    <md-card>
+      <div class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+          <span translate>Invoices</span>
+            <div flex></div>
+          <span>
+          <md-button ng-if="selected.length > 0" class="md-fab md-primary" ng-click="emailInvoices()">
+            <md-icon>email</md-icon>
+          </md-button>
+          <md-tooltip md-direction="left"><translate>Send selected invoices to billing emails</translate></md-tooltip>
+          </span>
+        </div>
+      </div>
+      <md-table-container>
+        <table md-table md-row-select="options.rowSelection" ng-model="selected" md-progress="promise">
+          <thead md-head>
+            <tr md-row>
+              <th md-column md-order-by="created_at"><span translate>Created</span></th>
+              <th hide show-gt-xs md-column><span translate>Description</span></th>
+              <th hide show-gt-xs md-column><span translate>Total</span></th>
+              <th ng-if="menu.length" md-column><span translate>Options</span></th>
+            </tr>
+          </thead>
+          <tbody md-body>
+            <tr md-row md-select="invoice" md-auto-select="options.autoSelect" ng-repeat="invoice in filtered = (invoices | filter: query.filter | orderBy: query.direction)">
+              <td md-cell>
+                <span hide show-gt-xs>
+                  {{ invoice.created_at | humanTime }}
+                </span>
+                <span hide show-xs>
+                  {{ invoice.created_at | humanTimeShort }}
+                </span>
+              </td>
+              <td hide show-gt-xs md-cell>
+                {{ ::invoice.description }}
+              </td>
+              <td hide show-gt-xs md-cell>
+                {{ ::invoice.total }}
+              </td>
+              <td md-cell ng-if="menu.length">
+                <md-menu>
+                  <md-button aria-label="{{ 'Open Menu' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+                    <md-icon md-menu-origin md-font-icon="more_black" class="s24">more_vert</md-icon>
+                  </md-button>
+                  <md-menu-content width="4" >
+                    <md-menu-item ng-repeat="item in menu">
+                      <md-button ng-click="action(item.type,invoice)">
+                        <md-icon ng-if="item.icon" md-menu-origin md-font-icon="{{ item.icon }}">{{ item.icon }}</md-icon>
+                        <p flex>{{ item.name }}</p>
                       </md-button>
-                      <md-menu-content width="4" >
-                        <md-menu-item ng-repeat="item in menu">
-                          <md-button ng-click="action(item.type,invoice)">
-                            <md-icon ng-if="item.icon" md-menu-origin md-font-icon="{{ item.icon }}">{{ item.icon }}</md-icon>
-                            <p flex>{{ item.name }}</p>
-                          </md-button>
-                        </md-menu-item>
-                      </md-menu-content>
-                    </md-menu>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </md-table-container>
-          <md-table-pagination md-limit="query.limit" md-limit-options="query.options" md-page="query.page" md-total="{{_links.total_entries}}" md-on-paginate="onPaginate" md-label="{{pagination_labels}}" md-page-select></md-table-pagination>
-        </md-card-content>
-      </md-card>
-    </div>
+                    </md-menu-item>
+                  </md-menu-content>
+                </md-menu>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </md-table-container>
+      <md-table-pagination md-limit="query.limit" md-limit-options="query.options" md-page="query.page" md-total="{{_links.total_entries}}" md-on-paginate="onPaginate" md-label="{{pagination_labels}}" md-page-select></md-table-pagination>
+    </md-card>
   </div>
 </md-content>

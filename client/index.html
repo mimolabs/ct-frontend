@@ -75,12 +75,12 @@
   </div>
 
   <md-sidenav id="mainSidebar" class="site-sidenav md-sidenav-left md-whiteframe-1dp"
-              md-component-id="left"
-              aria-label="'Main Menu' | translate"
-              md-whiteframe="4"
-              md-is-open="vm.menu.isOpenLeft"
-              md-is-locked-open="$mdMedia('gt-sm')"
-              ng-show="user">
+                               md-component-id="left"
+                               aria-label="'Main Menu' | translate"
+                               md-whiteframe="4"
+                               md-is-open="vm.menu.isOpenLeft"
+                               md-is-locked-open="$mdMedia('gt-sm')"
+                               ng-show="user">
 
     <md-content role="navigation" class="flex" ng-cloak>
 
@@ -262,9 +262,9 @@
   <!-- </md-sidenav> -->
 
   <!--[if lt IE 9]>
-      <script src="bower_components/es5-shim/es5-shim.js"></script>
-      <script src="bower_components/json3/lib/json3.min.js"></script>
-      <![endif]-->
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+  <![endif]-->
 
 
   <!-- build:js({client,node_modules}) app/vendor.js -->
@@ -400,8 +400,6 @@
 
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
 
-  <script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/z62yncmn';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
-
   <script>
     $( document ).ready(function() {
       if (!Modernizr.svg) {
@@ -412,32 +410,33 @@
     });
   </script>
 
-  <script type="text/javascript">
-    (function(e,t){var n=e.amplitude||{_q:[],_iq:{}};var r=t.createElement("script")
-    ;r.type="text/javascript";r.async=true
-    ;r.src="https://cdn.amplitude.com/libs/amplitude-4.1.0-min.gz.js"
-    ;r.onload=function(){if(e.amplitude.runQueuedFunctions){
-    e.amplitude.runQueuedFunctions()}else{
-    console.log("[Amplitude] Error: could not load SDK")}}
-    ;var i=t.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)
-    ;function s(e,t){e.prototype[t]=function(){
-    this._q.push([t].concat(Array.prototype.slice.call(arguments,0)));return this}}
-    var o=function(){this._q=[];return this}
-    ;var a=["add","append","clearAll","prepend","set","setOnce","unset"]
-    ;for(var u=0;u<a.length;u++){s(o,a[u])}n.Identify=o;var c=function(){this._q=[]
-    ;return this}
-    ;var l=["setProductId","setQuantity","setPrice","setRevenueType","setEventProperties"]
-    ;for(var p=0;p<l.length;p++){s(c,l[p])}n.Revenue=c
-    ;var d=["init","logEvent","logRevenue","setUserId","setUserProperties","setOptOut","setVersionName","setDomain","setDeviceId","setGlobalUserProperties","identify","clearUserProperties","setGroup","logRevenueV2","regenerateDeviceId","logEventWithTimestamp","logEventWithGroups","setSessionId"]
-    ;function v(e){function t(t){e[t]=function(){
-    e._q.push([t].concat(Array.prototype.slice.call(arguments,0)))}}
-    for(var n=0;n<d.length;n++){t(d[n])}}v(n);n.getInstance=function(e){
-    e=(!e||e.length===0?"$default_instance":e).toLowerCase()
-    ;if(!n._iq.hasOwnProperty(e)){n._iq[e]={_q:[]};v(n._iq[e])}return n._iq[e]}
-    ;e.amplitude=n})(window,document);
+  
+  <script>
+    "use strict";
+    !function() {
+      var t = window.driftt = window.drift = window.driftt || [];
+      if (!t.init) {
+        if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
+        t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
+          t.factory = function(e) {
+            return function() {
+              var n = Array.prototype.slice.call(arguments);
+              return n.unshift(e), t.push(n), t;
+            };
+          }, t.methods.forEach(function(e) {
+            t[e] = t.factory(e);
+          }), t.load = function(t) {
+            var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
+            o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
+            var i = document.getElementsByTagName("script")[0];
+            i.parentNode.insertBefore(o, i);
+          };
+      }
+    }();
+    drift.SNIPPET_VERSION = '0.3.1';
+    drift.load('pt8y9i5h2yev');
+  </script> 
 
-  </script>
-  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-  <script src="//js.pusher.com/3.1/pusher.min.js"></script>
+  <!-- <script type="text/javascript" src="https://js.stripe.com/v2/"></script> -->
 </body>
 </html>
